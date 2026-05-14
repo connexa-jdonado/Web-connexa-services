@@ -473,8 +473,8 @@ body {
 /* ── HERO ── */
 #hero { height: 100vh; min-height: 700px; background: #0a1628; display: flex; flex-direction: column; justify-content: center; position: relative; overflow: hidden; }
 #hero::before { content: ''; position: absolute; inset: 0; background: linear-gradient(100deg,rgba(10,22,40,0.97) 0%,rgba(10,22,40,0.90) 40%,rgba(10,22,40,0.50) 70%,rgba(10,22,40,0.08) 100%); z-index: 1; pointer-events: none; }
-#hero::after { content: ''; position: absolute; inset: 0; background: linear-gradient(220deg,#172554 0%,#0a1628 50%,#0d1f3c 100%); background-size: 300% 300%; animation: heroGrad 12s ease infinite; z-index: -1; }
-@keyframes heroGrad { 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} }
+#hero::after { content: ''; position: absolute; inset: -20%; background: linear-gradient(220deg,#172554 0%,#0a1628 50%,#0d1f3c 100%); animation: heroGrad 12s ease infinite; z-index: -1; will-change: transform; }
+@keyframes heroGrad { 0%,100%{transform:translate(0,0)} 50%{transform:translate(10%,7%)} }
 #hero-canvas { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; will-change: transform; }
 .hero-aurora { position: absolute; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; will-change: transform; }
 .aurora-blob { position: absolute; border-radius: 50%; filter: blur(60px); }

@@ -60,8 +60,10 @@ function useHeroCanvas(canvasRef, heroRef) {
     hero.addEventListener('mouseleave', onMouseLeave, { passive: true });
     const onResize = () => { resize(); init(); };
     window.addEventListener('resize', onResize, { passive: true });
+    const onVisibilityChange = () => { if (document.hidden) { cancelAnimationFrame(animId); } else { draw(); } };
+    document.addEventListener('visibilitychange', onVisibilityChange);
     resize(); init(); draw();
-    return () => { cancelAnimationFrame(animId); hero.removeEventListener('mousemove', onMouseMove); hero.removeEventListener('mouseleave', onMouseLeave); window.removeEventListener('resize', onResize); };
+    return () => { cancelAnimationFrame(animId); document.removeEventListener('visibilitychange', onVisibilityChange); hero.removeEventListener('mousemove', onMouseMove); hero.removeEventListener('mouseleave', onMouseLeave); window.removeEventListener('resize', onResize); };
   }, [canvasRef, heroRef]);
 }
 

@@ -2,6 +2,7 @@
 import { useEffect, useRef } from 'react';
 
 function useWorkerCanvas(canvasRef, heroRef) {
+  const transferred = useRef(false);
   useEffect(() => {
     const canvas = canvasRef.current;
     const hero = heroRef.current;
@@ -9,6 +10,8 @@ function useWorkerCanvas(canvasRef, heroRef) {
 
     // OffscreenCanvas path — animation runs off the main thread
     if (typeof OffscreenCanvas !== 'undefined' && typeof canvas.transferControlToOffscreen === 'function') {
+      if (transferred.current) return;
+      transferred.current = true;
       const worker = new Worker('/workers/particles.worker.js');
       const offscreen = canvas.transferControlToOffscreen();
       worker.postMessage(

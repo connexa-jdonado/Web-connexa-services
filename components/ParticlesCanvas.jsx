@@ -12,9 +12,11 @@ function useHeroCanvas(canvasRef, heroRef) {
     const mouse = { x: -9999, y: -9999 };
 
     function resize() { W = canvas.width = canvas.offsetWidth; H = canvas.height = canvas.offsetHeight; }
+    const isMobile = window.innerWidth < 768;
+    const PARTICLE_COUNT = isMobile ? 30 : 70;
     function init() {
       nodes = [];
-      for (let i = 0; i < 45; i++) nodes.push({ x: Math.random() * (W * 0.45) + W * 0.55, y: Math.random() * H, angle: Math.random() * Math.PI * 2, speed: 0.3 + Math.random() * 0.5, angleChange: (Math.random() - 0.5) * 0.04, baseRadius: 1.5 + Math.random() * 2.5, pulseSpeed: 0.02 + Math.random() * 0.02, pulseOffset: Math.random() * Math.PI * 2, radius: 2 });
+      for (let i = 0; i < PARTICLE_COUNT; i++) nodes.push({ x: Math.random() * (W * 0.45) + W * 0.55, y: Math.random() * H, angle: Math.random() * Math.PI * 2, speed: 0.3 + Math.random() * 0.5, angleChange: (Math.random() - 0.5) * 0.04, baseRadius: 1.5 + Math.random() * 2.5, pulseSpeed: 0.02 + Math.random() * 0.02, pulseOffset: Math.random() * Math.PI * 2, radius: 2 });
     }
     function lineAlpha(x1, x2, base) {
       const mx = Math.max(x1, x2);

@@ -76,27 +76,7 @@ body {
   transform: translateY(-1px);
 }
 
-.btn-outline {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: transparent;
-  color: var(--primary);
-  font-family: var(--font-body);
-  font-size: 15px;
-  font-weight: 600;
-  padding: 14px 32px;
-  border-radius: 8px;
-  border: 2px solid var(--primary);
-  cursor: pointer;
-  text-decoration: none;
-  transition: background var(--transition), color var(--transition);
-}
 
-.btn-outline:hover {
-  background: var(--primary);
-  color: var(--white);
-}
 
 /* ── Navbar ─────────────────────────────────────────────── */
 #navbar {
@@ -466,7 +446,6 @@ body {
 .fade-up.d2 { transition-delay: .2s; }
 .fade-up.d3 { transition-delay: .3s; }
 .fade-up.d4 { transition-delay: .4s; }
-.fade-up.d5 { transition-delay: .5s; }
 .btn-ghost { display: inline-flex; align-items: center; gap: 8px; background: transparent; color: #fff; font-family: var(--font-heading); font-weight: 600; font-size: 15px; padding: 14px 28px; border-radius: 8px; border: 2px solid rgba(255,255,255,0.6); cursor: pointer; text-decoration: none; transition: background 0.2s, border-color 0.2s, transform 0.15s; }
 .btn-ghost:hover { background: rgba(255,255,255,0.1); border-color: #fff; transform: translateY(-1px); }
 
@@ -702,18 +681,6 @@ body {
 .cta-flotante:hover { background: var(--accent-dark); transform: translateY(-50%) translateX(-4px); }
 
 /* ── Servicios.css ── */
-/* ── UTILITIES (page-scoped) ── */
-.fade-up { opacity: 0; transform: translateY(28px); transition: opacity 0.65s cubic-bezier(.22,1,.36,1), transform 0.65s cubic-bezier(.22,1,.36,1); }
-.fade-up.visible { opacity: 1; transform: translateY(0); }
-.fade-up.d1 { transition-delay: .1s; }
-.fade-up.d2 { transition-delay: .2s; }
-.fade-up.d3 { transition-delay: .3s; }
-.fade-up.d4 { transition-delay: .4s; }
-.fade-up.d5 { transition-delay: .5s; }
-.fade-up.d6 { transition-delay: .6s; }
-.fade-up.d7 { transition-delay: .7s; }
-.fade-up.d8 { transition-delay: .8s; }
-
 /* ── BREADCRUMB ── */
 .breadcrumb { display: flex; align-items: center; gap: 8px; margin-bottom: 28px; }
 .breadcrumb a { font-family: var(--font-body); font-size: 13px; color: rgba(255,255,255,0.45); text-decoration: none; transition: color 0.2s; }
@@ -889,16 +856,6 @@ body {
 .cta-flotante:hover { background: #5a9229; transform: translateY(-50%) translateX(-4px); }
 
 /* ── Productos.css ── */
-/* ── UTILITIES ── */
-.fade-up { opacity: 0; transform: translateY(28px); transition: opacity 0.65s cubic-bezier(.22,1,.36,1), transform 0.65s cubic-bezier(.22,1,.36,1); }
-.fade-up.visible { opacity: 1; transform: translateY(0); }
-.fade-up.d1 { transition-delay: .1s; }
-.fade-up.d2 { transition-delay: .2s; }
-.fade-up.d3 { transition-delay: .3s; }
-.fade-up.d4 { transition-delay: .4s; }
-
-.section-label { display: inline-block; font-family: var(--font-body); font-size: 12px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 14px; }
-
 /* ── BREADCRUMB ── */
 .breadcrumb { display: flex; align-items: center; gap: 8px; margin-bottom: 24px; }
 .breadcrumb a { font-family: var(--font-body); font-size: 13px; color: rgba(255,255,255,0.45); text-decoration: none; transition: color 0.2s; }
@@ -978,15 +935,6 @@ body {
 .cta-flotante:hover { background: var(--accent-dark, #5a9229); transform: translateY(-50%) translateX(-4px); }
 
 /* ── ProductPage.css ── */
-/* ── UTILITIES ── */
-.fade-up { opacity: 0; transform: translateY(28px); transition: opacity 0.65s cubic-bezier(.22,1,.36,1), transform 0.65s cubic-bezier(.22,1,.36,1); }
-.fade-up.visible { opacity: 1; transform: translateY(0); }
-.fade-up.d1 { transition-delay: .1s; }
-.fade-up.d2 { transition-delay: .2s; }
-.fade-up.d3 { transition-delay: .3s; }
-.fade-up.d4 { transition-delay: .4s; }
-.section-label { display: inline-block; font-family: var(--font-body); font-size: 12px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 14px; }
-
 /* ── BREADCRUMB ── */
 .breadcrumb { display: flex; align-items: center; gap: 8px; margin-bottom: 24px; }
 .breadcrumb a { font-family: var(--font-body); font-size: 13px; color: rgba(255,255,255,0.45); text-decoration: none; transition: color 0.2s; cursor: pointer; }

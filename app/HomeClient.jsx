@@ -1,6 +1,7 @@
 'use client';
 import { useEffect, useRef } from 'react';
 import dynamic from 'next/dynamic';
+import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useLang } from '@/context/LanguageContext';
@@ -33,6 +34,16 @@ function animateCounter(el, target, suffix, duration) {
   requestAnimationFrame(step);
 }
 
+
+const LOGO_DIMS = {
+  claro:      { w: 1600, h: 601 },
+  telefonica: { w: 478,  h: 124 },
+  vodafone:   { w: 495,  h: 143 },
+  tim:        { w: 458,  h: 135 },
+  prosegur:   { w: 483,  h: 109 },
+  simpress:   { w: 488,  h: 126 },
+  onnet:      { w: 571,  h: 40  },
+};
 
 export default function HomeClient() {
   const { lang } = useLang();
@@ -119,12 +130,12 @@ export default function HomeClient() {
           <span className="trust-label-text">{tr('Partner oficial', 'Official Partner')}</span>
           <div className="trust-sep" />
           <div className="trust-partner">
-            <img src="/assets/OFSC-hq.png" alt="Oracle" />
+            <Image src="/assets/OFSC-hq.png" alt="Oracle" width={32} height={32} priority sizes="32px" />
             <div className="trust-partner-text"><span className="trust-partner-name">Oracle</span><span className="trust-partner-caption">Field Service Cloud</span></div>
           </div>
           <div className="trust-sep" />
           <div className="trust-partner">
-            <img src="/assets/zinier-hq.webp" alt="Zinier" style={{ background: '#fff', borderRadius: 7 }} />
+            <Image src="/assets/zinier-hq.webp" alt="Zinier" width={32} height={32} priority sizes="32px" style={{ background: '#fff', borderRadius: 7 }} />
             <div className="trust-partner-text"><span className="trust-partner-name">Zinier</span><span className="trust-partner-caption">Certified Partner</span></div>
           </div>
         </div>
@@ -148,7 +159,7 @@ export default function HomeClient() {
           <div className="carousel-track">
             {['claro', 'telefonica', 'vodafone', 'tim', 'prosegur', 'simpress', 'onnet',
               'claro', 'telefonica', 'vodafone', 'tim', 'prosegur', 'simpress', 'onnet'].map((c, i) => (
-              <img key={i} className="carousel-logo" src={`/assets/clients/${c}.png`} alt={c} />
+              <Image key={i} className="carousel-logo" src={`/assets/clients/${c}.png`} alt={c} width={LOGO_DIMS[c]?.w ?? 200} height={LOGO_DIMS[c]?.h ?? 60} sizes="160px" />
             ))}
           </div>
         </div>
@@ -169,7 +180,7 @@ export default function HomeClient() {
           <div className="partnerships-grid">
             <div className="partnership-card fade-up d1">
               <div className="partner-logo-area">
-                <div className="partner-logo-img"><img src="/assets/OFSC-hq.png" alt="Oracle" /></div>
+                <div className="partner-logo-img"><Image src="/assets/OFSC-hq.png" alt="Oracle" width={44} height={44} sizes="44px" /></div>
                 <div className="partner-verified"><div className="partner-verified-icon" /><span className="partner-verified-text">{tr('Partner Certificado', 'Certified Partner')}</span></div>
               </div>
               <div className="partner-name-large">Oracle Field Service Cloud</div>
@@ -182,7 +193,7 @@ export default function HomeClient() {
             </div>
             <div className="partnership-card fade-up d2">
               <div className="partner-logo-area">
-                <div className="partner-logo-img"><img src="/assets/zinier-hq.webp" alt="Zinier" style={{ background: '#fff', borderRadius: 10 }} /></div>
+                <div className="partner-logo-img"><Image src="/assets/zinier-hq.webp" alt="Zinier" width={44} height={44} sizes="44px" style={{ background: '#fff', borderRadius: 10 }} /></div>
                 <div className="partner-verified"><div className="partner-verified-icon" /><span className="partner-verified-text">{tr('Partner Certificado', 'Certified Partner')}</span></div>
               </div>
               <div className="partner-name-large">Zinier FSM Platform</div>

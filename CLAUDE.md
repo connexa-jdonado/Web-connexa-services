@@ -91,3 +91,26 @@ y después de cualquier cambio.
   feature/productos — mejoras páginas de producto
   feature/servicios — mejoras página servicios
   feature/seo — optimizaciones SEO y metadata
+
+## REGLAS ESPECÍFICAS — WORKTREE PERFORMANCE
+
+PROHIBIDO en este worktree:
+- Nunca reescribir archivos completos existentes
+- Solo agregar código nuevo o editar líneas puntuales
+- Nunca modificar el diseño visual, colores ni tipografías
+- Nunca tocar styles/globals.css salvo eliminar CSS 
+  claramente sin usar
+- Nunca modificar componentes de páginas completas
+
+PERMITIDO en este worktree:
+- Crear archivos nuevos (workers, componentes separados)
+- Agregar dynamic imports al inicio de archivos
+- Agregar atributos width/height a imágenes existentes
+- Agregar preload de fuentes en layout.jsx
+- Separar el canvas en su propio componente nuevo
+
+ANTES de cada cambio:
+1. Leer el archivo completo
+2. Confirmar qué líneas exactas se van a tocar
+3. Verificar que HomeClient.jsx sigue teniendo 
+   la sección de partículas después del cambio

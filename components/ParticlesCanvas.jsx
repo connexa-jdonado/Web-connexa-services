@@ -1,46 +1,16 @@
 'use client';
 import { useEffect, useRef } from 'react';
 
-function useWorkerCanvas(canvasRef, heroRef) {
-  const transferred = useRef(false);
+function useHeroCanvas(canvasRef, heroRef) {
   useEffect(() => {
     const canvas = canvasRef.current;
     const hero = heroRef.current;
     if (!canvas || !hero || window.innerWidth <= 768) return;
-
-    // OffscreenCanvas path — animation runs off the main thread
-    if (typeof OffscreenCanvas !== 'undefined' && typeof canvas.transferControlToOffscreen === 'function') {
-      if (transferred.current) return;
-      transferred.current = true;
-      const worker = new Worker('/workers/particles.worker.js');
-      const offscreen = canvas.transferControlToOffscreen();
-      worker.postMessage(
-        { type: 'init', canvas: offscreen, width: canvas.offsetWidth, height: canvas.offsetHeight },
-        [offscreen]
-      );
-      const onMouseMove = (e) => {
-        const r = hero.getBoundingClientRect();
-        worker.postMessage({ type: 'mouse', mouseX: e.clientX - r.left, mouseY: e.clientY - r.top });
-      };
-      const onMouseLeave = () => worker.postMessage({ type: 'mouseleave' });
-      const onResize = () => worker.postMessage({ type: 'resize', width: canvas.offsetWidth, height: canvas.offsetHeight });
-      hero.addEventListener('mousemove', onMouseMove, { passive: true });
-      hero.addEventListener('mouseleave', onMouseLeave, { passive: true });
-      window.addEventListener('resize', onResize, { passive: true });
-      return () => {
-        worker.postMessage({ type: 'stop' });
-        worker.terminate();
-        hero.removeEventListener('mousemove', onMouseMove);
-        hero.removeEventListener('mouseleave', onMouseLeave);
-        window.removeEventListener('resize', onResize);
-      };
-    }
-
-    // Fallback: main-thread canvas for browsers without OffscreenCanvas
     const ctx = canvas.getContext('2d');
     let W, H, nodes = [], animId;
     const DIST = 150, COLOR = 'rgba(113,177,54,';
     const mouse = { x: -9999, y: -9999 };
+
     function resize() { W = canvas.width = canvas.offsetWidth; H = canvas.height = canvas.offsetHeight; }
     function init() {
       nodes = [];
@@ -118,7 +88,7 @@ function useHeroParallax(heroRef, canvasRef, innerRef, auroraRef) {
 
 export default function ParticlesCanvas({ heroRef, heroInnerRef, heroAuroraRef }) {
   const canvasRef = useRef(null);
-  useWorkerCanvas(canvasRef, heroRef);
+  useHeroCanvas(canvasRef, heroRef);
   useHeroParallax(heroRef, canvasRef, heroInnerRef, heroAuroraRef);
   return <canvas id="hero-canvas" ref={canvasRef} />;
 }

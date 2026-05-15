@@ -509,12 +509,14 @@ export default function HomeClient() {
           </div>
 
           {/* SCATTER PLOT MAPA DE PRIORIZACIÓN */}
-          <div className="fade-up d2" style={{ background: '#fff', borderRadius: '16px', padding: '32px 32px 24px', maxWidth: '820px', margin: '0 auto 48px', boxShadow: '0 8px 32px rgba(0,0,0,0.08)', border: '1px solid #F3F4F6' }}>
+          <div className="fade-up d2" style={{ background: '#fff', borderRadius: '16px', padding: '32px 32px 24px', maxWidth: '1100px', margin: '0 auto 48px', boxShadow: '0 8px 32px rgba(0,0,0,0.08)', border: '1px solid #F3F4F6' }}>
             <div style={{ textAlign: 'center', marginBottom: '20px' }}>
               <span style={{ fontSize: '11px', fontWeight: 700, letterSpacing: '0.16em', textTransform: 'uppercase', color: '#71B136', fontFamily: 'var(--font-body)' }}>
                 {tr('Mapa de Priorización de Iniciativas', 'Initiative Prioritization Map')}
               </span>
             </div>
+            <div style={{ display: 'flex', gap: '32px', alignItems: 'flex-start' }}>
+            <div style={{ flex: 1, minWidth: 0 }}>
             <svg viewBox="0 0 800 600" width="100%" style={{ display: 'block', overflow: 'visible' }}>
               <defs>
                 <filter id="tt-shadow" x="-10%" y="-10%" width="120%" height="120%">
@@ -672,20 +674,46 @@ export default function HomeClient() {
                 </g>
               </g>
             </svg>
-
-            {/* Leyenda */}
-            <div style={{ display: 'flex', justifyContent: 'center', gap: '24px', flexWrap: 'wrap', marginTop: '16px', paddingTop: '16px', borderTop: '1px solid #F3F4F6' }}>
+            </div>
+            {/* Panel lateral INICIATIVAS */}
+            <div style={{ width: '240px', flexShrink: 0 }}>
+              <div style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#71B136', fontFamily: 'var(--font-body)', marginBottom: '12px' }}>
+                {tr('INICIATIVAS', 'INITIATIVES')}
+              </div>
               {[
-                { color: '#71B136', label: tr('Quick Wins', 'Quick Wins') },
-                { color: '#172554', label: tr('Proyectos estratégicos', 'Strategic Projects') },
-                { color: '#6B7280', label: tr('Tareas menores', 'Minor Tasks') },
-                { color: '#DC2626', label: tr('Descarte', 'Discard') },
-              ].map((item, i) => (
-                <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '7px' }}>
-                  <div style={{ width: '11px', height: '11px', borderRadius: '50%', background: item.color, flexShrink: 0 }} />
-                  <span style={{ fontSize: '12px', color: '#374151', fontFamily: 'var(--font-body)' }}>{item.label}</span>
+                { color: '#71B136', title: tr('Quick Wins', 'Quick Wins'), items: [
+                  { code: 'A1', name: tr('Segmentar cuotas por zona', 'Segment quotas by zone') },
+                  { code: 'A2', name: tr('Gestión de minutos por categoría', 'Manage minutes by category') },
+                  { code: 'B1', name: tr('Optimizar planes de routing', 'Optimize routing plans') },
+                  { code: 'E1', name: tr('Activar módulo de colaboración', 'Activate collaboration module') },
+                ]},
+                { color: '#172554', title: tr('Proyectos Estratégicos', 'Strategic Projects'), items: [
+                  { code: 'D1', name: tr('Centralizar gestión de inventario', 'Centralize inventory management') },
+                  { code: 'D2', name: tr('Validación GPS en campo', 'GPS validation in field') },
+                  { code: 'D3', name: tr('Unificar app móvil (OFSC)', 'Unify mobile app (OFSC)') },
+                  { code: 'C2', name: tr('Visibilidad en tiempo real', 'Real-time visibility') },
+                ]},
+                { color: '#6B7280', title: tr('Tareas Menores', 'Minor Tasks'), items: [
+                  { code: 'A4', name: tr('Tablero de salud de agenda', 'Agenda health dashboard') },
+                  { code: 'B2', name: tr('Reclasificar atributos como skills', 'Reclassify attributes as skills') },
+                ]},
+                { color: '#DC2626', title: tr('Descarte', 'Discard'), items: [
+                  { code: 'D8', name: tr('Réplica de datos BI en tiempo real', 'Real-time BI data replication') },
+                ]},
+              ].map((group, gi) => (
+                <div key={gi} style={{ marginBottom: gi < 3 ? '10px' : 0 }}>
+                  <div style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', color: group.color, fontFamily: 'var(--font-body)', marginBottom: '4px' }}>
+                    {group.title}
+                  </div>
+                  {group.items.map((item, ii) => (
+                    <div key={ii} style={{ display: 'flex', gap: '4px', marginBottom: '3px', lineHeight: '1.3' }}>
+                      <span style={{ fontSize: '11px', fontWeight: 700, color: group.color, fontFamily: 'var(--font-body)', flexShrink: 0 }}>{item.code}</span>
+                      <span style={{ fontSize: '11px', color: '#6B7280', fontFamily: 'var(--font-body)' }}>{' — '}{item.name}</span>
+                    </div>
+                  ))}
                 </div>
               ))}
+            </div>
             </div>
           </div>
 

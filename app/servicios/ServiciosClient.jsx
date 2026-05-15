@@ -109,10 +109,16 @@ export default function ServiciosClient() {
       <section id="implementacion-ofsc" className="sec-ofsc">
         <div className="container">
           <div style={{ display: 'flex', flexDirection: 'row', gap: '48px', alignItems: 'center', marginBottom: '48px' }}>
-            <div className="section-header fade-up" style={{ flex: 1 }}>
-              <div className="section-eyebrow">{tr('IMPLEMENTACIÓN', 'IMPLEMENTATION')}</div>
-              <h2>Oracle Field Service Cloud</h2>
-              <p>{tr('Somos partner certificado de Oracle con experiencia en implementaciones end-to-end de Oracle Field Service Cloud. Configuramos, parametrizamos e integramos OFSC adaptado 100% a los procesos de tu empresa.', 'We are a certified Oracle partner with experience in end-to-end Oracle Field Service Cloud implementations. We configure, parameterize, and integrate OFSC 100% tailored to your company\'s processes.')}</p>
+            <div style={{ flex: 1 }}>
+              <div className="section-header fade-up">
+                <div className="section-eyebrow">{tr('IMPLEMENTACIÓN', 'IMPLEMENTATION')}</div>
+                <h2>Oracle Field Service Cloud</h2>
+                <p>{tr('Somos partner certificado de Oracle con experiencia en implementaciones end-to-end de Oracle Field Service Cloud. Configuramos, parametrizamos e integramos OFSC adaptado 100% a los procesos de tu empresa.', 'We are a certified Oracle partner with experience in end-to-end Oracle Field Service Cloud implementations. We configure, parameterize, and integrate OFSC 100% tailored to your company\'s processes.')}</p>
+              </div>
+              <div className="zinier-badge fade-up d1">
+                <div className="zinier-badge-dot"></div>
+                <span>{tr('Oracle Certified Partner', 'Oracle Certified Partner')}</span>
+              </div>
             </div>
             <div className="hidden md:block" style={{ flexShrink: 0, maxWidth: '560px', width: '100%', background: '#1a1a2e', borderRadius: '12px', overflow: 'hidden', boxShadow: '0 30px 80px rgba(0,0,0,0.3)' }}>
               <div style={{ height: '32px', background: '#e8e8ed', display: 'flex', alignItems: 'center', padding: '0 12px', gap: '6px' }}>
@@ -165,7 +171,6 @@ export default function ServiciosClient() {
                 <div className="zinier-badge-dot"></div>
                 <span>{tr('Zinier Certified Partner', 'Zinier Certified Partner')}</span>
               </div>
-              <a href="#contacto" className="btn-primary fade-up d2" style={{ width: 'fit-content', display: 'inline-flex', marginTop: '16px' }} onClick={(e) => { e.preventDefault(); scrollTo('contacto'); }}>{tr('Hablar con un experto →', 'Talk to an Expert →')}</a>
             </div>
             <div className="hidden md:block" style={{ flexShrink: 0, maxWidth: '560px', width: '100%', background: '#1a1a2e', borderRadius: '12px', overflow: 'hidden', boxShadow: '0 30px 80px rgba(0,0,0,0.3)' }}>
               <div style={{ height: '32px', background: '#e8e8ed', display: 'flex', alignItems: 'center', padding: '0 12px', gap: '6px' }}>
@@ -202,8 +207,8 @@ export default function ServiciosClient() {
         <div className="container">
           <div className="section-header center fade-up">
             <div className="section-eyebrow light">{tr('INTEGRACIONES', 'INTEGRATIONS')}</div>
-            <h2 className="light">{tr('Conectamos OFSC con tu ecosistema', 'We Connect OFSC with Your Ecosystem')}</h2>
-            <p className="light">{tr('Tenemos experiencia integrando Oracle Field Service Cloud con los principales sistemas empresariales del mercado.', 'We have experience integrating Oracle Field Service Cloud with the main enterprise systems on the market.')}</p>
+            <h2 className="light">{tr('Conectamos tu FSM con cualquier sistema', 'We connect your FSM with any system')}</h2>
+            <p className="light">{tr('Integramos tu FSM con los principales sistemas empresariales del mercado.', 'We integrate your FSM with the main enterprise systems on the market.')}</p>
           </div>
           <div className="hub-wrap fade-up d1">
             <svg className="hub-svg" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
@@ -235,7 +240,7 @@ export default function ServiciosClient() {
               <text x="99" y="175" textAnchor="middle" fill="rgba(255,255,255,0.5)" fontSize="9" fontFamily="Inter, sans-serif">Custom</text>
               <circle cx="250" cy="250" r="62" fill="#71B136"/>
               <circle cx="250" cy="250" r="58" fill="none" stroke="rgba(255,255,255,0.2)" strokeWidth="1.5"/>
-              <text x="250" y="244" textAnchor="middle" fill="#fff" fontSize="16" fontWeight="800" fontFamily="Plus Jakarta Sans, sans-serif">OFSC</text>
+              <text x="250" y="244" textAnchor="middle" fill="#fff" fontSize="16" fontWeight="800" fontFamily="Plus Jakarta Sans, sans-serif">FSM</text>
               <text x="250" y="262" textAnchor="middle" fill="rgba(255,255,255,0.75)" fontSize="9" fontFamily="Inter, sans-serif">Hub central</text>
             </svg>
           </div>

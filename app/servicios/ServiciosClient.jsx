@@ -148,8 +148,8 @@ export default function ServiciosClient() {
       {/* ── IMPLEMENTACIÓN ZINIER ── */}
       <section id="implementacion-zinier" className="sec-zinier">
         <div className="container">
-          <div className="zinier-grid">
-            <div>
+          <div style={{ display: 'flex', flexDirection: 'row', gap: '48px', alignItems: 'center', marginBottom: '48px' }}>
+            <div style={{ flex: 1 }}>
               <div className="section-header fade-up">
                 <div className="section-eyebrow">{tr('IMPLEMENTACIÓN', 'IMPLEMENTATION')}</div>
                 <h2>{tr('Zinier — Field Service Inteligente', 'Zinier — Intelligent Field Service')}</h2>
@@ -161,18 +161,27 @@ export default function ServiciosClient() {
               </div>
               <a href="#contacto" className="btn-primary fade-up d2" style={{ width: 'fit-content', display: 'inline-flex', marginTop: '16px' }} onClick={(e) => { e.preventDefault(); scrollTo('contacto'); }}>{tr('Hablar con un experto →', 'Talk to an Expert →')}</a>
             </div>
-            <div className="zinier-cards">
-              {[
-                { d: 'd1', icon: <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 10 10"/><path d="M12 8v4l3 3"/><path d="M18 2l4 4-4 4"/><path d="M22 2l-4 4"/></svg>, title: tr('Automatización con IA', 'AI Automation'), desc: tr('Flujos de trabajo inteligentes que toman decisiones automáticas basadas en datos de campo en tiempo real.', 'Intelligent workflows that make automatic decisions based on real-time field data.') },
-                { d: 'd2', icon: <svg viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>, title: tr('Workflows sin código', 'No-Code Workflows'), desc: tr('Constructor visual para diseñar y publicar procesos complejos sin necesidad de desarrollo de software.', 'Visual builder to design and publish complex processes without software development.') },
-                { d: 'd3', icon: <svg viewBox="0 0 24 24"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>, title: tr('Analítica en tiempo real', 'Real-Time Analytics'), desc: tr('Dashboards y reportes operacionales con métricas de campo actualizadas en tiempo real para la toma de decisiones.', 'Operational dashboards and reports with real-time field metrics for decision-making.') },
-              ].map((c, i) => (
-                <div key={i} className={`zinier-card fade-up ${c.d}`}>
-                  <div className="zinier-card-icon">{c.icon}</div>
-                  <div><div className="zinier-card-title">{c.title}</div><div className="zinier-card-desc">{c.desc}</div></div>
-                </div>
-              ))}
+            <div className="hidden md:block" style={{ flexShrink: 0 }}>
+              <Image
+                src="/assets/zinier-calendar-view.png"
+                alt="Zinier Calendar View"
+                width={520}
+                height={340}
+                style={{ maxWidth: '520px', width: '100%', borderRadius: '12px', boxShadow: '0 20px 60px rgba(0,0,0,0.15)', border: '1px solid rgba(255,255,255,0.1)', objectFit: 'cover', transform: 'perspective(1000px) rotateY(3deg)' }}
+              />
             </div>
+          </div>
+          <div className="zinier-cards">
+            {[
+              { d: 'd1', icon: <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 10 10"/><path d="M12 8v4l3 3"/><path d="M18 2l4 4-4 4"/><path d="M22 2l-4 4"/></svg>, title: tr('Automatización con IA', 'AI Automation'), desc: tr('Flujos de trabajo inteligentes que toman decisiones automáticas basadas en datos de campo en tiempo real.', 'Intelligent workflows that make automatic decisions based on real-time field data.') },
+              { d: 'd2', icon: <svg viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>, title: tr('Workflows sin código', 'No-Code Workflows'), desc: tr('Constructor visual para diseñar y publicar procesos complejos sin necesidad de desarrollo de software.', 'Visual builder to design and publish complex processes without software development.') },
+              { d: 'd3', icon: <svg viewBox="0 0 24 24"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>, title: tr('Analítica en tiempo real', 'Real-Time Analytics'), desc: tr('Dashboards y reportes operacionales con métricas de campo actualizadas en tiempo real para la toma de decisiones.', 'Operational dashboards and reports with real-time field metrics for decision-making.') },
+            ].map((c, i) => (
+              <div key={i} className={`zinier-card fade-up ${c.d}`}>
+                <div className="zinier-card-icon">{c.icon}</div>
+                <div><div className="zinier-card-title">{c.title}</div><div className="zinier-card-desc">{c.desc}</div></div>
+              </div>
+            ))}
           </div>
         </div>
       </section>

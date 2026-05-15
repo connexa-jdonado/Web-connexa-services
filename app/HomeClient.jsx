@@ -525,8 +525,8 @@ export default function HomeClient() {
               </defs>
               <style>{`
                 .sb { cursor: pointer; }
-                .sb circle { transition: transform 0.18s ease; }
-                .sb:hover circle { transform-box: fill-box; transform-origin: center; transform: scale(1.12); }
+                .sb circle { transition: transform 0.25s ease, opacity 0.25s ease; transform-box: fill-box; transform-origin: center; }
+                .sb:hover circle { transform: scale(1.08); }
                 .tt { opacity: 0; pointer-events: none; transition: opacity 0.15s; }
                 .sb:hover .tt { opacity: 1; }
                 .ax { font-family: var(--font-body); fill: #172554; font-weight: 700; letter-spacing: 0.1em; }

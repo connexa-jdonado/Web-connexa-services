@@ -120,10 +120,10 @@ export default function HomeClient() {
             {tr('para optimizar cada operación de campo.', 'to optimize every field operation.')}
           </p>
           <div className="hero-ctas">
-            <button className="btn-primary" onClick={() => scrollTo('services')} style={{ fontSize: 16, padding: '16px 32px' }}>
+            <Link href="/productos" className="btn-primary" style={{ fontSize: 16, padding: '16px 32px' }}>
               {tr('Conocé nuestras soluciones', 'Explore our solutions')}
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6" /></svg>
-            </button>
+            </Link>
           </div>
         </div>
         <div className="hero-trust-bar">

@@ -508,47 +508,119 @@ export default function HomeClient() {
 
           </div>
 
-          {/* CUADRANTE IMPACTO × COMPLEJIDAD */}
-          <div className="fade-up d2" style={{ background: '#fff', border: '1px solid #E5E7EB', borderRadius: '20px', padding: '40px', maxWidth: '640px', margin: '0 auto 48px' }}>
-            <div style={{ textAlign: 'center', marginBottom: '28px' }}>
-              <span style={{ fontSize: '11px', fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase', color: '#71B136', fontFamily: 'var(--font-body)' }}>
-                {tr('PRIORIZACIÓN', 'PRIORITIZATION')}
+          {/* SCATTER PLOT MAPA DE PRIORIZACIÓN */}
+          <div className="fade-up d2" style={{ background: '#fff', borderRadius: '24px', padding: '32px 32px 24px', maxWidth: '740px', margin: '0 auto 48px', boxShadow: '0 4px 24px rgba(0,0,0,0.07)', border: '1px solid #F3F4F6' }}>
+            <div style={{ textAlign: 'center', marginBottom: '20px' }}>
+              <span style={{ fontSize: '11px', fontWeight: 700, letterSpacing: '0.16em', textTransform: 'uppercase', color: '#71B136', fontFamily: 'var(--font-body)' }}>
+                {tr('Mapa de Priorización de Iniciativas', 'Initiative Prioritization Map')}
               </span>
-              <div style={{ fontSize: '17px', fontWeight: 700, color: '#172554', fontFamily: 'var(--font-heading)', marginTop: '6px' }}>
-                {tr('Mapa Impacto × Complejidad', 'Impact × Complexity Map')}
-              </div>
             </div>
-            <div style={{ display: 'flex', gap: '12px', alignItems: 'stretch' }}>
-              <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', alignItems: 'center', paddingBottom: '28px', minWidth: '20px' }}>
-                <span style={{ fontSize: '10px', color: '#9CA3AF', fontFamily: 'var(--font-body)', writingMode: 'vertical-rl', transform: 'rotate(180deg)', letterSpacing: '0.1em', textTransform: 'uppercase', whiteSpace: 'nowrap' }}>{tr('↑ Alto', 'High ↑')}</span>
-                <span style={{ fontSize: '10px', color: '#9CA3AF', fontFamily: 'var(--font-body)', writingMode: 'vertical-rl', transform: 'rotate(180deg)', letterSpacing: '0.1em', textTransform: 'uppercase', whiteSpace: 'nowrap' }}>{tr('Impacto', 'Impact')}</span>
-                <span style={{ fontSize: '10px', color: '#9CA3AF', fontFamily: 'var(--font-body)', writingMode: 'vertical-rl', transform: 'rotate(180deg)', letterSpacing: '0.1em', textTransform: 'uppercase', whiteSpace: 'nowrap' }}>{tr('Bajo ↓', '↓ Low')}</span>
-              </div>
-              <div style={{ flex: 1 }}>
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px' }}>
-                  <div style={{ background: 'rgba(113,177,54,0.10)', border: '2px solid #71B136', borderRadius: '12px', padding: '16px 14px' }}>
-                    <div style={{ fontSize: '13px', fontWeight: 700, color: '#71B136', fontFamily: 'var(--font-heading)', marginBottom: '4px' }}>⚡ Quick Wins</div>
-                    <div style={{ fontSize: '11px', color: '#6B7280', fontFamily: 'var(--font-body)', lineHeight: 1.4 }}>{tr('Alto impacto · Baja complejidad', 'High impact · Low complexity')}</div>
-                  </div>
-                  <div style={{ background: 'rgba(23,37,84,0.05)', border: '1px solid #D1D5DB', borderRadius: '12px', padding: '16px 14px' }}>
-                    <div style={{ fontSize: '13px', fontWeight: 700, color: '#172554', fontFamily: 'var(--font-heading)', marginBottom: '4px' }}>{tr('Proyectos estratégicos', 'Strategic Projects')}</div>
-                    <div style={{ fontSize: '11px', color: '#6B7280', fontFamily: 'var(--font-body)', lineHeight: 1.4 }}>{tr('Alto impacto · Alta complejidad', 'High impact · High complexity')}</div>
-                  </div>
-                  <div style={{ background: '#F9FAFB', border: '1px solid #E5E7EB', borderRadius: '12px', padding: '16px 14px' }}>
-                    <div style={{ fontSize: '13px', fontWeight: 600, color: '#6B7280', fontFamily: 'var(--font-heading)', marginBottom: '4px' }}>{tr('Tareas menores', 'Minor Tasks')}</div>
-                    <div style={{ fontSize: '11px', color: '#9CA3AF', fontFamily: 'var(--font-body)', lineHeight: 1.4 }}>{tr('Bajo impacto · Baja complejidad', 'Low impact · Low complexity')}</div>
-                  </div>
-                  <div style={{ background: '#FEF2F2', border: '1px solid #FECACA', borderRadius: '12px', padding: '16px 14px' }}>
-                    <div style={{ fontSize: '13px', fontWeight: 600, color: '#DC2626', fontFamily: 'var(--font-heading)', marginBottom: '4px' }}>{tr('Descarte', 'Discard')}</div>
-                    <div style={{ fontSize: '11px', color: '#9CA3AF', fontFamily: 'var(--font-body)', lineHeight: 1.4 }}>{tr('Bajo impacto · Alta complejidad', 'Low impact · High complexity')}</div>
-                  </div>
+            <svg viewBox="0 0 640 400" width="100%" style={{ display: 'block', overflow: 'visible' }}>
+              <style>{`
+                .s-bubble { cursor: pointer; }
+                .s-bubble circle { transition: all 0.2s ease; }
+                .s-bubble:hover circle { transform-box: fill-box; transform-origin: center; transform: scale(1.15); }
+                .s-lbl { font-family: var(--font-body); font-size: 8px; }
+                .s-axis { font-family: var(--font-body); fill: #9CA3AF; }
+                .s-zone { font-family: var(--font-body); font-weight: 600; font-size: 9.5px; }
+              `}</style>
+
+              {/* Fondos de zona */}
+              <rect x="55" y="25" width="285" height="163" fill="rgba(113,177,54,0.07)" />
+              <rect x="340" y="25" width="285" height="163" fill="rgba(23,37,84,0.05)" />
+              <rect x="55" y="188" width="285" height="162" fill="rgba(107,114,128,0.04)" />
+              <rect x="340" y="188" width="285" height="162" fill="rgba(220,38,38,0.04)" />
+
+              {/* Labels de zona */}
+              <text x="65" y="42" className="s-zone" fill="rgba(113,177,54,0.85)">{tr('Quick Wins', 'Quick Wins')}</text>
+              <text x="350" y="42" className="s-zone" fill="rgba(23,37,84,0.65)">{tr('Proy. estratégicos', 'Strategic Projects')}</text>
+              <text x="65" y="204" className="s-zone" fill="rgba(107,114,128,0.75)">{tr('Tareas menores', 'Minor Tasks')}</text>
+              <text x="350" y="204" className="s-zone" fill="rgba(220,38,38,0.75)">{tr('Descarte', 'Discard')}</text>
+
+              {/* Ejes sólidos */}
+              <line x1="55" y1="350" x2="625" y2="350" stroke="#D1D5DB" strokeWidth="1.5" />
+              <line x1="55" y1="25" x2="55" y2="350" stroke="#D1D5DB" strokeWidth="1.5" />
+              {/* Divisores centrales punteados */}
+              <line x1="340" y1="25" x2="340" y2="350" stroke="#E5E7EB" strokeWidth="1" strokeDasharray="4,3" />
+              <line x1="55" y1="188" x2="625" y2="188" stroke="#E5E7EB" strokeWidth="1" strokeDasharray="4,3" />
+
+              {/* Label eje Y (vertical) */}
+              <text transform="translate(18,188) rotate(-90)" textAnchor="middle" className="s-axis" fontSize="9" style={{ letterSpacing: '0.1em', textTransform: 'uppercase' }}>{tr('Impacto', 'Impact')}</text>
+              <text x="48" y="32" textAnchor="end" className="s-axis" fontSize="8.5">{tr('Alto', 'High')}</text>
+              <text x="48" y="354" textAnchor="end" className="s-axis" fontSize="8.5">{tr('Bajo', 'Low')}</text>
+
+              {/* Labels eje X */}
+              <text x="340" y="390" textAnchor="middle" className="s-axis" fontSize="9" style={{ letterSpacing: '0.1em', textTransform: 'uppercase' }}>{tr('Complejidad', 'Complexity')}</text>
+              <text x="70" y="368" className="s-axis" fontSize="8.5">{tr('← Baja', '← Low')}</text>
+              <text x="610" y="368" textAnchor="end" className="s-axis" fontSize="8.5">{tr('Alta →', 'High →')}</text>
+
+              {/* ── QUICK WINS (verde, cuadrante superior izquierdo) ── */}
+              <g className="s-bubble">
+                <title>{tr('Segmentación de cuotas', 'Quota segmentation')}</title>
+                <circle cx="198" cy="90" r="13" fill="rgba(113,177,54,0.22)" stroke="#71B136" strokeWidth="1.5" />
+                <text x="198" y="78" textAnchor="middle" className="s-lbl" fill="#4D8A1E">{tr('Seg. cuotas', 'Quota seg.')}</text>
+              </g>
+              <g className="s-bubble">
+                <title>{tr('Optimización de routing', 'Routing optimization')}</title>
+                <circle cx="255" cy="106" r="13" fill="rgba(113,177,54,0.22)" stroke="#71B136" strokeWidth="1.5" />
+                <text x="272" y="103" className="s-lbl" fill="#4D8A1E">{tr('Opt. routing', 'Routing opt.')}</text>
+              </g>
+              <g className="s-bubble">
+                <title>{tr('Activar colaboración', 'Activate collaboration')}</title>
+                <circle cx="169" cy="123" r="13" fill="rgba(113,177,54,0.22)" stroke="#71B136" strokeWidth="1.5" />
+                <text x="153" y="120" textAnchor="end" className="s-lbl" fill="#4D8A1E">{tr('Activar colab.', 'Activate collab.')}</text>
+              </g>
+
+              {/* ── PROYECTOS ESTRATÉGICOS (azul, cuadrante superior derecho) ── */}
+              <g className="s-bubble">
+                <title>{tr('Unificación app móvil', 'Mobile app unification')}</title>
+                <circle cx="483" cy="74" r="13" fill="rgba(23,37,84,0.16)" stroke="#172554" strokeWidth="1.5" />
+                <text x="483" y="61" textAnchor="middle" className="s-lbl" fill="#172554">{tr('Unif. app móvil', 'Mobile app unif.')}</text>
+              </g>
+              <g className="s-bubble">
+                <title>{tr('Visibilidad en tiempo real', 'Real-time visibility')}</title>
+                <circle cx="511" cy="116" r="13" fill="rgba(23,37,84,0.16)" stroke="#172554" strokeWidth="1.5" />
+                <text x="528" y="113" className="s-lbl" fill="#172554">{tr('Visib. RT', 'RT Visibility')}</text>
+              </g>
+              <g className="s-bubble">
+                <title>{tr('Gestión de inventario', 'Inventory management')}</title>
+                <circle cx="454" cy="97" r="13" fill="rgba(23,37,84,0.16)" stroke="#172554" strokeWidth="1.5" />
+                <text x="438" y="94" textAnchor="end" className="s-lbl" fill="#172554">{tr('Gest. inventario', 'Inventory mgmt.')}</text>
+              </g>
+
+              {/* ── TAREAS MENORES (gris, cuadrante inferior izquierdo) ── */}
+              <g className="s-bubble">
+                <title>{tr('Atributos de skills', 'Skills attributes')}</title>
+                <circle cx="226" cy="269" r="13" fill="rgba(107,114,128,0.16)" stroke="#6B7280" strokeWidth="1.5" />
+                <text x="243" y="266" className="s-lbl" fill="#6B7280">{tr('Atrib. skills', 'Skills attribs.')}</text>
+              </g>
+              <g className="s-bubble">
+                <title>{tr('Validación GPS', 'GPS validation')}</title>
+                <circle cx="169" cy="253" r="13" fill="rgba(107,114,128,0.16)" stroke="#6B7280" strokeWidth="1.5" />
+                <text x="153" y="250" textAnchor="end" className="s-lbl" fill="#6B7280">{tr('Valid. GPS', 'GPS valid.')}</text>
+              </g>
+
+              {/* ── DESCARTE (rojo, cuadrante inferior derecho) ── */}
+              <g className="s-bubble">
+                <title>{tr('Réplica BI en tiempo real', 'Real-time BI replication')}</title>
+                <circle cx="500" cy="285" r="13" fill="rgba(220,38,38,0.13)" stroke="#DC2626" strokeWidth="1.5" />
+                <text x="500" y="273" textAnchor="middle" className="s-lbl" fill="#DC2626">{tr('Réplica BI RT', 'BI RT replica')}</text>
+              </g>
+            </svg>
+
+            {/* Leyenda */}
+            <div style={{ display: 'flex', justifyContent: 'center', gap: '20px', flexWrap: 'wrap', marginTop: '12px', paddingTop: '16px', borderTop: '1px solid #F3F4F6' }}>
+              {[
+                { color: '#71B136', label: tr('Quick Wins', 'Quick Wins') },
+                { color: '#172554', label: tr('Proyectos estratégicos', 'Strategic Projects') },
+                { color: '#6B7280', label: tr('Tareas menores', 'Minor Tasks') },
+                { color: '#DC2626', label: tr('Descarte', 'Discard') },
+              ].map((item, i) => (
+                <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                  <div style={{ width: '10px', height: '10px', borderRadius: '50%', background: item.color, flexShrink: 0, opacity: 0.85 }} />
+                  <span style={{ fontSize: '12px', color: '#6B7280', fontFamily: 'var(--font-body)' }}>{item.label}</span>
                 </div>
-                <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '10px' }}>
-                  <span style={{ fontSize: '10px', color: '#9CA3AF', fontFamily: 'var(--font-body)', letterSpacing: '0.08em', textTransform: 'uppercase' }}>{tr('← Baja', '← Low')}</span>
-                  <span style={{ fontSize: '10px', color: '#9CA3AF', fontFamily: 'var(--font-body)', letterSpacing: '0.1em', textTransform: 'uppercase' }}>{tr('Complejidad', 'Complexity')}</span>
-                  <span style={{ fontSize: '10px', color: '#9CA3AF', fontFamily: 'var(--font-body)', letterSpacing: '0.08em', textTransform: 'uppercase' }}>{tr('Alta →', 'High →')}</span>
-                </div>
-              </div>
+              ))}
             </div>
           </div>
 

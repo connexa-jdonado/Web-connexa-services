@@ -509,116 +509,181 @@ export default function HomeClient() {
           </div>
 
           {/* SCATTER PLOT MAPA DE PRIORIZACIÓN */}
-          <div className="fade-up d2" style={{ background: '#fff', borderRadius: '24px', padding: '32px 32px 24px', maxWidth: '740px', margin: '0 auto 48px', boxShadow: '0 4px 24px rgba(0,0,0,0.07)', border: '1px solid #F3F4F6' }}>
+          <div className="fade-up d2" style={{ background: '#fff', borderRadius: '16px', padding: '32px 32px 24px', maxWidth: '820px', margin: '0 auto 48px', boxShadow: '0 8px 32px rgba(0,0,0,0.08)', border: '1px solid #F3F4F6' }}>
             <div style={{ textAlign: 'center', marginBottom: '20px' }}>
               <span style={{ fontSize: '11px', fontWeight: 700, letterSpacing: '0.16em', textTransform: 'uppercase', color: '#71B136', fontFamily: 'var(--font-body)' }}>
                 {tr('Mapa de Priorización de Iniciativas', 'Initiative Prioritization Map')}
               </span>
             </div>
-            <svg viewBox="0 0 640 400" width="100%" style={{ display: 'block', overflow: 'visible' }}>
+            <svg viewBox="0 0 800 600" width="100%" style={{ display: 'block', overflow: 'visible' }}>
+              <defs>
+                <filter id="tt-shadow" x="-10%" y="-10%" width="120%" height="120%">
+                  <feDropShadow dx="0" dy="2" stdDeviation="3" floodColor="rgba(0,0,0,0.18)" />
+                </filter>
+              </defs>
               <style>{`
-                .s-bubble { cursor: pointer; }
-                .s-bubble circle { transition: all 0.2s ease; }
-                .s-bubble:hover circle { transform-box: fill-box; transform-origin: center; transform: scale(1.15); }
-                .s-lbl { font-family: var(--font-body); font-size: 8px; }
-                .s-axis { font-family: var(--font-body); fill: #9CA3AF; }
-                .s-zone { font-family: var(--font-body); font-weight: 600; font-size: 9.5px; }
+                .sb { cursor: pointer; }
+                .sb circle { transition: transform 0.18s ease; }
+                .sb:hover circle { transform-box: fill-box; transform-origin: center; transform: scale(1.12); }
+                .tt { opacity: 0; pointer-events: none; transition: opacity 0.15s; }
+                .sb:hover .tt { opacity: 1; }
+                .ax { font-family: var(--font-body); fill: #172554; font-weight: 700; letter-spacing: 0.1em; }
+                .ax-tick { font-family: var(--font-body); fill: #9CA3AF; font-size: 10px; }
+                .zl { font-family: var(--font-body); font-weight: 700; font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; }
+                .grid { stroke: #E5E7EB; stroke-width: 0.5; }
               `}</style>
 
-              {/* Fondos de zona */}
-              <rect x="55" y="25" width="285" height="163" fill="rgba(113,177,54,0.07)" />
-              <rect x="340" y="25" width="285" height="163" fill="rgba(23,37,84,0.05)" />
-              <rect x="55" y="188" width="285" height="162" fill="rgba(107,114,128,0.04)" />
-              <rect x="340" y="188" width="285" height="162" fill="rgba(220,38,38,0.04)" />
+              {/* ── Zonas de fondo ── */}
+              {/* Tareas: inferior izquierdo */}
+              <rect x="70" y="310" width="295" height="220" fill="#F9FAFB" />
+              {/* Quick Wins: inferior derecho — borde punteado verde */}
+              <rect x="365" y="310" width="295" height="220" fill="#F0FDF4" />
+              <rect x="365" y="310" width="295" height="220" fill="none" stroke="#71B136" strokeWidth="1.5" strokeDasharray="6,4" />
+              {/* Proyectos: superior izquierdo */}
+              <rect x="70" y="60" width="295" height="250" fill="#EFF6FF" />
+              {/* Descarte: superior derecho */}
+              <rect x="365" y="60" width="295" height="250" fill="#FEF2F2" />
 
-              {/* Labels de zona */}
-              <text x="65" y="42" className="s-zone" fill="rgba(113,177,54,0.85)">{tr('Quick Wins', 'Quick Wins')}</text>
-              <text x="350" y="42" className="s-zone" fill="rgba(23,37,84,0.65)">{tr('Proy. estratégicos', 'Strategic Projects')}</text>
-              <text x="65" y="204" className="s-zone" fill="rgba(107,114,128,0.75)">{tr('Tareas menores', 'Minor Tasks')}</text>
-              <text x="350" y="204" className="s-zone" fill="rgba(220,38,38,0.75)">{tr('Descarte', 'Discard')}</text>
+              {/* ── Grid sutil ── */}
+              {[130,190,250,310,370,430,490].map(y => (
+                <line key={y} x1="70" y1={y} x2="660" y2={y} className="grid" />
+              ))}
+              {[130,190,250,310,370,430,490,550,610].map(x => (
+                <line key={x} x1={x} y1="60" x2={x} y2="530" className="grid" />
+              ))}
 
-              {/* Ejes sólidos */}
-              <line x1="55" y1="350" x2="625" y2="350" stroke="#D1D5DB" strokeWidth="1.5" />
-              <line x1="55" y1="25" x2="55" y2="350" stroke="#D1D5DB" strokeWidth="1.5" />
-              {/* Divisores centrales punteados */}
-              <line x1="340" y1="25" x2="340" y2="350" stroke="#E5E7EB" strokeWidth="1" strokeDasharray="4,3" />
-              <line x1="55" y1="188" x2="625" y2="188" stroke="#E5E7EB" strokeWidth="1" strokeDasharray="4,3" />
+              {/* ── Divisor central ── */}
+              <line x1="365" y1="60" x2="365" y2="530" stroke="#CBD5E1" strokeWidth="1" strokeDasharray="5,3" />
+              <line x1="70" y1="310" x2="660" y2="310" stroke="#CBD5E1" strokeWidth="1" strokeDasharray="5,3" />
 
-              {/* Label eje Y (vertical) */}
-              <text transform="translate(18,188) rotate(-90)" textAnchor="middle" className="s-axis" fontSize="9" style={{ letterSpacing: '0.1em', textTransform: 'uppercase' }}>{tr('Impacto', 'Impact')}</text>
-              <text x="48" y="32" textAnchor="end" className="s-axis" fontSize="8.5">{tr('Alto', 'High')}</text>
-              <text x="48" y="354" textAnchor="end" className="s-axis" fontSize="8.5">{tr('Bajo', 'Low')}</text>
+              {/* ── Labels de zona ── */}
+              <text x="82" y="82" className="zl" fill="rgba(23,37,84,0.55)">{tr('Proyectos', 'Projects')}</text>
+              <text x="377" y="82" className="zl" fill="rgba(220,38,38,0.55)">{tr('Descarte', 'Discard')}</text>
+              <text x="82" y="332" className="zl" fill="rgba(107,114,128,0.65)">{tr('Tareas', 'Tasks')}</text>
+              <text x="377" y="332" className="zl" fill="rgba(113,177,54,0.9)">{tr('Quick Wins', 'Quick Wins')}</text>
 
-              {/* Labels eje X */}
-              <text x="340" y="390" textAnchor="middle" className="s-axis" fontSize="9" style={{ letterSpacing: '0.1em', textTransform: 'uppercase' }}>{tr('Complejidad', 'Complexity')}</text>
-              <text x="70" y="368" className="s-axis" fontSize="8.5">{tr('← Baja', '← Low')}</text>
-              <text x="610" y="368" textAnchor="end" className="s-axis" fontSize="8.5">{tr('Alta →', 'High →')}</text>
+              {/* ── Eje Y (COMPLEJIDAD) ── */}
+              <line x1="70" y1="530" x2="70" y2="55" stroke="#172554" strokeWidth="1.5" />
+              <polygon points="70,48 65,62 75,62" fill="#172554" />
+              <text transform="translate(22,295) rotate(-90)" textAnchor="middle" className="ax" fontSize="10">{tr('COMPLEJIDAD', 'COMPLEXITY')}</text>
+              <text x="62" y="65" textAnchor="end" className="ax-tick">{tr('Alta', 'High')}</text>
+              <text x="62" y="528" textAnchor="end" className="ax-tick">{tr('Baja', 'Low')}</text>
 
-              {/* ── QUICK WINS (verde, cuadrante superior izquierdo) ── */}
-              <g className="s-bubble">
-                <title>{tr('Segmentación de cuotas', 'Quota segmentation')}</title>
-                <circle cx="198" cy="90" r="13" fill="rgba(113,177,54,0.22)" stroke="#71B136" strokeWidth="1.5" />
-                <text x="198" y="78" textAnchor="middle" className="s-lbl" fill="#4D8A1E">{tr('Seg. cuotas', 'Quota seg.')}</text>
-              </g>
-              <g className="s-bubble">
-                <title>{tr('Optimización de routing', 'Routing optimization')}</title>
-                <circle cx="255" cy="106" r="13" fill="rgba(113,177,54,0.22)" stroke="#71B136" strokeWidth="1.5" />
-                <text x="272" y="103" className="s-lbl" fill="#4D8A1E">{tr('Opt. routing', 'Routing opt.')}</text>
-              </g>
-              <g className="s-bubble">
-                <title>{tr('Activar colaboración', 'Activate collaboration')}</title>
-                <circle cx="169" cy="123" r="13" fill="rgba(113,177,54,0.22)" stroke="#71B136" strokeWidth="1.5" />
-                <text x="153" y="120" textAnchor="end" className="s-lbl" fill="#4D8A1E">{tr('Activar colab.', 'Activate collab.')}</text>
-              </g>
+              {/* ── Eje X (PRIORIDAD) ── */}
+              <line x1="70" y1="530" x2="665" y2="530" stroke="#172554" strokeWidth="1.5" />
+              <polygon points="672,530 658,525 658,535" fill="#172554" />
+              <text x="370" y="570" textAnchor="middle" className="ax" fontSize="10">{tr('PRIORIDAD', 'PRIORITY')}</text>
+              <text x="78" y="548" className="ax-tick">{tr('Baja', 'Low')}</text>
+              <text x="652" y="548" textAnchor="end" className="ax-tick">{tr('Alta', 'High')}</text>
 
-              {/* ── PROYECTOS ESTRATÉGICOS (azul, cuadrante superior derecho) ── */}
-              <g className="s-bubble">
-                <title>{tr('Unificación app móvil', 'Mobile app unification')}</title>
-                <circle cx="483" cy="74" r="13" fill="rgba(23,37,84,0.16)" stroke="#172554" strokeWidth="1.5" />
-                <text x="483" y="61" textAnchor="middle" className="s-lbl" fill="#172554">{tr('Unif. app móvil', 'Mobile app unif.')}</text>
+              {/* ── QUICK WINS — inferior derecho — verde ── */}
+              <g className="sb">
+                <circle cx="430" cy="460" r="22" fill="#71B136" stroke="#fff" strokeWidth="2" />
+                <text x="430" y="465" textAnchor="middle" fill="#fff" fontWeight="700" fontSize="11" fontFamily="var(--font-body)">A1</text>
+                <g className="tt" filter="url(#tt-shadow)">
+                  <rect x="378" y="422" width="148" height="28" rx="6" fill="#172554" />
+                  <text x="452" y="441" textAnchor="middle" fill="#fff" fontSize="11" fontFamily="var(--font-body)">{tr('Segmentación de cuotas', 'Quota segmentation')}</text>
+                </g>
               </g>
-              <g className="s-bubble">
-                <title>{tr('Visibilidad en tiempo real', 'Real-time visibility')}</title>
-                <circle cx="511" cy="116" r="13" fill="rgba(23,37,84,0.16)" stroke="#172554" strokeWidth="1.5" />
-                <text x="528" y="113" className="s-lbl" fill="#172554">{tr('Visib. RT', 'RT Visibility')}</text>
+              <g className="sb">
+                <circle cx="520" cy="440" r="22" fill="#71B136" stroke="#fff" strokeWidth="2" />
+                <text x="520" y="445" textAnchor="middle" fill="#fff" fontWeight="700" fontSize="11" fontFamily="var(--font-body)">A2</text>
+                <g className="tt" filter="url(#tt-shadow)">
+                  <rect x="458" y="402" width="148" height="28" rx="6" fill="#172554" />
+                  <text x="532" y="421" textAnchor="middle" fill="#fff" fontSize="11" fontFamily="var(--font-body)">{tr('Optimización de routing', 'Routing optimization')}</text>
+                </g>
               </g>
-              <g className="s-bubble">
-                <title>{tr('Gestión de inventario', 'Inventory management')}</title>
-                <circle cx="454" cy="97" r="13" fill="rgba(23,37,84,0.16)" stroke="#172554" strokeWidth="1.5" />
-                <text x="438" y="94" textAnchor="end" className="s-lbl" fill="#172554">{tr('Gest. inventario', 'Inventory mgmt.')}</text>
+              <g className="sb">
+                <circle cx="460" cy="390" r="22" fill="#71B136" stroke="#fff" strokeWidth="2" />
+                <text x="460" y="395" textAnchor="middle" fill="#fff" fontWeight="700" fontSize="11" fontFamily="var(--font-body)">B1</text>
+                <g className="tt" filter="url(#tt-shadow)">
+                  <rect x="398" y="352" width="148" height="28" rx="6" fill="#172554" />
+                  <text x="472" y="371" textAnchor="middle" fill="#fff" fontSize="11" fontFamily="var(--font-body)">{tr('Activar colaboración', 'Activate collaboration')}</text>
+                </g>
               </g>
-
-              {/* ── TAREAS MENORES (gris, cuadrante inferior izquierdo) ── */}
-              <g className="s-bubble">
-                <title>{tr('Atributos de skills', 'Skills attributes')}</title>
-                <circle cx="226" cy="269" r="13" fill="rgba(107,114,128,0.16)" stroke="#6B7280" strokeWidth="1.5" />
-                <text x="243" y="266" className="s-lbl" fill="#6B7280">{tr('Atrib. skills', 'Skills attribs.')}</text>
-              </g>
-              <g className="s-bubble">
-                <title>{tr('Validación GPS', 'GPS validation')}</title>
-                <circle cx="169" cy="253" r="13" fill="rgba(107,114,128,0.16)" stroke="#6B7280" strokeWidth="1.5" />
-                <text x="153" y="250" textAnchor="end" className="s-lbl" fill="#6B7280">{tr('Valid. GPS', 'GPS valid.')}</text>
+              <g className="sb">
+                <circle cx="590" cy="360" r="22" fill="#71B136" stroke="#fff" strokeWidth="2" />
+                <text x="590" y="365" textAnchor="middle" fill="#fff" fontWeight="700" fontSize="11" fontFamily="var(--font-body)">E1</text>
+                <g className="tt" filter="url(#tt-shadow)">
+                  <rect x="490" y="322" width="160" height="28" rx="6" fill="#172554" />
+                  <text x="570" y="341" textAnchor="middle" fill="#fff" fontSize="11" fontFamily="var(--font-body)">{tr('Visibilidad en tiempo real', 'Real-time visibility')}</text>
+                </g>
               </g>
 
-              {/* ── DESCARTE (rojo, cuadrante inferior derecho) ── */}
-              <g className="s-bubble">
-                <title>{tr('Réplica BI en tiempo real', 'Real-time BI replication')}</title>
-                <circle cx="500" cy="285" r="13" fill="rgba(220,38,38,0.13)" stroke="#DC2626" strokeWidth="1.5" />
-                <text x="500" y="273" textAnchor="middle" className="s-lbl" fill="#DC2626">{tr('Réplica BI RT', 'BI RT replica')}</text>
+              {/* ── PROYECTOS — superior izquierdo — azul ── */}
+              <g className="sb">
+                <circle cx="200" cy="140" r="22" fill="#172554" stroke="#fff" strokeWidth="2" />
+                <text x="200" y="145" textAnchor="middle" fill="#fff" fontWeight="700" fontSize="11" fontFamily="var(--font-body)">D1</text>
+                <g className="tt" filter="url(#tt-shadow)">
+                  <rect x="138" y="102" width="148" height="28" rx="6" fill="#172554" />
+                  <text x="212" y="121" textAnchor="middle" fill="#fff" fontSize="11" fontFamily="var(--font-body)">{tr('Unificación app móvil', 'Mobile app unification')}</text>
+                </g>
+              </g>
+              <g className="sb">
+                <circle cx="290" cy="100" r="22" fill="#172554" stroke="#fff" strokeWidth="2" />
+                <text x="290" y="105" textAnchor="middle" fill="#fff" fontWeight="700" fontSize="11" fontFamily="var(--font-body)">D2</text>
+                <g className="tt" filter="url(#tt-shadow)">
+                  <rect x="228" y="62" width="148" height="28" rx="6" fill="#172554" />
+                  <text x="302" y="81" textAnchor="middle" fill="#fff" fontSize="11" fontFamily="var(--font-body)">{tr('Gestión de inventario', 'Inventory management')}</text>
+                </g>
+              </g>
+              <g className="sb">
+                <circle cx="150" cy="220" r="22" fill="#172554" stroke="#fff" strokeWidth="2" />
+                <text x="150" y="225" textAnchor="middle" fill="#fff" fontWeight="700" fontSize="11" fontFamily="var(--font-body)">D3</text>
+                <g className="tt" filter="url(#tt-shadow)">
+                  <rect x="88" y="182" width="148" height="28" rx="6" fill="#172554" />
+                  <text x="162" y="201" textAnchor="middle" fill="#fff" fontSize="11" fontFamily="var(--font-body)">{tr('Integración ERP', 'ERP Integration')}</text>
+                </g>
+              </g>
+              <g className="sb">
+                <circle cx="320" cy="180" r="22" fill="#172554" stroke="#fff" strokeWidth="2" />
+                <text x="320" y="185" textAnchor="middle" fill="#fff" fontWeight="700" fontSize="11" fontFamily="var(--font-body)">C2</text>
+                <g className="tt" filter="url(#tt-shadow)">
+                  <rect x="218" y="142" width="148" height="28" rx="6" fill="#172554" />
+                  <text x="292" y="161" textAnchor="middle" fill="#fff" fontSize="11" fontFamily="var(--font-body)">{tr('Analítica avanzada', 'Advanced analytics')}</text>
+                </g>
+              </g>
+
+              {/* ── TAREAS — inferior izquierdo — gris ── */}
+              <g className="sb">
+                <circle cx="200" cy="420" r="22" fill="#6B7280" stroke="#fff" strokeWidth="2" />
+                <text x="200" y="425" textAnchor="middle" fill="#fff" fontWeight="700" fontSize="11" fontFamily="var(--font-body)">B2</text>
+                <g className="tt" filter="url(#tt-shadow)">
+                  <rect x="138" y="382" width="128" height="28" rx="6" fill="#172554" />
+                  <text x="202" y="401" textAnchor="middle" fill="#fff" fontSize="11" fontFamily="var(--font-body)">{tr('Atributos de skills', 'Skills attributes')}</text>
+                </g>
+              </g>
+              <g className="sb">
+                <circle cx="130" cy="370" r="22" fill="#6B7280" stroke="#fff" strokeWidth="2" />
+                <text x="130" y="375" textAnchor="middle" fill="#fff" fontWeight="700" fontSize="11" fontFamily="var(--font-body)">A4</text>
+                <g className="tt" filter="url(#tt-shadow)">
+                  <rect x="68" y="332" width="128" height="28" rx="6" fill="#172554" />
+                  <text x="132" y="351" textAnchor="middle" fill="#fff" fontSize="11" fontFamily="var(--font-body)">{tr('Validación GPS', 'GPS validation')}</text>
+                </g>
+              </g>
+
+              {/* ── DESCARTE — superior derecho — rojo ── */}
+              <g className="sb">
+                <circle cx="500" cy="160" r="22" fill="#DC2626" stroke="#fff" strokeWidth="2" />
+                <text x="500" y="165" textAnchor="middle" fill="#fff" fontWeight="700" fontSize="11" fontFamily="var(--font-body)">D8</text>
+                <g className="tt" filter="url(#tt-shadow)">
+                  <rect x="398" y="122" width="168" height="28" rx="6" fill="#172554" />
+                  <text x="482" y="141" textAnchor="middle" fill="#fff" fontSize="11" fontFamily="var(--font-body)">{tr('Réplica BI en tiempo real', 'Real-time BI replication')}</text>
+                </g>
               </g>
             </svg>
 
             {/* Leyenda */}
-            <div style={{ display: 'flex', justifyContent: 'center', gap: '20px', flexWrap: 'wrap', marginTop: '12px', paddingTop: '16px', borderTop: '1px solid #F3F4F6' }}>
+            <div style={{ display: 'flex', justifyContent: 'center', gap: '24px', flexWrap: 'wrap', marginTop: '16px', paddingTop: '16px', borderTop: '1px solid #F3F4F6' }}>
               {[
                 { color: '#71B136', label: tr('Quick Wins', 'Quick Wins') },
                 { color: '#172554', label: tr('Proyectos estratégicos', 'Strategic Projects') },
                 { color: '#6B7280', label: tr('Tareas menores', 'Minor Tasks') },
                 { color: '#DC2626', label: tr('Descarte', 'Discard') },
               ].map((item, i) => (
-                <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                  <div style={{ width: '10px', height: '10px', borderRadius: '50%', background: item.color, flexShrink: 0, opacity: 0.85 }} />
-                  <span style={{ fontSize: '12px', color: '#6B7280', fontFamily: 'var(--font-body)' }}>{item.label}</span>
+                <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '7px' }}>
+                  <div style={{ width: '11px', height: '11px', borderRadius: '50%', background: item.color, flexShrink: 0 }} />
+                  <span style={{ fontSize: '12px', color: '#374151', fontFamily: 'var(--font-body)' }}>{item.label}</span>
                 </div>
               ))}
             </div>

@@ -90,8 +90,7 @@ export default function Navbar() {
           <div className="nav-cta">
             <a
               className="btn-primary"
-              href="/#cta-section"
-              onClick={(e) => { e.preventDefault(); handleHashLink('#cta-section'); }}
+              href="/servicios#contacto"
             >
               {nav.cta}
             </a>
@@ -138,8 +137,7 @@ export default function Navbar() {
         </a>
         <a
           className="btn-primary"
-          href="/#cta-section"
-          onClick={(e) => { e.preventDefault(); handleHashLink('#cta-section'); }}
+          href="/servicios#contacto"
         >
           {nav.cta}
         </a>

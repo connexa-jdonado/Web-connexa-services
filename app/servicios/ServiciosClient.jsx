@@ -1,6 +1,7 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
+import AssessmentMethodology from '@/components/AssessmentMethodology';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useLang } from '@/context/LanguageContext';
@@ -271,20 +272,7 @@ export default function ServiciosClient() {
             <h2>{tr('Consultoría estratégica en Field Service', 'Strategic Field Service Consulting')}</h2>
             <p>{tr('Analizamos tu operación actual y diseñamos la estrategia óptima para maximizar la eficiencia de tu fuerza de trabajo en campo.', 'We analyze your current operation and design the optimal strategy to maximize the efficiency of your field workforce.')}</p>
           </div>
-          <div className="consulting-grid">
-            {[
-              { d: 'd1', num: '01', icon: <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>, title: tr('Diagnóstico', 'Diagnosis'), desc: tr('Relevamos tu operación actual, procesos, sistemas y pain points para entender dónde estás y a dónde querés llegar en Field Service.', 'We survey your current operation, processes, systems, and pain points to understand where you are and where you want to go in Field Service.') },
-              { d: 'd2', num: '02', icon: <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>, title: tr('Diseño de solución', 'Solution Design'), desc: tr('Diseñamos la arquitectura de la solución óptima para tu negocio: plataforma, módulos, integraciones y flujos de trabajo.', 'We design the optimal solution architecture for your business: platform, modules, integrations, and workflows.') },
-              { d: 'd3', num: '03', icon: <svg viewBox="0 0 24 24"><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></svg>, title: tr('Hoja de ruta', 'Roadmap'), desc: tr('Definimos un plan de implementación por etapas, con hitos claros, recursos necesarios y métricas de éxito para cada fase.', 'We define a phased implementation plan with clear milestones, required resources, and success metrics for each phase.') },
-            ].map((c, i) => (
-              <div key={i} className={`consulting-card fade-up ${c.d}`}>
-                <div className="consulting-num">{c.num}</div>
-                <div className="consulting-icon">{c.icon}</div>
-                <div className="consulting-title">{c.title}</div>
-                <div className="consulting-desc">{c.desc}</div>
-              </div>
-            ))}
-          </div>
+          <AssessmentMethodology />
         </div>
       </section>
 

@@ -94,6 +94,10 @@ export default function ProductosClient() {
                   <div className="benefit-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div>
                   <div><div className="benefit-title">{tr('Autonomía para el negocio', 'Business autonomy')}</div><div className="benefit-desc">{tr('Los equipos de operaciones modifican procesos sin IT.', 'Operations teams modify processes without IT.')}</div></div>
                 </div>
+                <div className="benefit-row">
+                  <div className="benefit-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="7" y="7" width="10" height="10" rx="1"/><path d="M7 12H4"/><path d="M20 12h-3"/><path d="M12 7V4"/><path d="M12 20v-3"/></svg></div>
+                  <div><div className="benefit-title">{tr('Agente de IA integrado', 'Integrated AI agent')}</div><div className="benefit-desc">{tr('Agente de IA integrado para optimizar y sugerir mejoras en tus workflows.', 'Integrated AI agent to optimize and suggest improvements to your workflows.')}</div></div>
+                </div>
               </div>
               <div className="showcase-ctas fade-up d4">
                 <Link href="/productos/workflow-builder" className="btn-primary">
@@ -141,6 +145,10 @@ export default function ProductosClient() {
                 <div className="benefit-row">
                   <div className="benefit-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></div>
                   <div><div className="benefit-title">{tr('Reportería exportable', 'Exportable reporting')}</div><div className="benefit-desc">{tr('Exportá cualquier vista a Excel o PDF con un clic.', 'Export any view to Excel or PDF with one click.')}</div></div>
+                </div>
+                <div className="benefit-row">
+                  <div className="benefit-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 3v18h18"/><polyline points="7 14 10 10 13 12 17 7"/></svg></div>
+                  <div><div className="benefit-title">{tr('Dashboard inteligente con IA', 'Intelligent AI dashboard')}</div><div className="benefit-desc">{tr('Dashboard inteligente con análisis predictivo impulsado por IA.', 'Intelligent dashboard with AI-powered predictive analytics.')}</div></div>
                 </div>
               </div>
               <div className="showcase-ctas fade-up d4">

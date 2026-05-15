@@ -229,7 +229,7 @@ export default function HomeClient() {
           <div className="carousel-track">
             {['claro', 'telefonica', 'vodafone', 'tim', 'prosegur', 'simpress', 'onnet',
               'claro', 'telefonica', 'vodafone', 'tim', 'prosegur', 'simpress', 'onnet'].map((c, i) => (
-              <img key={i} className="carousel-logo" src={`/assets/clients/${c}.png`} alt={c} />
+              <img key={i} className="carousel-logo" src={`/assets/clients/${c}.png`} alt={c} style={c === 'onnet' ? { height: '28px' } : undefined} />
             ))}
           </div>
         </div>
@@ -256,7 +256,7 @@ export default function HomeClient() {
               <div className="partner-name-large">Oracle Field Service Cloud</div>
               <p className="partner-desc">{tr('Partner oficial de Oracle para la implementación y soporte de Oracle Field Service Cloud. Lideramos proyectos de transformación digital para empresas de utilities, telecomunicaciones e industria de servicios.', 'Gold Partner certified by Oracle for Field Service Cloud implementations. Direct access to technical support and the latest platform updates.')}</p>
               <div className="partner-stats">
-                <div className="partner-stat-item"><div className="partner-stat-val">30+</div><div className="partner-stat-lbl">{tr('Impl. OFSC', 'OFSC Impl.')}</div></div>
+                <div className="partner-stat-item"><div className="partner-stat-val">30+</div><div className="partner-stat-lbl">{tr('Impl. OFS', 'OFS Impl.')}</div></div>
                 <div className="partner-stat-item"><div className="partner-stat-val">99%</div><div className="partner-stat-lbl">{tr('Satisfacción', 'Satisfaction')}</div></div>
                 <div className="partner-stat-item"><div className="partner-stat-val">8+</div><div className="partner-stat-lbl">{tr('Años de partnership', 'Years of partnership')}</div></div>
               </div>
@@ -267,6 +267,7 @@ export default function HomeClient() {
                 <div className="partner-verified"><div className="partner-verified-icon" /><span className="partner-verified-text">{tr('Partner Certificado', 'Certified Partner')}</span></div>
               </div>
               <div className="partner-name-large">Zinier FSM Platform</div>
+              <span style={{ fontSize: '12px', color: '#71B136', background: 'rgba(113,177,54,0.1)', borderRadius: '20px', padding: '4px 10px', display: 'inline-block', marginTop: '8px' }}>{tr('+8 implementaciones', '+8 implementations')}</span>
               <p className="partner-desc">{tr('Partner certificado de Zinier, la plataforma de inteligencia artificial para Field Service Management de próxima generación. Implementamos flujos de trabajo inteligentes y automatizados.', 'Authorized reseller and official implementation partner of Zinier. Full access to roadmap and dedicated technical support.')}</p>
               <div className="partner-stats">
                 <div className="partner-stat-item"><div className="partner-stat-val">20+</div><div className="partner-stat-lbl">{tr('Impl. Zinier', 'Zinier Impl.')}</div></div>
@@ -288,12 +289,12 @@ export default function HomeClient() {
           </div>
           <div className="services-grid">
             {[
-              { d: 'd1', icon: <><circle cx="12" cy="12" r="3" /><path d="M12 2v3M12 19v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M2 12h3M19 12h3M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12" /></>, title: tr('Implementación OFSC', 'OFSC Implementation'), desc: tr('Diseño, configuración y puesta en marcha de Oracle Field Service Cloud. Desde el análisis de procesos hasta el go-live y capacitación de equipos.', 'Design, configuration and deployment of Oracle Field Service Cloud. From process analysis to go-live and team training.') },
+              { d: 'd1', icon: <><circle cx="12" cy="12" r="3" /><path d="M12 2v3M12 19v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M2 12h3M19 12h3M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12" /></>, title: tr('Implementación OFS', 'OFS Implementation'), desc: tr('Diseño, configuración y puesta en marcha de Oracle Field Service Cloud. Desde el análisis de procesos hasta el go-live y capacitación de equipos.', 'Design, configuration and deployment of Oracle Field Service Cloud. From process analysis to go-live and team training.') },
               { d: 'd2', icon: <><rect x="2" y="3" width="20" height="14" rx="2" /><path d="M8 21h8M12 17v4" /></>, title: tr('Implementación Zinier', 'Zinier Implementation'), desc: tr('Configuración de la plataforma Zinier adaptada a tus flujos de trabajo, integraciones con sistemas existentes y deployment en producción.', 'Configuration of the Zinier platform tailored to your workflows, integration with existing systems and production deployment.') },
               { d: 'd3', icon: <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />, title: tr('Consultoría FSM', 'FSM Consulting'), desc: tr('Análisis de madurez operacional, diseño de procesos y estrategia de transformación digital para tu área de Field Service Management.', 'Operational maturity analysis, process design and digital transformation strategy for your Field Service Management area.') },
               { d: 'd1', icon: <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />, title: tr('Soporte Post Go-Live', 'Post Go-Live Support'), desc: tr('Servicio de soporte continuo con SLA garantizado, gestión de incidentes, mejoras evolutivas y acompañamiento técnico de primer nivel.', 'Continuous support service with guaranteed SLA, incident management, evolutionary improvements and first-level technical assistance.') },
-              { d: 'd2', icon: <><polyline points="16 18 22 12 16 6" /><polyline points="8 6 2 12 8 18" /></>, title: tr('Desarrollo a Medida', 'Custom Development'), desc: tr('Desarrollo de plugins, extensiones y soluciones personalizadas sobre las plataformas OFSC y Zinier para adaptar la herramienta a tu negocio.', 'Development of plugins, extensions and custom solutions on OFSC and Zinier platforms to adapt the tool to your business.') },
-              { d: 'd3', icon: <path d="M18 20V10M12 20V4M6 20v-6" />, title: tr('Integraciones', 'Integrations'), desc: tr('Conectamos OFSC y Zinier con tus sistemas ERP, CRM, GIS o de facturación mediante APIs, middleware y conectores especializados.', 'We connect OFSC and Zinier with your ERP, CRM, GIS or billing systems through APIs, middleware and specialized connectors.') },
+              { d: 'd2', icon: <><polyline points="16 18 22 12 16 6" /><polyline points="8 6 2 12 8 18" /></>, title: tr('Desarrollo a Medida', 'Custom Development'), desc: tr('Desarrollo de plugins, extensiones y soluciones personalizadas sobre las plataformas OFS y Zinier para adaptar la herramienta a tu negocio.', 'Development of plugins, extensions and custom solutions on OFS and Zinier platforms to adapt the tool to your business.') },
+              { d: 'd3', icon: <path d="M18 20V10M12 20V4M6 20v-6" />, title: tr('Integraciones', 'Integrations'), desc: tr('Conectamos OFS y Zinier con tus sistemas ERP, CRM, GIS o de facturación mediante APIs, middleware y conectores especializados.', 'We connect OFS and Zinier with your ERP, CRM, GIS or billing systems through APIs, middleware and specialized connectors.') },
             ].map((s, i) => (
               <div key={i} className={`service-card fade-up ${s.d}`}>
                 <div className="service-icon"><svg viewBox="0 0 24 24">{s.icon}</svg></div>
@@ -432,7 +433,7 @@ export default function HomeClient() {
             <div className="timeline-phases" id="timeline-phases">
               {[
                 { n: 1, name: tr('Descubrimiento', 'Discovery'), desc: tr('Relevamiento del negocio, procesos actuales y necesidades operativas del cliente.', "Survey of the business, current processes and client's operational needs.") },
-                { n: 2, name: tr('Análisis', 'Analysis'), desc: tr('Evaluación técnica y funcional del entorno OFSC o Zinier para definir el alcance.', 'Technical and functional evaluation of the OFSC or Zinier environment to define scope.') },
+                { n: 2, name: tr('Análisis', 'Analysis'), desc: tr('Evaluación técnica y funcional del entorno OFS o Zinier para definir el alcance.', 'Technical and functional evaluation of the OFS or Zinier environment to define scope.') },
                 { n: 3, name: tr('Estimación', 'Estimation'), desc: tr('Planificación de tiempos, recursos y costos del proyecto con entregables claros.', 'Planning of project timelines, resources and costs with clear deliverables.') },
                 { n: 4, name: tr('Desarrollo', 'Development'), desc: tr('Configuración, parametrización y desarrollo de soluciones sobre la plataforma.', 'Configuration, parameterization and solution development on the platform.') },
                 { n: 5, name: tr('Pruebas Internas', 'Internal Testing'), badge: 'QA', desc: tr('Validación funcional y de integración realizada por el equipo técnico de Connexa.', 'Functional and integration validation performed by the Connexa technical team.') },
@@ -491,7 +492,7 @@ export default function HomeClient() {
                 <p className="product-desc">{tr('Constructor visual de flujos de trabajo para Oracle Field Service Cloud. Permite diseñar, testear y publicar workflows sin código, reduciendo el time-to-market de nuevos procesos.', 'Visual workflow builder for Oracle Field Service Cloud. Design, test and publish workflows without code, reducing the time-to-market for new processes.')}</p>
                 <div className="product-bullets">
                   <div className="product-bullet">{tr('Editor drag & drop sin código', 'No-code drag & drop editor')}</div>
-                  <div className="product-bullet">{tr('Integración nativa con OFSC APIs', 'Native integration with OFSC APIs')}</div>
+                  <div className="product-bullet">{tr('Integración nativa con OFS APIs', 'Native integration with OFS APIs')}</div>
                   <div className="product-bullet">{tr('Testing y simulación en sandbox', 'Testing and simulation in sandbox')}</div>
                 </div>
                 <button className="product-cta">{tr('Conocer más', 'Learn more')} <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6" /></svg></button>

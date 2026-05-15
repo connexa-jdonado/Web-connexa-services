@@ -91,3 +91,30 @@ y después de cualquier cambio.
   feature/productos — mejoras páginas de producto
   feature/servicios — mejoras página servicios
   feature/seo — optimizaciones SEO y metadata
+
+## REGLAS ESPECÍFICAS — WORKTREE CONTENT
+
+PROHIBIDO en este worktree:
+- Nunca tocar archivos de performance o animaciones
+- Nunca modificar el canvas de partículas
+- Nunca cambiar colores ni tipografías del design system
+- Nunca reescribir archivos completos
+
+PERMITIDO en este worktree:
+- Modificar textos y traducciones ES/EN
+- Cambiar orden de secciones
+- Agregar imágenes y videos
+- Ajustes visuales de layout y espaciado
+- Crear páginas nuevas (nosotros, casos de éxito)
+
+ANTES de cada cambio:
+1. Leer el archivo completo
+2. Confirmar qué líneas exactas se van a tocar
+3. Verificar que la sección de casos de uso con video
+   existe en FSMTool y WorkflowBuilder después del cambio
+4. Confirmar que el build compila sin errores
+
+WORKFLOW:
+- Un cambio a la vez
+- Commit después de cada cambio exitoso
+- Nunca acumular muchos cambios sin commitear

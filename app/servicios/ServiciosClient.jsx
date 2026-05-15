@@ -42,7 +42,7 @@ export default function ServiciosClient() {
 
   return (
     <>
-      {/* ── HERO ── COMENTADO
+      {/* ── HERO ── */}
       <section className="page-hero">
         <div className="container">
           <div className="page-hero-inner">
@@ -61,6 +61,7 @@ export default function ServiciosClient() {
                   <a href="#implementacion-ofsc" className="btn-ghost" onClick={(e) => { e.preventDefault(); scrollTo('implementacion-ofsc'); }}>{tr('Ver servicios', 'View Services')}</a>
                 </div>
               </div>
+              {/*
               <div className="page-hero-right page-hero-illustration">
                 <svg viewBox="0 0 440 360" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ width: '100%', maxWidth: '440px', display: 'block', margin: '0 auto' }}>
                   <circle cx="220" cy="180" r="160" stroke="rgba(255,255,255,0.04)" strokeWidth="1"/>
@@ -98,11 +99,11 @@ export default function ServiciosClient() {
                   <text x="325" y="348" textAnchor="middle" fontFamily="Inter,sans-serif" fontSize="9" fill="rgba(255,255,255,0.4)">Zinier</text>
                 </svg>
               </div>
+              */}
             </div>
           </div>
         </div>
       </section>
-      */}
 
       {/* ── IMPLEMENTACIÓN OFSC ── */}
       <section id="implementacion-ofsc" className="sec-ofsc">

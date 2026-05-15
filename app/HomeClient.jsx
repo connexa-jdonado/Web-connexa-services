@@ -271,8 +271,8 @@ export default function HomeClient() {
               <p className="partner-desc">{tr('Partner certificado de Zinier, la plataforma de inteligencia artificial para Field Service Management de próxima generación. Implementamos flujos de trabajo inteligentes y automatizados.', 'Authorized reseller and official implementation partner of Zinier. Full access to roadmap and dedicated technical support.')}</p>
               <div className="partner-stats">
                 <div className="partner-stat-item"><div className="partner-stat-val">8+</div><div className="partner-stat-lbl">{tr('Impl. Zinier', 'Zinier Impl.')}</div></div>
-                <div className="partner-stat-item"><div className="partner-stat-val">40%</div><div className="partner-stat-lbl">{tr('Efic. promedio', 'Avg. efficiency')}</div></div>
-                <div className="partner-stat-item"><div className="partner-stat-val">5+</div><div className="partner-stat-lbl">{tr('Años de partnership', 'Years of partnership')}</div></div>
+                <div className="partner-stat-item"><div className="partner-stat-val">88%</div><div className="partner-stat-lbl">{tr('Efic. promedio', 'Avg. efficiency')}</div></div>
+                <div className="partner-stat-item"><div className="partner-stat-val">4+</div><div className="partner-stat-lbl">{tr('Años de partnership', 'Years of partnership')}</div></div>
               </div>
             </div>
           </div>
@@ -738,23 +738,7 @@ export default function HomeClient() {
             <p className="section-subtitle fade-up d2" style={{ color: 'rgba(255,255,255,0.6)', margin: '0 auto' }}>{tr('Herramientas desarrolladas internamente sobre las plataformas líderes, diseñadas para resolver los desafíos más comunes del Field Service.', 'Internally developed tools built on leading platforms, designed to solve the most common Field Service challenges.')}</p>
           </div>
           <div className="products-grid">
-            <div className="product-card fade-up d1" onClick={() => router.push('/productos/fsmtool')} role="button" tabIndex={0} onKeyDown={(e) => e.key === 'Enter' && router.push('/productos/fsmtool')}>
-              <div>
-                <div className="product-badge"><div className="product-badge-dot" /><span>{tr('Solución propia', 'Proprietary solution')}</span></div>
-                <div className="product-name">FSMTool</div>
-                <p className="product-desc">{tr('Suite de herramientas avanzadas de administración y monitoreo para Oracle Field Service Cloud. Operaciones masivas, dashboards en tiempo real y automatización de procesos.', 'Advanced administration and monitoring toolkit for Oracle Field Service Cloud. Bulk operations, real-time dashboards and process automation.')}</p>
-                <div className="product-bullets">
-                  <div className="product-bullet">{tr('Dashboard de operaciones en tiempo real', 'Real-time operations dashboard')}</div>
-                  <div className="product-bullet">{tr('Gestión avanzada de rutas y recursos', 'Advanced route and resource management')}</div>
-                  <div className="product-bullet">{tr('Reportería y analytics personalizables', 'Customizable reporting and analytics')}</div>
-                </div>
-                <button className="product-cta">{tr('Conocer más', 'Learn more')} <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6" /></svg></button>
-              </div>
-              <div className="product-visual">
-                <svg viewBox="0 0 80 80"><rect x="8" y="20" width="64" height="44" rx="6" /><rect x="14" y="28" width="22" height="14" rx="3" /><rect x="14" y="46" width="22" height="8" rx="2" /><rect x="42" y="28" width="22" height="8" rx="2" /><rect x="42" y="40" width="22" height="14" rx="3" /><circle cx="14" cy="14" r="3" /><circle cx="40" cy="14" r="3" /><circle cx="66" cy="14" r="3" /></svg>
-              </div>
-            </div>
-            <div className="product-card fade-up d2" onClick={() => router.push('/productos/workflow-builder')} role="button" tabIndex={0} onKeyDown={(e) => e.key === 'Enter' && router.push('/productos/workflow-builder')}>
+            <div className="product-card fade-up d1" onClick={() => router.push('/productos/workflow-builder')} role="button" tabIndex={0} onKeyDown={(e) => e.key === 'Enter' && router.push('/productos/workflow-builder')}>
               <div>
                 <div className="product-badge"><div className="product-badge-dot" /><span>{tr('Solución propia', 'Proprietary solution')}</span></div>
                 <div className="product-name">Workflow Builder</div>
@@ -768,6 +752,22 @@ export default function HomeClient() {
               </div>
               <div className="product-visual">
                 <svg viewBox="0 0 80 80"><circle cx="20" cy="20" r="8" /><circle cx="60" cy="20" r="8" /><circle cx="20" cy="60" r="8" /><circle cx="60" cy="60" r="8" /><line x1="28" y1="20" x2="52" y2="20" /><line x1="20" y1="28" x2="20" y2="52" /><line x1="28" y1="60" x2="52" y2="60" /><line x1="60" y1="28" x2="60" y2="52" /><circle cx="40" cy="40" r="6" /></svg>
+              </div>
+            </div>
+            <div className="product-card fade-up d2" onClick={() => router.push('/productos/fsmtool')} role="button" tabIndex={0} onKeyDown={(e) => e.key === 'Enter' && router.push('/productos/fsmtool')}>
+              <div>
+                <div className="product-badge"><div className="product-badge-dot" /><span>{tr('Solución propia', 'Proprietary solution')}</span></div>
+                <div className="product-name">FSMTool</div>
+                <p className="product-desc">{tr('Suite de herramientas avanzadas de administración y monitoreo para Oracle Field Service Cloud. Operaciones masivas, dashboards en tiempo real y automatización de procesos.', 'Advanced administration and monitoring toolkit for Oracle Field Service Cloud. Bulk operations, real-time dashboards and process automation.')}</p>
+                <div className="product-bullets">
+                  <div className="product-bullet">{tr('Dashboard de operaciones en tiempo real', 'Real-time operations dashboard')}</div>
+                  <div className="product-bullet">{tr('Gestión avanzada de rutas y recursos', 'Advanced route and resource management')}</div>
+                  <div className="product-bullet">{tr('Reportería y analytics personalizables', 'Customizable reporting and analytics')}</div>
+                </div>
+                <button className="product-cta">{tr('Conocer más', 'Learn more')} <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6" /></svg></button>
+              </div>
+              <div className="product-visual">
+                <svg viewBox="0 0 80 80"><rect x="8" y="20" width="64" height="44" rx="6" /><rect x="14" y="28" width="22" height="14" rx="3" /><rect x="14" y="46" width="22" height="8" rx="2" /><rect x="42" y="28" width="22" height="8" rx="2" /><rect x="42" y="40" width="22" height="14" rx="3" /><circle cx="14" cy="14" r="3" /><circle cx="40" cy="14" r="3" /><circle cx="66" cy="14" r="3" /></svg>
               </div>
             </div>
           </div>

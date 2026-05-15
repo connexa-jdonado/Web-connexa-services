@@ -758,11 +758,11 @@ export default function HomeClient() {
               <div>
                 <div className="product-badge"><div className="product-badge-dot" /><span>{tr('Solución propia', 'Proprietary solution')}</span></div>
                 <div className="product-name">FSMTool</div>
-                <p className="product-desc">{tr('Suite de herramientas avanzadas de administración y monitoreo para Oracle Field Service Cloud. Operaciones masivas, dashboards en tiempo real y automatización de procesos.', 'Advanced administration and monitoring toolkit for Oracle Field Service Cloud. Bulk operations, real-time dashboards and process automation.')}</p>
+                <p className="product-desc">{tr('Suite de herramientas avanzadas de administración para Oracle Field Service Cloud. Operaciones masivas, gestión de inventarios, actividades y recursos.', 'Advanced administration suite for Oracle Field Service Cloud. Bulk operations, inventory management, activities and resources.')}</p>
                 <div className="product-bullets">
-                  <div className="product-bullet">{tr('Dashboard de operaciones en tiempo real', 'Real-time operations dashboard')}</div>
-                  <div className="product-bullet">{tr('Gestión avanzada de rutas y recursos', 'Advanced route and resource management')}</div>
-                  <div className="product-bullet">{tr('Reportería y analytics personalizables', 'Customizable reporting and analytics')}</div>
+                  <div className="product-bullet">{tr('Gestión masiva de actividades y recursos', 'Bulk management of activities and resources')}</div>
+                  <div className="product-bullet">{tr('Gestión completa de inventarios', 'Complete inventory management')}</div>
+                  <div className="product-bullet">{tr('Descarga y gestión masiva de actividades', 'Download and bulk management of activities')}</div>
                 </div>
                 <button className="product-cta">{tr('Conocer más', 'Learn more')} <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6" /></svg></button>
               </div>

@@ -364,6 +364,7 @@ export default function HomeClient() {
             </p>
           </div>
 
+          <div className="services-grid" style={{ marginBottom: '48px' }}>
             <div className="service-card">
               <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
                 <div className="service-icon">
@@ -433,6 +434,7 @@ export default function HomeClient() {
                 ))}
               </ul>
             </div>
+          </div>
 
           {/* SCATTER PLOT MAPA DE PRIORIZACIÓN */}
           <div className="fade-up d2" style={{ background: '#fff', borderRadius: '16px', padding: '32px 32px 24px', margin: '0 0 48px', boxShadow: '0 8px 32px rgba(0,0,0,0.08)', border: '1px solid #F3F4F6' }}>

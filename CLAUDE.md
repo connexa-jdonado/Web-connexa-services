@@ -92,25 +92,29 @@ y después de cualquier cambio.
   feature/servicios — mejoras página servicios
   feature/seo — optimizaciones SEO y metadata
 
-## REGLAS ESPECÍFICAS — WORKTREE PERFORMANCE
+## REGLAS ESPECÍFICAS — WORKTREE CONTENT
 
 PROHIBIDO en este worktree:
-- Nunca reescribir archivos completos existentes
-- Solo agregar código nuevo o editar líneas puntuales
-- Nunca modificar el diseño visual, colores ni tipografías
-- Nunca tocar styles/globals.css salvo eliminar CSS 
-  claramente sin usar
-- Nunca modificar componentes de páginas completas
+- Nunca tocar archivos de performance o animaciones
+- Nunca modificar el canvas de partículas
+- Nunca cambiar colores ni tipografías del design system
+- Nunca reescribir archivos completos
 
 PERMITIDO en este worktree:
-- Crear archivos nuevos (workers, componentes separados)
-- Agregar dynamic imports al inicio de archivos
-- Agregar atributos width/height a imágenes existentes
-- Agregar preload de fuentes en layout.jsx
-- Separar el canvas en su propio componente nuevo
+- Modificar textos y traducciones ES/EN
+- Cambiar orden de secciones
+- Agregar imágenes y videos
+- Ajustes visuales de layout y espaciado
+- Crear páginas nuevas (nosotros, casos de éxito)
 
 ANTES de cada cambio:
 1. Leer el archivo completo
 2. Confirmar qué líneas exactas se van a tocar
-3. Verificar que HomeClient.jsx sigue teniendo 
-   la sección de partículas después del cambio
+3. Verificar que la sección de casos de uso con video
+   existe en FSMTool y WorkflowBuilder después del cambio
+4. Confirmar que el build compila sin errores
+
+WORKFLOW:
+- Un cambio a la vez
+- Commit después de cada cambio exitoso
+- Nunca acumular muchos cambios sin commitear

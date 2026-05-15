@@ -159,7 +159,7 @@ export default function HomeClient() {
           <div className="carousel-track">
             {['claro', 'telefonica', 'vodafone', 'tim', 'prosegur', 'simpress', 'onnet',
               'claro', 'telefonica', 'vodafone', 'tim', 'prosegur', 'simpress', 'onnet'].map((c, i) => (
-              <Image key={i} className="carousel-logo" src={`/assets/clients/${c}.png`} alt={c} width={LOGO_DIMS[c]?.w ?? 200} height={LOGO_DIMS[c]?.h ?? 60} sizes="160px" />
+              <img key={i} className="carousel-logo" src={`/assets/clients/${c}.png`} alt={c} style={c === 'onnet' ? { height: '20px' } : undefined} />
             ))}
           </div>
         </div>
@@ -186,7 +186,7 @@ export default function HomeClient() {
               <div className="partner-name-large">Oracle Field Service Cloud</div>
               <p className="partner-desc">{tr('Partner oficial de Oracle para la implementación y soporte de Oracle Field Service Cloud. Lideramos proyectos de transformación digital para empresas de utilities, telecomunicaciones e industria de servicios.', 'Gold Partner certified by Oracle for Field Service Cloud implementations. Direct access to technical support and the latest platform updates.')}</p>
               <div className="partner-stats">
-                <div className="partner-stat-item"><div className="partner-stat-val">30+</div><div className="partner-stat-lbl">{tr('Impl. OFSC', 'OFSC Impl.')}</div></div>
+                <div className="partner-stat-item"><div className="partner-stat-val">30+</div><div className="partner-stat-lbl">{tr('Impl. OFS', 'OFS Impl.')}</div></div>
                 <div className="partner-stat-item"><div className="partner-stat-val">99%</div><div className="partner-stat-lbl">{tr('Satisfacción', 'Satisfaction')}</div></div>
                 <div className="partner-stat-item"><div className="partner-stat-val">8+</div><div className="partner-stat-lbl">{tr('Años de partnership', 'Years of partnership')}</div></div>
               </div>
@@ -197,11 +197,12 @@ export default function HomeClient() {
                 <div className="partner-verified"><div className="partner-verified-icon" /><span className="partner-verified-text">{tr('Partner Certificado', 'Certified Partner')}</span></div>
               </div>
               <div className="partner-name-large">Zinier FSM Platform</div>
+              <span style={{ fontSize: '12px', color: '#71B136', background: 'rgba(113,177,54,0.1)', borderRadius: '20px', padding: '4px 10px', display: 'inline-block', marginTop: '8px' }}>{tr('+8 implementaciones', '+8 implementations')}</span>
               <p className="partner-desc">{tr('Partner certificado de Zinier, la plataforma de inteligencia artificial para Field Service Management de próxima generación. Implementamos flujos de trabajo inteligentes y automatizados.', 'Authorized reseller and official implementation partner of Zinier. Full access to roadmap and dedicated technical support.')}</p>
               <div className="partner-stats">
-                <div className="partner-stat-item"><div className="partner-stat-val">20+</div><div className="partner-stat-lbl">{tr('Impl. Zinier', 'Zinier Impl.')}</div></div>
-                <div className="partner-stat-item"><div className="partner-stat-val">40%</div><div className="partner-stat-lbl">{tr('Efic. promedio', 'Avg. efficiency')}</div></div>
-                <div className="partner-stat-item"><div className="partner-stat-val">5+</div><div className="partner-stat-lbl">{tr('Años de partnership', 'Years of partnership')}</div></div>
+                <div className="partner-stat-item"><div className="partner-stat-val">8+</div><div className="partner-stat-lbl">{tr('Impl. Zinier', 'Zinier Impl.')}</div></div>
+                <div className="partner-stat-item"><div className="partner-stat-val">88%</div><div className="partner-stat-lbl">{tr('Efic. promedio', 'Avg. efficiency')}</div></div>
+                <div className="partner-stat-item"><div className="partner-stat-val">4+</div><div className="partner-stat-lbl">{tr('Años de partnership', 'Years of partnership')}</div></div>
               </div>
             </div>
           </div>
@@ -218,12 +219,12 @@ export default function HomeClient() {
           </div>
           <div className="services-grid">
             {[
-              { d: 'd1', icon: <><circle cx="12" cy="12" r="3" /><path d="M12 2v3M12 19v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M2 12h3M19 12h3M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12" /></>, title: tr('Implementación OFSC', 'OFSC Implementation'), desc: tr('Diseño, configuración y puesta en marcha de Oracle Field Service Cloud. Desde el análisis de procesos hasta el go-live y capacitación de equipos.', 'Design, configuration and deployment of Oracle Field Service Cloud. From process analysis to go-live and team training.') },
+              { d: 'd1', icon: <><circle cx="12" cy="12" r="3" /><path d="M12 2v3M12 19v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M2 12h3M19 12h3M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12" /></>, title: tr('Implementación OFS', 'OFS Implementation'), desc: tr('Diseño, configuración y puesta en marcha de Oracle Field Service Cloud. Desde el análisis de procesos hasta el go-live y capacitación de equipos.', 'Design, configuration and deployment of Oracle Field Service Cloud. From process analysis to go-live and team training.') },
               { d: 'd2', icon: <><rect x="2" y="3" width="20" height="14" rx="2" /><path d="M8 21h8M12 17v4" /></>, title: tr('Implementación Zinier', 'Zinier Implementation'), desc: tr('Configuración de la plataforma Zinier adaptada a tus flujos de trabajo, integraciones con sistemas existentes y deployment en producción.', 'Configuration of the Zinier platform tailored to your workflows, integration with existing systems and production deployment.') },
               { d: 'd3', icon: <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />, title: tr('Consultoría FSM', 'FSM Consulting'), desc: tr('Análisis de madurez operacional, diseño de procesos y estrategia de transformación digital para tu área de Field Service Management.', 'Operational maturity analysis, process design and digital transformation strategy for your Field Service Management area.') },
               { d: 'd1', icon: <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />, title: tr('Soporte Post Go-Live', 'Post Go-Live Support'), desc: tr('Servicio de soporte continuo con SLA garantizado, gestión de incidentes, mejoras evolutivas y acompañamiento técnico de primer nivel.', 'Continuous support service with guaranteed SLA, incident management, evolutionary improvements and first-level technical assistance.') },
-              { d: 'd2', icon: <><polyline points="16 18 22 12 16 6" /><polyline points="8 6 2 12 8 18" /></>, title: tr('Desarrollo a Medida', 'Custom Development'), desc: tr('Desarrollo de plugins, extensiones y soluciones personalizadas sobre las plataformas OFSC y Zinier para adaptar la herramienta a tu negocio.', 'Development of plugins, extensions and custom solutions on OFSC and Zinier platforms to adapt the tool to your business.') },
-              { d: 'd3', icon: <path d="M18 20V10M12 20V4M6 20v-6" />, title: tr('Integraciones', 'Integrations'), desc: tr('Conectamos OFSC y Zinier con tus sistemas ERP, CRM, GIS o de facturación mediante APIs, middleware y conectores especializados.', 'We connect OFSC and Zinier with your ERP, CRM, GIS or billing systems through APIs, middleware and specialized connectors.') },
+              { d: 'd2', icon: <><polyline points="16 18 22 12 16 6" /><polyline points="8 6 2 12 8 18" /></>, title: tr('Desarrollo a Medida', 'Custom Development'), desc: tr('Desarrollo de plugins, extensiones y soluciones personalizadas sobre las plataformas OFS y Zinier para adaptar la herramienta a tu negocio.', 'Development of plugins, extensions and custom solutions on OFS and Zinier platforms to adapt the tool to your business.') },
+              { d: 'd3', icon: <path d="M18 20V10M12 20V4M6 20v-6" />, title: tr('Integraciones', 'Integrations'), desc: tr('Conectamos OFS y Zinier con tus sistemas ERP, CRM, GIS o de facturación mediante APIs, middleware y conectores especializados.', 'We connect OFS and Zinier with your ERP, CRM, GIS or billing systems through APIs, middleware and specialized connectors.') },
             ].map((s, i) => (
               <div key={i} className={`service-card fade-up ${s.d}`}>
                 <div className="service-icon"><svg viewBox="0 0 24 24">{s.icon}</svg></div>
@@ -261,7 +262,7 @@ export default function HomeClient() {
             </div>
             <div className="pqc-card fade-up d3">
               <div className="pqc-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" /><polyline points="9 12 11 14 15 10" /></svg></div>
-              <div className="pqc-card-title">{tr('Equipo certificado en Oracle Field Service', 'Team certified in Oracle Field Service')}</div>
+              <div className="pqc-card-title" data-es="Equipo Certificado en productos de Field Service" data-en="Team Certified in Field Service Products">{tr('Equipo Certificado en productos de Field Service', 'Team Certified in Field Service Products')}</div>
               <p className="pqc-card-desc">{tr('Nuestros consultores están certificados en Oracle Field Service Cloud y Zinier. Implementamos con el conocimiento técnico más profundo del mercado.', 'Our consultants are certified in Oracle Field Service Cloud and Zinier. We implement with the deepest technical knowledge in the market.')}</p>
               <span className="pqc-badge">Oracle Certified · Zinier Partner</span>
             </div>
@@ -277,6 +278,7 @@ export default function HomeClient() {
       {/* EQUIPO Y CASO DE ÉXITO */}
       <section id="nosotros">
         <div className="container">
+          {/* SECCIÓN LIDERAZGO Y EXPERIENCIA — temporalmente comentada
           <div className="ec-header">
             <div className="ec-eyebrow fade-up">{tr('LIDERAZGO Y EXPERIENCIA', 'LEADERSHIP & EXPERIENCE')}</div>
             <h2 className="ec-title fade-up d1">{tr('El equipo detrás de cada implementación', 'The team behind every implementation')}</h2>
@@ -305,6 +307,8 @@ export default function HomeClient() {
             ))}
           </div>
           <div className="ec-sep" />
+          */}
+          {/* SECCIÓN CASO DE ÉXITO INTERNACIONAL — temporalmente comentada
           <div id="casos" />
           <div className="ec-case-eyebrow fade-up">{tr('CASO DE ÉXITO INTERNACIONAL', 'INTERNATIONAL SUCCESS CASE')}</div>
           <div className="ec-case-layout">
@@ -343,6 +347,7 @@ export default function HomeClient() {
               </div>
             </div>
           </div>
+          */}
         </div>
       </section>
 
@@ -352,39 +357,304 @@ export default function HomeClient() {
           <div className="metodologia-header">
             <div className="metodologia-eyebrow fade-up">{tr('NUESTRA METODOLOGÍA', 'OUR METHODOLOGY')}</div>
             <h2 className="metodologia-title fade-up d1">
-              {tr('Un proceso probado para', 'A proven process for every implementation')}
-              {lang === 'es' && <><br />cada implementación</>}
+              {tr('Un assessment que convierte dolores en resultados', 'An assessment that turns pain points into results')}
             </h2>
-            <p className="metodologia-subtitle fade-up d2">{tr('Cada proyecto sigue una metodología estructurada que garantiza resultados predecibles y de calidad.', 'Every project follows a structured methodology that guarantees predictable and quality results.')}</p>
+            <p className="metodologia-subtitle fade-up d2">
+              {tr('Analizamos tu operación actual para identificar brechas y proponer iniciativas concretas y priorizadas.', 'We analyze your current operation to identify gaps and propose specific, prioritized initiatives.')}
+            </p>
           </div>
-          <div className="timeline-container fade-up d2">
-            <div className="timeline-line" id="timeline-line" />
-            <div className="timeline-phases" id="timeline-phases">
+
+          <div className="services-grid" style={{ marginBottom: '48px' }}>
+
+            <div className="service-card">
+              <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                <div className="service-icon">
+                  <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8" /><line x1="21" y1="21" x2="16.65" y2="16.65" /></svg>
+                </div>
+                <span style={{ fontSize: '11px', fontWeight: 700, color: '#71B136', letterSpacing: '0.1em', fontFamily: 'var(--font-body)', textTransform: 'uppercase' }}>01</span>
+              </div>
+              <h3>{tr('Dolores & Hallazgos', 'Pain Points & Findings')}</h3>
+              <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                {[
+                  tr('Relevamiento de procesos operativos actuales', 'Survey of current operational processes'),
+                  tr('Entrevistas con usuarios clave y equipos de campo', 'Interviews with key users and field teams'),
+                  tr('Análisis del nivel de aprovechamiento de la plataforma', 'Analysis of platform utilization level'),
+                  tr('Identificación de brechas y limitaciones técnicas', 'Identification of gaps and technical limitations'),
+                  tr('Documentación del estado actual de la solución', 'Documentation of the current solution state'),
+                ].map((item, i) => (
+                  <li key={i} style={{ display: 'flex', gap: '8px', alignItems: 'flex-start', fontSize: '13px', color: '#4B5563', lineHeight: '1.55', fontFamily: 'var(--font-body)' }}>
+                    <span style={{ color: '#71B136', flexShrink: 0, marginTop: '1px' }}>▸</span>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div className="service-card">
+              <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                <div className="service-icon">
+                  <svg viewBox="0 0 24 24"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18" /><polyline points="17 6 23 6 23 12" /></svg>
+                </div>
+                <span style={{ fontSize: '11px', fontWeight: 700, color: '#71B136', letterSpacing: '0.1em', fontFamily: 'var(--font-body)', textTransform: 'uppercase' }}>02</span>
+              </div>
+              <h3>{tr('Oportunidades de Mejora', 'Improvement Opportunities')}</h3>
+              <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                {[
+                  tr('Detección de funcionalidades subutilizadas', 'Detection of underutilized features'),
+                  tr('Análisis de gaps entre operación actual y potencial de la plataforma', 'Gap analysis between current operation and platform potential'),
+                  tr('Evaluación de procesos susceptibles de automatización', 'Evaluation of processes suitable for automation'),
+                  tr('Identificación de mejoras de eficiencia operativa', 'Identification of operational efficiency improvements'),
+                ].map((item, i) => (
+                  <li key={i} style={{ display: 'flex', gap: '8px', alignItems: 'flex-start', fontSize: '13px', color: '#4B5563', lineHeight: '1.55', fontFamily: 'var(--font-body)' }}>
+                    <span style={{ color: '#71B136', flexShrink: 0, marginTop: '1px' }}>▸</span>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div className="service-card">
+              <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                <div className="service-icon">
+                  <svg viewBox="0 0 24 24"><path d="M9.66 17.33c-1.66 1.66-4 2.67-4 2.67s1-2.34 2.67-4c.94-.94 2.34-.94 3.28 0 .94.94.94 2.34.05 3.33z" /><path d="m14 10-4 4" /><path d="M19 5c0 2.5-2 7-7 10l-3-3c3-5 7.5-7 10-7z" /></svg>
+                </div>
+                <span style={{ fontSize: '11px', fontWeight: 700, color: '#71B136', letterSpacing: '0.1em', fontFamily: 'var(--font-body)', textTransform: 'uppercase' }}>03</span>
+              </div>
+              <h3>{tr('Iniciativas', 'Initiatives')}</h3>
+              <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                {[
+                  tr('Propuesta de iniciativas concretas y accionables', 'Proposal of concrete and actionable initiatives'),
+                  tr('Ponderación por impacto en el negocio y complejidad', 'Weighting by business impact and complexity'),
+                  tr('Mapa visual Impacto × Complejidad para priorizar', 'Visual Impact × Complexity map for prioritization'),
+                  tr('Roadmap de implementación por fases', 'Phased implementation roadmap'),
+                ].map((item, i) => (
+                  <li key={i} style={{ display: 'flex', gap: '8px', alignItems: 'flex-start', fontSize: '13px', color: '#4B5563', lineHeight: '1.55', fontFamily: 'var(--font-body)' }}>
+                    <span style={{ color: '#71B136', flexShrink: 0, marginTop: '1px' }}>▸</span>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+          </div>
+
+          {/* SCATTER PLOT MAPA DE PRIORIZACIÓN */}
+          <div className="fade-up d2" style={{ background: '#fff', borderRadius: '16px', padding: '32px 32px 24px', margin: '0 0 48px', boxShadow: '0 8px 32px rgba(0,0,0,0.08)', border: '1px solid #F3F4F6' }}>
+            <div style={{ textAlign: 'center', marginBottom: '20px' }}>
+              <span style={{ fontSize: '11px', fontWeight: 700, letterSpacing: '0.16em', textTransform: 'uppercase', color: '#71B136', fontFamily: 'var(--font-body)' }}>
+                {tr('Mapa de Priorización de Iniciativas', 'Initiative Prioritization Map')}
+              </span>
+            </div>
+            <div style={{ display: 'flex', gap: '32px', alignItems: 'stretch' }}>
+            <div style={{ flex: 1, minWidth: 0 }}>
+            <svg viewBox="0 0 800 600" width="100%" style={{ display: 'block', overflow: 'visible' }}>
+              <defs>
+                <filter id="tt-shadow" x="-10%" y="-10%" width="120%" height="120%">
+                  <feDropShadow dx="0" dy="2" stdDeviation="3" floodColor="rgba(0,0,0,0.18)" />
+                </filter>
+              </defs>
+              <style>{`
+                .sb { cursor: pointer; }
+                .sb circle { transition: transform 0.25s ease, opacity 0.25s ease; transform-box: fill-box; transform-origin: center; }
+                .sb:hover circle { transform: scale(1.08); }
+                .tt { opacity: 0; pointer-events: none; transition: opacity 0.15s; }
+                .sb:hover .tt { opacity: 1; }
+                .ax { font-family: var(--font-body); fill: #172554; font-weight: 700; letter-spacing: 0.1em; }
+                .ax-tick { font-family: var(--font-body); fill: #9CA3AF; font-size: 10px; }
+                .zl { font-family: var(--font-body); font-weight: 700; font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; }
+                .grid { stroke: #E5E7EB; stroke-width: 0.5; }
+              `}</style>
+
+              {/* ── Zonas de fondo ── */}
+              {/* Tareas: inferior izquierdo */}
+              <rect x="70" y="310" width="295" height="220" fill="#F9FAFB" />
+              {/* Quick Wins: inferior derecho — borde punteado verde */}
+              <rect x="365" y="310" width="295" height="220" fill="#F0FDF4" />
+              <rect x="365" y="310" width="295" height="220" fill="none" stroke="#71B136" strokeWidth="1.5" strokeDasharray="6,4" />
+              {/* Proyectos: superior izquierdo */}
+              <rect x="70" y="60" width="295" height="250" fill="#EFF6FF" />
+              {/* Descarte: superior derecho */}
+              <rect x="365" y="60" width="295" height="250" fill="#FEF2F2" />
+
+              {/* ── Grid sutil ── */}
+              {[130,190,250,310,370,430,490].map(y => (
+                <line key={y} x1="70" y1={y} x2="660" y2={y} className="grid" />
+              ))}
+              {[130,190,250,310,370,430,490,550,610].map(x => (
+                <line key={x} x1={x} y1="60" x2={x} y2="530" className="grid" />
+              ))}
+
+              {/* ── Divisor central ── */}
+              <line x1="365" y1="60" x2="365" y2="530" stroke="#CBD5E1" strokeWidth="1" strokeDasharray="5,3" />
+              <line x1="70" y1="310" x2="660" y2="310" stroke="#CBD5E1" strokeWidth="1" strokeDasharray="5,3" />
+
+              {/* ── Labels de zona ── */}
+              <text x="82" y="82" className="zl" fill="rgba(23,37,84,0.55)">{tr('Proyectos', 'Projects')}</text>
+              <text x="377" y="82" className="zl" fill="rgba(220,38,38,0.55)">{tr('Descarte', 'Discard')}</text>
+              <text x="82" y="332" className="zl" fill="rgba(107,114,128,0.65)">{tr('Tareas', 'Tasks')}</text>
+              <text x="377" y="332" className="zl" fill="rgba(113,177,54,0.9)">{tr('Quick Wins', 'Quick Wins')}</text>
+
+              {/* ── Eje Y (COMPLEJIDAD) ── */}
+              <line x1="70" y1="530" x2="70" y2="55" stroke="#172554" strokeWidth="1.5" />
+              <polygon points="70,48 65,62 75,62" fill="#172554" />
+              <text transform="translate(22,295) rotate(-90)" textAnchor="middle" className="ax" fontSize="10">{tr('COMPLEJIDAD', 'COMPLEXITY')}</text>
+              <text x="62" y="65" textAnchor="end" className="ax-tick">{tr('Alta', 'High')}</text>
+              <text x="62" y="528" textAnchor="end" className="ax-tick">{tr('Baja', 'Low')}</text>
+
+              {/* ── Eje X (PRIORIDAD) ── */}
+              <line x1="70" y1="530" x2="665" y2="530" stroke="#172554" strokeWidth="1.5" />
+              <polygon points="672,530 658,525 658,535" fill="#172554" />
+              <text x="370" y="570" textAnchor="middle" className="ax" fontSize="10">{tr('PRIORIDAD', 'PRIORITY')}</text>
+              <text x="78" y="548" className="ax-tick">{tr('Baja', 'Low')}</text>
+              <text x="652" y="548" textAnchor="end" className="ax-tick">{tr('Alta', 'High')}</text>
+
+              {/* ── QUICK WINS — inferior derecho — verde ── */}
+              <g className="sb">
+                <circle cx="430" cy="460" r="22" fill="#71B136" stroke="#fff" strokeWidth="2" />
+                <text x="430" y="465" textAnchor="middle" fill="#fff" fontWeight="700" fontSize="11" fontFamily="var(--font-body)">A1</text>
+                <g className="tt" filter="url(#tt-shadow)">
+                  <rect x="378" y="422" width="148" height="28" rx="6" fill="#172554" />
+                  <text x="452" y="441" textAnchor="middle" fill="#fff" fontSize="11" fontFamily="var(--font-body)">{tr('Segmentación de cuotas', 'Quota segmentation')}</text>
+                </g>
+              </g>
+              <g className="sb">
+                <circle cx="520" cy="440" r="22" fill="#71B136" stroke="#fff" strokeWidth="2" />
+                <text x="520" y="445" textAnchor="middle" fill="#fff" fontWeight="700" fontSize="11" fontFamily="var(--font-body)">A2</text>
+                <g className="tt" filter="url(#tt-shadow)">
+                  <rect x="458" y="402" width="148" height="28" rx="6" fill="#172554" />
+                  <text x="532" y="421" textAnchor="middle" fill="#fff" fontSize="11" fontFamily="var(--font-body)">{tr('Optimización de routing', 'Routing optimization')}</text>
+                </g>
+              </g>
+              <g className="sb">
+                <circle cx="460" cy="390" r="22" fill="#71B136" stroke="#fff" strokeWidth="2" />
+                <text x="460" y="395" textAnchor="middle" fill="#fff" fontWeight="700" fontSize="11" fontFamily="var(--font-body)">B1</text>
+                <g className="tt" filter="url(#tt-shadow)">
+                  <rect x="398" y="352" width="148" height="28" rx="6" fill="#172554" />
+                  <text x="472" y="371" textAnchor="middle" fill="#fff" fontSize="11" fontFamily="var(--font-body)">{tr('Activar colaboración', 'Activate collaboration')}</text>
+                </g>
+              </g>
+              <g className="sb">
+                <circle cx="590" cy="360" r="22" fill="#71B136" stroke="#fff" strokeWidth="2" />
+                <text x="590" y="365" textAnchor="middle" fill="#fff" fontWeight="700" fontSize="11" fontFamily="var(--font-body)">E1</text>
+                <g className="tt" filter="url(#tt-shadow)">
+                  <rect x="490" y="322" width="160" height="28" rx="6" fill="#172554" />
+                  <text x="570" y="341" textAnchor="middle" fill="#fff" fontSize="11" fontFamily="var(--font-body)">{tr('Visibilidad en tiempo real', 'Real-time visibility')}</text>
+                </g>
+              </g>
+
+              {/* ── PROYECTOS — superior izquierdo — azul ── */}
+              <g className="sb">
+                <circle cx="200" cy="140" r="22" fill="#172554" stroke="#fff" strokeWidth="2" />
+                <text x="200" y="145" textAnchor="middle" fill="#fff" fontWeight="700" fontSize="11" fontFamily="var(--font-body)">D1</text>
+                <g className="tt" filter="url(#tt-shadow)">
+                  <rect x="138" y="102" width="148" height="28" rx="6" fill="#172554" />
+                  <text x="212" y="121" textAnchor="middle" fill="#fff" fontSize="11" fontFamily="var(--font-body)">{tr('Unificación app móvil', 'Mobile app unification')}</text>
+                </g>
+              </g>
+              <g className="sb">
+                <circle cx="290" cy="100" r="22" fill="#172554" stroke="#fff" strokeWidth="2" />
+                <text x="290" y="105" textAnchor="middle" fill="#fff" fontWeight="700" fontSize="11" fontFamily="var(--font-body)">D2</text>
+                <g className="tt" filter="url(#tt-shadow)">
+                  <rect x="228" y="62" width="148" height="28" rx="6" fill="#172554" />
+                  <text x="302" y="81" textAnchor="middle" fill="#fff" fontSize="11" fontFamily="var(--font-body)">{tr('Gestión de inventario', 'Inventory management')}</text>
+                </g>
+              </g>
+              <g className="sb">
+                <circle cx="150" cy="220" r="22" fill="#172554" stroke="#fff" strokeWidth="2" />
+                <text x="150" y="225" textAnchor="middle" fill="#fff" fontWeight="700" fontSize="11" fontFamily="var(--font-body)">D3</text>
+                <g className="tt" filter="url(#tt-shadow)">
+                  <rect x="88" y="182" width="148" height="28" rx="6" fill="#172554" />
+                  <text x="162" y="201" textAnchor="middle" fill="#fff" fontSize="11" fontFamily="var(--font-body)">{tr('Integración ERP', 'ERP Integration')}</text>
+                </g>
+              </g>
+              <g className="sb">
+                <circle cx="320" cy="180" r="22" fill="#172554" stroke="#fff" strokeWidth="2" />
+                <text x="320" y="185" textAnchor="middle" fill="#fff" fontWeight="700" fontSize="11" fontFamily="var(--font-body)">C2</text>
+                <g className="tt" filter="url(#tt-shadow)">
+                  <rect x="218" y="142" width="148" height="28" rx="6" fill="#172554" />
+                  <text x="292" y="161" textAnchor="middle" fill="#fff" fontSize="11" fontFamily="var(--font-body)">{tr('Analítica avanzada', 'Advanced analytics')}</text>
+                </g>
+              </g>
+
+              {/* ── TAREAS — inferior izquierdo — gris ── */}
+              <g className="sb">
+                <circle cx="200" cy="420" r="22" fill="#6B7280" stroke="#fff" strokeWidth="2" />
+                <text x="200" y="425" textAnchor="middle" fill="#fff" fontWeight="700" fontSize="11" fontFamily="var(--font-body)">B2</text>
+                <g className="tt" filter="url(#tt-shadow)">
+                  <rect x="138" y="382" width="128" height="28" rx="6" fill="#172554" />
+                  <text x="202" y="401" textAnchor="middle" fill="#fff" fontSize="11" fontFamily="var(--font-body)">{tr('Atributos de skills', 'Skills attributes')}</text>
+                </g>
+              </g>
+              <g className="sb">
+                <circle cx="130" cy="370" r="22" fill="#6B7280" stroke="#fff" strokeWidth="2" />
+                <text x="130" y="375" textAnchor="middle" fill="#fff" fontWeight="700" fontSize="11" fontFamily="var(--font-body)">A4</text>
+                <g className="tt" filter="url(#tt-shadow)">
+                  <rect x="68" y="332" width="128" height="28" rx="6" fill="#172554" />
+                  <text x="132" y="351" textAnchor="middle" fill="#fff" fontSize="11" fontFamily="var(--font-body)">{tr('Validación GPS', 'GPS validation')}</text>
+                </g>
+              </g>
+
+              {/* ── DESCARTE — superior derecho — rojo ── */}
+              <g className="sb">
+                <circle cx="500" cy="160" r="22" fill="#DC2626" stroke="#fff" strokeWidth="2" />
+                <text x="500" y="165" textAnchor="middle" fill="#fff" fontWeight="700" fontSize="11" fontFamily="var(--font-body)">D8</text>
+                <g className="tt" filter="url(#tt-shadow)">
+                  <rect x="398" y="122" width="168" height="28" rx="6" fill="#172554" />
+                  <text x="482" y="141" textAnchor="middle" fill="#fff" fontSize="11" fontFamily="var(--font-body)">{tr('Réplica BI en tiempo real', 'Real-time BI replication')}</text>
+                </g>
+              </g>
+            </svg>
+            </div>
+            {/* Panel lateral INICIATIVAS */}
+            <div style={{ minWidth: '260px', flexShrink: 0, padding: '24px', background: '#F8FAFC', borderLeft: '2px solid #E5E7EB', borderRadius: '0 8px 8px 0' }}>
+              <div style={{ fontSize: '11px', fontWeight: 600, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#71B136', fontFamily: 'var(--font-body)', marginBottom: '20px' }}>
+                {tr('INICIATIVAS', 'INITIATIVES')}
+              </div>
               {[
-                { n: 1, name: tr('Descubrimiento', 'Discovery'), desc: tr('Relevamiento del negocio, procesos actuales y necesidades operativas del cliente.', "Survey of the business, current processes and client's operational needs.") },
-                { n: 2, name: tr('Análisis', 'Analysis'), desc: tr('Evaluación técnica y funcional del entorno OFSC o Zinier para definir el alcance.', 'Technical and functional evaluation of the OFSC or Zinier environment to define scope.') },
-                { n: 3, name: tr('Estimación', 'Estimation'), desc: tr('Planificación de tiempos, recursos y costos del proyecto con entregables claros.', 'Planning of project timelines, resources and costs with clear deliverables.') },
-                { n: 4, name: tr('Desarrollo', 'Development'), desc: tr('Configuración, parametrización y desarrollo de soluciones sobre la plataforma.', 'Configuration, parameterization and solution development on the platform.') },
-                { n: 5, name: tr('Pruebas Internas', 'Internal Testing'), badge: 'QA', desc: tr('Validación funcional y de integración realizada por el equipo técnico de Connexa.', 'Functional and integration validation performed by the Connexa technical team.') },
-                { n: 6, name: 'UAT', badge: 'QA', desc: tr('Pruebas de aceptación ejecutadas por los usuarios finales del cliente en su entorno.', "Acceptance testing executed by the client's end users in their environment.") },
-                { n: 7, name: 'Go Live', badge: '🚀', desc: tr('Puesta en producción, capacitación de usuarios y acompañamiento en el lanzamiento.', 'Production deployment, user training and launch support.') },
-                { n: 8, name: tr('Soporte', 'Support'), badge: '∞', desc: tr('Monitoreo post-implementación, mejora continua y soporte técnico especializado.', 'Post-implementation monitoring, continuous improvement and specialized technical support.') },
-              ].map((phase) => (
-                <div key={phase.n} className="timeline-phase">
-                  {phase.badge && <div className="phase-badge">{phase.badge}</div>}
-                  <div className="phase-circle">{phase.n}</div>
-                  <div className="phase-content">
-                    <div className="phase-name">{phase.name}</div>
-                    <div className="phase-divider" />
-                    <div className="phase-desc">{phase.desc}</div>
+                { color: '#71B136', title: tr('Quick Wins', 'Quick Wins'), items: [
+                  { code: 'A1', name: tr('Segmentar cuotas por zona', 'Segment quotas by zone') },
+                  { code: 'A2', name: tr('Gestión de minutos por categoría', 'Manage minutes by category') },
+                  { code: 'B1', name: tr('Optimizar planes de routing', 'Optimize routing plans') },
+                  { code: 'E1', name: tr('Activar módulo de colaboración', 'Activate collaboration module') },
+                ]},
+                { color: '#172554', title: tr('Proyectos Estratégicos', 'Strategic Projects'), items: [
+                  { code: 'D1', name: tr('Centralizar gestión de inventario', 'Centralize inventory management') },
+                  { code: 'D2', name: tr('Validación GPS en campo', 'GPS validation in field') },
+                  { code: 'D3', name: tr('Unificar app móvil (OFSC)', 'Unify mobile app (OFSC)') },
+                  { code: 'C2', name: tr('Visibilidad en tiempo real', 'Real-time visibility') },
+                ]},
+                { color: '#6B7280', title: tr('Tareas Menores', 'Minor Tasks'), items: [
+                  { code: 'A4', name: tr('Tablero de salud de agenda', 'Agenda health dashboard') },
+                  { code: 'B2', name: tr('Reclasificar atributos como skills', 'Reclassify attributes as skills') },
+                ]},
+                { color: '#EF4444', title: tr('Descarte', 'Discard'), items: [
+                  { code: 'D8', name: tr('Réplica de datos BI en tiempo real', 'Real-time BI data replication') },
+                ]},
+              ].map((group, gi) => (
+                <div key={gi}>
+                  <div style={{ fontSize: '11px', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', color: group.color, fontFamily: 'var(--font-body)', marginTop: gi === 0 ? 0 : '16px', marginBottom: '8px' }}>
+                    {group.title}
+                  </div>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                    {group.items.map((item, ii) => (
+                      <div key={ii} style={{ display: 'flex', alignItems: 'center' }}>
+                        <div style={{ width: '22px', height: '22px', borderRadius: '50%', background: group.color, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                          <span style={{ fontSize: '9px', fontWeight: 700, color: '#fff', fontFamily: 'var(--font-body)' }}>{item.code}</span>
+                        </div>
+                        <span style={{ fontSize: '13px', color: '#374151', fontFamily: 'var(--font-body)', marginLeft: '10px', lineHeight: '1.4', fontWeight: 400 }}>{item.name}</span>
+                      </div>
+                    ))}
                   </div>
                 </div>
               ))}
             </div>
+            </div>
           </div>
-          <div className="metodologia-cta fade-up d3">
-            <p className="metodologia-cta-text"><strong>{tr('¿Querés conocer cómo aplicamos esta metodología en tu empresa?', 'Want to learn how we apply this methodology in your company?')}</strong></p>
-            <button className="btn-primary" onClick={() => scrollTo('cta-section')} style={{ fontSize: 16, padding: '14px 32px' }}>{tr('Hablemos →', "Let's talk →")}</button>
+
+          <div style={{ paddingTop: '32px', textAlign: 'center' }}>
+            <p style={{ fontSize: '14px', color: '#6B7280', fontStyle: 'italic', maxWidth: '600px', margin: '0 auto', fontFamily: 'var(--font-body)', lineHeight: '1.6' }}>
+              {tr('Cada assessment es único. Los resultados dependen de tu operación, tu plataforma y tus objetivos.', 'Every assessment is unique. Results depend on your operation, your platform, and your goals.')}
+            </p>
           </div>
         </div>
       </section>
@@ -398,36 +668,38 @@ export default function HomeClient() {
             <p className="section-subtitle fade-up d2" style={{ color: 'rgba(255,255,255,0.6)', margin: '0 auto' }}>{tr('Herramientas desarrolladas internamente sobre las plataformas líderes, diseñadas para resolver los desafíos más comunes del Field Service.', 'Internally developed tools built on leading platforms, designed to solve the most common Field Service challenges.')}</p>
           </div>
           <div className="products-grid">
-            <div className="product-card fade-up d1" onClick={() => router.push('/productos/fsmtool')} role="button" tabIndex={0} onKeyDown={(e) => e.key === 'Enter' && router.push('/productos/fsmtool')}>
-              <div>
-                <div className="product-badge"><div className="product-badge-dot" /><span>{tr('Solución propia', 'Proprietary solution')}</span></div>
-                <div className="product-name">FSMTool</div>
-                <p className="product-desc">{tr('Suite de herramientas avanzadas de administración y monitoreo para Oracle Field Service Cloud. Operaciones masivas, dashboards en tiempo real y automatización de procesos.', 'Advanced administration and monitoring toolkit for Oracle Field Service Cloud. Bulk operations, real-time dashboards and process automation.')}</p>
-                <div className="product-bullets">
-                  <div className="product-bullet">{tr('Dashboard de operaciones en tiempo real', 'Real-time operations dashboard')}</div>
-                  <div className="product-bullet">{tr('Gestión avanzada de rutas y recursos', 'Advanced route and resource management')}</div>
-                  <div className="product-bullet">{tr('Reportería y analytics personalizables', 'Customizable reporting and analytics')}</div>
-                </div>
-                <button className="product-cta">{tr('Conocer más', 'Learn more')} <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6" /></svg></button>
-              </div>
-              <div className="product-visual">
-                <svg viewBox="0 0 80 80"><rect x="8" y="20" width="64" height="44" rx="6" /><rect x="14" y="28" width="22" height="14" rx="3" /><rect x="14" y="46" width="22" height="8" rx="2" /><rect x="42" y="28" width="22" height="8" rx="2" /><rect x="42" y="40" width="22" height="14" rx="3" /><circle cx="14" cy="14" r="3" /><circle cx="40" cy="14" r="3" /><circle cx="66" cy="14" r="3" /></svg>
-              </div>
-            </div>
-            <div className="product-card fade-up d2" onClick={() => router.push('/productos/workflow-builder')} role="button" tabIndex={0} onKeyDown={(e) => e.key === 'Enter' && router.push('/productos/workflow-builder')}>
+            <div className="product-card fade-up d1" onClick={() => router.push('/productos/workflow-builder')} role="button" tabIndex={0} onKeyDown={(e) => e.key === 'Enter' && router.push('/productos/workflow-builder')}>
               <div>
                 <div className="product-badge"><div className="product-badge-dot" /><span>{tr('Solución propia', 'Proprietary solution')}</span></div>
                 <div className="product-name">Workflow Builder</div>
                 <p className="product-desc">{tr('Constructor visual de flujos de trabajo para Oracle Field Service Cloud. Permite diseñar, testear y publicar workflows sin código, reduciendo el time-to-market de nuevos procesos.', 'Visual workflow builder for Oracle Field Service Cloud. Design, test and publish workflows without code, reducing the time-to-market for new processes.')}</p>
                 <div className="product-bullets">
-                  <div className="product-bullet">{tr('Editor drag & drop sin código', 'No-code drag & drop editor')}</div>
-                  <div className="product-bullet">{tr('Integración nativa con OFSC APIs', 'Native integration with OFSC APIs')}</div>
-                  <div className="product-bullet">{tr('Testing y simulación en sandbox', 'Testing and simulation in sandbox')}</div>
+                  <div className="product-bullet">{tr('Orquestador de eventos de OFS (Event API) – Gestor de suscripciones', 'OFS Event Orchestrator (Event API) – Subscription Manager')}</div>
+                  <div className="product-bullet">{tr('Editor de workflow drag and drop para orquestar procesos', 'Drag and drop workflow editor to orchestrate processes')}</div>
+                  <div className="product-bullet">{tr('+40 APIs de OFS disponibles para ejecutar dentro de cada workflow', '+40 OFS APIs available to execute within each workflow')}</div>
+                  <div className="product-bullet">{tr('Agente de IA integrado para eficientizar procesos', 'Integrated AI agent to streamline processes')}</div>
+                  <div className="product-bullet">{tr('Integración con Slack, Teams, WhatsApp', 'Integration with Slack, Teams, WhatsApp')}</div>
                 </div>
                 <button className="product-cta">{tr('Conocer más', 'Learn more')} <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6" /></svg></button>
               </div>
               <div className="product-visual">
                 <svg viewBox="0 0 80 80"><circle cx="20" cy="20" r="8" /><circle cx="60" cy="20" r="8" /><circle cx="20" cy="60" r="8" /><circle cx="60" cy="60" r="8" /><line x1="28" y1="20" x2="52" y2="20" /><line x1="20" y1="28" x2="20" y2="52" /><line x1="28" y1="60" x2="52" y2="60" /><line x1="60" y1="28" x2="60" y2="52" /><circle cx="40" cy="40" r="6" /></svg>
+              </div>
+            </div>
+            <div className="product-card fade-up d2" onClick={() => router.push('/productos/fsmtool')} role="button" tabIndex={0} onKeyDown={(e) => e.key === 'Enter' && router.push('/productos/fsmtool')}>
+              <div>
+                <div className="product-badge"><div className="product-badge-dot" /><span>{tr('Solución propia', 'Proprietary solution')}</span></div>
+                <div className="product-name">FSMTool</div>
+                <p className="product-desc">{tr('Suite de herramientas avanzadas de administración para Oracle Field Service Cloud. Operaciones masivas, gestión de inventarios, actividades y recursos.', 'Advanced administration suite for Oracle Field Service Cloud. Bulk operations, inventory management, activities and resources.')}</p>
+                <div className="product-bullets">
+                  <div className="product-bullet">{tr('Gestión masiva de actividades y recursos', 'Bulk management of activities and resources')}</div>
+                  <div className="product-bullet">{tr('Gestión completa de inventarios', 'Complete inventory management')}</div>
+                  <div className="product-bullet">{tr('Descarga y gestión masiva de actividades', 'Download and bulk management of activities')}</div>
+                </div>
+                <button className="product-cta">{tr('Conocer más', 'Learn more')} <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6" /></svg></button>
+              </div>
+              <div className="product-visual">
+                <svg viewBox="0 0 80 80"><rect x="8" y="20" width="64" height="44" rx="6" /><rect x="14" y="28" width="22" height="14" rx="3" /><rect x="14" y="46" width="22" height="8" rx="2" /><rect x="42" y="28" width="22" height="8" rx="2" /><rect x="42" y="40" width="22" height="14" rx="3" /><circle cx="14" cy="14" r="3" /><circle cx="40" cy="14" r="3" /><circle cx="66" cy="14" r="3" /></svg>
               </div>
             </div>
           </div>

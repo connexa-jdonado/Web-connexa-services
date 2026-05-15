@@ -270,7 +270,7 @@ export default function HomeClient() {
               <span style={{ fontSize: '12px', color: '#71B136', background: 'rgba(113,177,54,0.1)', borderRadius: '20px', padding: '4px 10px', display: 'inline-block', marginTop: '8px' }}>{tr('+8 implementaciones', '+8 implementations')}</span>
               <p className="partner-desc">{tr('Partner certificado de Zinier, la plataforma de inteligencia artificial para Field Service Management de próxima generación. Implementamos flujos de trabajo inteligentes y automatizados.', 'Authorized reseller and official implementation partner of Zinier. Full access to roadmap and dedicated technical support.')}</p>
               <div className="partner-stats">
-                <div className="partner-stat-item"><div className="partner-stat-val">20+</div><div className="partner-stat-lbl">{tr('Impl. Zinier', 'Zinier Impl.')}</div></div>
+                <div className="partner-stat-item"><div className="partner-stat-val">8+</div><div className="partner-stat-lbl">{tr('Impl. Zinier', 'Zinier Impl.')}</div></div>
                 <div className="partner-stat-item"><div className="partner-stat-val">40%</div><div className="partner-stat-lbl">{tr('Efic. promedio', 'Avg. efficiency')}</div></div>
                 <div className="partner-stat-item"><div className="partner-stat-val">5+</div><div className="partner-stat-lbl">{tr('Años de partnership', 'Years of partnership')}</div></div>
               </div>

@@ -427,36 +427,131 @@ export default function HomeClient() {
           <div className="metodologia-header">
             <div className="metodologia-eyebrow fade-up">{tr('NUESTRA METODOLOGÍA', 'OUR METHODOLOGY')}</div>
             <h2 className="metodologia-title fade-up d1">
-              {tr('Un proceso probado para', 'A proven process for every implementation')}
-              {lang === 'es' && <><br />cada implementación</>}
+              {tr('Un assessment que convierte dolores en resultados', 'An assessment that turns pain points into results')}
             </h2>
-            <p className="metodologia-subtitle fade-up d2">{tr('Cada proyecto sigue una metodología estructurada que garantiza resultados predecibles y de calidad.', 'Every project follows a structured methodology that guarantees predictable and quality results.')}</p>
+            <p className="metodologia-subtitle fade-up d2">
+              {tr('Analizamos en profundidad tu operación actual para identificar brechas y proponer iniciativas concretas y priorizadas.', 'We deeply analyze your current operation to identify gaps and propose concrete, prioritized initiatives.')}
+            </p>
           </div>
-          <div className="timeline-container fade-up d2">
-            <div className="timeline-line" id="timeline-line" />
-            <div className="timeline-phases" id="timeline-phases">
-              {[
-                { n: 1, name: tr('Descubrimiento', 'Discovery'), desc: tr('Relevamiento del negocio, procesos actuales y necesidades operativas del cliente.', "Survey of the business, current processes and client's operational needs.") },
-                { n: 2, name: tr('Análisis', 'Analysis'), desc: tr('Evaluación técnica y funcional del entorno OFS o Zinier para definir el alcance.', 'Technical and functional evaluation of the OFS or Zinier environment to define scope.') },
-                { n: 3, name: tr('Estimación', 'Estimation'), desc: tr('Planificación de tiempos, recursos y costos del proyecto con entregables claros.', 'Planning of project timelines, resources and costs with clear deliverables.') },
-                { n: 4, name: tr('Desarrollo', 'Development'), desc: tr('Configuración, parametrización y desarrollo de soluciones sobre la plataforma.', 'Configuration, parameterization and solution development on the platform.') },
-                { n: 5, name: tr('Pruebas Internas', 'Internal Testing'), badge: 'QA', desc: tr('Validación funcional y de integración realizada por el equipo técnico de Connexa.', 'Functional and integration validation performed by the Connexa technical team.') },
-                { n: 6, name: 'UAT', badge: 'QA', desc: tr('Pruebas de aceptación ejecutadas por los usuarios finales del cliente en su entorno.', "Acceptance testing executed by the client's end users in their environment.") },
-                { n: 7, name: 'Go Live', badge: '🚀', desc: tr('Puesta en producción, capacitación de usuarios y acompañamiento en el lanzamiento.', 'Production deployment, user training and launch support.') },
-                { n: 8, name: tr('Soporte', 'Support'), badge: '∞', desc: tr('Monitoreo post-implementación, mejora continua y soporte técnico especializado.', 'Post-implementation monitoring, continuous improvement and specialized technical support.') },
-              ].map((phase) => (
-                <div key={phase.n} className="timeline-phase">
-                  {phase.badge && <div className="phase-badge">{phase.badge}</div>}
-                  <div className="phase-circle">{phase.n}</div>
-                  <div className="phase-content">
-                    <div className="phase-name">{phase.name}</div>
-                    <div className="phase-divider" />
-                    <div className="phase-desc">{phase.desc}</div>
+
+          <div className="services-grid" style={{ marginBottom: '48px' }}>
+
+            <div className="service-card fade-up d1">
+              <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                <div className="service-icon">
+                  <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8" /><line x1="21" y1="21" x2="16.65" y2="16.65" /></svg>
+                </div>
+                <span style={{ fontSize: '11px', fontWeight: 700, color: '#71B136', letterSpacing: '0.1em', fontFamily: 'var(--font-body)', textTransform: 'uppercase' }}>01</span>
+              </div>
+              <h3>{tr('Dolores & Hallazgos', 'Pain Points & Findings')}</h3>
+              <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                {[
+                  tr('Relevamiento de procesos operativos actuales', 'Survey of current operational processes'),
+                  tr('Entrevistas con usuarios clave y equipos de campo', 'Interviews with key users and field teams'),
+                  tr('Análisis del nivel de aprovechamiento de la plataforma', 'Analysis of platform utilization level'),
+                  tr('Identificación de brechas y limitaciones técnicas', 'Identification of gaps and technical limitations'),
+                  tr('Documentación del estado actual de la solución', 'Documentation of the current solution state'),
+                ].map((item, i) => (
+                  <li key={i} style={{ display: 'flex', gap: '8px', alignItems: 'flex-start', fontSize: '13px', color: '#4B5563', lineHeight: '1.55', fontFamily: 'var(--font-body)' }}>
+                    <span style={{ color: '#71B136', flexShrink: 0, marginTop: '1px' }}>▸</span>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div className="service-card fade-up d2">
+              <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                <div className="service-icon">
+                  <svg viewBox="0 0 24 24"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18" /><polyline points="17 6 23 6 23 12" /></svg>
+                </div>
+                <span style={{ fontSize: '11px', fontWeight: 700, color: '#71B136', letterSpacing: '0.1em', fontFamily: 'var(--font-body)', textTransform: 'uppercase' }}>02</span>
+              </div>
+              <h3>{tr('Oportunidades de Mejora', 'Improvement Opportunities')}</h3>
+              <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                {[
+                  tr('Detección de funcionalidades subutilizadas', 'Detection of underutilized features'),
+                  tr('Análisis de gaps entre operación actual y potencial de la plataforma', 'Gap analysis between current operation and platform potential'),
+                  tr('Evaluación de procesos susceptibles de automatización', 'Evaluation of processes suitable for automation'),
+                  tr('Identificación de mejoras de eficiencia operativa', 'Identification of operational efficiency improvements'),
+                ].map((item, i) => (
+                  <li key={i} style={{ display: 'flex', gap: '8px', alignItems: 'flex-start', fontSize: '13px', color: '#4B5563', lineHeight: '1.55', fontFamily: 'var(--font-body)' }}>
+                    <span style={{ color: '#71B136', flexShrink: 0, marginTop: '1px' }}>▸</span>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div className="service-card fade-up d3">
+              <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                <div className="service-icon">
+                  <svg viewBox="0 0 24 24"><path d="M9.66 17.33c-1.66 1.66-4 2.67-4 2.67s1-2.34 2.67-4c.94-.94 2.34-.94 3.28 0 .94.94.94 2.34.05 3.33z" /><path d="m14 10-4 4" /><path d="M19 5c0 2.5-2 7-7 10l-3-3c3-5 7.5-7 10-7z" /></svg>
+                </div>
+                <span style={{ fontSize: '11px', fontWeight: 700, color: '#71B136', letterSpacing: '0.1em', fontFamily: 'var(--font-body)', textTransform: 'uppercase' }}>03</span>
+              </div>
+              <h3>{tr('Iniciativas', 'Initiatives')}</h3>
+              <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                {[
+                  tr('Propuesta de iniciativas concretas y accionables', 'Proposal of concrete and actionable initiatives'),
+                  tr('Ponderación por impacto en el negocio y complejidad', 'Weighting by business impact and complexity'),
+                  tr('Mapa visual Impacto × Complejidad para priorizar', 'Visual Impact × Complexity map for prioritization'),
+                  tr('Roadmap de implementación por fases', 'Phased implementation roadmap'),
+                ].map((item, i) => (
+                  <li key={i} style={{ display: 'flex', gap: '8px', alignItems: 'flex-start', fontSize: '13px', color: '#4B5563', lineHeight: '1.55', fontFamily: 'var(--font-body)' }}>
+                    <span style={{ color: '#71B136', flexShrink: 0, marginTop: '1px' }}>▸</span>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+          </div>
+
+          {/* CUADRANTE IMPACTO × COMPLEJIDAD */}
+          <div className="fade-up d2" style={{ background: '#fff', border: '1px solid #E5E7EB', borderRadius: '20px', padding: '40px', maxWidth: '640px', margin: '0 auto 48px' }}>
+            <div style={{ textAlign: 'center', marginBottom: '28px' }}>
+              <span style={{ fontSize: '11px', fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase', color: '#71B136', fontFamily: 'var(--font-body)' }}>
+                {tr('PRIORIZACIÓN', 'PRIORITIZATION')}
+              </span>
+              <div style={{ fontSize: '17px', fontWeight: 700, color: '#172554', fontFamily: 'var(--font-heading)', marginTop: '6px' }}>
+                {tr('Mapa Impacto × Complejidad', 'Impact × Complexity Map')}
+              </div>
+            </div>
+            <div style={{ display: 'flex', gap: '12px', alignItems: 'stretch' }}>
+              <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', alignItems: 'center', paddingBottom: '28px', minWidth: '20px' }}>
+                <span style={{ fontSize: '10px', color: '#9CA3AF', fontFamily: 'var(--font-body)', writingMode: 'vertical-rl', transform: 'rotate(180deg)', letterSpacing: '0.1em', textTransform: 'uppercase', whiteSpace: 'nowrap' }}>{tr('↑ Alto', 'High ↑')}</span>
+                <span style={{ fontSize: '10px', color: '#9CA3AF', fontFamily: 'var(--font-body)', writingMode: 'vertical-rl', transform: 'rotate(180deg)', letterSpacing: '0.1em', textTransform: 'uppercase', whiteSpace: 'nowrap' }}>{tr('Impacto', 'Impact')}</span>
+                <span style={{ fontSize: '10px', color: '#9CA3AF', fontFamily: 'var(--font-body)', writingMode: 'vertical-rl', transform: 'rotate(180deg)', letterSpacing: '0.1em', textTransform: 'uppercase', whiteSpace: 'nowrap' }}>{tr('Bajo ↓', '↓ Low')}</span>
+              </div>
+              <div style={{ flex: 1 }}>
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px' }}>
+                  <div style={{ background: 'rgba(113,177,54,0.10)', border: '2px solid #71B136', borderRadius: '12px', padding: '16px 14px' }}>
+                    <div style={{ fontSize: '13px', fontWeight: 700, color: '#71B136', fontFamily: 'var(--font-heading)', marginBottom: '4px' }}>⚡ Quick Wins</div>
+                    <div style={{ fontSize: '11px', color: '#6B7280', fontFamily: 'var(--font-body)', lineHeight: 1.4 }}>{tr('Alto impacto · Baja complejidad', 'High impact · Low complexity')}</div>
+                  </div>
+                  <div style={{ background: 'rgba(23,37,84,0.05)', border: '1px solid #D1D5DB', borderRadius: '12px', padding: '16px 14px' }}>
+                    <div style={{ fontSize: '13px', fontWeight: 700, color: '#172554', fontFamily: 'var(--font-heading)', marginBottom: '4px' }}>{tr('Proyectos estratégicos', 'Strategic Projects')}</div>
+                    <div style={{ fontSize: '11px', color: '#6B7280', fontFamily: 'var(--font-body)', lineHeight: 1.4 }}>{tr('Alto impacto · Alta complejidad', 'High impact · High complexity')}</div>
+                  </div>
+                  <div style={{ background: '#F9FAFB', border: '1px solid #E5E7EB', borderRadius: '12px', padding: '16px 14px' }}>
+                    <div style={{ fontSize: '13px', fontWeight: 600, color: '#6B7280', fontFamily: 'var(--font-heading)', marginBottom: '4px' }}>{tr('Tareas menores', 'Minor Tasks')}</div>
+                    <div style={{ fontSize: '11px', color: '#9CA3AF', fontFamily: 'var(--font-body)', lineHeight: 1.4 }}>{tr('Bajo impacto · Baja complejidad', 'Low impact · Low complexity')}</div>
+                  </div>
+                  <div style={{ background: '#FEF2F2', border: '1px solid #FECACA', borderRadius: '12px', padding: '16px 14px' }}>
+                    <div style={{ fontSize: '13px', fontWeight: 600, color: '#DC2626', fontFamily: 'var(--font-heading)', marginBottom: '4px' }}>{tr('Descarte', 'Discard')}</div>
+                    <div style={{ fontSize: '11px', color: '#9CA3AF', fontFamily: 'var(--font-body)', lineHeight: 1.4 }}>{tr('Bajo impacto · Alta complejidad', 'Low impact · High complexity')}</div>
                   </div>
                 </div>
-              ))}
+                <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '10px' }}>
+                  <span style={{ fontSize: '10px', color: '#9CA3AF', fontFamily: 'var(--font-body)', letterSpacing: '0.08em', textTransform: 'uppercase' }}>{tr('← Baja', '← Low')}</span>
+                  <span style={{ fontSize: '10px', color: '#9CA3AF', fontFamily: 'var(--font-body)', letterSpacing: '0.1em', textTransform: 'uppercase' }}>{tr('Complejidad', 'Complexity')}</span>
+                  <span style={{ fontSize: '10px', color: '#9CA3AF', fontFamily: 'var(--font-body)', letterSpacing: '0.08em', textTransform: 'uppercase' }}>{tr('Alta →', 'High →')}</span>
+                </div>
+              </div>
             </div>
           </div>
+
           <div className="metodologia-cta fade-up d3">
             <p className="metodologia-cta-text"><strong>{tr('¿Querés conocer cómo aplicamos esta metodología en tu empresa?', 'Want to learn how we apply this methodology in your company?')}</strong></p>
             <button className="btn-primary" onClick={() => scrollTo('cta-section')} style={{ fontSize: 16, padding: '14px 32px' }}>{tr('Hablemos →', "Let's talk →")}</button>

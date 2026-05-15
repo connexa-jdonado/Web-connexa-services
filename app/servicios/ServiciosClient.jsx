@@ -380,7 +380,7 @@ export default function ServiciosClient() {
               <h2 dangerouslySetInnerHTML={{ __html: tr('¿Listo para transformar<br/>tu <em>Field Service</em>?', 'Ready to transform<br/>your <em>Field Service</em>?') }} />
               <p>{tr('Contactanos y diseñamos juntos la solución ideal para tu empresa.', "Contact us and we'll design together the ideal solution for your company.")}</p>
               <div className="form-trust">
-                {[tr('Sin costo. Sin compromiso.', 'No cost. No commitment.'), tr('Respondemos en menos de 24 horas', 'We respond in less than 24 hours'), tr('Partner certificado Oracle y Zinier', 'Certified Oracle and Zinier Partner'), tr('+50 proyectos de Field Service', '+50 Field Service projects')].map((item, i) => (
+                {[tr('Sin costo. Sin compromiso.', 'No cost. No commitment.'), tr('Partner certificado Oracle y Zinier', 'Certified Oracle and Zinier Partner'), tr('+50 proyectos de Field Service', '+50 Field Service projects')].map((item, i) => (
                   <div key={i} className="form-trust-item"><div className="form-trust-check"></div><span>{item}</span></div>
                 ))}
               </div>

@@ -471,10 +471,10 @@ export default function HomeClient() {
               {/* Quick Wins: inferior derecho — borde punteado verde */}
               <rect x="365" y="310" width="295" height="220" fill="#F0FDF4" />
               <rect x="365" y="310" width="295" height="220" fill="none" stroke="#71B136" strokeWidth="1.5" strokeDasharray="6,4" />
-              {/* Proyectos: superior izquierdo */}
-              <rect x="70" y="60" width="295" height="250" fill="#EFF6FF" />
-              {/* Descarte: superior derecho */}
-              <rect x="365" y="60" width="295" height="250" fill="#FEF2F2" />
+              {/* Descarte: superior izquierdo */}
+              <rect x="70" y="60" width="295" height="250" fill="#FEF2F2" />
+              {/* Proyectos: superior derecho */}
+              <rect x="365" y="60" width="295" height="250" fill="#EFF6FF" />
 
               {/* ── Grid sutil ── */}
               {[130,190,250,310,370,430,490].map(y => (
@@ -489,8 +489,8 @@ export default function HomeClient() {
               <line x1="70" y1="310" x2="660" y2="310" stroke="#CBD5E1" strokeWidth="1" strokeDasharray="5,3" />
 
               {/* ── Labels de zona ── */}
-              <text x="82" y="82" className="zl" fill="rgba(23,37,84,0.55)">{tr('Proyectos', 'Projects')}</text>
-              <text x="377" y="82" className="zl" fill="rgba(220,38,38,0.55)">{tr('Descarte', 'Discard')}</text>
+              <text x="82" y="82" className="zl" fill="rgba(220,38,38,0.55)">{tr('Descarte', 'Discard')}</text>
+              <text x="377" y="82" className="zl" fill="rgba(23,37,84,0.55)">{tr('Proyectos', 'Projects')}</text>
               <text x="82" y="332" className="zl" fill="rgba(107,114,128,0.65)">{tr('Tareas', 'Tasks')}</text>
               <text x="377" y="332" className="zl" fill="rgba(113,177,54,0.9)">{tr('Quick Wins', 'Quick Wins')}</text>
 
@@ -542,37 +542,37 @@ export default function HomeClient() {
                 </g>
               </g>
 
-              {/* ── PROYECTOS — superior izquierdo — azul ── */}
+              {/* ── PROYECTOS — superior derecho — azul ── */}
               <g className="sb">
-                <circle cx="200" cy="140" r="22" fill="#172554" stroke="#fff" strokeWidth="2" />
-                <text x="200" y="145" textAnchor="middle" fill="#fff" fontWeight="700" fontSize="11" fontFamily="var(--font-body)">D1</text>
+                <circle cx="495" cy="140" r="22" fill="#172554" stroke="#fff" strokeWidth="2" />
+                <text x="495" y="145" textAnchor="middle" fill="#fff" fontWeight="700" fontSize="11" fontFamily="var(--font-body)">D1</text>
                 <g className="tt" filter="url(#tt-shadow)">
-                  <rect x="138" y="102" width="148" height="28" rx="6" fill="#172554" />
-                  <text x="212" y="121" textAnchor="middle" fill="#fff" fontSize="11" fontFamily="var(--font-body)">{tr('Unificación app móvil', 'Mobile app unification')}</text>
+                  <rect x="433" y="102" width="148" height="28" rx="6" fill="#172554" />
+                  <text x="507" y="121" textAnchor="middle" fill="#fff" fontSize="11" fontFamily="var(--font-body)">{tr('Unificación app móvil', 'Mobile app unification')}</text>
                 </g>
               </g>
               <g className="sb">
-                <circle cx="290" cy="100" r="22" fill="#172554" stroke="#fff" strokeWidth="2" />
-                <text x="290" y="105" textAnchor="middle" fill="#fff" fontWeight="700" fontSize="11" fontFamily="var(--font-body)">D2</text>
+                <circle cx="585" cy="100" r="22" fill="#172554" stroke="#fff" strokeWidth="2" />
+                <text x="585" y="105" textAnchor="middle" fill="#fff" fontWeight="700" fontSize="11" fontFamily="var(--font-body)">D2</text>
                 <g className="tt" filter="url(#tt-shadow)">
-                  <rect x="228" y="62" width="148" height="28" rx="6" fill="#172554" />
-                  <text x="302" y="81" textAnchor="middle" fill="#fff" fontSize="11" fontFamily="var(--font-body)">{tr('Gestión de inventario', 'Inventory management')}</text>
+                  <rect x="511" y="62" width="148" height="28" rx="6" fill="#172554" />
+                  <text x="585" y="81" textAnchor="middle" fill="#fff" fontSize="11" fontFamily="var(--font-body)">{tr('Gestión de inventario', 'Inventory management')}</text>
                 </g>
               </g>
               <g className="sb">
-                <circle cx="150" cy="220" r="22" fill="#172554" stroke="#fff" strokeWidth="2" />
-                <text x="150" y="225" textAnchor="middle" fill="#fff" fontWeight="700" fontSize="11" fontFamily="var(--font-body)">D3</text>
+                <circle cx="445" cy="220" r="22" fill="#172554" stroke="#fff" strokeWidth="2" />
+                <text x="445" y="225" textAnchor="middle" fill="#fff" fontWeight="700" fontSize="11" fontFamily="var(--font-body)">D3</text>
                 <g className="tt" filter="url(#tt-shadow)">
-                  <rect x="88" y="182" width="148" height="28" rx="6" fill="#172554" />
-                  <text x="162" y="201" textAnchor="middle" fill="#fff" fontSize="11" fontFamily="var(--font-body)">{tr('Integración ERP', 'ERP Integration')}</text>
+                  <rect x="383" y="182" width="148" height="28" rx="6" fill="#172554" />
+                  <text x="457" y="201" textAnchor="middle" fill="#fff" fontSize="11" fontFamily="var(--font-body)">{tr('Integración ERP', 'ERP Integration')}</text>
                 </g>
               </g>
               <g className="sb">
-                <circle cx="320" cy="180" r="22" fill="#172554" stroke="#fff" strokeWidth="2" />
-                <text x="320" y="185" textAnchor="middle" fill="#fff" fontWeight="700" fontSize="11" fontFamily="var(--font-body)">C2</text>
+                <circle cx="615" cy="180" r="22" fill="#172554" stroke="#fff" strokeWidth="2" />
+                <text x="615" y="185" textAnchor="middle" fill="#fff" fontWeight="700" fontSize="11" fontFamily="var(--font-body)">C2</text>
                 <g className="tt" filter="url(#tt-shadow)">
-                  <rect x="218" y="142" width="148" height="28" rx="6" fill="#172554" />
-                  <text x="292" y="161" textAnchor="middle" fill="#fff" fontSize="11" fontFamily="var(--font-body)">{tr('Analítica avanzada', 'Advanced analytics')}</text>
+                  <rect x="513" y="142" width="148" height="28" rx="6" fill="#172554" />
+                  <text x="587" y="161" textAnchor="middle" fill="#fff" fontSize="11" fontFamily="var(--font-body)">{tr('Analítica avanzada', 'Advanced analytics')}</text>
                 </g>
               </g>
 
@@ -594,13 +594,13 @@ export default function HomeClient() {
                 </g>
               </g>
 
-              {/* ── DESCARTE — superior derecho — rojo ── */}
+              {/* ── DESCARTE — superior izquierdo — rojo ── */}
               <g className="sb">
-                <circle cx="500" cy="160" r="22" fill="#DC2626" stroke="#fff" strokeWidth="2" />
-                <text x="500" y="165" textAnchor="middle" fill="#fff" fontWeight="700" fontSize="11" fontFamily="var(--font-body)">D8</text>
+                <circle cx="205" cy="160" r="22" fill="#DC2626" stroke="#fff" strokeWidth="2" />
+                <text x="205" y="165" textAnchor="middle" fill="#fff" fontWeight="700" fontSize="11" fontFamily="var(--font-body)">D8</text>
                 <g className="tt" filter="url(#tt-shadow)">
-                  <rect x="398" y="122" width="168" height="28" rx="6" fill="#172554" />
-                  <text x="482" y="141" textAnchor="middle" fill="#fff" fontSize="11" fontFamily="var(--font-body)">{tr('Réplica BI en tiempo real', 'Real-time BI replication')}</text>
+                  <rect x="103" y="122" width="168" height="28" rx="6" fill="#172554" />
+                  <text x="187" y="141" textAnchor="middle" fill="#fff" fontSize="11" fontFamily="var(--font-body)">{tr('Réplica BI en tiempo real', 'Real-time BI replication')}</text>
                 </g>
               </g>
             </svg>

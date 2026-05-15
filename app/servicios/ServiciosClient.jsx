@@ -289,7 +289,7 @@ export default function ServiciosClient() {
               <div className="soporte-plan">{tr('Basic', 'Basic')}</div>
               <div className="soporte-desc">{tr('Soporte reactivo para incidentes críticos. Ideal para operaciones estabilizadas con equipo interno técnico.', 'Reactive support for critical incidents. Ideal for stabilized operations with an internal technical team.')}</div>
               <ul className="soporte-features">
-                {[tr('Tickets de soporte por email', 'Email support tickets'), tr('SLA 48hs respuesta', '48h response SLA'), tr('Parches y actualizaciones', 'Patches and updates'), tr('Documentación técnica', 'Technical documentation')].map((f, i) => <li key={i} className="soporte-feature"><div className="soporte-check"></div><span>{f}</span></li>)}
+                {[tr('Soporte correctivo', 'Corrective support'), tr('Revisión de parches y actualizaciones', 'Patch and update review'), tr('Documentación técnica', 'Technical documentation')].map((f, i) => <li key={i} className="soporte-feature"><div className="soporte-check"></div><span>{f}</span></li>)}
               </ul>
               <div className="soporte-cta"><a href="#contacto" className="btn-ghost soporte-btn-ghost" onClick={(e) => { e.preventDefault(); scrollTo('contacto'); }}>{tr('Consultar →', 'Inquire →')}</a></div>
             </div>
@@ -298,7 +298,7 @@ export default function ServiciosClient() {
               <div className="soporte-plan">{tr('Professional', 'Professional')}</div>
               <div className="soporte-desc">{tr('Soporte proactivo con un equipo dedicado. Para operaciones en crecimiento que requieren agilidad y mejora continua.', 'Proactive support with a dedicated team. For growing operations that require agility and continuous improvement.')}</div>
               <ul className="soporte-features">
-                {[tr('Todo lo del plan Basic', 'Everything in Basic plan'), tr('SLA 8hs respuesta', '8h response SLA'), tr('Reuniones mensuales de revisión', 'Monthly review meetings'), tr('Consultoría funcional incluida', 'Functional consulting included'), tr('Capacitación continua', 'Continuous training'), tr('Acceso prioritario al equipo', 'Priority team access')].map((f, i) => <li key={i} className="soporte-feature"><div className="soporte-check"></div><span>{f}</span></li>)}
+                {[tr('Todo lo del plan básico', 'Everything in Basic plan'), tr('Reuniones de seguimiento y planificación gestionadas por nuestro equipo', 'Follow-up and planning meetings managed by our team'), tr('Consultoría funcional incluida', 'Functional consulting included'), tr('Capacitación continua', 'Continuous training'), tr('Desarrollo de plugins', 'Plugin development')].map((f, i) => <li key={i} className="soporte-feature"><div className="soporte-check"></div><span>{f}</span></li>)}
               </ul>
               <div className="soporte-cta"><a href="#contacto" className="btn-primary" style={{ fontSize: '14px', padding: '12px 24px' }} onClick={(e) => { e.preventDefault(); scrollTo('contacto'); }}>{tr('Consultar →', 'Inquire →')}</a></div>
             </div>
@@ -306,7 +306,7 @@ export default function ServiciosClient() {
               <div className="soporte-plan">{tr('Enterprise', 'Enterprise')}</div>
               <div className="soporte-desc">{tr('Soporte full dedicado para operaciones complejas de gran escala con requerimientos críticos de uptime.', 'Full dedicated support for complex, large-scale operations with critical uptime requirements.')}</div>
               <ul className="soporte-features">
-                {[tr('Todo lo del plan Professional', 'Everything in Professional plan'), tr('SLA 2hs respuesta', '2h response SLA'), tr('Recurso dedicado Connexa', 'Dedicated Connexa resource'), tr('Monitoreo proactivo 24/7', 'Proactive 24/7 monitoring'), tr('Roadmap de mejoras trimestral', 'Quarterly improvement roadmap'), tr('Horas de desarrollo incluidas', 'Development hours included')].map((f, i) => <li key={i} className="soporte-feature"><div className="soporte-check"></div><span>{f}</span></li>)}
+                {[tr('Todo lo del plan profesional', 'Everything in Professional plan'), tr('Equipo dedicado', 'Dedicated team'), tr('Soporte 24/7', '24/7 support'), tr('Assessment con roadmap de mejoras semestrales', 'Assessment with semi-annual improvement roadmap'), tr('Acceso preferencial a Productos de Connexa Services', 'Preferential access to Connexa Services Products')].map((f, i) => <li key={i} className="soporte-feature"><div className="soporte-check"></div><span>{f}</span></li>)}
               </ul>
               <div className="soporte-cta"><a href="#contacto" className="btn-ghost soporte-btn-ghost" onClick={(e) => { e.preventDefault(); scrollTo('contacto'); }}>{tr('Consultar →', 'Inquire →')}</a></div>
             </div>

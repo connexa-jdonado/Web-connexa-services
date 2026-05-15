@@ -716,14 +716,14 @@ export default function HomeClient() {
           </h2>
           <p className="cta-sub fade-up d2">{tr('Nuestro equipo de expertos está disponible para analizar tu situación actual y proponer la estrategia óptima para tu negocio.', 'Our team of experts is available to analyze your current situation and propose the optimal strategy for your business.')}</p>
           <div className="cta-btns fade-up d3">
-            <a href="mailto:contacto@connexaservices.com" className="btn-primary" style={{ fontSize: 16, padding: '16px 36px' }}>{tr('Hablar con un experto', 'Talk to an Expert')}</a>
+            <a href="/servicios#contacto" className="btn-primary" style={{ fontSize: 16, padding: '16px 36px' }}>{tr('Hablar con un experto', 'Talk to an Expert')}</a>
             <button className="btn-ghost" onClick={() => scrollTo('services')} style={{ fontSize: 16, padding: '16px 36px' }}>{tr('Ver servicios', 'View services')}</button>
           </div>
         </div>
       </section>
 
       {/* CTA FLOTANTE */}
-      <a className="cta-flotante" id="ctaFlotante" href="mailto:contacto@connexaservices.com">
+      <a className="cta-flotante" id="ctaFlotante" href="/servicios#contacto">
         <span>{tr('Agendar demo', 'Schedule demo')}</span>
       </a>
     </>

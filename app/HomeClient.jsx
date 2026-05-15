@@ -744,9 +744,11 @@ export default function HomeClient() {
                 <div className="product-name">Workflow Builder</div>
                 <p className="product-desc">{tr('Constructor visual de flujos de trabajo para Oracle Field Service Cloud. Permite diseñar, testear y publicar workflows sin código, reduciendo el time-to-market de nuevos procesos.', 'Visual workflow builder for Oracle Field Service Cloud. Design, test and publish workflows without code, reducing the time-to-market for new processes.')}</p>
                 <div className="product-bullets">
-                  <div className="product-bullet">{tr('Editor drag & drop sin código', 'No-code drag & drop editor')}</div>
-                  <div className="product-bullet">{tr('Integración nativa con OFS APIs', 'Native integration with OFS APIs')}</div>
-                  <div className="product-bullet">{tr('Testing y simulación en sandbox', 'Testing and simulation in sandbox')}</div>
+                  <div className="product-bullet">{tr('Orquestador de eventos de OFS (Event API) – Gestor de suscripciones', 'OFS Event Orchestrator (Event API) – Subscription Manager')}</div>
+                  <div className="product-bullet">{tr('Editor de workflow drag and drop para orquestar procesos', 'Drag and drop workflow editor to orchestrate processes')}</div>
+                  <div className="product-bullet">{tr('+40 APIs de OFS disponibles para ejecutar dentro de cada workflow', '+40 OFS APIs available to execute within each workflow')}</div>
+                  <div className="product-bullet">{tr('Agente de IA integrado para eficientizar procesos', 'Integrated AI agent to streamline processes')}</div>
+                  <div className="product-bullet">{tr('Integración con Slack, Teams, WhatsApp', 'Integration with Slack, Teams, WhatsApp')}</div>
                 </div>
                 <button className="product-cta">{tr('Conocer más', 'Learn more')} <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6" /></svg></button>
               </div>

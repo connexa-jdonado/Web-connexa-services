@@ -430,7 +430,7 @@ export default function HomeClient() {
               {tr('Un assessment que convierte dolores en resultados', 'An assessment that turns pain points into results')}
             </h2>
             <p className="metodologia-subtitle fade-up d2">
-              {tr('Analizamos en profundidad tu operación actual para identificar brechas y proponer iniciativas concretas y priorizadas.', 'We deeply analyze your current operation to identify gaps and propose concrete, prioritized initiatives.')}
+              {tr('Analizamos tu operación actual para identificar brechas y proponer iniciativas concretas y priorizadas.', 'We analyze your current operation to identify gaps and propose specific, prioritized initiatives.')}
             </p>
           </div>
 
@@ -509,7 +509,7 @@ export default function HomeClient() {
           </div>
 
           {/* SCATTER PLOT MAPA DE PRIORIZACIÓN */}
-          <div className="fade-up d2" style={{ background: '#fff', borderRadius: '16px', padding: '32px 32px 24px', maxWidth: '1100px', margin: '0 auto 48px', boxShadow: '0 8px 32px rgba(0,0,0,0.08)', border: '1px solid #F3F4F6' }}>
+          <div className="fade-up d2" style={{ background: '#fff', borderRadius: '16px', padding: '32px 32px 24px', margin: '0 0 48px', boxShadow: '0 8px 32px rgba(0,0,0,0.08)', border: '1px solid #F3F4F6' }}>
             <div style={{ textAlign: 'center', marginBottom: '20px' }}>
               <span style={{ fontSize: '11px', fontWeight: 700, letterSpacing: '0.16em', textTransform: 'uppercase', color: '#71B136', fontFamily: 'var(--font-body)' }}>
                 {tr('Mapa de Priorización de Iniciativas', 'Initiative Prioritization Map')}
@@ -676,10 +676,7 @@ export default function HomeClient() {
             </svg>
             </div>
             {/* Panel lateral INICIATIVAS */}
-            <div style={{ width: '240px', flexShrink: 0 }}>
-              <div style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#71B136', fontFamily: 'var(--font-body)', marginBottom: '12px' }}>
-                {tr('INICIATIVAS', 'INITIATIVES')}
-              </div>
+            <div style={{ minWidth: '260px', flexShrink: 0, padding: '24px', background: '#F8FAFC', borderLeft: '2px solid #E5E7EB', borderRadius: '0 8px 8px 0' }}>
               {[
                 { color: '#71B136', title: tr('Quick Wins', 'Quick Wins'), items: [
                   { code: 'A1', name: tr('Segmentar cuotas por zona', 'Segment quotas by zone') },
@@ -697,20 +694,24 @@ export default function HomeClient() {
                   { code: 'A4', name: tr('Tablero de salud de agenda', 'Agenda health dashboard') },
                   { code: 'B2', name: tr('Reclasificar atributos como skills', 'Reclassify attributes as skills') },
                 ]},
-                { color: '#DC2626', title: tr('Descarte', 'Discard'), items: [
+                { color: '#EF4444', title: tr('Descarte', 'Discard'), items: [
                   { code: 'D8', name: tr('Réplica de datos BI en tiempo real', 'Real-time BI data replication') },
                 ]},
               ].map((group, gi) => (
-                <div key={gi} style={{ marginBottom: gi < 3 ? '10px' : 0 }}>
-                  <div style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', color: group.color, fontFamily: 'var(--font-body)', marginBottom: '4px' }}>
+                <div key={gi}>
+                  <div style={{ fontSize: '11px', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', color: group.color, fontFamily: 'var(--font-body)', marginTop: gi === 0 ? 0 : '16px', marginBottom: '8px' }}>
                     {group.title}
                   </div>
-                  {group.items.map((item, ii) => (
-                    <div key={ii} style={{ display: 'flex', gap: '4px', marginBottom: '3px', lineHeight: '1.3' }}>
-                      <span style={{ fontSize: '11px', fontWeight: 700, color: group.color, fontFamily: 'var(--font-body)', flexShrink: 0 }}>{item.code}</span>
-                      <span style={{ fontSize: '11px', color: '#6B7280', fontFamily: 'var(--font-body)' }}>{' — '}{item.name}</span>
-                    </div>
-                  ))}
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                    {group.items.map((item, ii) => (
+                      <div key={ii} style={{ display: 'flex', alignItems: 'center' }}>
+                        <div style={{ width: '20px', height: '20px', borderRadius: '50%', background: group.color, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                          <span style={{ fontSize: '9px', fontWeight: 700, color: '#fff', fontFamily: 'var(--font-body)' }}>{item.code}</span>
+                        </div>
+                        <span style={{ fontSize: '13px', color: '#374151', fontFamily: 'var(--font-body)', marginLeft: '10px', lineHeight: '1.4', fontWeight: 400 }}>{item.name}</span>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               ))}
             </div>

@@ -515,7 +515,7 @@ export default function HomeClient() {
                 {tr('Mapa de Priorización de Iniciativas', 'Initiative Prioritization Map')}
               </span>
             </div>
-            <div style={{ display: 'flex', gap: '32px', alignItems: 'flex-start' }}>
+            <div style={{ display: 'flex', gap: '32px', alignItems: 'stretch' }}>
             <div style={{ flex: 1, minWidth: 0 }}>
             <svg viewBox="0 0 800 600" width="100%" style={{ display: 'block', overflow: 'visible' }}>
               <defs>
@@ -677,6 +677,9 @@ export default function HomeClient() {
             </div>
             {/* Panel lateral INICIATIVAS */}
             <div style={{ minWidth: '260px', flexShrink: 0, padding: '24px', background: '#F8FAFC', borderLeft: '2px solid #E5E7EB', borderRadius: '0 8px 8px 0' }}>
+              <div style={{ fontSize: '11px', fontWeight: 600, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#71B136', fontFamily: 'var(--font-body)', marginBottom: '20px' }}>
+                {tr('INICIATIVAS', 'INITIATIVES')}
+              </div>
               {[
                 { color: '#71B136', title: tr('Quick Wins', 'Quick Wins'), items: [
                   { code: 'A1', name: tr('Segmentar cuotas por zona', 'Segment quotas by zone') },
@@ -705,7 +708,7 @@ export default function HomeClient() {
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
                     {group.items.map((item, ii) => (
                       <div key={ii} style={{ display: 'flex', alignItems: 'center' }}>
-                        <div style={{ width: '20px', height: '20px', borderRadius: '50%', background: group.color, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                        <div style={{ width: '22px', height: '22px', borderRadius: '50%', background: group.color, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
                           <span style={{ fontSize: '9px', fontWeight: 700, color: '#fff', fontFamily: 'var(--font-body)' }}>{item.code}</span>
                         </div>
                         <span style={{ fontSize: '13px', color: '#374151', fontFamily: 'var(--font-body)', marginLeft: '10px', lineHeight: '1.4', fontWeight: 400 }}>{item.name}</span>
@@ -718,9 +721,10 @@ export default function HomeClient() {
             </div>
           </div>
 
-          <div className="metodologia-cta fade-up d3">
-            <p className="metodologia-cta-text"><strong>{tr('¿Querés conocer cómo aplicamos esta metodología en tu empresa?', 'Want to learn how we apply this methodology in your company?')}</strong></p>
-            <button className="btn-primary" onClick={() => scrollTo('cta-section')} style={{ fontSize: 16, padding: '14px 32px' }}>{tr('Hablemos →', "Let's talk →")}</button>
+          <div style={{ paddingTop: '32px', textAlign: 'center' }}>
+            <p style={{ fontSize: '14px', color: '#6B7280', fontStyle: 'italic', maxWidth: '600px', margin: '0 auto', fontFamily: 'var(--font-body)', lineHeight: '1.6' }}>
+              {tr('Cada assessment es único. Los resultados dependen de tu operación, tu plataforma y tus objetivos.', 'Every assessment is unique. Results depend on your operation, your platform, and your goals.')}
+            </p>
           </div>
         </div>
       </section>

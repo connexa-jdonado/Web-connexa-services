@@ -48,7 +48,7 @@ export default function ServiciosClient() {
         <div className="container">
           <div className="page-hero-inner">
             <div className="page-hero-grid">
-              <div className="page-hero-left">
+              <div className="page-hero-left" style={{ textAlign: 'left' }}>
                 <nav className="breadcrumb">
                   <Link href="/">{tr('Inicio', 'Home')}</Link>
                   <span className="breadcrumb-sep">/</span>

@@ -69,6 +69,7 @@ export default function ProductosClient() {
                 <span>{tr('Solución propia', 'Proprietary solution')}</span>
               </div>
               <h2 className="showcase-name fade-up d1">Workflow Builder</h2>
+              <span style={{ background: 'linear-gradient(135deg, #71B136 0%, #172554 100%)', color: '#fff', fontSize: '11px', fontWeight: 600, letterSpacing: '0.08em', padding: '4px 12px', borderRadius: '999px', boxShadow: '0 2px 12px rgba(113,177,54,0.3)', display: 'inline-block', margin: '4px 0 8px' }}>{tr('✦ IA integrada', '✦ AI integrated')}</span>
               <p className="showcase-tagline fade-up d2">{tr('Automatizá tus procesos OFSC sin código', 'Automate your OFSC processes without code')}</p>
               <p className="showcase-desc fade-up d2">{tr('Workflow Builder es un constructor visual de flujos de trabajo para Oracle Field Service Cloud. Permite diseñar, testear y publicar procesos de campo complejos sin escribir una línea de código.', 'Workflow Builder is a visual workflow builder for Oracle Field Service Cloud. It lets you design, test, and publish complex field processes without writing a single line of code.')}</p>
               <div className="use-chips fade-up d3">
@@ -116,6 +117,7 @@ export default function ProductosClient() {
                 <span>{tr('Solución propia', 'Proprietary solution')}</span>
               </div>
               <h2 className="showcase-name fade-up d1">FSMTool</h2>
+              <span style={{ background: 'linear-gradient(135deg, #71B136 0%, #172554 100%)', color: '#fff', fontSize: '11px', fontWeight: 600, letterSpacing: '0.08em', padding: '4px 12px', borderRadius: '999px', boxShadow: '0 2px 12px rgba(113,177,54,0.3)', display: 'inline-block', margin: '4px 0 8px' }}>{tr('✦ IA integrada', '✦ AI integrated')}</span>
               <p className="showcase-tagline fade-up d2">{tr('Operaciones masivas en OFSC, sin complejidad', 'Bulk OFSC operations, without complexity')}</p>
               <p className="showcase-desc fade-up d2">{tr('FSMTool es una suite de administración y monitoreo de operaciones construida nativamente sobre Oracle Field Service Cloud. Permite a los equipos de operaciones ejecutar acciones masivas, visualizar el estado en tiempo real y automatizar los procesos del día a día.', 'FSMTool is an operations administration and monitoring suite built natively on Oracle Field Service Cloud. It lets operations teams execute bulk actions, visualize status in real time, and automate day-to-day processes.')}</p>
               <div className="use-chips fade-up d3">

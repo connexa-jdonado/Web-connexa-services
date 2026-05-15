@@ -113,6 +113,7 @@ export default function ServiciosClient() {
               <div className="section-header fade-up">
                 <div className="section-eyebrow">{tr('IMPLEMENTACIÓN', 'IMPLEMENTATION')}</div>
                 <h2>Oracle Field Service Cloud</h2>
+                <span style={{ background: 'linear-gradient(135deg, #71B136 0%, #172554 100%)', color: '#fff', fontSize: '11px', fontWeight: 600, letterSpacing: '0.08em', padding: '4px 12px', borderRadius: '999px', boxShadow: '0 2px 12px rgba(113,177,54,0.3)', display: 'inline-block', margin: '4px 0 8px' }}>{tr('✦ IA integrada', '✦ AI integrated')}</span>
                 <p>{tr('Somos partner certificado de Oracle con experiencia en implementaciones end-to-end de Oracle Field Service Cloud. Configuramos, parametrizamos e integramos OFSC adaptado 100% a los procesos de tu empresa.', 'We are a certified Oracle partner with experience in end-to-end Oracle Field Service Cloud implementations. We configure, parameterize, and integrate OFSC 100% tailored to your company\'s processes.')}</p>
               </div>
               <div className="zinier-badge fade-up d1">
@@ -165,6 +166,7 @@ export default function ServiciosClient() {
               <div className="section-header fade-up">
                 <div className="section-eyebrow">{tr('IMPLEMENTACIÓN', 'IMPLEMENTATION')}</div>
                 <h2>{tr('Zinier — Field Service Inteligente', 'Zinier — Intelligent Field Service')}</h2>
+                <span style={{ background: 'linear-gradient(135deg, #71B136 0%, #172554 100%)', color: '#fff', fontSize: '11px', fontWeight: 600, letterSpacing: '0.08em', padding: '4px 12px', borderRadius: '999px', boxShadow: '0 2px 12px rgba(113,177,54,0.3)', display: 'inline-block', margin: '4px 0 8px' }}>{tr('✦ IA integrada', '✦ AI integrated')}</span>
                 <p>{tr('Como partner certificado de Zinier implementamos la plataforma de Field Service Management más innovadora del mercado, potenciada por inteligencia artificial.', 'As a certified Zinier partner, we implement the most innovative Field Service Management platform on the market, powered by artificial intelligence.')}</p>
               </div>
               <div className="zinier-badge fade-up d1">

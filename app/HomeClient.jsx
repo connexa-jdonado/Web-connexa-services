@@ -229,7 +229,7 @@ export default function HomeClient() {
           <div className="carousel-track">
             {['claro', 'telefonica', 'vodafone', 'tim', 'prosegur', 'simpress', 'onnet',
               'claro', 'telefonica', 'vodafone', 'tim', 'prosegur', 'simpress', 'onnet'].map((c, i) => (
-              <img key={i} className="carousel-logo" src={`/assets/clients/${c}.png`} alt={c} style={c === 'onnet' ? { height: '28px' } : undefined} />
+              <img key={i} className="carousel-logo" src={`/assets/clients/${c}.png`} alt={c} style={c === 'onnet' ? { height: '20px' } : undefined} />
             ))}
           </div>
         </div>

@@ -1,7 +1,6 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
-import AssessmentMethodology from '@/components/AssessmentMethodology';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useLang } from '@/context/LanguageContext';
@@ -272,7 +271,6 @@ export default function ServiciosClient() {
             <h2>{tr('Consultoría estratégica en Field Service', 'Strategic Field Service Consulting')}</h2>
             <p>{tr('Analizamos tu operación actual y diseñamos la estrategia óptima para maximizar la eficiencia de tu fuerza de trabajo en campo.', 'We analyze your current operation and design the optimal strategy to maximize the efficiency of your field workforce.')}</p>
           </div>
-          <AssessmentMethodology />
         </div>
       </section>
 

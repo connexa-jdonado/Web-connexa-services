@@ -79,14 +79,6 @@ export default function Navbar() {
             </li>
             <li>
               <a
-                href="/#casos"
-                onClick={(e) => { e.preventDefault(); handleHashLink('#casos'); }}
-              >
-                {nav.successCases}
-              </a>
-            </li>
-            <li>
-              <a
                 href="/#nosotros"
                 onClick={(e) => { e.preventDefault(); handleHashLink('#nosotros'); }}
               >
@@ -137,12 +129,6 @@ export default function Navbar() {
           onClick={(e) => { e.preventDefault(); handleHashLink('#partnerships'); }}
         >
           {nav.partnerships}
-        </a>
-        <a
-          href="/#casos"
-          onClick={(e) => { e.preventDefault(); handleHashLink('#casos'); }}
-        >
-          {nav.successCases}
         </a>
         <a
           href="/#nosotros"

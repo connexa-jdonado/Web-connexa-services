@@ -169,7 +169,7 @@ export default function ProductosClient() {
           <h2 className="cta-headline" dangerouslySetInnerHTML={{ __html: tr('¿Querés ver los productos<br/><em>en acción</em>?', 'Want to see the products<br/><em>in action</em>?') }} />
           <p className="cta-sub">{tr('Agendá una demo personalizada con nuestro equipo.', 'Schedule a personalized demo with our team.')}</p>
           <div className="cta-btns">
-            <a href="mailto:contacto@connexaservices.com?subject=Demo%20Productos" className="btn-primary cta-btn-lg">{tr('Agendar demo', 'Schedule demo')}</a>
+            <a href="/servicios#contacto" className="btn-primary cta-btn-lg">{tr('Agendar demo', 'Schedule demo')}</a>
             <a href="#prod-workflow" className="btn-ghost cta-btn-lg" onClick={(e) => { e.preventDefault(); scrollTo('prod-workflow'); }}>{tr('Ver productos', 'View products')}</a>
           </div>
         </div>

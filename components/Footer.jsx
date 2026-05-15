@@ -78,14 +78,6 @@ export default function Footer() {
                   {f.companyLinks.about}
                 </a>
               </li>
-              <li>
-                <a
-                  href="/#casos"
-                  onClick={(e) => { e.preventDefault(); handleHashLink('#casos'); }}
-                >
-                  {f.companyLinks.successCases}
-                </a>
-              </li>
             </ul>
           </div>
 

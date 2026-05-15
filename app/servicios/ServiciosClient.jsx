@@ -41,7 +41,7 @@ export default function ServiciosClient() {
 
   return (
     <>
-      {/* ── HERO ── */}
+      {/* ── HERO ── COMENTADO
       <section className="page-hero">
         <div className="container">
           <div className="page-hero-inner">
@@ -101,6 +101,7 @@ export default function ServiciosClient() {
           </div>
         </div>
       </section>
+      */}
 
       {/* ── IMPLEMENTACIÓN OFSC ── */}
       <section id="implementacion-ofsc" className="sec-ofsc">

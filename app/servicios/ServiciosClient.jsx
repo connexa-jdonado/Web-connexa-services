@@ -114,13 +114,18 @@ export default function ServiciosClient() {
               <h2>Oracle Field Service Cloud</h2>
               <p>{tr('Somos partner certificado de Oracle con experiencia en implementaciones end-to-end de Oracle Field Service Cloud. Configuramos, parametrizamos e integramos OFSC adaptado 100% a los procesos de tu empresa.', 'We are a certified Oracle partner with experience in end-to-end Oracle Field Service Cloud implementations. We configure, parameterize, and integrate OFSC 100% tailored to your company\'s processes.')}</p>
             </div>
-            <div className="hidden md:block" style={{ flexShrink: 0 }}>
+            <div className="hidden md:block" style={{ flexShrink: 0, maxWidth: '560px', width: '100%', background: '#1a1a2e', borderRadius: '12px', overflow: 'hidden', boxShadow: '0 30px 80px rgba(0,0,0,0.3)' }}>
+              <div style={{ height: '32px', background: '#2d2d3a', display: 'flex', alignItems: 'center', padding: '0 12px', gap: '6px' }}>
+                <div style={{ width: '10px', height: '10px', borderRadius: '50%', background: '#FF5F57' }}></div>
+                <div style={{ width: '10px', height: '10px', borderRadius: '50%', background: '#FFBD2E' }}></div>
+                <div style={{ width: '10px', height: '10px', borderRadius: '50%', background: '#28CA41' }}></div>
+              </div>
               <Image
                 src="/assets/ofsc-dispatch-console.png"
                 alt="OFSC Dispatch Console"
-                width={520}
-                height={340}
-                style={{ maxWidth: '520px', width: '100%', borderRadius: '12px', boxShadow: '0 20px 60px rgba(0,0,0,0.15)', border: '1px solid rgba(255,255,255,0.1)', objectFit: 'cover', transform: 'perspective(1000px) rotateY(-3deg)' }}
+                width={560}
+                height={360}
+                style={{ width: '100%', display: 'block', objectFit: 'cover' }}
               />
             </div>
           </div>
@@ -162,13 +167,18 @@ export default function ServiciosClient() {
               </div>
               <a href="#contacto" className="btn-primary fade-up d2" style={{ width: 'fit-content', display: 'inline-flex', marginTop: '16px' }} onClick={(e) => { e.preventDefault(); scrollTo('contacto'); }}>{tr('Hablar con un experto →', 'Talk to an Expert →')}</a>
             </div>
-            <div className="hidden md:block" style={{ flexShrink: 0 }}>
+            <div className="hidden md:block" style={{ flexShrink: 0, maxWidth: '560px', width: '100%', background: '#1a1a2e', borderRadius: '12px', overflow: 'hidden', boxShadow: '0 30px 80px rgba(0,0,0,0.3)' }}>
+              <div style={{ height: '32px', background: '#2d2d3a', display: 'flex', alignItems: 'center', padding: '0 12px', gap: '6px' }}>
+                <div style={{ width: '10px', height: '10px', borderRadius: '50%', background: '#FF5F57' }}></div>
+                <div style={{ width: '10px', height: '10px', borderRadius: '50%', background: '#FFBD2E' }}></div>
+                <div style={{ width: '10px', height: '10px', borderRadius: '50%', background: '#28CA41' }}></div>
+              </div>
               <Image
                 src="/assets/zinier-calendar-view.png"
                 alt="Zinier Calendar View"
-                width={520}
-                height={340}
-                style={{ maxWidth: '520px', width: '100%', borderRadius: '12px', boxShadow: '0 20px 60px rgba(0,0,0,0.15)', border: '1px solid rgba(255,255,255,0.1)', objectFit: 'cover', transform: 'perspective(1000px) rotateY(3deg)' }}
+                width={560}
+                height={360}
+                style={{ width: '100%', display: 'block', objectFit: 'cover' }}
               />
             </div>
           </div>

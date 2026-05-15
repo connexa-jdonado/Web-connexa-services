@@ -5,7 +5,6 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useLang } from '@/context/LanguageContext';
-import AssessmentMethodology from '@/components/AssessmentMethodology';
 
 const ParticlesCanvas = dynamic(
   () => import('@/components/ParticlesCanvas'),
@@ -364,8 +363,6 @@ export default function HomeClient() {
               {tr('Analizamos tu operación actual para identificar brechas y proponer iniciativas concretas y priorizadas.', 'We analyze your current operation to identify gaps and propose specific, prioritized initiatives.')}
             </p>
           </div>
-
-          <AssessmentMethodology />
 
             <div className="service-card">
               <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>

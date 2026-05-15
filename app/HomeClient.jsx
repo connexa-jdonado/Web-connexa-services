@@ -332,7 +332,7 @@ export default function HomeClient() {
             </div>
             <div className="pqc-card fade-up d3">
               <div className="pqc-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" /><polyline points="9 12 11 14 15 10" /></svg></div>
-              <div className="pqc-card-title">{tr('Equipo certificado en Oracle Field Service', 'Team certified in Oracle Field Service')}</div>
+              <div className="pqc-card-title" data-es="Equipo Certificado en productos de Field Service" data-en="Team Certified in Field Service Products">{tr('Equipo Certificado en productos de Field Service', 'Team Certified in Field Service Products')}</div>
               <p className="pqc-card-desc">{tr('Nuestros consultores están certificados en Oracle Field Service Cloud y Zinier. Implementamos con el conocimiento técnico más profundo del mercado.', 'Our consultants are certified in Oracle Field Service Cloud and Zinier. We implement with the deepest technical knowledge in the market.')}</p>
               <span className="pqc-badge">Oracle Certified · Zinier Partner</span>
             </div>
@@ -348,6 +348,7 @@ export default function HomeClient() {
       {/* EQUIPO Y CASO DE ÉXITO */}
       <section id="nosotros">
         <div className="container">
+          {/* SECCIÓN LIDERAZGO Y EXPERIENCIA — temporalmente comentada
           <div className="ec-header">
             <div className="ec-eyebrow fade-up">{tr('LIDERAZGO Y EXPERIENCIA', 'LEADERSHIP & EXPERIENCE')}</div>
             <h2 className="ec-title fade-up d1">{tr('El equipo detrás de cada implementación', 'The team behind every implementation')}</h2>
@@ -376,6 +377,8 @@ export default function HomeClient() {
             ))}
           </div>
           <div className="ec-sep" />
+          */}
+          {/* SECCIÓN CASO DE ÉXITO INTERNACIONAL — temporalmente comentada
           <div id="casos" />
           <div className="ec-case-eyebrow fade-up">{tr('CASO DE ÉXITO INTERNACIONAL', 'INTERNATIONAL SUCCESS CASE')}</div>
           <div className="ec-case-layout">
@@ -414,6 +417,7 @@ export default function HomeClient() {
               </div>
             </div>
           </div>
+          */}
         </div>
       </section>
 

@@ -1,5 +1,6 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useLang } from '@/context/LanguageContext';
@@ -106,10 +107,21 @@ export default function ServiciosClient() {
       {/* ── IMPLEMENTACIÓN OFSC ── */}
       <section id="implementacion-ofsc" className="sec-ofsc">
         <div className="container">
-          <div className="section-header fade-up">
-            <div className="section-eyebrow">{tr('IMPLEMENTACIÓN', 'IMPLEMENTATION')}</div>
-            <h2>Oracle Field Service Cloud</h2>
-            <p>{tr('Somos partner certificado de Oracle con experiencia en implementaciones end-to-end de Oracle Field Service Cloud. Configuramos, parametrizamos e integramos OFSC adaptado 100% a los procesos de tu empresa.', 'We are a certified Oracle partner with experience in end-to-end Oracle Field Service Cloud implementations. We configure, parameterize, and integrate OFSC 100% tailored to your company\'s processes.')}</p>
+          <div style={{ display: 'flex', flexDirection: 'row', gap: '48px', alignItems: 'center', marginBottom: '48px' }}>
+            <div className="section-header fade-up" style={{ flex: 1 }}>
+              <div className="section-eyebrow">{tr('IMPLEMENTACIÓN', 'IMPLEMENTATION')}</div>
+              <h2>Oracle Field Service Cloud</h2>
+              <p>{tr('Somos partner certificado de Oracle con experiencia en implementaciones end-to-end de Oracle Field Service Cloud. Configuramos, parametrizamos e integramos OFSC adaptado 100% a los procesos de tu empresa.', 'We are a certified Oracle partner with experience in end-to-end Oracle Field Service Cloud implementations. We configure, parameterize, and integrate OFSC 100% tailored to your company\'s processes.')}</p>
+            </div>
+            <div className="hidden md:block" style={{ flexShrink: 0 }}>
+              <Image
+                src="/assets/ofsc-dispatch-console.png"
+                alt="OFSC Dispatch Console"
+                width={520}
+                height={340}
+                style={{ maxWidth: '520px', width: '100%', borderRadius: '12px', boxShadow: '0 20px 60px rgba(0,0,0,0.15)', border: '1px solid rgba(255,255,255,0.1)', objectFit: 'cover', transform: 'perspective(1000px) rotateY(-3deg)' }}
+              />
+            </div>
           </div>
           <div className="module-grid">
             {[

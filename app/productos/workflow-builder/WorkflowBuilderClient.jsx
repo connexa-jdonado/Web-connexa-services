@@ -83,7 +83,8 @@ export default function WorkflowBuilderClient() {
         </div>
       </div>
 
-      {/* ── HERO VISUAL ── */}
+      {/* ── HERO VISUAL (comentado) ── */}
+      {/*
       <div className="hero-visual">
         <div className="container">
           <div className="browser-frame hero-size">
@@ -95,6 +96,7 @@ export default function WorkflowBuilderClient() {
           </div>
         </div>
       </div>
+      */}
 
       {/* ── VALOR ── */}
       <div className="valor-section">

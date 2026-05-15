@@ -82,7 +82,8 @@ export default function FSMToolClient() {
         </div>
       </div>
 
-      {/* ── HERO VISUAL ── */}
+      {/* ── HERO VISUAL (comentado) ── */}
+      {/*
       <div className="hero-visual">
         <div className="container">
           <div className="browser-frame hero-size">
@@ -94,6 +95,7 @@ export default function FSMToolClient() {
           </div>
         </div>
       </div>
+      */}
 
       {/* ── VALOR ── */}
       <div className="valor-section">

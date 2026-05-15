@@ -436,7 +436,7 @@ export default function HomeClient() {
 
           <div className="services-grid" style={{ marginBottom: '48px' }}>
 
-            <div className="service-card fade-up d1">
+            <div className="service-card">
               <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
                 <div className="service-icon">
                   <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8" /><line x1="21" y1="21" x2="16.65" y2="16.65" /></svg>
@@ -460,7 +460,7 @@ export default function HomeClient() {
               </ul>
             </div>
 
-            <div className="service-card fade-up d2">
+            <div className="service-card">
               <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
                 <div className="service-icon">
                   <svg viewBox="0 0 24 24"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18" /><polyline points="17 6 23 6 23 12" /></svg>
@@ -483,7 +483,7 @@ export default function HomeClient() {
               </ul>
             </div>
 
-            <div className="service-card fade-up d3">
+            <div className="service-card">
               <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
                 <div className="service-icon">
                   <svg viewBox="0 0 24 24"><path d="M9.66 17.33c-1.66 1.66-4 2.67-4 2.67s1-2.34 2.67-4c.94-.94 2.34-.94 3.28 0 .94.94.94 2.34.05 3.33z" /><path d="m14 10-4 4" /><path d="M19 5c0 2.5-2 7-7 10l-3-3c3-5 7.5-7 10-7z" /></svg>

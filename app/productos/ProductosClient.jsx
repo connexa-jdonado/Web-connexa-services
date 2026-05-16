@@ -101,7 +101,7 @@ export default function ProductosClient() {
               </div>
               <div className="showcase-ctas fade-up d4">
                 <Link href="/productos/workflow-builder" className="btn-primary">
-                  {tr('Ver demo', 'View demo')}
+                  {tr('Ver más', 'Learn more')}
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
                 </Link>
                 <Link href="/productos/workflow-builder" className="btn-secondary">{tr('Solicitar acceso', 'Request access')}</Link>
@@ -153,7 +153,7 @@ export default function ProductosClient() {
               </div>
               <div className="showcase-ctas fade-up d4">
                 <Link href="/productos/fsmtool" className="btn-primary">
-                  {tr('Ver demo', 'View demo')}
+                  {tr('Ver más', 'Learn more')}
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
                 </Link>
                 <Link href="/productos/fsmtool" className="btn-secondary">{tr('Solicitar acceso', 'Request access')}</Link>

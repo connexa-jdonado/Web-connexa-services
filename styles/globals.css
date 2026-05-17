@@ -4,7 +4,9 @@
   --color-primary: #172554;
   --color-secondary: #F3F4F6;
   --color-accent: #71B136;
-  --color-accent-dark: #5a8f2a;
+  /* --color-accent: #99D95E; */
+  /* --color-accent-dark: #5a8f2a; */
+  --color-accent-dark: #99D95E;
 }
 
 /* ── Design System Variables ────────────────────────────── */
@@ -12,7 +14,9 @@
   --primary: #172554;
   --secondary: #F3F4F6;
   --accent: #71B136;
-  --accent-dark: #5a8f2a;
+  /* --accent: #99D95E; */
+  /* --accent-dark: #5a8f2a; */
+  --accent-dark: #99D95E;
   --white: #ffffff;
   --text-body: #374151;
   --text-muted: rgba(255, 255, 255, 0.52);

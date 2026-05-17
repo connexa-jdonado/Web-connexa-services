@@ -53,7 +53,7 @@ export default function ProductosClient() {
       {/* ── WORKFLOW BUILDER SHOWCASE (FIRST) ── */}
       <div className="showcase alt" id="prod-workflow">
         <div className="container">
-          <div className="showcase-grid mirror">
+          <div className="showcase-grid mirror" style={{ gridTemplateColumns: '3fr 2fr' }}>
             <div className="fade-up d2">
               <div className="browser-frame">
                 <div className="browser-toolbar">
@@ -64,19 +64,9 @@ export default function ProductosClient() {
               </div>
             </div>
             <div className="showcase-text">
-              <div className="showcase-badge fade-up">
-                <div className="showcase-badge-dot"></div>
-                <span>{tr('Solución propia', 'Proprietary solution')}</span>
-              </div>
-              <h2 className="showcase-name fade-up d1">Workflow Builder</h2>
-              <span style={{ background: 'linear-gradient(135deg, #71B136 0%, #172554 100%)', color: '#fff', fontSize: '11px', fontWeight: 600, letterSpacing: '0.08em', padding: '4px 12px', borderRadius: '999px', boxShadow: '0 2px 12px rgba(113,177,54,0.3)', display: 'inline-block', margin: '4px 0 8px' }}>{tr('✦ IA integrada', '✦ AI integrated')}</span>
+              <h2 className="showcase-name fade-up d1">Workflow Builder <span style={{color:'#172554', fontSize:'0.7em', fontWeight:700}}>✦ AI</span></h2>
               <p className="showcase-tagline fade-up d2">{tr('Automatizá tus procesos OFSC sin código', 'Automate your OFSC processes without code')}</p>
               <p className="showcase-desc fade-up d2">{tr('Workflow Builder es un constructor visual de flujos de trabajo para Oracle Field Service Cloud. Permite diseñar, testear y publicar procesos de campo complejos sin escribir una línea de código.', 'Workflow Builder is a visual workflow builder for Oracle Field Service Cloud. It lets you design, test, and publish complex field processes without writing a single line of code.')}</p>
-              <div className="use-chips fade-up d3">
-                <span className="chip">{tr('Flujos de diagnóstico guiado', 'Guided diagnostic flows')}</span>
-                <span className="chip">{tr('Checklists de cierre', 'Closing checklists')}</span>
-                <span className="chip">{tr('Escalados automáticos', 'Automatic escalations')}</span>
-              </div>
               <div className="benefits-list fade-up d3">
                 <div className="benefit-row">
                   <div className="benefit-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div>
@@ -96,7 +86,7 @@ export default function ProductosClient() {
                 </div>
                 <div className="benefit-row">
                   <div className="benefit-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="7" y="7" width="10" height="10" rx="1"/><path d="M7 12H4"/><path d="M20 12h-3"/><path d="M12 7V4"/><path d="M12 20v-3"/></svg></div>
-                  <div><div className="benefit-title">{tr('Agente de IA integrado', 'Integrated AI agent')}</div><div className="benefit-desc">{tr('Agente de IA integrado para optimizar y sugerir mejoras en tus workflows.', 'Integrated AI agent to optimize and suggest improvements to your workflows.')}</div></div>
+                  <div><div className="benefit-title">{tr('Agente de IA integrado', 'Integrated AI agent')}</div><div className="benefit-desc">{tr('Agente de IA para crear y optimizar tus workflows automáticamente.', 'AI agent to create and optimize your workflows automatically.')}</div></div>
                 </div>
               </div>
               <div className="showcase-ctas fade-up d4">
@@ -114,21 +104,11 @@ export default function ProductosClient() {
       {/* ── FSMTOOL SHOWCASE (SECOND) ── */}
       <div className="showcase" id="prod-fsmtool">
         <div className="container">
-          <div className="showcase-grid">
+          <div className="showcase-grid" style={{ gridTemplateColumns: '2fr 3fr' }}>
             <div className="showcase-text">
-              <div className="showcase-badge fade-up">
-                <div className="showcase-badge-dot"></div>
-                <span>{tr('Solución propia', 'Proprietary solution')}</span>
-              </div>
-              <h2 className="showcase-name fade-up d1">FSMTool</h2>
-              <span style={{ background: 'linear-gradient(135deg, #71B136 0%, #172554 100%)', color: '#fff', fontSize: '11px', fontWeight: 600, letterSpacing: '0.08em', padding: '4px 12px', borderRadius: '999px', boxShadow: '0 2px 12px rgba(113,177,54,0.3)', display: 'inline-block', margin: '4px 0 8px' }}>{tr('✦ IA integrada', '✦ AI integrated')}</span>
+              <h2 className="showcase-name fade-up d1">FSMTool <span style={{color:'#172554', fontSize:'0.7em', fontWeight:700}}>✦ AI</span></h2>
               <p className="showcase-tagline fade-up d2">{tr('Operaciones masivas en OFSC, sin complejidad', 'Bulk OFSC operations, without complexity')}</p>
               <p className="showcase-desc fade-up d2">{tr('FSMTool es una suite de administración y monitoreo de operaciones construida nativamente sobre Oracle Field Service Cloud. Permite a los equipos de operaciones ejecutar acciones masivas, visualizar el estado en tiempo real y automatizar los procesos del día a día.', 'FSMTool is an operations administration and monitoring suite built natively on Oracle Field Service Cloud. It lets operations teams execute bulk actions, visualize status in real time, and automate day-to-day processes.')}</p>
-              <div className="use-chips fade-up d3">
-                <span className="chip">{tr('Reasignación masiva de órdenes', 'Bulk order reassignment')}</span>
-                <span className="chip">{tr('Cierre automático de actividades', 'Automatic activity closing')}</span>
-                <span className="chip">{tr('Monitoreo de SLA en vivo', 'Live SLA monitoring')}</span>
-              </div>
               <div className="benefits-list fade-up d3">
                 <div className="benefit-row">
                   <div className="benefit-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/></svg></div>
@@ -148,7 +128,7 @@ export default function ProductosClient() {
                 </div>
                 <div className="benefit-row">
                   <div className="benefit-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 3v18h18"/><polyline points="7 14 10 10 13 12 17 7"/></svg></div>
-                  <div><div className="benefit-title">{tr('Dashboard inteligente con IA', 'Intelligent AI dashboard')}</div><div className="benefit-desc">{tr('Dashboard inteligente con análisis predictivo impulsado por IA.', 'Intelligent dashboard with AI-powered predictive analytics.')}</div></div>
+                  <div><div className="benefit-title">{tr('Dashboard inteligente con IA', 'Intelligent AI dashboard')}</div><div className="benefit-desc">{tr('Agente de IA para automatizar la gestión masiva de tu operación.', 'AI agent to automate bulk management of your operation.')}</div></div>
                 </div>
               </div>
               <div className="showcase-ctas fade-up d4">

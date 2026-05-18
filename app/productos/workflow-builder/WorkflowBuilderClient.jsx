@@ -106,6 +106,16 @@ export default function WorkflowBuilderClient() {
             <h2 className="fade-up d1">{tr('Automatización OFSC al alcance de todos', 'OFSC automation within everyone\'s reach')}</h2>
             <p className="fade-up d2">{tr('Diseñado para que los equipos de operaciones puedan automatizar sin depender de IT.', 'Designed so operations teams can automate without depending on IT.')}</p>
           </div>
+          <div style={{ background: 'linear-gradient(135deg, #172554 0%, #1a3a6b 100%)', borderRadius: '12px', padding: '16px 32px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '12px', marginBottom: '40px' }}>
+            <svg width="32" height="28" viewBox="0 0 32 28" fill="none">
+              <path d="M23 2l1.2 4L28.5 7.5l-4.3 1.2L23 13l-1.2-4.3L17.5 7.5l4.3-1.2z" fill="white" opacity="1"/>
+              <path d="M12 0l.9 3.2L16 4.8l-3.1.9L12 8.8l-.9-3.1L8 4.8l3.1-.9z" fill="white" opacity="0.7"/>
+              <path d="M26 17l.7 2.3L29 21l-2.3.7L26 24l-.7-2.3L23 21l2.3-.7z" fill="white" opacity="0.5"/>
+            </svg>
+            <span style={{ color: 'white', fontSize: '15px', fontWeight: 600, letterSpacing: '0.06em' }}>
+              {tr('100% impulsado por Inteligencia Artificial', '100% powered by Artificial Intelligence')}
+            </span>
+          </div>
           <div className="valor-grid">
             <div className="valor-card fade-up d1">
               <div className="valor-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div>

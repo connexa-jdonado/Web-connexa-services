@@ -106,81 +106,94 @@ export default function WorkflowBuilderClient() {
 
   return (
     <>
-      {/* ── HERO ── */}
-      <div className="page-hero">
-        <div className="container page-hero-inner">
-          <nav className="breadcrumb">
-            <Link href="/">{tr('Inicio', 'Home')}</Link>
-            <span className="breadcrumb-sep">/</span>
-            <Link href="/productos">{tr('Productos', 'Products')}</Link>
-            <span className="breadcrumb-sep">/</span>
-            <span className="breadcrumb-cur">Workflow Builder</span>
-          </nav>
-          <div className="page-hero-eyebrow">
-            <div className="page-hero-eyebrow-dot"></div>
-            <span>{tr('Solución propia Connexa · Para Oracle Field Service Cloud', 'Connexa Proprietary Solution · For Oracle Field Service Cloud')}</span>
+      {/* ── HERO FULLSCREEN ── */}
+      <div style={{ width: '100%', minHeight: '100vh', background: 'linear-gradient(135deg, #0d1b3e 0%, #172554 60%, #1a3a2a 100%)', display: 'flex', alignItems: 'center', position: 'relative', overflow: 'hidden', padding: '0' }}>
+        <svg style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', opacity: 0.15 }}>
+          <defs>
+            <pattern id="dots" x="0" y="0" width="32" height="32" patternUnits="userSpaceOnUse">
+              <circle cx="1" cy="1" r="1" fill="#71B136"/>
+            </pattern>
+          </defs>
+          <rect width="100%" height="100%" fill="url(#dots)"/>
+        </svg>
+        <div style={{ position: 'absolute', width: '600px', height: '600px', borderRadius: '50%', background: 'radial-gradient(circle, rgba(113,177,54,0.12) 0%, transparent 70%)', top: '-100px', right: '20%', pointerEvents: 'none' }} />
+        <div style={{ display: 'flex', width: '100%', maxWidth: '1400px', margin: '0 auto', padding: '80px 60px', alignItems: 'center', gap: '80px', position: 'relative', zIndex: 2 }}>
+          {/* Columna izquierda 48% */}
+          <div style={{ flex: '0 0 48%' }}>
+            <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', background: 'rgba(113,177,54,0.12)', border: '1px solid rgba(113,177,54,0.3)', borderRadius: '999px', padding: '8px 18px', marginBottom: '32px' }}>
+              <svg width="16" height="14" viewBox="0 0 32 28" fill="none">
+                <path d="M23 2l1.2 4L28.5 7.5l-4.3 1.2L23 13l-1.2-4.3L17.5 7.5l4.3-1.2z" fill="#71B136"/>
+                <path d="M12 0l.9 3.2L16 4.8l-3.1.9L12 8.8l-.9-3.1L8 4.8l3.1-.9z" fill="#71B136" opacity="0.7"/>
+                <path d="M26 17l.7 2.3L29 21l-2.3.7L26 24l-.7-2.3L23 21l2.3-.7z" fill="#71B136" opacity="0.5"/>
+              </svg>
+              <span style={{ color: '#71B136', fontSize: '12px', fontWeight: 600, letterSpacing: '0.08em' }}>
+                {tr('Impulsado por Inteligencia Artificial', 'Powered by Artificial Intelligence')}
+              </span>
+            </div>
+            <div style={{ fontSize: '64px', fontWeight: 900, lineHeight: 1.05, color: 'white', marginBottom: '8px' }}>Workflow Builder</div>
+            <div style={{ fontSize: '64px', fontWeight: 900, color: '#71B136', marginBottom: '16px' }}>✦ AI</div>
+            <div style={{ fontSize: '22px', color: 'rgba(255,255,255,0.7)', fontWeight: 400, marginBottom: '24px', lineHeight: 1.5 }}>
+              {tr('Automatizá tus procesos OFSC sin código', 'Automate your OFSC processes without code')}
+            </div>
+            <p style={{ fontSize: '16px', color: 'rgba(255,255,255,0.55)', lineHeight: 1.8, margin: '0 0 40px 0', maxWidth: '460px' }}>
+              {tr('Construí y ejecutá workflows programados sobre entidades de Oracle Field Service de forma visual y sencilla. Triggers, condiciones, acciones y notificaciones — todo sin código.', 'Build and execute scheduled workflows on Oracle Field Service entities visually and simply. Triggers, conditions, actions and notifications — all without code.')}
+            </p>
+            <div style={{ display: 'flex', gap: '40px', marginBottom: '48px' }}>
+              {[
+                { num: '+40', lbl: tr('APIs de OFS', 'OFS APIs') },
+                { num: '0',   lbl: tr('Líneas de código', 'Lines of code') },
+                { num: '99+', lbl: tr('Workflows activos', 'Active workflows') },
+              ].map((s, i) => (
+                <div key={i}>
+                  <div style={{ fontSize: '36px', fontWeight: 800, color: '#71B136' }}>{s.num}</div>
+                  <div style={{ fontSize: '12px', color: 'rgba(255,255,255,0.5)', letterSpacing: '0.08em', textTransform: 'uppercase' }}>{s.lbl}</div>
+                </div>
+              ))}
+            </div>
+            <div style={{ display: 'flex', gap: '16px' }}>
+              <button onClick={() => scrollTo('casos-uso')} style={{ background: '#71B136', color: 'white', border: 'none', padding: '16px 32px', borderRadius: '8px', fontSize: '15px', fontWeight: 600, cursor: 'pointer' }}>
+                {tr('Ver más →', 'Learn more →')}
+              </button>
+              <button onClick={() => scrollTo('demo')} style={{ background: 'transparent', color: 'white', border: '1px solid rgba(255,255,255,0.3)', padding: '16px 32px', borderRadius: '8px', fontSize: '15px', fontWeight: 400, cursor: 'pointer' }}>
+                {tr('Solicitar acceso', 'Request access')}
+              </button>
+            </div>
           </div>
-          <h1 className="page-hero-h1" dangerouslySetInnerHTML={{ __html: tr('Automatizá tus procesos OFSC<br/><em>sin escribir código</em>', 'Automate your OFSC processes<br/><em>without writing code</em>') }} />
-          <p className="page-hero-sub">{tr('Construí y ejecutá workflows programados sobre entidades de Oracle Field Service de forma visual y sencilla. Triggers, condiciones, acciones y notificaciones — todo sin código.', 'Build and execute scheduled workflows on Oracle Field Service entities visually and simply. Triggers, conditions, actions, and notifications — all without code.')}</p>
+          {/* Columna derecha 52% */}
+          <div style={{ flex: '0 0 52%' }}>
+            <div style={{ width: '100%', position: 'relative', transform: 'perspective(1200px) rotateY(-4deg) rotateX(2deg)', transformStyle: 'preserve-3d' }}>
+              <div style={{ position: 'absolute', inset: '-20px', background: 'radial-gradient(ellipse, rgba(113,177,54,0.15) 0%, transparent 70%)', borderRadius: '20px', zIndex: 0 }} />
+              <div style={{ borderRadius: '14px', overflow: 'hidden', boxShadow: '0 50px 120px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.08)', position: 'relative', zIndex: 1 }}>
+                <div style={{ height: '40px', background: '#1e1e2e', display: 'flex', alignItems: 'center', padding: '0 16px', gap: '7px' }}>
+                  <div style={{ width: '11px', height: '11px', borderRadius: '50%', background: '#FF5F57' }} />
+                  <div style={{ width: '11px', height: '11px', borderRadius: '50%', background: '#FFBD2E' }} />
+                  <div style={{ width: '11px', height: '11px', borderRadius: '50%', background: '#28CA41' }} />
+                  <div style={{ flex: 1, background: 'rgba(255,255,255,0.06)', borderRadius: '6px', height: '22px', margin: '0 12px', display: 'flex', alignItems: 'center', padding: '0 10px' }}>
+                    <span style={{ color: 'rgba(255,255,255,0.3)', fontSize: '11px' }}>newwfbuilder.fsmtool.com/workflows</span>
+                  </div>
+                </div>
+                <img src="/assets/wb-canvas.png" style={{ width: '100%', display: 'block', objectFit: 'cover' }} alt="Workflow Builder" />
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
-      {/* ── HERO VISUAL (comentado) ── */}
-      {/*
-      <div className="hero-visual">
-        <div className="container">
-          <div className="browser-frame hero-size">
-            <div className="browser-toolbar">
-              <div className="browser-dots"><span></span><span></span><span></span></div>
-              <div className="browser-address">newwfbuilder.fsmtool.com/workflows</div>
+      {/* ── FEATURES FRANJA ── */}
+      <div style={{ background: '#0d1b3e', padding: '32px 60px' }}>
+        <div style={{ display: 'flex', maxWidth: '1400px', margin: '0 auto' }}>
+          {[
+            { icon: <svg key="i0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#71B136" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>, text: tr('Sin código — solo drag & drop', 'No code — just drag & drop') },
+            { icon: <svg key="i1" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#71B136" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>, text: tr('Editor visual de workflows', 'Visual workflow editor') },
+            { icon: <svg key="i2" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#71B136" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>, text: tr('+40 APIs de OFS nativas', '+40 native OFS APIs') },
+            { icon: <svg key="i3" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#71B136" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>, text: tr('Triggers en tiempo real', 'Real-time triggers') },
+            { icon: <svg key="i4" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#71B136" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>, text: tr('Slack, Teams, email integrado', 'Slack, Teams, email integrated') },
+          ].map((f, i) => (
+            <div key={i} style={{ flex: 1, padding: '0 40px', display: 'flex', alignItems: 'center', gap: '12px', borderRight: i < 4 ? '1px solid rgba(255,255,255,0.08)' : 'none' }}>
+              {f.icon}
+              <span style={{ color: 'rgba(255,255,255,0.8)', fontSize: '13px', fontWeight: 500 }}>{f.text}</span>
             </div>
-            <img src="/assets/wb-canvas.png" style={{ width: '100%', display: 'block' }} alt="Workflow Builder canvas" />
-          </div>
-        </div>
-      </div>
-      */}
-
-      {/* ── VALOR ── */}
-      <div className="valor-section">
-        <div className="container">
-          <div className="section-header-center">
-            <span className="section-label fade-up">{tr('Por qué Workflow Builder', 'Why Workflow Builder')}</span>
-            <h2 className="fade-up d1">{tr('Automatización OFSC al alcance de todos', 'OFSC automation within everyone\'s reach')}</h2>
-            <p className="fade-up d2">{tr('Diseñado para que los equipos de operaciones puedan automatizar sin depender de IT.', 'Designed so operations teams can automate without depending on IT.')}</p>
-          </div>
-          <div style={{ background: 'linear-gradient(135deg, #172554 0%, #1a3a6b 100%)', borderRadius: '12px', padding: '16px 32px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '12px', marginBottom: '40px' }}>
-            <svg width="32" height="28" viewBox="0 0 32 28" fill="none">
-              <path d="M23 2l1.2 4L28.5 7.5l-4.3 1.2L23 13l-1.2-4.3L17.5 7.5l4.3-1.2z" fill="white" opacity="1"/>
-              <path d="M12 0l.9 3.2L16 4.8l-3.1.9L12 8.8l-.9-3.1L8 4.8l3.1-.9z" fill="white" opacity="0.7"/>
-              <path d="M26 17l.7 2.3L29 21l-2.3.7L26 24l-.7-2.3L23 21l2.3-.7z" fill="white" opacity="0.5"/>
-            </svg>
-            <span style={{ color: 'white', fontSize: '15px', fontWeight: 600, letterSpacing: '0.06em' }}>
-              {tr('100% impulsado por Inteligencia Artificial', '100% powered by Artificial Intelligence')}
-            </span>
-          </div>
-          <div className="valor-grid">
-            <div className="valor-card fade-up d1">
-              <div className="valor-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div>
-              <h3>{tr('Sin código', 'No code')}</h3>
-              <p>{tr('Cualquier usuario de negocio puede armar workflows sin programar. Interface visual con nodos drag & drop.', 'Any business user can build workflows without programming. Visual interface with drag & drop nodes.')}</p>
-              <div className="valor-stat">0</div>
-              <div className="valor-stat-lbl">{tr('líneas de código para crear un workflow', 'lines of code to create a workflow')}</div>
-            </div>
-            <div className="valor-card fade-up d2">
-              <div className="valor-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></div>
-              <h3>{tr('Visual e intuitivo', 'Visual and intuitive')}</h3>
-              <p>{tr('Editor canvas con paleta de nodos: condiciones, switches, loops, acciones OFS y notificaciones.', 'Canvas editor with node palette: conditions, switches, loops, OFS actions, and notifications.')}</p>
-              <div className="valor-stat">10+</div>
-              <div className="valor-stat-lbl">{tr('tipos de nodos disponibles', 'node types available')}</div>
-            </div>
-            <div className="valor-card fade-up d3">
-              <div className="valor-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg></div>
-              <h3>{tr('Potente y confiable', 'Powerful and reliable')}</h3>
-              <p>{tr('Automatizaciones complejas sobre cualquier entidad OFSC con historial completo de ejecuciones.', 'Complex automations on any OFSC entity with a complete execution history.')}</p>
-              <div className="valor-stat">99+</div>
-              <div className="valor-stat-lbl">{tr('workflows activos en producción', 'active workflows in production')}</div>
-            </div>
-          </div>
+          ))}
         </div>
       </div>
 

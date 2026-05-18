@@ -59,10 +59,14 @@ export default function ProductosClient() {
           from { opacity: 0; transform: translateX(60px); }
           to   { opacity: 1; transform: translateX(0);    }
         }
+        @keyframes heroFloat {
+          0%, 100% { transform: translateY(0px); }
+          50%      { transform: translateY(-12px); }
+        }
       `}</style>
       {/* ── HERO ── */}
       <section className="prod-hero">
-        <div className="container prod-hero-inner">
+        <div className="container prod-hero-inner" style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
           <nav className="breadcrumb">
             <Link href="/">{tr('Inicio', 'Home')}</Link>
             <span className="breadcrumb-sep">/</span>

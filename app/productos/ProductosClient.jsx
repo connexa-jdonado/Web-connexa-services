@@ -1,5 +1,5 @@
 'use client';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useLang } from '@/context/LanguageContext';
@@ -8,6 +8,12 @@ export default function ProductosClient() {
   const { lang } = useLang();
   const router = useRouter();
   const ctaRef = useRef(null);
+  const wfImgRef = useRef(null);
+  const fsmImgRef = useRef(null);
+  const [wfPrimaryHover, setWfPrimaryHover] = useState(false);
+  const [wfSecondaryHover, setWfSecondaryHover] = useState(false);
+  const [fsmPrimaryHover, setFsmPrimaryHover] = useState(false);
+  const [fsmSecondaryHover, setFsmSecondaryHover] = useState(false);
 
   const tr = (es, en) => (lang === 'es' ? es : en);
 
@@ -29,10 +35,31 @@ export default function ProductosClient() {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
+  useEffect(() => {
+    const targets = [wfImgRef.current, fsmImgRef.current].filter(Boolean);
+    const io = new IntersectionObserver(
+      (entries) => entries.forEach((e) => {
+        if (e.isIntersecting) {
+          e.target.style.animation = 'mockupSlideIn 0.75s cubic-bezier(0.22,0.61,0.36,1) forwards';
+          io.unobserve(e.target);
+        }
+      }),
+      { threshold: 0.15 }
+    );
+    targets.forEach((t) => io.observe(t));
+    return () => io.disconnect();
+  }, []);
+
   const scrollTo = (id) => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
 
   return (
     <>
+      <style>{`
+        @keyframes mockupSlideIn {
+          from { opacity: 0; transform: translateX(60px); }
+          to   { opacity: 1; transform: translateX(0);    }
+        }
+      `}</style>
       {/* ── HERO ── */}
       <section className="prod-hero">
         <div className="container prod-hero-inner">
@@ -55,7 +82,7 @@ export default function ProductosClient() {
         <div className="container" style={{ maxWidth: '100%', width: '100%' }}>
           <div className="showcase-grid mirror" style={{ gridTemplateColumns: '4fr 2fr' }}>
             <div className="fade-up d2">
-              <div className="browser-frame">
+              <div className="browser-frame" ref={wfImgRef} style={{ opacity: 0 }}>
                 <div className="browser-toolbar">
                   <div className="browser-dots"><span></span><span></span><span></span></div>
                   <div className="browser-address">newwfbuilder.fsmtool.com/workflows</div>
@@ -145,7 +172,7 @@ export default function ProductosClient() {
               </div>
             </div>
             <div className="fade-up d2">
-              <div className="browser-frame">
+              <div className="browser-frame" ref={fsmImgRef} style={{ opacity: 0 }}>
                 <div className="browser-toolbar">
                   <div className="browser-dots"><span></span><span></span><span></span></div>
                   <div className="browser-address">app.connexaservices.com/fsmtool</div>

@@ -151,7 +151,7 @@ export default function FSMToolClient() {
       </div>
 
       {/* ── CASOS DE USO ── */}
-      <section className="casos-v2-section">
+      {/* <section className="casos-v2-section">
         <div className="container">
           <div className="casos-v2-header fade-up">
             <div className="casos-v2-eyebrow">{tr('CASOS DE USO', 'USE CASES')}</div>
@@ -193,7 +193,7 @@ export default function FSMToolClient() {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* ── TABS / MÓDULOS ── */}
       <div className="valor-section white">

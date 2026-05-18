@@ -8,7 +8,7 @@ const WB_CASOS = [
   {
     num: '01',
     titleEs: 'Automatización de actividades OFS', titleEn: 'OFS Activity Automation',
-    badgeEs: '✦ IA disponible', badgeEn: '✦ AI available',
+    badgeEs: '✦ Automatización + IA', badgeEn: '✦ Automation + AI',
     descEs: 'Recibí eventos de OFS en tiempo real, ejecutá acciones automáticas y notificá a Slack, Teams o sistemas externos sin escribir una línea de código.',
     descEn: 'Receive OFS events in real time, execute automatic actions and notify Slack, Teams or external systems without writing a single line of code.',
   },
@@ -30,8 +30,8 @@ const WB_CASOS = [
     num: '04',
     titleEs: 'Alerta inteligente de inventarios', titleEn: 'Smart Inventory Alert',
     badgeEs: '✦ IA disponible', badgeEn: '✦ AI available',
-    descEs: 'Detectá automáticamente cuando un técnico no tiene el inventario requerido al asignarle una tarea y enviá alertas instantáneas por Email, Slack o Teams al supervisor.',
-    descEn: 'Automatically detect when a technician lacks required inventory when assigned a task and send instant alerts via Email, Slack or Teams to the supervisor.',
+    descEs: 'Detectá cuando un técnico no tiene el inventario requerido y enviá alertas instantáneas por Email, Slack o Teams al supervisor.',
+    descEn: 'Detect when a technician lacks required inventory and send instant alerts via Email, Slack or Teams to the supervisor.',
   },
   {
     num: '05',
@@ -55,12 +55,10 @@ export default function WorkflowBuilderClient() {
   const ctaRef = useRef(null);
 
   const [activeCaso, setActiveCaso] = useState(0);
-  const [mockupOpacity, setMockupOpacity] = useState(1);
   const [activeTab, setActiveTab] = useState('constructor');
   const [formSent, setFormSent] = useState(false);
-  const casosRef = useRef(null);
-  const scrollLocked = useRef(false);
-  const touchStartY = useRef(0);
+  const casosContainerRef = useRef(null);
+  const caseRefs = useRef([]);
 
   const tr = (es, en) => (lang === 'es' ? es : en);
 
@@ -83,59 +81,25 @@ export default function WorkflowBuilderClient() {
   }, []);
 
   useEffect(() => {
-    const section = casosRef.current;
-    if (!section) return;
-    const observer = new IntersectionObserver(
-      ([entry]) => { scrollLocked.current = entry.intersectionRatio >= 0.6; },
-      { threshold: 0.6 }
-    );
-    observer.observe(section);
-    const handleWheel = (e) => {
-      if (!scrollLocked.current) return;
-      e.preventDefault();
-      if (e.deltaY > 0) {
-        setActiveCaso((prev) => {
-          if (prev >= WB_CASOS.length - 1) { scrollLocked.current = false; return prev; }
-          return prev + 1;
-        });
-      } else {
-        setActiveCaso((prev) => {
-          if (prev <= 0) { scrollLocked.current = false; return prev; }
-          return prev - 1;
-        });
-      }
-    };
-    const handleTouchStart = (e) => { touchStartY.current = e.touches[0].clientY; };
-    const handleTouchEnd = (e) => {
-      if (!scrollLocked.current) return;
-      const delta = touchStartY.current - e.changedTouches[0].clientY;
-      if (Math.abs(delta) < 40) return;
-      if (delta > 0) {
-        setActiveCaso((prev) => {
-          if (prev >= WB_CASOS.length - 1) { scrollLocked.current = false; return prev; }
-          return prev + 1;
-        });
-      } else {
-        setActiveCaso((prev) => {
-          if (prev <= 0) { scrollLocked.current = false; return prev; }
-          return prev - 1;
-        });
-      }
-    };
-    window.addEventListener('wheel', handleWheel, { passive: false });
-    window.addEventListener('touchstart', handleTouchStart, { passive: true });
-    window.addEventListener('touchend', handleTouchEnd, { passive: true });
-    return () => {
-      observer.disconnect();
-      window.removeEventListener('wheel', handleWheel);
-      window.removeEventListener('touchstart', handleTouchStart);
-      window.removeEventListener('touchend', handleTouchEnd);
-    };
+    const container = casosContainerRef.current;
+    if (!container) return;
+    const observers = [];
+    caseRefs.current.forEach((el, idx) => {
+      if (!el) return;
+      const obs = new IntersectionObserver(
+        ([entry]) => { if (entry.intersectionRatio >= 0.5) setActiveCaso(idx); },
+        { root: container, threshold: 0.5 }
+      );
+      obs.observe(el);
+      observers.push(obs);
+    });
+    return () => observers.forEach((obs) => obs.disconnect());
   }, []);
 
-  const handleCasoClick = (idx) => {
-    setMockupOpacity(0);
-    setTimeout(() => { setActiveCaso(idx); setMockupOpacity(1); }, 150);
+  const scrollToCase = (idx) => {
+    const container = casosContainerRef.current;
+    if (!container) return;
+    container.scrollTo({ top: idx * window.innerHeight, behavior: 'smooth' });
   };
 
   const scrollTo = (id) => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
@@ -220,65 +184,96 @@ export default function WorkflowBuilderClient() {
         </div>
       </div>
 
-      {/* ── CASOS DE USO — SCROLL LOCKING ── */}
-      <section ref={casosRef} className="casos-sl-section" id="casos-uso">
-        <div className="casos-sl-inner">
-          <div className="casos-sl-left">
-            <div className="casos-sl-eyebrow">{tr('CASOS DE USO', 'USE CASES')}</div>
-            <h2 className="casos-sl-title">{tr('Mirá Workflow Builder en acción', 'See Workflow Builder in action')}</h2>
-            <p className="casos-sl-sub">{tr('Automatizá tus procesos OFSC sin escribir código', 'Automate your OFSC processes without writing code')}</p>
-            <div className="casos-sl-badge">
-              <svg width="22" height="20" viewBox="0 0 32 28" fill="none">
-                <path d="M23 2l1.2 4L28.5 7.5l-4.3 1.2L23 13l-1.2-4.3L17.5 7.5l4.3-1.2z" fill="white" opacity="1"/>
-                <path d="M12 0l.9 3.2L16 4.8l-3.1.9L12 8.8l-.9-3.1L8 4.8l3.1-.9z" fill="white" opacity="0.7"/>
-                <path d="M26 17l.7 2.3L29 21l-2.3.7L26 24l-.7-2.3L23 21l2.3-.7z" fill="white" opacity="0.5"/>
-              </svg>
-              <span>{tr('Impulsado por IA', 'Powered by AI')}</span>
-            </div>
-            <div className="casos-sl-list">
-              {WB_CASOS.map((caso, idx) => (
-                <div
-                  key={idx}
-                  className={`casos-sl-item${activeCaso === idx ? ' active' : ''}`}
-                  onClick={() => handleCasoClick(idx)}
-                >
-                  <span className="casos-sl-num">{caso.num}</span>
-                  <div className="casos-sl-item-body">
-                    <div className="casos-sl-item-title">{tr(caso.titleEs, caso.titleEn)}</div>
-                    {activeCaso === idx && (
-                      <div className="casos-sl-item-desc">
-                        <span className="casos-sl-item-badge">{tr(caso.badgeEs, caso.badgeEn)}</span>
-                        <p>{tr(caso.descEs, caso.descEn)}</p>
-                      </div>
-                    )}
+      {/* ── CASOS DE USO — SCROLL SNAP ── */}
+      <section id="casos-uso" style={{ position: 'relative' }}>
+        <div
+          ref={casosContainerRef}
+          style={{ height: '100vh', overflowY: 'scroll', scrollSnapType: 'y mandatory', scrollBehavior: 'smooth' }}
+        >
+          {WB_CASOS.map((caso, idx) => {
+            const isDark = idx % 2 === 0;
+            const bg = isDark ? '#172554' : '#F3F4F6';
+            const fg = isDark ? 'white' : '#172554';
+            const fgSub = isDark ? 'rgba(255,255,255,0.6)' : '#6B7280';
+            const badgeBg = isDark ? 'rgba(113,177,54,0.2)' : '#F0FDF4';
+            const numDeco = isDark ? 'rgba(255,255,255,0.04)' : 'rgba(23,37,84,0.05)';
+            const mockupBg = isDark ? '#1e3a5f' : '#172554';
+            return (
+              <div
+                key={idx}
+                ref={(el) => { caseRefs.current[idx] = el; }}
+                style={{ height: '100vh', width: '100%', scrollSnapAlign: 'start', scrollSnapStop: 'always', display: 'flex', position: 'relative', overflow: 'hidden', background: bg }}
+              >
+                {/* Columna izquierda 40% */}
+                <div style={{ width: '40%', padding: '80px 60px', display: 'flex', flexDirection: 'column', justifyContent: 'center', position: 'relative', zIndex: 2 }}>
+                  <div style={{ position: 'absolute', top: '50%', left: '-20px', transform: 'translateY(-50%)', fontSize: '280px', fontWeight: 900, lineHeight: 1, color: numDeco, userSelect: 'none', zIndex: 1, pointerEvents: 'none' }}>
+                    {caso.num}
+                  </div>
+                  <div style={{ color: '#71B136', fontSize: '11px', fontWeight: 600, letterSpacing: '0.14em', marginBottom: '20px', zIndex: 2, position: 'relative' }}>
+                    {tr('CASOS DE USO', 'USE CASES')}
+                  </div>
+                  <div style={{ display: 'flex', alignItems: 'baseline', gap: '16px', marginBottom: '20px', zIndex: 2, position: 'relative' }}>
+                    <span style={{ fontSize: '56px', fontWeight: 900, color: '#71B136', lineHeight: 1 }}>{caso.num}</span>
+                    <h2 style={{ fontSize: '32px', fontWeight: 800, lineHeight: 1.2, color: fg, margin: 0 }}>{tr(caso.titleEs, caso.titleEn)}</h2>
+                  </div>
+                  <div style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', padding: '6px 14px', borderRadius: '999px', fontSize: '12px', fontWeight: 600, marginBottom: '24px', zIndex: 2, background: badgeBg, color: '#71B136', alignSelf: 'flex-start', position: 'relative' }}>
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none">
+                      <path d="M12 2l1.5 4.5L18 8l-4.5 1.5L12 14l-1.5-4.5L6 8l4.5-1.5z" fill="#71B136"/>
+                    </svg>
+                    {tr(caso.badgeEs, caso.badgeEn)}
+                  </div>
+                  <p style={{ fontSize: '17px', lineHeight: 1.7, maxWidth: '400px', color: fgSub, zIndex: 2, margin: 0, position: 'relative' }}>
+                    {tr(caso.descEs, caso.descEn)}
+                  </p>
+                  <div style={{ display: 'flex', gap: '8px', marginTop: '48px', zIndex: 2, position: 'relative' }}>
+                    {WB_CASOS.map((_, dotIdx) => (
+                      <div
+                        key={dotIdx}
+                        onClick={() => scrollToCase(dotIdx)}
+                        style={{ width: dotIdx === activeCaso ? '32px' : '8px', height: '4px', borderRadius: '2px', background: dotIdx === activeCaso ? '#71B136' : 'rgba(113,177,54,0.3)', transition: 'all 0.3s ease', cursor: 'pointer' }}
+                      />
+                    ))}
                   </div>
                 </div>
-              ))}
-            </div>
-            <div className="casos-sl-dots">
-              {WB_CASOS.map((_, idx) => (
-                <div key={idx} className={`casos-sl-dot${activeCaso === idx ? ' active' : ''}`} onClick={() => handleCasoClick(idx)} />
-              ))}
-            </div>
-          </div>
-          <div className="casos-sl-right">
-            <div className="casos-sl-browser">
-              <div className="casos-sl-browser-bar">
-                <div className="casos-sl-browser-dots">
-                  <span className="dot-red" /><span className="dot-yellow" /><span className="dot-green" />
+                {/* Columna derecha 60% */}
+                <div style={{ width: '60%', padding: '60px', display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative' }}>
+                  <div style={{ width: '100%', maxWidth: '760px', borderRadius: '16px', overflow: 'hidden', boxShadow: '0 40px 100px rgba(0,0,0,0.25)', position: 'relative' }}>
+                    <div style={{ height: '40px', background: '#e8e8ed', display: 'flex', alignItems: 'center', padding: '0 16px', gap: '7px' }}>
+                      <div style={{ width: '11px', height: '11px', borderRadius: '50%', background: '#FF5F57' }} />
+                      <div style={{ width: '11px', height: '11px', borderRadius: '50%', background: '#FFBD2E' }} />
+                      <div style={{ width: '11px', height: '11px', borderRadius: '50%', background: '#28CA41' }} />
+                    </div>
+                    <div style={{ background: mockupBg, height: '520px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '20px', position: 'relative', overflow: 'hidden' }}>
+                      <div style={{ position: 'absolute', fontSize: '320px', fontWeight: 900, color: 'rgba(255,255,255,0.03)', userSelect: 'none', lineHeight: 1 }}>
+                        {caso.num}
+                      </div>
+                      <svg width="56" height="56" viewBox="0 0 56 56" fill="none" style={{ position: 'relative', zIndex: 2 }}>
+                        <rect x="4" y="10" width="48" height="36" rx="6" stroke="rgba(255,255,255,0.25)" strokeWidth="2"/>
+                        <circle cx="18" cy="24" r="4" fill="rgba(255,255,255,0.2)"/>
+                        <path d="M4 38l14-10 10 7 8-6 20 13" stroke="rgba(255,255,255,0.2)" strokeWidth="2" fill="none"/>
+                      </svg>
+                      <div style={{ color: 'rgba(255,255,255,0.85)', fontSize: '20px', fontWeight: 700, textAlign: 'center', maxWidth: '360px', position: 'relative', zIndex: 2 }}>
+                        {tr(caso.titleEs, caso.titleEn)}
+                      </div>
+                      <div style={{ color: 'rgba(255,255,255,0.35)', fontSize: '13px', letterSpacing: '0.08em', position: 'relative', zIndex: 2 }}>
+                        {tr('Imagen próximamente', 'Image coming soon')}
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
-              <div className="casos-sl-browser-body" style={{ opacity: mockupOpacity }}>
-                <div className="casos-sl-placeholder">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.2)" strokeWidth="1.5" width="48" height="48">
-                    <rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/>
-                  </svg>
-                  <div className="casos-sl-placeholder-num">{WB_CASOS[activeCaso].num}</div>
-                  <div className="casos-sl-placeholder-title">{tr(WB_CASOS[activeCaso].titleEs, WB_CASOS[activeCaso].titleEn)}</div>
-                </div>
-              </div>
-            </div>
-          </div>
+            );
+          })}
+        </div>
+        {/* Navegación lateral fija */}
+        <div style={{ position: 'fixed', right: '32px', top: '50%', transform: 'translateY(-50%)', display: 'flex', flexDirection: 'column', gap: '10px', zIndex: 100 }}>
+          {WB_CASOS.map((_, idx) => (
+            <div
+              key={idx}
+              onClick={() => scrollToCase(idx)}
+              style={{ width: idx === activeCaso ? '12px' : '8px', height: idx === activeCaso ? '12px' : '8px', borderRadius: '50%', background: idx === activeCaso ? '#71B136' : 'rgba(113,177,54,0.3)', cursor: 'pointer', transition: 'all 0.3s ease' }}
+            />
+          ))}
         </div>
       </section>
 

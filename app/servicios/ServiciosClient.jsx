@@ -277,13 +277,17 @@ export default function ServiciosClient() {
             <rect width="100%" height="100%" fill="url(#dots-cons)"/>
           </svg>
 
-          <div style={{position:'relative', zIndex:2, textAlign:'center'}}>
-            <span style={{color:'#71B136', fontSize:'11px', fontWeight:600, letterSpacing:'0.14em', textAlign:'center', display:'block', marginBottom:'16px'}}>{tr('NUESTRA METODOLOGÍA', 'OUR METHODOLOGY')}</span>
-            <h2 style={{fontSize:'42px', fontWeight:800, color:'#172554', textAlign:'center', lineHeight:1.2, marginBottom:'16px'}}>{tr('Un assessment que convierte dolores en resultados', 'An assessment that turns pain points into results')}</h2>
-            <p style={{fontSize:'18px', color:'#6B7280', textAlign:'center', maxWidth:'600px', margin:'0 auto 60px', lineHeight:1.7}}>{tr('Analizamos tu operación actual para identificar brechas y proponer iniciativas concretas y priorizadas.', 'We analyze your current operation to identify gaps and propose specific, prioritized initiatives.')}</p>
+          <div className="metodologia-header" style={{position:'relative', zIndex:2}}>
+            <div className="metodologia-eyebrow fade-up" style={{color:'#71B136'}}>{tr('NUESTRA METODOLOGÍA', 'OUR METHODOLOGY')}</div>
+            <h2 className="metodologia-title fade-up d1" style={{color:'#172554'}}>
+              {tr('Un assessment que convierte dolores en resultados', 'An assessment that turns pain points into results')}
+            </h2>
+            <p className="metodologia-subtitle fade-up d2" style={{color:'#6B7280'}}>
+              {tr('Analizamos tu operación actual para identificar brechas y proponer iniciativas concretas y priorizadas.', 'We analyze your current operation to identify gaps and propose specific, prioritized initiatives.')}
+            </p>
           </div>
 
-          <div style={{display:'flex', flexDirection:'row', gap:'48px', maxWidth:'1600px', margin:'0 auto 0', alignItems:'stretch', position:'relative', zIndex:2}}>
+          <div style={{display:'flex', gap:'48px', maxWidth:'1600px', margin:'60px auto 0', alignItems:'flex-start', position:'relative', zIndex:2}}>
 
             {/* Columna izquierda 30% — 3 cards */}
             <div style={{width:'30%', display:'flex', flexDirection:'column', gap:'16px'}}>
@@ -355,7 +359,7 @@ export default function ServiciosClient() {
             </div>
 
             {/* Columna derecha 70% — scatter plot */}
-            <div style={{width:'70%', background:'rgba(255,255,255,0.97)', borderRadius:'20px', padding:'8px', boxShadow:'0 40px 100px rgba(0,0,0,0.4)', position:'sticky', top:'100px', height:'100%', overflow:'hidden', display:'flex', flexDirection:'column'}}>
+            <div style={{width:'70%', background:'rgba(255,255,255,0.97)', borderRadius:'20px', padding:'8px', boxShadow:'0 40px 100px rgba(0,0,0,0.4)', position:'sticky', top:'100px'}}>
 
           {/* SCATTER PLOT MAPA DE PRIORIZACIÓN */}
           <div className="fade-up d2" style={{ background: '#fff', borderRadius: '16px', padding: '32px 32px 24px', margin: '0', boxShadow: 'none', border: 'none' }}>
@@ -366,7 +370,7 @@ export default function ServiciosClient() {
             </div>
             <div style={{display:'flex', flexDirection:'column', gap:'24px'}}>
             <div style={{ flex: 1, minWidth: 0 }}>
-            <svg viewBox="0 0 800 600" width="100%" style={{ display: 'block', overflow: 'visible', flex: 1, height: 'auto', maxHeight: '480px' }}>
+            <svg viewBox="0 0 1000 600" width="100%" style={{ display: 'block', overflow: 'visible' }}>
               <defs>
                 <filter id="tt-shadow-svc" x="-10%" y="-10%" width="120%" height="120%">
                   <feDropShadow dx="0" dy="2" stdDeviation="3" floodColor="rgba(0,0,0,0.18)" />
@@ -384,128 +388,138 @@ export default function ServiciosClient() {
                 .grid { stroke: #E5E7EB; stroke-width: 0.5; }
               `}</style>
 
-              <rect x="70" y="310" width="295" height="220" fill="#F9FAFB" />
-              <rect x="365" y="310" width="295" height="220" fill="#F0FDF4" />
-              <rect x="365" y="310" width="295" height="220" fill="none" stroke="#71B136" strokeWidth="1.5" strokeDasharray="6,4" />
-              <rect x="70" y="60" width="295" height="250" fill="#FEF2F2" />
-              <rect x="365" y="60" width="295" height="250" fill="#EFF6FF" />
+              {/* ── Cuadrantes iguales 410×220 ── */}
+              <rect x="60" y="260" width="410" height="220" fill="#F9FAFB" />
+              <rect x="470" y="260" width="410" height="220" fill="#F0FDF4" />
+              <rect x="470" y="260" width="410" height="220" fill="none" stroke="#71B136" strokeWidth="1.5" strokeDasharray="6,4" />
+              <rect x="60" y="40" width="410" height="220" fill="#FEF2F2" />
+              <rect x="470" y="40" width="410" height="220" fill="#EFF6FF" />
 
-              {[130,190,250,310,370,430,490].map(y => (
-                <line key={y} x1="70" y1={y} x2="660" y2={y} className="grid" />
+              {/* ── Grid sutil ── */}
+              {[100,160,220,260,320,380,440].map(y => (
+                <line key={y} x1="60" y1={y} x2="880" y2={y} className="grid" />
               ))}
-              {[130,190,250,310,370,430,490,550,610].map(x => (
-                <line key={x} x1={x} y1="60" x2={x} y2="530" className="grid" />
+              {[120,180,240,310,370,430,490,560,620,680,740,800,860].map(x => (
+                <line key={x} x1={x} y1="40" x2={x} y2="480" className="grid" />
               ))}
 
-              <line x1="365" y1="60" x2="365" y2="530" stroke="#CBD5E1" strokeWidth="1" strokeDasharray="5,3" />
-              <line x1="70" y1="310" x2="660" y2="310" stroke="#CBD5E1" strokeWidth="1" strokeDasharray="5,3" />
+              {/* ── Divisores centrales ── */}
+              <line x1="470" y1="40" x2="470" y2="480" stroke="#CBD5E1" strokeWidth="1" strokeDasharray="5,3" />
+              <line x1="60" y1="260" x2="880" y2="260" stroke="#CBD5E1" strokeWidth="1" strokeDasharray="5,3" />
 
-              <text x="82" y="82" className="zl" fill="rgba(220,38,38,0.55)">{tr('Descarte', 'Discard')}</text>
-              <text x="377" y="82" className="zl" fill="rgba(23,37,84,0.55)">{tr('Proyectos', 'Projects')}</text>
-              <text x="82" y="332" className="zl" fill="rgba(107,114,128,0.65)">{tr('Tareas', 'Tasks')}</text>
-              <text x="377" y="332" className="zl" fill="rgba(113,177,54,0.9)">{tr('Quick Wins', 'Quick Wins')}</text>
+              {/* ── Labels de zona ── */}
+              <text x="72" y="62" className="zl" fill="rgba(220,38,38,0.55)">{tr('Descarte', 'Discard')}</text>
+              <text x="482" y="62" className="zl" fill="rgba(23,37,84,0.55)">{tr('Proyectos', 'Projects')}</text>
+              <text x="72" y="278" className="zl" fill="rgba(107,114,128,0.65)">{tr('Tareas', 'Tasks')}</text>
+              <text x="482" y="278" className="zl" fill="rgba(113,177,54,0.9)">{tr('Quick Wins', 'Quick Wins')}</text>
 
-              <line x1="70" y1="530" x2="70" y2="55" stroke="#172554" strokeWidth="1.5" />
-              <polygon points="70,48 65,62 75,62" fill="#172554" />
-              <text transform="translate(22,295) rotate(-90)" textAnchor="middle" className="ax" fontSize="10">{tr('COMPLEJIDAD', 'COMPLEXITY')}</text>
-              <text x="62" y="65" textAnchor="end" className="ax-tick">{tr('Alta', 'High')}</text>
-              <text x="62" y="528" textAnchor="end" className="ax-tick">{tr('Baja', 'Low')}</text>
+              {/* ── Eje Y (COMPLEJIDAD) ── */}
+              <line x1="60" y1="480" x2="60" y2="32" stroke="#172554" strokeWidth="1.5" />
+              <polygon points="60,24 55,38 65,38" fill="#172554" />
+              <text transform="translate(22,260) rotate(-90)" textAnchor="middle" className="ax" fontSize="10">{tr('COMPLEJIDAD', 'COMPLEXITY')}</text>
+              <text x="52" y="48" textAnchor="end" className="ax-tick">{tr('Alta', 'High')}</text>
+              <text x="52" y="477" textAnchor="end" className="ax-tick">{tr('Baja', 'Low')}</text>
 
-              <line x1="70" y1="530" x2="665" y2="530" stroke="#172554" strokeWidth="1.5" />
-              <polygon points="672,530 658,525 658,535" fill="#172554" />
-              <text x="370" y="570" textAnchor="middle" className="ax" fontSize="10">{tr('PRIORIDAD', 'PRIORITY')}</text>
-              <text x="78" y="548" className="ax-tick">{tr('Baja', 'Low')}</text>
-              <text x="652" y="548" textAnchor="end" className="ax-tick">{tr('Alta', 'High')}</text>
+              {/* ── Eje X (PRIORIDAD) ── */}
+              <line x1="60" y1="480" x2="893" y2="480" stroke="#172554" strokeWidth="1.5" />
+              <polygon points="900,480 886,475 886,485" fill="#172554" />
+              <text x="470" y="518" textAnchor="middle" className="ax" fontSize="10">{tr('PRIORIDAD', 'PRIORITY')}</text>
+              <text x="68" y="496" className="ax-tick">{tr('Baja', 'Low')}</text>
+              <text x="882" y="496" textAnchor="end" className="ax-tick">{tr('Alta', 'High')}</text>
 
+              {/* ── QUICK WINS — inferior derecho — verde ── */}
               <g className="sb">
-                <circle cx="430" cy="460" r="22" fill="#71B136" stroke="#fff" strokeWidth="2" />
-                <text x="430" y="465" textAnchor="middle" fill="#fff" fontWeight="700" fontSize="11" fontFamily="var(--font-body)">A1</text>
+                <circle cx="479" cy="414" r="22" fill="#71B136" stroke="#fff" strokeWidth="2" />
+                <text x="479" y="419" textAnchor="middle" fill="#fff" fontWeight="700" fontSize="11" fontFamily="var(--font-body)">A1</text>
                 <g className="tt" filter="url(#tt-shadow-svc)">
-                  <rect x="378" y="422" width="148" height="28" rx="6" fill="#172554" />
-                  <text x="452" y="441" textAnchor="middle" fill="#fff" fontSize="11" fontFamily="var(--font-body)">{tr('Segmentación de cuotas', 'Quota segmentation')}</text>
+                  <rect x="405" y="376" width="148" height="28" rx="6" fill="#172554" />
+                  <text x="479" y="395" textAnchor="middle" fill="#fff" fontSize="11" fontFamily="var(--font-body)">{tr('Segmentación de cuotas', 'Quota segmentation')}</text>
                 </g>
               </g>
               <g className="sb">
-                <circle cx="520" cy="440" r="22" fill="#71B136" stroke="#fff" strokeWidth="2" />
-                <text x="520" y="445" textAnchor="middle" fill="#fff" fontWeight="700" fontSize="11" fontFamily="var(--font-body)">A2</text>
+                <circle cx="657" cy="396" r="22" fill="#71B136" stroke="#fff" strokeWidth="2" />
+                <text x="657" y="401" textAnchor="middle" fill="#fff" fontWeight="700" fontSize="11" fontFamily="var(--font-body)">A2</text>
                 <g className="tt" filter="url(#tt-shadow-svc)">
-                  <rect x="458" y="402" width="148" height="28" rx="6" fill="#172554" />
-                  <text x="532" y="421" textAnchor="middle" fill="#fff" fontSize="11" fontFamily="var(--font-body)">{tr('Optimización de routing', 'Routing optimization')}</text>
+                  <rect x="583" y="358" width="148" height="28" rx="6" fill="#172554" />
+                  <text x="657" y="377" textAnchor="middle" fill="#fff" fontSize="11" fontFamily="var(--font-body)">{tr('Optimización de routing', 'Routing optimization')}</text>
                 </g>
               </g>
               <g className="sb">
-                <circle cx="460" cy="390" r="22" fill="#71B136" stroke="#fff" strokeWidth="2" />
-                <text x="460" y="395" textAnchor="middle" fill="#fff" fontWeight="700" fontSize="11" fontFamily="var(--font-body)">B1</text>
+                <circle cx="531" cy="349" r="22" fill="#71B136" stroke="#fff" strokeWidth="2" />
+                <text x="531" y="354" textAnchor="middle" fill="#fff" fontWeight="700" fontSize="11" fontFamily="var(--font-body)">B1</text>
                 <g className="tt" filter="url(#tt-shadow-svc)">
-                  <rect x="398" y="352" width="148" height="28" rx="6" fill="#172554" />
-                  <text x="472" y="371" textAnchor="middle" fill="#fff" fontSize="11" fontFamily="var(--font-body)">{tr('Activar colaboración', 'Activate collaboration')}</text>
+                  <rect x="457" y="311" width="148" height="28" rx="6" fill="#172554" />
+                  <text x="531" y="330" textAnchor="middle" fill="#fff" fontSize="11" fontFamily="var(--font-body)">{tr('Activar colaboración', 'Activate collaboration')}</text>
                 </g>
               </g>
               <g className="sb">
-                <circle cx="590" cy="360" r="22" fill="#71B136" stroke="#fff" strokeWidth="2" />
-                <text x="590" y="365" textAnchor="middle" fill="#fff" fontWeight="700" fontSize="11" fontFamily="var(--font-body)">E1</text>
+                <circle cx="759" cy="321" r="22" fill="#71B136" stroke="#fff" strokeWidth="2" />
+                <text x="759" y="326" textAnchor="middle" fill="#fff" fontWeight="700" fontSize="11" fontFamily="var(--font-body)">E1</text>
                 <g className="tt" filter="url(#tt-shadow-svc)">
-                  <rect x="490" y="322" width="160" height="28" rx="6" fill="#172554" />
-                  <text x="570" y="341" textAnchor="middle" fill="#fff" fontSize="11" fontFamily="var(--font-body)">{tr('Visibilidad en tiempo real', 'Real-time visibility')}</text>
-                </g>
-              </g>
-
-              <g className="sb">
-                <circle cx="495" cy="140" r="22" fill="#172554" stroke="#fff" strokeWidth="2" />
-                <text x="495" y="145" textAnchor="middle" fill="#fff" fontWeight="700" fontSize="11" fontFamily="var(--font-body)">D1</text>
-                <g className="tt" filter="url(#tt-shadow-svc)">
-                  <rect x="433" y="102" width="148" height="28" rx="6" fill="#172554" />
-                  <text x="507" y="121" textAnchor="middle" fill="#fff" fontSize="11" fontFamily="var(--font-body)">{tr('Unificación app móvil', 'Mobile app unification')}</text>
-                </g>
-              </g>
-              <g className="sb">
-                <circle cx="585" cy="100" r="22" fill="#172554" stroke="#fff" strokeWidth="2" />
-                <text x="585" y="105" textAnchor="middle" fill="#fff" fontWeight="700" fontSize="11" fontFamily="var(--font-body)">D2</text>
-                <g className="tt" filter="url(#tt-shadow-svc)">
-                  <rect x="511" y="62" width="148" height="28" rx="6" fill="#172554" />
-                  <text x="585" y="81" textAnchor="middle" fill="#fff" fontSize="11" fontFamily="var(--font-body)">{tr('Gestión de inventario', 'Inventory management')}</text>
-                </g>
-              </g>
-              <g className="sb">
-                <circle cx="445" cy="220" r="22" fill="#172554" stroke="#fff" strokeWidth="2" />
-                <text x="445" y="225" textAnchor="middle" fill="#fff" fontWeight="700" fontSize="11" fontFamily="var(--font-body)">D3</text>
-                <g className="tt" filter="url(#tt-shadow-svc)">
-                  <rect x="383" y="182" width="148" height="28" rx="6" fill="#172554" />
-                  <text x="457" y="201" textAnchor="middle" fill="#fff" fontSize="11" fontFamily="var(--font-body)">{tr('Integración ERP', 'ERP Integration')}</text>
-                </g>
-              </g>
-              <g className="sb">
-                <circle cx="615" cy="180" r="22" fill="#172554" stroke="#fff" strokeWidth="2" />
-                <text x="615" y="185" textAnchor="middle" fill="#fff" fontWeight="700" fontSize="11" fontFamily="var(--font-body)">C2</text>
-                <g className="tt" filter="url(#tt-shadow-svc)">
-                  <rect x="513" y="142" width="148" height="28" rx="6" fill="#172554" />
-                  <text x="587" y="161" textAnchor="middle" fill="#fff" fontSize="11" fontFamily="var(--font-body)">{tr('Analítica avanzada', 'Advanced analytics')}</text>
+                  <rect x="679" y="283" width="160" height="28" rx="6" fill="#172554" />
+                  <text x="759" y="302" textAnchor="middle" fill="#fff" fontSize="11" fontFamily="var(--font-body)">{tr('Visibilidad en tiempo real', 'Real-time visibility')}</text>
                 </g>
               </g>
 
+              {/* ── PROYECTOS — superior derecho — azul ── */}
               <g className="sb">
-                <circle cx="200" cy="420" r="22" fill="#6B7280" stroke="#fff" strokeWidth="2" />
-                <text x="200" y="425" textAnchor="middle" fill="#fff" fontWeight="700" fontSize="11" fontFamily="var(--font-body)">B2</text>
+                <circle cx="592" cy="115" r="22" fill="#172554" stroke="#fff" strokeWidth="2" />
+                <text x="592" y="120" textAnchor="middle" fill="#fff" fontWeight="700" fontSize="11" fontFamily="var(--font-body)">D1</text>
                 <g className="tt" filter="url(#tt-shadow-svc)">
-                  <rect x="138" y="382" width="128" height="28" rx="6" fill="#172554" />
-                  <text x="202" y="401" textAnchor="middle" fill="#fff" fontSize="11" fontFamily="var(--font-body)">{tr('Atributos de skills', 'Skills attributes')}</text>
+                  <rect x="518" y="77" width="148" height="28" rx="6" fill="#172554" />
+                  <text x="592" y="96" textAnchor="middle" fill="#fff" fontSize="11" fontFamily="var(--font-body)">{tr('Unificación app móvil', 'Mobile app unification')}</text>
                 </g>
               </g>
               <g className="sb">
-                <circle cx="130" cy="370" r="22" fill="#6B7280" stroke="#fff" strokeWidth="2" />
-                <text x="130" y="375" textAnchor="middle" fill="#fff" fontWeight="700" fontSize="11" fontFamily="var(--font-body)">A4</text>
+                <circle cx="749" cy="77" r="22" fill="#172554" stroke="#fff" strokeWidth="2" />
+                <text x="749" y="82" textAnchor="middle" fill="#fff" fontWeight="700" fontSize="11" fontFamily="var(--font-body)">D2</text>
                 <g className="tt" filter="url(#tt-shadow-svc)">
-                  <rect x="68" y="332" width="128" height="28" rx="6" fill="#172554" />
-                  <text x="132" y="351" textAnchor="middle" fill="#fff" fontSize="11" fontFamily="var(--font-body)">{tr('Validación GPS', 'GPS validation')}</text>
+                  <rect x="675" y="48" width="148" height="28" rx="6" fill="#172554" />
+                  <text x="749" y="67" textAnchor="middle" fill="#fff" fontSize="11" fontFamily="var(--font-body)">{tr('Gestión de inventario', 'Inventory management')}</text>
+                </g>
+              </g>
+              <g className="sb">
+                <circle cx="505" cy="190" r="22" fill="#172554" stroke="#fff" strokeWidth="2" />
+                <text x="505" y="195" textAnchor="middle" fill="#fff" fontWeight="700" fontSize="11" fontFamily="var(--font-body)">D3</text>
+                <g className="tt" filter="url(#tt-shadow-svc)">
+                  <rect x="431" y="152" width="148" height="28" rx="6" fill="#172554" />
+                  <text x="505" y="171" textAnchor="middle" fill="#fff" fontSize="11" fontFamily="var(--font-body)">{tr('Integración ERP', 'ERP Integration')}</text>
+                </g>
+              </g>
+              <g className="sb">
+                <circle cx="802" cy="152" r="22" fill="#172554" stroke="#fff" strokeWidth="2" />
+                <text x="802" y="157" textAnchor="middle" fill="#fff" fontWeight="700" fontSize="11" fontFamily="var(--font-body)">C2</text>
+                <g className="tt" filter="url(#tt-shadow-svc)">
+                  <rect x="728" y="114" width="148" height="28" rx="6" fill="#172554" />
+                  <text x="802" y="133" textAnchor="middle" fill="#fff" fontSize="11" fontFamily="var(--font-body)">{tr('Analítica avanzada', 'Advanced analytics')}</text>
                 </g>
               </g>
 
+              {/* ── TAREAS — inferior izquierdo — gris ── */}
               <g className="sb">
-                <circle cx="205" cy="160" r="22" fill="#DC2626" stroke="#fff" strokeWidth="2" />
-                <text x="205" y="165" textAnchor="middle" fill="#fff" fontWeight="700" fontSize="11" fontFamily="var(--font-body)">D8</text>
+                <circle cx="195" cy="377" r="22" fill="#6B7280" stroke="#fff" strokeWidth="2" />
+                <text x="195" y="382" textAnchor="middle" fill="#fff" fontWeight="700" fontSize="11" fontFamily="var(--font-body)">B2</text>
                 <g className="tt" filter="url(#tt-shadow-svc)">
-                  <rect x="103" y="122" width="168" height="28" rx="6" fill="#172554" />
-                  <text x="187" y="141" textAnchor="middle" fill="#fff" fontSize="11" fontFamily="var(--font-body)">{tr('Réplica BI en tiempo real', 'Real-time BI replication')}</text>
+                  <rect x="131" y="339" width="128" height="28" rx="6" fill="#172554" />
+                  <text x="195" y="358" textAnchor="middle" fill="#fff" fontSize="11" fontFamily="var(--font-body)">{tr('Atributos de skills', 'Skills attributes')}</text>
+                </g>
+              </g>
+              <g className="sb">
+                <circle cx="122" cy="330" r="22" fill="#6B7280" stroke="#fff" strokeWidth="2" />
+                <text x="122" y="335" textAnchor="middle" fill="#fff" fontWeight="700" fontSize="11" fontFamily="var(--font-body)">A4</text>
+                <g className="tt" filter="url(#tt-shadow-svc)">
+                  <rect x="58" y="292" width="128" height="28" rx="6" fill="#172554" />
+                  <text x="122" y="311" textAnchor="middle" fill="#fff" fontSize="11" fontFamily="var(--font-body)">{tr('Validación GPS', 'GPS validation')}</text>
+                </g>
+              </g>
+
+              {/* ── DESCARTE — superior izquierdo — rojo ── */}
+              <g className="sb">
+                <circle cx="200" cy="134" r="22" fill="#DC2626" stroke="#fff" strokeWidth="2" />
+                <text x="200" y="139" textAnchor="middle" fill="#fff" fontWeight="700" fontSize="11" fontFamily="var(--font-body)">D8</text>
+                <g className="tt" filter="url(#tt-shadow-svc)">
+                  <rect x="116" y="96" width="168" height="28" rx="6" fill="#172554" />
+                  <text x="200" y="115" textAnchor="middle" fill="#fff" fontSize="11" fontFamily="var(--font-body)">{tr('Réplica BI en tiempo real', 'Real-time BI replication')}</text>
                 </g>
               </g>
             </svg>

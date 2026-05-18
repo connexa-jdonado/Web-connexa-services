@@ -267,93 +267,104 @@ export default function ServiciosClient() {
 
       {/* ── CONSULTORÍA ── */}
       <section id="consultoria" className="sec-consultoria">
-        <div className="container">
-          <div className="section-header center fade-up">
+        <div style={{width:'100%', background:'#F3F4F6', padding:'100px 40px', position:'relative', overflow:'hidden', overflowX:'auto'}}>
+          <svg style={{position:'absolute',inset:0,width:'100%',height:'100%',opacity:0,pointerEvents:'none',zIndex:0}}>
+            <defs>
+              <pattern id="dots-cons" x="0" y="0" width="32" height="32" patternUnits="userSpaceOnUse">
+                <circle cx="1" cy="1" r="1" fill="#71B136"/>
+              </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#dots-cons)"/>
+          </svg>
+
+          <div className="section-header center fade-up" style={{position:'relative', zIndex:2}}>
             <div className="section-eyebrow">{tr('CONSULTORÍA', 'CONSULTING')}</div>
             <h2>{tr('Consultoría estratégica en Field Service', 'Strategic Field Service Consulting')}</h2>
             <p>{tr('Analizamos tu operación actual y diseñamos la estrategia óptima para maximizar la eficiencia de tu fuerza de trabajo en campo.', 'We analyze your current operation and design the optimal strategy to maximize the efficiency of your field workforce.')}</p>
           </div>
 
-          <div className="services-grid" style={{ marginBottom: '48px' }}>
-            <div className="service-card">
-              <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                <div className="service-icon">
-                  <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8" /><line x1="21" y1="21" x2="16.65" y2="16.65" /></svg>
+          <div style={{display:'flex', flexDirection:'row', gap:'48px', maxWidth:'1600px', margin:'60px auto 0', alignItems:'flex-start', position:'relative', zIndex:2}}>
+
+            {/* Columna izquierda 30% — 3 cards */}
+            <div style={{width:'30%', display:'flex', flexDirection:'column', gap:'16px'}}>
+
+              <div style={{background:'white', border:'1px solid #E5E7EB', borderRadius:'16px', padding:'28px 32px', position:'relative', overflow:'hidden'}}>
+                <span style={{position:'absolute', right:'-10px', top:'-20px', fontSize:'120px', fontWeight:900, lineHeight:1, userSelect:'none', pointerEvents:'none', color:'rgba(23,37,84,0.04)', WebkitTextStroke:'1.5px rgba(113,177,54,0.25)', letterSpacing:'-4px'}}>01</span>
+                <div style={{background:'rgba(113,177,54,0.12)', borderRadius:'10px', padding:'10px', display:'inline-flex', marginBottom:'16px'}}>
+                  <svg viewBox="0 0 24 24" style={{width:'24px', height:'24px', stroke:'#71B136', fill:'none', strokeWidth:2, strokeLinecap:'round', strokeLinejoin:'round'}}><circle cx="11" cy="11" r="8" /><line x1="21" y1="21" x2="16.65" y2="16.65" /></svg>
                 </div>
-                <span style={{ fontSize: '11px', fontWeight: 700, color: '#71B136', letterSpacing: '0.1em', fontFamily: 'var(--font-body)', textTransform: 'uppercase' }}>01</span>
+                <h3 style={{color:'#172554', fontSize:'18px', fontWeight:700, margin:'0 0 16px'}}>{tr('Dolores & Hallazgos', 'Pain Points & Findings')}</h3>
+                <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                  {[
+                    tr('Relevamiento de procesos operativos actuales', 'Survey of current operational processes'),
+                    tr('Entrevistas con usuarios clave y equipos de campo', 'Interviews with key users and field teams'),
+                    tr('Análisis del nivel de aprovechamiento de la plataforma', 'Analysis of platform utilization level'),
+                    tr('Identificación de brechas y limitaciones técnicas', 'Identification of gaps and technical limitations'),
+                    tr('Documentación del estado actual de la solución', 'Documentation of the current solution state'),
+                  ].map((item, i) => (
+                    <li key={i} style={{ display: 'flex', gap: '8px', alignItems: 'flex-start', fontSize: '14px', color: '#6B7280', lineHeight: '1.55', fontFamily: 'var(--font-body)' }}>
+                      <span style={{ color: '#71B136', flexShrink: 0, marginTop: '1px' }}>▸</span>
+                      {item}
+                    </li>
+                  ))}
+                </ul>
               </div>
-              <h3>{tr('Dolores & Hallazgos', 'Pain Points & Findings')}</h3>
-              <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                {[
-                  tr('Relevamiento de procesos operativos actuales', 'Survey of current operational processes'),
-                  tr('Entrevistas con usuarios clave y equipos de campo', 'Interviews with key users and field teams'),
-                  tr('Análisis del nivel de aprovechamiento de la plataforma', 'Analysis of platform utilization level'),
-                  tr('Identificación de brechas y limitaciones técnicas', 'Identification of gaps and technical limitations'),
-                  tr('Documentación del estado actual de la solución', 'Documentation of the current solution state'),
-                ].map((item, i) => (
-                  <li key={i} style={{ display: 'flex', gap: '8px', alignItems: 'flex-start', fontSize: '13px', color: '#4B5563', lineHeight: '1.55', fontFamily: 'var(--font-body)' }}>
-                    <span style={{ color: '#71B136', flexShrink: 0, marginTop: '1px' }}>▸</span>
-                    {item}
-                  </li>
-                ))}
-              </ul>
+
+              <div style={{background:'white', border:'1px solid #E5E7EB', borderRadius:'16px', padding:'28px 32px', position:'relative', overflow:'hidden'}}>
+                <span style={{position:'absolute', right:'-10px', top:'-20px', fontSize:'120px', fontWeight:900, lineHeight:1, userSelect:'none', pointerEvents:'none', color:'rgba(23,37,84,0.04)', WebkitTextStroke:'1.5px rgba(113,177,54,0.25)', letterSpacing:'-4px'}}>02</span>
+                <div style={{background:'rgba(113,177,54,0.12)', borderRadius:'10px', padding:'10px', display:'inline-flex', marginBottom:'16px'}}>
+                  <svg viewBox="0 0 24 24" style={{width:'24px', height:'24px', stroke:'#71B136', fill:'none', strokeWidth:2, strokeLinecap:'round', strokeLinejoin:'round'}}><polyline points="23 6 13.5 15.5 8.5 10.5 1 18" /><polyline points="17 6 23 6 23 12" /></svg>
+                </div>
+                <h3 style={{color:'#172554', fontSize:'18px', fontWeight:700, margin:'0 0 16px'}}>{tr('Oportunidades de Mejora', 'Improvement Opportunities')}</h3>
+                <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                  {[
+                    tr('Detección de funcionalidades subutilizadas', 'Detection of underutilized features'),
+                    tr('Análisis de gaps entre operación actual y potencial de la plataforma', 'Gap analysis between current operation and platform potential'),
+                    tr('Evaluación de procesos susceptibles de automatización', 'Evaluation of processes suitable for automation'),
+                    tr('Identificación de mejoras de eficiencia operativa', 'Identification of operational efficiency improvements'),
+                  ].map((item, i) => (
+                    <li key={i} style={{ display: 'flex', gap: '8px', alignItems: 'flex-start', fontSize: '14px', color: '#6B7280', lineHeight: '1.55', fontFamily: 'var(--font-body)' }}>
+                      <span style={{ color: '#71B136', flexShrink: 0, marginTop: '1px' }}>▸</span>
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <div style={{background:'white', border:'1px solid #E5E7EB', borderRadius:'16px', padding:'28px 32px', position:'relative', overflow:'hidden'}}>
+                <span style={{position:'absolute', right:'-10px', top:'-20px', fontSize:'120px', fontWeight:900, lineHeight:1, userSelect:'none', pointerEvents:'none', color:'rgba(23,37,84,0.04)', WebkitTextStroke:'1.5px rgba(113,177,54,0.25)', letterSpacing:'-4px'}}>03</span>
+                <div style={{background:'rgba(113,177,54,0.12)', borderRadius:'10px', padding:'10px', display:'inline-flex', marginBottom:'16px'}}>
+                  <svg viewBox="0 0 24 24" style={{width:'24px', height:'24px', stroke:'#71B136', fill:'none', strokeWidth:2, strokeLinecap:'round', strokeLinejoin:'round'}}><path d="M9.66 17.33c-1.66 1.66-4 2.67-4 2.67s1-2.34 2.67-4c.94-.94 2.34-.94 3.28 0 .94.94.94 2.34.05 3.33z" /><path d="m14 10-4 4" /><path d="M19 5c0 2.5-2 7-7 10l-3-3c3-5 7.5-7 10-7z" /></svg>
+                </div>
+                <h3 style={{color:'#172554', fontSize:'18px', fontWeight:700, margin:'0 0 16px'}}>{tr('Iniciativas', 'Initiatives')}</h3>
+                <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                  {[
+                    tr('Propuesta de iniciativas concretas y accionables', 'Proposal of concrete and actionable initiatives'),
+                    tr('Ponderación por impacto en el negocio y complejidad', 'Weighting by business impact and complexity'),
+                    tr('Mapa visual Impacto × Complejidad para priorizar', 'Visual Impact × Complexity map for prioritization'),
+                    tr('Roadmap de implementación por fases', 'Phased implementation roadmap'),
+                  ].map((item, i) => (
+                    <li key={i} style={{ display: 'flex', gap: '8px', alignItems: 'flex-start', fontSize: '14px', color: '#6B7280', lineHeight: '1.55', fontFamily: 'var(--font-body)' }}>
+                      <span style={{ color: '#71B136', flexShrink: 0, marginTop: '1px' }}>▸</span>
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
             </div>
 
-            <div className="service-card">
-              <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                <div className="service-icon">
-                  <svg viewBox="0 0 24 24"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18" /><polyline points="17 6 23 6 23 12" /></svg>
-                </div>
-                <span style={{ fontSize: '11px', fontWeight: 700, color: '#71B136', letterSpacing: '0.1em', fontFamily: 'var(--font-body)', textTransform: 'uppercase' }}>02</span>
-              </div>
-              <h3>{tr('Oportunidades de Mejora', 'Improvement Opportunities')}</h3>
-              <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                {[
-                  tr('Detección de funcionalidades subutilizadas', 'Detection of underutilized features'),
-                  tr('Análisis de gaps entre operación actual y potencial de la plataforma', 'Gap analysis between current operation and platform potential'),
-                  tr('Evaluación de procesos susceptibles de automatización', 'Evaluation of processes suitable for automation'),
-                  tr('Identificación de mejoras de eficiencia operativa', 'Identification of operational efficiency improvements'),
-                ].map((item, i) => (
-                  <li key={i} style={{ display: 'flex', gap: '8px', alignItems: 'flex-start', fontSize: '13px', color: '#4B5563', lineHeight: '1.55', fontFamily: 'var(--font-body)' }}>
-                    <span style={{ color: '#71B136', flexShrink: 0, marginTop: '1px' }}>▸</span>
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <div className="service-card">
-              <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                <div className="service-icon">
-                  <svg viewBox="0 0 24 24"><path d="M9.66 17.33c-1.66 1.66-4 2.67-4 2.67s1-2.34 2.67-4c.94-.94 2.34-.94 3.28 0 .94.94.94 2.34.05 3.33z" /><path d="m14 10-4 4" /><path d="M19 5c0 2.5-2 7-7 10l-3-3c3-5 7.5-7 10-7z" /></svg>
-                </div>
-                <span style={{ fontSize: '11px', fontWeight: 700, color: '#71B136', letterSpacing: '0.1em', fontFamily: 'var(--font-body)', textTransform: 'uppercase' }}>03</span>
-              </div>
-              <h3>{tr('Iniciativas', 'Initiatives')}</h3>
-              <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                {[
-                  tr('Propuesta de iniciativas concretas y accionables', 'Proposal of concrete and actionable initiatives'),
-                  tr('Ponderación por impacto en el negocio y complejidad', 'Weighting by business impact and complexity'),
-                  tr('Mapa visual Impacto × Complejidad para priorizar', 'Visual Impact × Complexity map for prioritization'),
-                  tr('Roadmap de implementación por fases', 'Phased implementation roadmap'),
-                ].map((item, i) => (
-                  <li key={i} style={{ display: 'flex', gap: '8px', alignItems: 'flex-start', fontSize: '13px', color: '#4B5563', lineHeight: '1.55', fontFamily: 'var(--font-body)' }}>
-                    <span style={{ color: '#71B136', flexShrink: 0, marginTop: '1px' }}>▸</span>
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
+            {/* Columna derecha 70% — scatter plot */}
+            <div style={{width:'70%', background:'rgba(255,255,255,0.97)', borderRadius:'20px', padding:'8px', boxShadow:'0 40px 100px rgba(0,0,0,0.4)', position:'sticky', top:'100px'}}>
 
           {/* SCATTER PLOT MAPA DE PRIORIZACIÓN */}
-          <div className="fade-up d2" style={{ background: '#fff', borderRadius: '16px', padding: '32px 32px 24px', margin: '0 0 48px', boxShadow: '0 8px 32px rgba(0,0,0,0.08)', border: '1px solid #F3F4F6' }}>
+          <div className="fade-up d2" style={{ background: '#fff', borderRadius: '16px', padding: '32px 32px 24px', margin: '0', boxShadow: 'none', border: 'none' }}>
             <div style={{ textAlign: 'center', marginBottom: '20px' }}>
               <span style={{ fontSize: '11px', fontWeight: 700, letterSpacing: '0.16em', textTransform: 'uppercase', color: '#71B136', fontFamily: 'var(--font-body)' }}>
                 {tr('Mapa de Priorización de Iniciativas', 'Initiative Prioritization Map')}
               </span>
             </div>
-            <div style={{ display: 'flex', gap: '32px', alignItems: 'stretch' }}>
+            <div style={{display:'flex', flexDirection:'column', gap:'24px'}}>
             <div style={{ flex: 1, minWidth: 0 }}>
             <svg viewBox="0 0 800 600" width="100%" style={{ display: 'block', overflow: 'visible' }}>
               <defs>
@@ -499,10 +510,8 @@ export default function ServiciosClient() {
               </g>
             </svg>
             </div>
-            <div style={{ minWidth: '260px', flexShrink: 0, padding: '24px', background: '#F8FAFC', borderLeft: '2px solid #E5E7EB', borderRadius: '0 8px 8px 0' }}>
-              <div style={{ fontSize: '11px', fontWeight: 600, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#71B136', fontFamily: 'var(--font-body)', marginBottom: '20px' }}>
-                {tr('INICIATIVAS', 'INITIATIVES')}
-              </div>
+            {/* Leyenda horizontal 4 columnas */}
+            <div style={{display:'grid', gridTemplateColumns:'repeat(4,1fr)', gap:'16px', padding:'0 8px 8px'}}>
               {[
                 { color: '#71B136', title: tr('Quick Wins', 'Quick Wins'), items: [
                   { code: 'A1', name: tr('Segmentar cuotas por zona', 'Segment quotas by zone') },
@@ -525,7 +534,7 @@ export default function ServiciosClient() {
                 ]},
               ].map((group, gi) => (
                 <div key={gi}>
-                  <div style={{ fontSize: '11px', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', color: group.color, fontFamily: 'var(--font-body)', marginTop: gi === 0 ? 0 : '16px', marginBottom: '8px' }}>
+                  <div style={{ fontSize: '11px', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', color: group.color, fontFamily: 'var(--font-body)', marginBottom: '8px' }}>
                     {group.title}
                   </div>
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
@@ -544,12 +553,15 @@ export default function ServiciosClient() {
             </div>
           </div>
 
-          <div style={{ paddingTop: '32px', textAlign: 'center' }}>
-            <p style={{ fontSize: '14px', color: '#6B7280', fontStyle: 'italic', maxWidth: '600px', margin: '0 auto', fontFamily: 'var(--font-body)', lineHeight: '1.6' }}>
+            </div>{/* /columna derecha */}
+          </div>{/* /flex 2 columnas */}
+
+          <div style={{ paddingTop: '32px', textAlign: 'center', position:'relative', zIndex:2 }}>
+            <p style={{ fontSize: '14px', color: 'rgb(23, 37, 84)', fontStyle: 'italic', maxWidth: '600px', margin: '0 auto', fontFamily: 'var(--font-body)', lineHeight: '1.6' }}>
               {tr('Cada assessment es único. Los resultados dependen de tu operación, tu plataforma y tus objetivos.', 'Every assessment is unique. Results depend on your operation, your platform, and your goals.')}
             </p>
           </div>
-        </div>
+        </div>{/* /wrapper F3F4F6 */}
       </section>
 
       {/* ── SOPORTE ── */}

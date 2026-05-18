@@ -67,7 +67,7 @@ export default function ProductosClient() {
       {/* ── HERO ── */}
       <section className="prod-hero">
         <div className="container prod-hero-inner" style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
-          <div style={{ textAlign: 'left', display: 'flex', flexDirection: 'column', alignItems: 'flex-start', maxWidth: '50%' }}>
+          <div style={{ textAlign: 'left', display: 'flex', flexDirection: 'column', alignItems: 'flex-start', maxWidth: '58%' }}>
           <nav className="breadcrumb">
             <Link href="/">{tr('Inicio', 'Home')}</Link>
             <span className="breadcrumb-sep">/</span>

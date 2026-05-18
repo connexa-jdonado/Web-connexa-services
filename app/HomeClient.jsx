@@ -687,7 +687,7 @@ export default function HomeClient() {
           <div className="products-grid">
             <div className="product-card fade-up d1" onClick={() => router.push('/productos/workflow-builder')} role="button" tabIndex={0} onKeyDown={(e) => e.key === 'Enter' && router.push('/productos/workflow-builder')}>
               <div>
-                <div className="product-badge"><div className="product-badge-dot" /><span>{tr('Solución propia', 'Proprietary solution')}</span></div>
+                <div className="product-badge"><div className="product-badge-dot" /><span>{tr('Solución propia impultada por IA', 'AI powered custom solution')}</span></div>
                 <div className="product-name">Workflow Builder</div>
                 <p className="product-desc">{tr('Constructor visual de flujos de trabajo para Oracle Field Service Cloud. Permite diseñar, testear y publicar workflows sin código, reduciendo el time-to-market de nuevos procesos. El Agente de IA te ayuda a crear y configurar workflows en lenguaje natural, sin escribir código.', 'Visual workflow builder for Oracle Field Service Cloud. Design, test and publish workflows without code, reducing the time-to-market for new processes. The AI Agent helps you create and configure workflows in natural language, without writing code.')}</p>
                 <div className="product-bullets">
@@ -707,13 +707,13 @@ export default function HomeClient() {
                     <path d="M7 7l.6 2.2 2.2.6-2.2.6L7 12.6l-.6-2.2-2.2-.6 2.2-.6z" fill="#71B136" stroke="#71B136" strokeWidth="0.3" strokeLinejoin="round" opacity="0.65"/>
                     <path d="M21 14l.5 1.6 1.6.5-1.6.5L21 18.2l-.5-1.6-1.6-.5 1.6-.5z" fill="#71B136" stroke="#71B136" strokeWidth="0.3" strokeLinejoin="round" opacity="0.45"/>
                   </svg>
-                  <span style={{color:'#71B136', fontSize:'13px', fontWeight:700, letterSpacing:'0.1em'}}>IA</span>
+                  <span style={{color:'#71B136', fontSize:'30px', fontWeight:700, letterSpacing:'0.1em'}}>IA</span>
                 </div>
               </div>
             </div>
             <div className="product-card fade-up d2" onClick={() => router.push('/productos/fsmtool')} role="button" tabIndex={0} onKeyDown={(e) => e.key === 'Enter' && router.push('/productos/fsmtool')}>
               <div>
-                <div className="product-badge"><div className="product-badge-dot" /><span>{tr('Solución propia', 'Proprietary solution')}</span></div>
+                <div className="product-badge"><div className="product-badge-dot" /><span>{tr('Solución propia impultada por IA', 'AI powered custom solution')}</span></div>
                 <div className="product-name">FSMTool</div>
                 <p className="product-desc">{tr('Suite de herramientas avanzadas de administración para Oracle Field Service Cloud. Operaciones masivas, gestión de inventarios, actividades y recursos. Con IA integrada podés ejecutar operaciones masivas describiendo lo que necesitás en lenguaje natural.', 'Advanced administration suite for Oracle Field Service Cloud. Bulk operations, inventory management, activities and resources. With integrated AI you can execute bulk operations by describing what you need in natural language.')}</p>
                 <div className="product-bullets">
@@ -731,7 +731,7 @@ export default function HomeClient() {
                     <path d="M7 7l.6 2.2 2.2.6-2.2.6L7 12.6l-.6-2.2-2.2-.6 2.2-.6z" fill="#71B136" stroke="#71B136" strokeWidth="0.3" strokeLinejoin="round" opacity="0.65"/>
                     <path d="M21 14l.5 1.6 1.6.5-1.6.5L21 18.2l-.5-1.6-1.6-.5 1.6-.5z" fill="#71B136" stroke="#71B136" strokeWidth="0.3" strokeLinejoin="round" opacity="0.45"/>
                   </svg>
-                  <span style={{color:'#71B136', fontSize:'13px', fontWeight:700, letterSpacing:'0.1em'}}>IA</span>
+                  <span style={{color:'#71B136', fontSize:'30px', fontWeight:700, letterSpacing:'0.1em'}}>IA</span>
                 </div>
               </div>
             </div>

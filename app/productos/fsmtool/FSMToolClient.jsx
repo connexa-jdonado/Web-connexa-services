@@ -195,88 +195,133 @@ export default function FSMToolClient() {
         </div>
       </section> */}
 
-      {/* ── TABS / MÓDULOS ── */}
-      <div className="valor-section white">
-        <div className="container">
-          <div className="section-header-center">
-            <span className="section-label fade-up">{tr('Módulos', 'Modules')}</span>
-            <h2 className="fade-up d1">{tr('Todo lo que podés hacer', 'Everything you can do')}</h2>
-            <p className="fade-up d2">{tr('Cinco módulos integrados que cubren cada aspecto de la operación masiva sobre Oracle Field Service Cloud.', 'Five integrated modules covering every aspect of bulk operations on Oracle Field Service Cloud.')}</p>
+      {/* ── MÓDULOS ── */}
+
+      {/* BLOQUE 1: HEADER */}
+      <div style={{ width:'100%', background:'linear-gradient(135deg, #0d1b3e 0%, #172554 100%)', padding:'80px 60px', textAlign:'center', position:'relative', overflow:'hidden' }}>
+        <svg style={{ position:'absolute', inset:0, width:'100%', height:'100%', opacity:0.1, pointerEvents:'none' }} aria-hidden="true">
+          <defs><pattern id="dots-fsm-mod" x="0" y="0" width="32" height="32" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r="1" fill="#71B136"/></pattern></defs>
+          <rect width="100%" height="100%" fill="url(#dots-fsm-mod)"/>
+        </svg>
+        <div style={{ position:'relative', zIndex:2 }}>
+          <div style={{ display:'inline-flex', alignItems:'center', gap:'8px', background:'rgba(113,177,54,0.12)', border:'1px solid rgba(113,177,54,0.3)', borderRadius:'999px', padding:'8px 20px', marginBottom:'24px' }}>
+            <svg width="1em" height="0.85em" viewBox="0 0 28 24" fill="none" style={{ display:'inline-block', verticalAlign:'middle', fontSize:'16px' }}><path d="M16 1.5l.9 3.2 3.2.9-3.2.9L16 9.7l-.9-3.2-3.2-.9 3.2-.9z" fill="#71B136" stroke="#71B136" strokeWidth="0.4" strokeLinejoin="round"/><path d="M7 7l.6 2.2 2.2.6-2.2.6L7 12.6l-.6-2.2-2.2-.6 2.2-.6z" fill="#71B136" stroke="#71B136" strokeWidth="0.3" strokeLinejoin="round" opacity="0.65"/><path d="M21 14l.5 1.6 1.6.5-1.6.5L21 18.2l-.5-1.6-1.6-.5 1.6-.5z" fill="#71B136" stroke="#71B136" strokeWidth="0.3" strokeLinejoin="round" opacity="0.45"/></svg>
+            <span style={{ color:'#71B136', fontSize:'12px', fontWeight:600, letterSpacing:'0.1em' }}>{tr('Impulsado por Inteligencia Artificial', 'Powered by Artificial Intelligence')}</span>
           </div>
-          <div className="func-tabs fade-up d1">
-            {FSM_TABS.map((tab) => (
-              <button key={tab.key} className={`func-tab${activeTab === tab.key ? ' active' : ''}`} onClick={() => setActiveTab(tab.key)}>
-                {tab.label}
-              </button>
+          <h2 style={{ fontSize:'52px', fontWeight:900, color:'white', lineHeight:1.1, marginBottom:'16px', position:'relative', zIndex:2 }}>{tr('Todo lo que podés hacer', 'Everything you can do')}</h2>
+          <p style={{ fontSize:'18px', color:'rgba(255,255,255,0.6)', maxWidth:'600px', margin:'0 auto 16px', lineHeight:1.7, position:'relative', zIndex:2 }}>{tr('Gestioná tu operación de Oracle Field Service de forma masiva, sin límites y con IA.', 'Manage your Oracle Field Service operation massively, without limits and with AI.')}</p>
+          <div style={{ display:'flex', justifyContent:'center', gap:'80px', marginTop:'40px', position:'relative', zIndex:2 }}>
+            {[['4', tr('Módulos','Modules')], ['13', tr('APIs disponibles','Available APIs')], ['100%', tr('Gestión masiva','Bulk management')]].map(([num, label]) => (
+              <div key={label} style={{ textAlign:'center' }}>
+                <div style={{ fontSize:'40px', fontWeight:900, color:'#71B136' }}>{num}</div>
+                <div style={{ fontSize:'12px', color:'rgba(255,255,255,0.5)', letterSpacing:'0.1em', textTransform:'uppercase' }}>{label}</div>
+              </div>
             ))}
           </div>
+        </div>
+      </div>
 
-          <div className={`func-panel${activeTab === 'actividades' ? ' active' : ''} fade-up d2`}>
-            <div className="func-text">
-              <div className="func-module-badge"><span>{tr('Módulo Actividades', 'Activities Module')}</span></div>
-              <h3>{tr('Gestión masiva de actividades', 'Bulk activity management')}</h3>
-              <p>{tr('Creá, actualizá, reasigná y cerrá miles de actividades de OFSC en una sola operación.', 'Create, update, reassign, and close thousands of OFSC activities in a single operation.')}</p>
-              <div className="func-actions">
-                {[tr('Creación masiva desde plantilla Excel','Bulk creation from Excel template'), tr('Actualización de propiedades por lote','Batch property updates'), tr('Cambio de estado (pendiente → en curso → cerrada)','Status change (pending → in progress → closed)'), tr('Reasignación de recurso o fecha','Resource or date reassignment'), tr('Validación previa con preview de errores','Prior validation with error preview')].map((item, i) => (
-                  <div key={i} className="func-action-item"><div className="func-action-dot"></div>{item}</div>
-                ))}
-              </div>
+      {/* BLOQUE 2: MÓDULOS CARDS */}
+      <div style={{ width:'100%', background:'#ffffff', padding:'80px 60px' }}>
+        <div style={{ maxWidth:'1400px', margin:'0 auto' }}>
+          <div style={{ marginBottom:'8px' }}>
+            <span style={{ color:'#71B136', fontSize:'11px', fontWeight:700, letterSpacing:'0.12em', textTransform:'uppercase' }}>{tr('MÓDULOS','MODULES')}</span>
+          </div>
+          <h3 style={{ fontSize:'36px', fontWeight:800, color:'#172554', marginBottom:'16px' }}>{tr('Módulos de gestión masiva','Bulk management modules')}</h3>
+          <p style={{ color:'#6B7280', fontSize:'16px', marginBottom:'48px' }}>{tr('Operaciones masivas sobre actividades, recursos e inventarios de OFS.','Bulk operations on OFS activities, resources and inventories.')}</p>
+          <div style={{ display:'grid', gridTemplateColumns:'repeat(2,1fr)', gap:'24px' }}>
+
+            {/* Card ACTIVIDADES */}
+            <div style={{ background:'#F8FAFC', borderRadius:'16px', padding:'32px', border:'1px solid #E5E7EB' }}>
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#71B136" strokeWidth="1.5" strokeLinecap="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+              <div style={{ fontSize:'20px', fontWeight:700, color:'#172554', marginTop:'16px', marginBottom:'8px' }}>{tr('Actividades','Activities')}</div>
+              <div style={{ color:'#6B7280', fontSize:'14px', lineHeight:1.6, marginBottom:'16px' }}>{tr('Creá, actualizá y gestioná el estado de actividades de forma masiva.','Create, update and manage activity status in bulk.')}</div>
+              <span style={{ background:'#F0FDF4', color:'#71B136', fontSize:'11px', fontWeight:600, padding:'4px 12px', borderRadius:'999px', display:'inline-block' }}>{tr('Gestión masiva','Bulk management')}</span>
             </div>
+
+            {/* Card RECURSOS */}
+            <div style={{ background:'#F8FAFC', borderRadius:'16px', padding:'32px', border:'1px solid #E5E7EB' }}>
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#71B136" strokeWidth="1.5" strokeLinecap="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+              <div style={{ fontSize:'20px', fontWeight:700, color:'#172554', marginTop:'16px', marginBottom:'8px' }}>{tr('Recursos','Resources')}</div>
+              <div style={{ color:'#6B7280', fontSize:'14px', lineHeight:1.6, marginBottom:'16px' }}>{tr('Actualizá propiedades, zonas de trabajo, skills y horarios de técnicos masivamente.','Update properties, work zones, skills and schedules of technicians in bulk.')}</div>
+              <span style={{ background:'#F0FDF4', color:'#71B136', fontSize:'11px', fontWeight:600, padding:'4px 12px', borderRadius:'999px', display:'inline-block' }}>{tr('Gestión masiva','Bulk management')}</span>
+            </div>
+
+            {/* Card INVENTARIOS */}
+            <div style={{ background:'#F8FAFC', borderRadius:'16px', padding:'32px', border:'1px solid #E5E7EB' }}>
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#71B136" strokeWidth="1.5" strokeLinecap="round"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+              <div style={{ fontSize:'20px', fontWeight:700, color:'#172554', marginTop:'16px', marginBottom:'8px' }}>{tr('Inventarios','Inventories')}</div>
+              <div style={{ color:'#6B7280', fontSize:'14px', lineHeight:1.6, marginBottom:'16px' }}>{tr('Gestioná y transferí inventarios entre técnicos y ubicaciones de forma masiva.','Manage and transfer inventories between technicians and locations in bulk.')}</div>
+              <span style={{ background:'#F0FDF4', color:'#71B136', fontSize:'11px', fontWeight:600, padding:'4px 12px', borderRadius:'999px', display:'inline-block' }}>{tr('Gestión masiva','Bulk management')}</span>
+            </div>
+
+            {/* Card DESCARGAS */}
+            <div style={{ background:'#F8FAFC', borderRadius:'16px', padding:'32px', border:'1px solid #E5E7EB' }}>
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#71B136" strokeWidth="1.5" strokeLinecap="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              <div style={{ fontSize:'20px', fontWeight:700, color:'#172554', marginTop:'16px', marginBottom:'8px' }}>{tr('Descargas','Downloads')}</div>
+              <div style={{ color:'#6B7280', fontSize:'14px', lineHeight:1.6, marginBottom:'16px' }}>{tr('Descargá actividades masivamente para reportes, análisis y procesamiento externo.','Download activities in bulk for reports, analysis and external processing.')}</div>
+              <span style={{ background:'#F0FDF4', color:'#71B136', fontSize:'11px', fontWeight:600, padding:'4px 12px', borderRadius:'999px', display:'inline-block' }}>{tr('Exportación masiva','Bulk export')}</span>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      {/* BLOQUE 3: APIs */}
+      <div style={{ width:'100%', background:'#F8FAFC', padding:'80px 60px' }}>
+        <div style={{ maxWidth:'1400px', margin:'0 auto' }}>
+          <div style={{ marginBottom:'8px' }}>
+            <span style={{ color:'#71B136', fontSize:'11px', fontWeight:700, letterSpacing:'0.12em', textTransform:'uppercase' }}>{tr('APIs DE OFS','OFS APIs')}</span>
+          </div>
+          <h3 style={{ fontSize:'36px', fontWeight:800, color:'#172554', marginBottom:'16px' }}>{tr('+13 APIs de Oracle Field Service','13+ Oracle Field Service APIs')}</h3>
+          <p style={{ color:'#6B7280', fontSize:'16px', marginBottom:'48px' }}>{tr('Todas disponibles para gestión masiva. Sin límites de volumen.','All available for bulk management. No volume limits.')}</p>
+
+          <div style={{ background:'linear-gradient(135deg, #172554 0%, #1a3a6b 100%)', borderRadius:'12px', padding:'20px 32px', marginBottom:'32px', display:'flex', alignItems:'center', gap:'16px' }}>
+            <svg width="1em" height="0.85em" viewBox="0 0 28 24" fill="none" style={{ display:'inline-block', verticalAlign:'middle', fontSize:'24px', flexShrink:0 }}><path d="M16 1.5l.9 3.2 3.2.9-3.2.9L16 9.7l-.9-3.2-3.2-.9 3.2-.9z" fill="#71B136" stroke="#71B136" strokeWidth="0.4" strokeLinejoin="round"/><path d="M7 7l.6 2.2 2.2.6-2.2.6L7 12.6l-.6-2.2-2.2-.6 2.2-.6z" fill="#71B136" stroke="#71B136" strokeWidth="0.3" strokeLinejoin="round" opacity="0.65"/><path d="M21 14l.5 1.6 1.6.5-1.6.5L21 18.2l-.5-1.6-1.6-.5 1.6-.5z" fill="#71B136" stroke="#71B136" strokeWidth="0.3" strokeLinejoin="round" opacity="0.45"/></svg>
             <div>
-              <div className="browser-frame"><div className="browser-toolbar"><div className="browser-dots"><span></span><span></span><span></span></div><div className="browser-address">FSMTool · {tr('Actividades','Activities')}</div></div>
-              <img src="/assets/fsmtool-actividades.png" style={{ width: '100%', display: 'block' }} alt="FSMTool actividades" /></div>
+              <div style={{ color:'white', fontSize:'16px', fontWeight:700 }}>{tr('100% Gestión Masiva','100% Bulk Management')}</div>
+              <div style={{ color:'rgba(255,255,255,0.65)', fontSize:'14px' }}>{tr('Todas las operaciones soportan procesamiento masivo de registros sin límite.','All operations support unlimited bulk record processing.')}</div>
             </div>
           </div>
 
-          <div className={`func-panel${activeTab === 'recursos' ? ' active' : ''}`}>
-            <div className="func-text">
-              <div className="func-module-badge"><span>{tr('Módulo Recursos','Resources Module')}</span></div>
-              <h3>{tr('Administración masiva de recursos','Bulk resource administration')}</h3>
-              <p>{tr('Gestioná técnicos, vehículos y equipos de tu organización OFSC de forma masiva.','Manage technicians, vehicles, and equipment in your OFSC organization in bulk.')}</p>
-              <div className="func-actions">
-                {[tr('Creación de recursos en lote','Batch resource creation'), tr('Actualización de habilidades y certificaciones','Skills and certifications update'), tr('Asignación masiva de zonas de trabajo','Bulk work zone assignment'), tr('Gestión de calendarios y horarios','Calendar and schedule management')].map((item, i) => (
-                  <div key={i} className="func-action-item"><div className="func-action-dot"></div>{item}</div>
+          <div style={{ display:'grid', gridTemplateColumns:'repeat(3,1fr)', gap:'24px' }}>
+            {[
+              { name:'Activities', count:'6', endpoints:[tr('Create activities','Create activities'), tr('Update activities','Update activities'), tr('Change activity status','Change activity status'), tr('Change activity date','Change activity date'), tr('Change activity resource','Change activity resource'), tr('Download activities','Download activities')] },
+              { name:'Resources', count:'5', endpoints:[tr('Create resources','Create resources'), tr('Update resource properties','Update resource properties'), tr('Update resources work zones','Update resources work zones'), tr('Update resources work skills','Update resources work skills'), tr('Update resources work schedules','Update resources work schedules')] },
+              { name:'Inventories', count:'2', endpoints:[tr('Inventory management','Inventory management'), tr('Inventory transfer','Inventory transfer')] },
+            ].map((cat) => (
+              <div key={cat.name} style={{ background:'white', borderRadius:'16px', padding:'28px', border:'1px solid #E5E7EB', boxShadow:'0 2px 8px rgba(0,0,0,0.04)' }}>
+                <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom:'20px' }}>
+                  <span style={{ fontSize:'16px', fontWeight:700, color:'#172554' }}>{cat.name}</span>
+                  <span style={{ background:'#F0FDF4', color:'#71B136', fontSize:'12px', fontWeight:600, padding:'4px 10px', borderRadius:'999px' }}>{cat.count} APIs</span>
+                </div>
+                {cat.endpoints.map((ep, i) => (
+                  <div key={i} style={{ display:'flex', alignItems:'center', gap:'8px', padding:'8px 0', borderBottom: i < cat.endpoints.length - 1 ? '1px solid #F3F4F6' : 'none', fontSize:'13px', color:'#6B7280' }}>
+                    <span style={{ width:'6px', height:'6px', borderRadius:'50%', background:'#71B136', flexShrink:0, display:'inline-block' }}></span>
+                    {ep}
+                  </div>
                 ))}
               </div>
-            </div>
-            <div>
-              <div className="browser-frame"><div className="browser-toolbar"><div className="browser-dots"><span></span><span></span><span></span></div><div className="browser-address">FSMTool · {tr('Recursos','Resources')}</div></div>
-              <img src="/assets/fsmtool-config.png" style={{ width: '100%', display: 'block' }} alt="FSMTool recursos" /></div>
-            </div>
+            ))}
           </div>
+        </div>
+      </div>
 
-          <div className={`func-panel${activeTab === 'inventario' ? ' active' : ''}`}>
-            <div className="func-text">
-              <div className="func-module-badge"><span>{tr('Módulo Inventario','Inventory Module')}</span></div>
-              <h3>{tr('Gestión y transferencia de inventario','Inventory management and transfer')}</h3>
-              <p>{tr('Controlá el stock de materiales asignados a técnicos y almacenes.','Control the stock of materials assigned to technicians and warehouses.')}</p>
-              <div className="func-actions">
-                {[tr('Transferencia masiva entre recursos','Bulk transfer between resources'), tr('Carga masiva de stock inicial','Bulk initial stock loading'), tr('Exportación completa para auditoría','Full export for audit')].map((item, i) => (
-                  <div key={i} className="func-action-item"><div className="func-action-dot"></div>{item}</div>
-                ))}
-              </div>
-            </div>
-            <div>
-              <div className="browser-frame"><div className="browser-toolbar"><div className="browser-dots"><span></span><span></span><span></span></div><div className="browser-address">FSMTool · {tr('Inventario','Inventory')}</div></div>
-              <img src="/assets/fsmtool-config.png" style={{ width: '100%', display: 'block' }} alt="FSMTool inventario" /></div>
-            </div>
-          </div>
-
-          <div className={`func-panel${activeTab === 'descargas' ? ' active' : ''}`}>
-            <div className="func-text">
-              <div className="func-module-badge"><span>{tr('Módulo Descargas','Downloads Module')}</span></div>
-              <h3>{tr('Exportación avanzada de datos OFSC','Advanced OFSC data export')}</h3>
-              <p>{tr('Descargá actividades con filtros avanzados por recurso, fecha, estado y condiciones personalizadas.','Download activities with advanced filters by resource, date, status, and custom conditions.')}</p>
-              <div className="func-actions">
-                {[tr('Filtros por árbol jerárquico de recursos','Filters by hierarchical resource tree'), tr('Condiciones personalizables por campo','Customizable conditions by field'), tr('Favoritos para consultas recurrentes','Favorites for recurring queries'), tr('Exportación a Excel con campos configurables','Excel export with configurable fields')].map((item, i) => (
-                  <div key={i} className="func-action-item"><div className="func-action-dot"></div>{item}</div>
-                ))}
-              </div>
-            </div>
-            <div>
-              <div className="browser-frame"><div className="browser-toolbar"><div className="browser-dots"><span></span><span></span><span></span></div><div className="browser-address">FSMTool · {tr('Descargas','Downloads')}</div></div>
-              <img src="/assets/fsmtool-descarga.png" style={{ width: '100%', display: 'block' }} alt="FSMTool descargas" /></div>
-            </div>
+      {/* BLOQUE 4: CTA IA FINAL */}
+      <div style={{ width:'100%', background:'linear-gradient(135deg, #071428 0%, #172554 50%, #1a3a2a 100%)', padding:'80px 60px', textAlign:'center', position:'relative', overflow:'hidden' }}>
+        <svg style={{ position:'absolute', inset:0, width:'100%', height:'100%', opacity:0.1, pointerEvents:'none' }} aria-hidden="true">
+          <defs><pattern id="dots-fsm2" x="0" y="0" width="32" height="32" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r="1" fill="#71B136"/></pattern></defs>
+          <rect width="100%" height="100%" fill="url(#dots-fsm2)"/>
+        </svg>
+        <div style={{ position:'absolute', top:'50%', left:'50%', transform:'translate(-50%,-50%)', width:'500px', height:'500px', background:'radial-gradient(circle, rgba(113,177,54,0.12) 0%, transparent 70%)', borderRadius:'50%', pointerEvents:'none' }}></div>
+        <div style={{ position:'relative', zIndex:2 }}>
+          <svg width="48" height="40" viewBox="0 0 28 24" fill="none" style={{ display:'block', margin:'0 auto 24px' }}><path d="M16 1.5l.9 3.2 3.2.9-3.2.9L16 9.7l-.9-3.2-3.2-.9 3.2-.9z" fill="#71B136" stroke="#71B136" strokeWidth="0.4" strokeLinejoin="round"/><path d="M7 7l.6 2.2 2.2.6-2.2.6L7 12.6l-.6-2.2-2.2-.6 2.2-.6z" fill="#71B136" stroke="#71B136" strokeWidth="0.3" strokeLinejoin="round" opacity="0.65"/><path d="M21 14l.5 1.6 1.6.5-1.6.5L21 18.2l-.5-1.6-1.6-.5 1.6-.5z" fill="#71B136" stroke="#71B136" strokeWidth="0.3" strokeLinejoin="round" opacity="0.45"/></svg>
+          <div style={{ color:'white', fontSize:'44px', fontWeight:900, lineHeight:1.1 }}>{tr('Gestioná tu operación','Manage your operation')}</div>
+          <div style={{ color:'#71B136', fontSize:'44px', fontWeight:900, lineHeight:1.1, marginBottom:'16px' }}>{tr('de forma masiva con IA.','massively with AI.')}</div>
+          <p style={{ color:'rgba(255,255,255,0.55)', fontSize:'18px', maxWidth:'500px', margin:'0 auto 40px', lineHeight:1.7 }}>{tr('Sin límites de volumen. Sin código. Con el poder de la Inteligencia Artificial.','No volume limits. No code. With the power of Artificial Intelligence.')}</p>
+          <div style={{ display:'flex', justifyContent:'center', gap:'16px', flexWrap:'wrap' }}>
+            <a href="#demo" style={{ background:'#71B136', color:'white', padding:'16px 40px', borderRadius:'8px', fontSize:'16px', fontWeight:600, textDecoration:'none', display:'inline-block' }}>{tr('Solicitar acceso','Request access')}</a>
+            <a href="#demo" style={{ border:'1px solid rgba(255,255,255,0.3)', color:'white', padding:'16px 40px', borderRadius:'8px', fontSize:'16px', textDecoration:'none', display:'inline-block' }}>{tr('Ver más','Learn more')}</a>
           </div>
         </div>
       </div>

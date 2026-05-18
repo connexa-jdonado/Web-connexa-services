@@ -5,11 +5,41 @@ import { useRouter } from 'next/navigation';
 import { useLang } from '@/context/LanguageContext';
 
 const WB_CASOS = [
-  { title: 'Automatización de tareas repetitivas', desc: 'Creá workflows que ejecuten automáticamente las tareas que tu equipo repite a diario en OFSC.', metric: '0 horas en tareas manuales repetitivas', disabled: false },
-  { title: 'IA Agents integrados', desc: 'Incorporá agentes de IA dentro de tus flujos para tomar decisiones automáticas basadas en datos de campo.', metric: 'Decisiones inteligentes sin intervención humana', disabled: false },
-  { title: 'Gestión automática de capacidad', desc: 'Automatizá la distribución de carga según la disponibilidad real de tu fuerza de trabajo por zona.', metric: 'Capacidad optimizada en tiempo real', disabled: false },
-  { title: 'Próximamente', desc: 'Nuevo caso de uso en camino.', metric: '', disabled: true },
-  { title: 'Próximamente', desc: 'Nuevo caso de uso en camino.', metric: '', disabled: true },
+  {
+    num: '01',
+    titleEs: 'Automatización de actividades OFS', titleEn: 'OFS Activity Automation',
+    badgeEs: '✦ IA disponible', badgeEn: '✦ AI available',
+    descEs: 'Recibí eventos de OFS en tiempo real, ejecutá acciones automáticas y notificá a Slack, Teams o sistemas externos sin escribir una línea de código.',
+    descEn: 'Receive OFS events in real time, execute automatic actions and notify Slack, Teams or external systems without writing a single line of code.',
+  },
+  {
+    num: '02',
+    titleEs: 'Agente de IA integrado', titleEn: 'Integrated AI Agent',
+    badgeEs: '✦ IA nativa', badgeEn: '✦ Native AI',
+    descEs: 'Conectá Slack, Teams o WhatsApp con OFS mediante un agente de IA. Consultá horarios, estados y datos de campo en lenguaje natural desde cualquier canal.',
+    descEn: 'Connect Slack, Teams or WhatsApp with OFS through an AI agent. Query schedules, statuses and field data in natural language from any channel.',
+  },
+  {
+    num: '03',
+    titleEs: 'Backup de chats de Collaboration', titleEn: 'Collaboration Chat Backup',
+    badgeEs: '✦ Automatización', badgeEn: '✦ Automation',
+    descEs: 'Capturá todos los mensajes de OFS Collaboration automáticamente y guardalos en tu base de datos para auditoría y trazabilidad completa.',
+    descEn: 'Automatically capture all OFS Collaboration messages and store them in your database for complete audit and traceability.',
+  },
+  {
+    num: '04',
+    titleEs: 'Alerta inteligente de inventarios', titleEn: 'Smart Inventory Alert',
+    badgeEs: '✦ IA disponible', badgeEn: '✦ AI available',
+    descEs: 'Detectá automáticamente cuando un técnico no tiene el inventario requerido al asignarle una tarea y enviá alertas instantáneas por Email, Slack o Teams al supervisor.',
+    descEn: 'Automatically detect when a technician lacks required inventory when assigned a task and send instant alerts via Email, Slack or Teams to the supervisor.',
+  },
+  {
+    num: '05',
+    titleEs: 'Monitoreo de formularios', titleEn: 'Form Monitoring',
+    badgeEs: '✦ Automatización', badgeEn: '✦ Automation',
+    descEs: 'Cada vez que se guarda un formulario en OFS, enviá la información automáticamente a cualquier sistema externo vía webhook o API.',
+    descEn: 'Every time a form is saved in OFS, automatically send the information to any external system via webhook or API.',
+  },
 ];
 
 const WB_TABS = [
@@ -25,10 +55,12 @@ export default function WorkflowBuilderClient() {
   const ctaRef = useRef(null);
 
   const [activeCaso, setActiveCaso] = useState(0);
-  const [videoTitle, setVideoTitle] = useState(WB_CASOS[0].title);
-  const [videoOpacity, setVideoOpacity] = useState(1);
+  const [mockupOpacity, setMockupOpacity] = useState(1);
   const [activeTab, setActiveTab] = useState('constructor');
   const [formSent, setFormSent] = useState(false);
+  const casosRef = useRef(null);
+  const scrollLocked = useRef(false);
+  const touchStartY = useRef(0);
 
   const tr = (es, en) => (lang === 'es' ? es : en);
 
@@ -50,14 +82,60 @@ export default function WorkflowBuilderClient() {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
+  useEffect(() => {
+    const section = casosRef.current;
+    if (!section) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => { scrollLocked.current = entry.intersectionRatio >= 0.6; },
+      { threshold: 0.6 }
+    );
+    observer.observe(section);
+    const handleWheel = (e) => {
+      if (!scrollLocked.current) return;
+      e.preventDefault();
+      if (e.deltaY > 0) {
+        setActiveCaso((prev) => {
+          if (prev >= WB_CASOS.length - 1) { scrollLocked.current = false; return prev; }
+          return prev + 1;
+        });
+      } else {
+        setActiveCaso((prev) => {
+          if (prev <= 0) { scrollLocked.current = false; return prev; }
+          return prev - 1;
+        });
+      }
+    };
+    const handleTouchStart = (e) => { touchStartY.current = e.touches[0].clientY; };
+    const handleTouchEnd = (e) => {
+      if (!scrollLocked.current) return;
+      const delta = touchStartY.current - e.changedTouches[0].clientY;
+      if (Math.abs(delta) < 40) return;
+      if (delta > 0) {
+        setActiveCaso((prev) => {
+          if (prev >= WB_CASOS.length - 1) { scrollLocked.current = false; return prev; }
+          return prev + 1;
+        });
+      } else {
+        setActiveCaso((prev) => {
+          if (prev <= 0) { scrollLocked.current = false; return prev; }
+          return prev - 1;
+        });
+      }
+    };
+    window.addEventListener('wheel', handleWheel, { passive: false });
+    window.addEventListener('touchstart', handleTouchStart, { passive: true });
+    window.addEventListener('touchend', handleTouchEnd, { passive: true });
+    return () => {
+      observer.disconnect();
+      window.removeEventListener('wheel', handleWheel);
+      window.removeEventListener('touchstart', handleTouchStart);
+      window.removeEventListener('touchend', handleTouchEnd);
+    };
+  }, []);
+
   const handleCasoClick = (idx) => {
-    if (WB_CASOS[idx].disabled) return;
-    setVideoOpacity(0);
-    setTimeout(() => {
-      setActiveCaso(idx);
-      setVideoTitle(WB_CASOS[idx].title);
-      setVideoOpacity(1);
-    }, 150);
+    setMockupOpacity(0);
+    setTimeout(() => { setActiveCaso(idx); setMockupOpacity(1); }, 150);
   };
 
   const scrollTo = (id) => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
@@ -142,49 +220,61 @@ export default function WorkflowBuilderClient() {
         </div>
       </div>
 
-      {/* ── CASOS DE USO ── */}
-      <section className="casos-v2-section">
-        <div className="container">
-          <div className="casos-v2-header fade-up">
-            <div className="casos-v2-eyebrow">{tr('CASOS DE USO', 'USE CASES')}</div>
-            <h2 className="casos-v2-title">{tr('Mirá Workflow Builder en acción', 'See Workflow Builder in action')}</h2>
-            <p className="casos-v2-sub">{tr('Seleccioná un caso y vé cómo automatizar tus procesos OFSC sin escribir código.', 'Select a case and see how to automate your OFSC processes without writing code.')}</p>
-          </div>
-          <div className="casos-v2-layout">
-            <div className="casos-v2-list">
+      {/* ── CASOS DE USO — SCROLL LOCKING ── */}
+      <section ref={casosRef} className="casos-sl-section" id="casos-uso">
+        <div className="casos-sl-inner">
+          <div className="casos-sl-left">
+            <div className="casos-sl-eyebrow">{tr('CASOS DE USO', 'USE CASES')}</div>
+            <h2 className="casos-sl-title">{tr('Mirá Workflow Builder en acción', 'See Workflow Builder in action')}</h2>
+            <p className="casos-sl-sub">{tr('Automatizá tus procesos OFSC sin escribir código', 'Automate your OFSC processes without writing code')}</p>
+            <div className="casos-sl-badge">
+              <svg width="22" height="20" viewBox="0 0 32 28" fill="none">
+                <path d="M23 2l1.2 4L28.5 7.5l-4.3 1.2L23 13l-1.2-4.3L17.5 7.5l4.3-1.2z" fill="white" opacity="1"/>
+                <path d="M12 0l.9 3.2L16 4.8l-3.1.9L12 8.8l-.9-3.1L8 4.8l3.1-.9z" fill="white" opacity="0.7"/>
+                <path d="M26 17l.7 2.3L29 21l-2.3.7L26 24l-.7-2.3L23 21l2.3-.7z" fill="white" opacity="0.5"/>
+              </svg>
+              <span>{tr('Impulsado por IA', 'Powered by AI')}</span>
+            </div>
+            <div className="casos-sl-list">
               {WB_CASOS.map((caso, idx) => (
                 <div
                   key={idx}
-                  className={`caso-item${activeCaso === idx && !caso.disabled ? ' active' : ''}${caso.disabled ? ' disabled' : ''}`}
+                  className={`casos-sl-item${activeCaso === idx ? ' active' : ''}`}
                   onClick={() => handleCasoClick(idx)}
                 >
-                  <div className="caso-item-header">
-                    <span className="caso-item-num">{String(idx + 1).padStart(2, '0')}</span>
-                    <span className="caso-item-title">
-                      {caso.title}
-                      {caso.disabled && <span className="caso-soon-badge">{tr('Próximamente', 'Coming soon')}</span>}
-                    </span>
+                  <span className="casos-sl-num">{caso.num}</span>
+                  <div className="casos-sl-item-body">
+                    <div className="casos-sl-item-title">{tr(caso.titleEs, caso.titleEn)}</div>
+                    {activeCaso === idx && (
+                      <div className="casos-sl-item-desc">
+                        <span className="casos-sl-item-badge">{tr(caso.badgeEs, caso.badgeEn)}</span>
+                        <p>{tr(caso.descEs, caso.descEn)}</p>
+                      </div>
+                    )}
                   </div>
-                  {!caso.disabled && (
-                    <div className="caso-item-body">
-                      <p className="caso-item-desc">{caso.desc}</p>
-                      <span className="caso-item-metric">{caso.metric}</span>
-                    </div>
-                  )}
                 </div>
               ))}
             </div>
-            <div className="casos-v2-video">
-              <div className="video-frame">
-                <div className="video-toolbar">
-                  <div className="video-dots"><span></span><span></span><span></span></div>
+            <div className="casos-sl-dots">
+              {WB_CASOS.map((_, idx) => (
+                <div key={idx} className={`casos-sl-dot${activeCaso === idx ? ' active' : ''}`} onClick={() => handleCasoClick(idx)} />
+              ))}
+            </div>
+          </div>
+          <div className="casos-sl-right">
+            <div className="casos-sl-browser">
+              <div className="casos-sl-browser-bar">
+                <div className="casos-sl-browser-dots">
+                  <span className="dot-red" /><span className="dot-yellow" /><span className="dot-green" />
                 </div>
-                <div className="video-area" style={{ opacity: videoOpacity, transition: 'opacity 0.3s ease' }}>
-                  <div className="video-placeholder">
-                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-                    <p className="video-title">{videoTitle}</p>
-                    <span className="video-soon">{tr('Próximamente — demo en vivo', 'Coming soon — live demo')}</span>
-                  </div>
+              </div>
+              <div className="casos-sl-browser-body" style={{ opacity: mockupOpacity }}>
+                <div className="casos-sl-placeholder">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.2)" strokeWidth="1.5" width="48" height="48">
+                    <rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/>
+                  </svg>
+                  <div className="casos-sl-placeholder-num">{WB_CASOS[activeCaso].num}</div>
+                  <div className="casos-sl-placeholder-title">{tr(WB_CASOS[activeCaso].titleEs, WB_CASOS[activeCaso].titleEn)}</div>
                 </div>
               </div>
             </div>

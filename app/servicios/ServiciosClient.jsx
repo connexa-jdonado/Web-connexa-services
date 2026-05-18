@@ -173,7 +173,14 @@ export default function ServiciosClient() {
               <div className="section-header fade-up">
                 <div className="section-eyebrow">{tr('IMPLEMENTACIÓN', 'IMPLEMENTATION')}</div>
                 <h2>{tr('Zinier — Field Service Inteligente', 'Zinier — Intelligent Field Service')}</h2>
-                <span style={{ background: 'linear-gradient(135deg, #71B136 0%, #172554 100%)', color: '#fff', fontSize: '11px', fontWeight: 600, letterSpacing: '0.08em', padding: '4px 12px', borderRadius: '999px', boxShadow: '0 2px 12px rgba(113,177,54,0.3)', display: 'inline-block', margin: '4px 0 8px' }}>{tr('✦ IA integrada', '✦ AI integrated')}</span>
+                <div style={{display:'flex', alignItems:'center', gap:'8px', marginBottom:'16px'}}>
+                  <svg width="18px" height="15px" viewBox="0 0 28 24" fill="none">
+                    <path d="M16 1.5l.9 3.2 3.2.9-3.2.9L16 9.7l-.9-3.2-3.2-.9 3.2-.9z" fill="#71B136" stroke="#71B136" strokeWidth="0.4" strokeLinejoin="round"/>
+                    <path d="M7 7l.6 2.2 2.2.6-2.2.6L7 12.6l-.6-2.2-2.2-.6 2.2-.6z" fill="#71B136" stroke="#71B136" strokeWidth="0.3" strokeLinejoin="round" opacity="0.65"/>
+                    <path d="M21 14l.5 1.6 1.6.5-1.6.5L21 18.2l-.5-1.6-1.6-.5 1.6-.5z" fill="#71B136" stroke="#71B136" strokeWidth="0.3" strokeLinejoin="round" opacity="0.45"/>
+                  </svg>
+                  <span style={{color:'#71B136', fontSize:'13px', fontWeight:600, letterSpacing:'0.06em'}}>{tr('Impulsado por Inteligencia Artificial','Powered by Artificial Intelligence')}</span>
+                </div>
                 <p>{tr('Como partner certificado de Zinier implementamos la plataforma de Field Service Management más innovadora del mercado, potenciada por inteligencia artificial.', 'As a certified Zinier partner, we implement the most innovative Field Service Management platform on the market, powered by artificial intelligence.')}</p>
               </div>
               <div className="zinier-badge fade-up d1">

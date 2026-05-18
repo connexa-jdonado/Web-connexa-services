@@ -118,11 +118,21 @@ export default function ProductosClient() {
                 </div>
               </div>
               <div className="showcase-ctas fade-up d4">
-                <Link href="/productos/workflow-builder" className="btn-primary">
+                <Link href="/productos/workflow-builder" className="btn-primary"
+                  onMouseEnter={() => setWfPrimaryHover(true)}
+                  onMouseLeave={() => setWfPrimaryHover(false)}
+                  style={wfPrimaryHover
+                    ? { transform: 'translateY(-2px)', boxShadow: '0 8px 24px rgba(23,37,84,0.28)', transition: 'transform 0.2s ease, box-shadow 0.2s ease' }
+                    : { transition: 'transform 0.2s ease, box-shadow 0.2s ease' }}>
                   {tr('Ver más', 'Learn more')}
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
                 </Link>
-                <Link href="/productos/workflow-builder" className="btn-secondary">{tr('Solicitar acceso', 'Request access')}</Link>
+                <Link href="/productos/workflow-builder" className="btn-secondary"
+                  onMouseEnter={() => setWfSecondaryHover(true)}
+                  onMouseLeave={() => setWfSecondaryHover(false)}
+                  style={wfSecondaryHover
+                    ? { transform: 'translateY(-2px)', boxShadow: '0 4px 16px rgba(23,37,84,0.18)', transition: 'transform 0.2s ease, box-shadow 0.2s ease' }
+                    : { transition: 'transform 0.2s ease, box-shadow 0.2s ease' }}>{tr('Solicitar acceso', 'Request access')}</Link>
               </div>
             </div>
           </div>
@@ -164,11 +174,21 @@ export default function ProductosClient() {
                 </div>
               </div>
               <div className="showcase-ctas fade-up d4">
-                <Link href="/productos/fsmtool" className="btn-primary">
+                <Link href="/productos/fsmtool" className="btn-primary"
+                  onMouseEnter={() => setFsmPrimaryHover(true)}
+                  onMouseLeave={() => setFsmPrimaryHover(false)}
+                  style={fsmPrimaryHover
+                    ? { transform: 'translateY(-2px)', boxShadow: '0 8px 24px rgba(23,37,84,0.28)', transition: 'transform 0.2s ease, box-shadow 0.2s ease' }
+                    : { transition: 'transform 0.2s ease, box-shadow 0.2s ease' }}>
                   {tr('Ver más', 'Learn more')}
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
                 </Link>
-                <Link href="/productos/fsmtool" className="btn-secondary">{tr('Solicitar acceso', 'Request access')}</Link>
+                <Link href="/productos/fsmtool" className="btn-secondary"
+                  onMouseEnter={() => setFsmSecondaryHover(true)}
+                  onMouseLeave={() => setFsmSecondaryHover(false)}
+                  style={fsmSecondaryHover
+                    ? { transform: 'translateY(-2px)', boxShadow: '0 4px 16px rgba(23,37,84,0.18)', transition: 'transform 0.2s ease, box-shadow 0.2s ease' }
+                    : { transition: 'transform 0.2s ease, box-shadow 0.2s ease' }}>{tr('Solicitar acceso', 'Request access')}</Link>
               </div>
             </div>
             <div className="fade-up d2">

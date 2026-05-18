@@ -113,7 +113,14 @@ export default function ServiciosClient() {
               <div className="section-header fade-up">
                 <div className="section-eyebrow">{tr('IMPLEMENTACIÓN', 'IMPLEMENTATION')}</div>
                 <h2>Oracle Field Service Cloud</h2>
-                <span style={{ background: 'linear-gradient(135deg, #71B136 0%, #172554 100%)', color: '#fff', fontSize: '11px', fontWeight: 600, letterSpacing: '0.08em', padding: '4px 12px', borderRadius: '999px', boxShadow: '0 2px 12px rgba(113,177,54,0.3)', display: 'inline-block', margin: '4px 0 8px' }}>{tr('✦ IA integrada', '✦ AI integrated')}</span>
+                <div style={{display:'flex', alignItems:'center', gap:'8px', marginBottom:'16px'}}>
+                  <svg width="18px" height="15px" viewBox="0 0 28 24" fill="none">
+                    <path d="M16 1.5l.9 3.2 3.2.9-3.2.9L16 9.7l-.9-3.2-3.2-.9 3.2-.9z" fill="#71B136" stroke="#71B136" strokeWidth="0.4" strokeLinejoin="round"/>
+                    <path d="M7 7l.6 2.2 2.2.6-2.2.6L7 12.6l-.6-2.2-2.2-.6 2.2-.6z" fill="#71B136" stroke="#71B136" strokeWidth="0.3" strokeLinejoin="round" opacity="0.65"/>
+                    <path d="M21 14l.5 1.6 1.6.5-1.6.5L21 18.2l-.5-1.6-1.6-.5 1.6-.5z" fill="#71B136" stroke="#71B136" strokeWidth="0.3" strokeLinejoin="round" opacity="0.45"/>
+                  </svg>
+                  <span style={{color:'#71B136', fontSize:'13px', fontWeight:600, letterSpacing:'0.06em'}}>{tr('Impulsado por Inteligencia Artificial','Powered by Artificial Intelligence')}</span>
+                </div>
                 <p>{tr('Somos partner certificado de Oracle con experiencia en implementaciones end-to-end de Oracle Field Service Cloud. Configuramos, parametrizamos e integramos OFSC adaptado 100% a los procesos de tu empresa.', 'We are a certified Oracle partner with experience in end-to-end Oracle Field Service Cloud implementations. We configure, parameterize, and integrate OFSC 100% tailored to your company\'s processes.')}</p>
               </div>
               <div className="zinier-badge fade-up d1">
@@ -266,7 +273,7 @@ export default function ServiciosClient() {
       </section>
 
       {/* ── CONSULTORÍA ── */}
-      <section id="consultoria" className="sec-consultoria">
+      <section id="consultoria" className="sec-consultoria" style={{padding:0}}>
         <div style={{width:'100%', background:'#F3F4F6', padding:'100px 40px', position:'relative', overflow:'hidden', overflowX:'auto'}}>
           <svg style={{position:'absolute',inset:0,width:'100%',height:'100%',opacity:0,pointerEvents:'none',zIndex:0}}>
             <defs>

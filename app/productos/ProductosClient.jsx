@@ -70,6 +70,10 @@ export default function ProductosClient() {
               <p className="showcase-desc fade-up d2">{tr('Workflow Builder es un constructor visual de flujos de trabajo para Oracle Field Service Cloud. Permite diseñar, testear y publicar procesos de campo complejos sin escribir una línea de código.', 'Workflow Builder is a visual workflow builder for Oracle Field Service Cloud. It lets you design, test, and publish complex field processes without writing a single line of code.')}</p>
               <div className="benefits-list fade-up d3">
                 <div className="benefit-row">
+                  <div className="benefit-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="7" y="7" width="10" height="10" rx="1"/><path d="M7 12H4"/><path d="M20 12h-3"/><path d="M12 7V4"/><path d="M12 20v-3"/></svg></div>
+                  <div><div className="benefit-title">{tr('Agente de IA integrado', 'Integrated AI agent')}</div><div className="benefit-desc">{tr('Agente de IA para crear y optimizar tus workflows automáticamente.', 'AI agent to create and optimize your workflows automatically.')}</div></div>
+                </div>
+                <div className="benefit-row">
                   <div className="benefit-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div>
                   <div><div className="benefit-title">Editor drag &amp; drop</div><div className="benefit-desc">{tr('Arrastrá nodos y condiciones para construir cualquier flujo.', 'Drag nodes and conditions to build any workflow.')}</div></div>
                 </div>
@@ -84,10 +88,6 @@ export default function ProductosClient() {
                 <div className="benefit-row">
                   <div className="benefit-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div>
                   <div><div className="benefit-title">{tr('Autonomía para el negocio', 'Business autonomy')}</div><div className="benefit-desc">{tr('Los equipos de operaciones modifican procesos sin IT.', 'Operations teams modify processes without IT.')}</div></div>
-                </div>
-                <div className="benefit-row">
-                  <div className="benefit-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="7" y="7" width="10" height="10" rx="1"/><path d="M7 12H4"/><path d="M20 12h-3"/><path d="M12 7V4"/><path d="M12 20v-3"/></svg></div>
-                  <div><div className="benefit-title">{tr('Agente de IA integrado', 'Integrated AI agent')}</div><div className="benefit-desc">{tr('Agente de IA para crear y optimizar tus workflows automáticamente.', 'AI agent to create and optimize your workflows automatically.')}</div></div>
                 </div>
               </div>
               <div className="showcase-ctas fade-up d4">

@@ -142,8 +142,8 @@ export default function ProductosClient() {
       {/* ── FSMTOOL SHOWCASE (SECOND) ── */}
       <div className="showcase" id="prod-fsmtool">
         <div className="container" style={{ maxWidth: '100%', width: '100%' }}>
-          <div className="showcase-grid" style={{ gridTemplateColumns: '2fr 4fr' }}>
-            <div className="showcase-text">
+          <div className="showcase-grid" style={{ display: 'flex', flexDirection: 'row', alignItems: 'flex-start', gap: '0', padding: '48px 64px', marginTop: '40px' }}>
+            <div className="showcase-text" style={{ alignSelf: 'flex-start', paddingTop: '0', flex: 1 }}>
               <h2 className="showcase-name fade-up d1" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>FSMTool <span style={{color:'#172554', fontSize:'0.7em', fontWeight:700, display:'inline-flex', alignItems:'center', gap:'4px'}}><svg width="28" height="24" viewBox="0 0 28 24" fill="none"><path d="M16 1.5l.9 3.2 3.2.9-3.2.9L16 9.7l-.9-3.2-3.2-.9 3.2-.9z" fill="#71B136" stroke="#71B136" strokeWidth="0.4" strokeLinejoin="round"/><path d="M7 7l.6 2.2 2.2.6-2.2.6L7 12.6l-.6-2.2-2.2-.6 2.2-.6z" fill="#71B136" stroke="#71B136" strokeWidth="0.3" strokeLinejoin="round" opacity="0.65"/><path d="M21 14l.5 1.6 1.6.5-1.6.5L21 18.2l-.5-1.6-1.6-.5 1.6-.5z" fill="#71B136" stroke="#71B136" strokeWidth="0.3" strokeLinejoin="round" opacity="0.45"/></svg> AI</span></h2>
               <p className="showcase-tagline fade-up d2">{tr('Operaciones masivas en OFSC, sin complejidad', 'Bulk OFSC operations, without complexity')}</p>
               <p className="showcase-desc fade-up d2">{tr('FSMTool es una suite de administración y monitoreo de operaciones construida nativamente sobre Oracle Field Service Cloud. Permite a los equipos de operaciones ejecutar acciones masivas, visualizar el estado en tiempo real y automatizar los procesos del día a día.', 'FSMTool is an operations administration and monitoring suite built natively on Oracle Field Service Cloud. It lets operations teams execute bulk actions, visualize status in real time, and automate day-to-day processes.')}</p>
@@ -191,7 +191,7 @@ export default function ProductosClient() {
                     : { transition: 'transform 0.2s ease, box-shadow 0.2s ease' }}>{tr('Solicitar acceso', 'Request access')}</Link>
               </div>
             </div>
-            <div className="fade-up d2">
+            <div className="fade-up d2" style={{ maxWidth: '55%', marginLeft: '40px' }}>
               <div className="browser-frame" ref={fsmImgRef} style={{ opacity: 0 }}>
                 <div className="browser-toolbar">
                   <div className="browser-dots"><span></span><span></span><span></span></div>

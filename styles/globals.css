@@ -1056,7 +1056,7 @@ body {
   .caso-item-body { max-height: none !important; }
 }
 
-/* ── CASOS DE USO — SCROLL LOCKING ── */
+/* ── CASOS DE USO — SCROLL LOCKING v2 ── */
 .casos-sl-section { position: sticky; top: 0; width: 100%; height: 100vh; background: #F8FAFC; display: flex; align-items: center; overflow: hidden; z-index: 10; }
 .casos-sl-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; max-width: 1200px; margin: 0 auto; padding: 0 40px; width: 100%; align-items: center; }
 .casos-sl-left { display: flex; flex-direction: column; }

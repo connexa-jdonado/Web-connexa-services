@@ -688,14 +688,6 @@ export default function HomeClient() {
             <div className="product-card fade-up d1" onClick={() => router.push('/productos/workflow-builder')} role="button" tabIndex={0} onKeyDown={(e) => e.key === 'Enter' && router.push('/productos/workflow-builder')}>
               <div>
                 <div className="product-badge"><div className="product-badge-dot" /><span>{tr('Solución propia', 'Proprietary solution')}</span></div>
-                <div style={{display:'inline-flex', alignItems:'center', gap:'6px', background:'rgba(113,177,54,0.12)', border:'1px solid rgba(113,177,54,0.25)', borderRadius:'999px', padding:'5px 12px', marginBottom:'12px'}}>
-                  <svg width="18px" height="15px" viewBox="0 0 28 24" fill="none">
-                    <path d="M16 1.5l.9 3.2 3.2.9-3.2.9L16 9.7l-.9-3.2-3.2-.9 3.2-.9z" fill="#71B136" stroke="#71B136" strokeWidth="0.4" strokeLinejoin="round"/>
-                    <path d="M7 7l.6 2.2 2.2.6-2.2.6L7 12.6l-.6-2.2-2.2-.6 2.2-.6z" fill="#71B136" stroke="#71B136" strokeWidth="0.3" strokeLinejoin="round" opacity="0.65"/>
-                    <path d="M21 14l.5 1.6 1.6.5-1.6.5L21 18.2l-.5-1.6-1.6-.5 1.6-.5z" fill="#71B136" stroke="#71B136" strokeWidth="0.3" strokeLinejoin="round" opacity="0.45"/>
-                  </svg>
-                  <span style={{color:'#71B136', fontSize:'11px', fontWeight:600}}>{tr('Impulsado por IA', 'Powered by AI')}</span>
-                </div>
                 <div className="product-name">Workflow Builder</div>
                 <p className="product-desc">{tr('Constructor visual de flujos de trabajo para Oracle Field Service Cloud. Permite diseñar, testear y publicar workflows sin código, reduciendo el time-to-market de nuevos procesos. El Agente de IA te ayuda a crear y configurar workflows en lenguaje natural, sin escribir código.', 'Visual workflow builder for Oracle Field Service Cloud. Design, test and publish workflows without code, reducing the time-to-market for new processes. The AI Agent helps you create and configure workflows in natural language, without writing code.')}</p>
                 <div className="product-bullets">
@@ -709,19 +701,19 @@ export default function HomeClient() {
               </div>
               <div className="product-visual">
                 <svg viewBox="0 0 80 80"><circle cx="20" cy="20" r="8" /><circle cx="60" cy="20" r="8" /><circle cx="20" cy="60" r="8" /><circle cx="60" cy="60" r="8" /><line x1="28" y1="20" x2="52" y2="20" /><line x1="20" y1="28" x2="20" y2="52" /><line x1="28" y1="60" x2="52" y2="60" /><line x1="60" y1="28" x2="60" y2="52" /><circle cx="40" cy="40" r="6" /></svg>
+                <div style={{display:'flex', flexDirection:'column', alignItems:'center', gap:'8px', marginTop:'16px'}}>
+                  <svg width="32" height="27" viewBox="0 0 28 24" fill="none">
+                    <path d="M16 1.5l.9 3.2 3.2.9-3.2.9L16 9.7l-.9-3.2-3.2-.9 3.2-.9z" fill="#71B136" stroke="#71B136" strokeWidth="0.4" strokeLinejoin="round"/>
+                    <path d="M7 7l.6 2.2 2.2.6-2.2.6L7 12.6l-.6-2.2-2.2-.6 2.2-.6z" fill="#71B136" stroke="#71B136" strokeWidth="0.3" strokeLinejoin="round" opacity="0.65"/>
+                    <path d="M21 14l.5 1.6 1.6.5-1.6.5L21 18.2l-.5-1.6-1.6-.5 1.6-.5z" fill="#71B136" stroke="#71B136" strokeWidth="0.3" strokeLinejoin="round" opacity="0.45"/>
+                  </svg>
+                  <span style={{color:'#71B136', fontSize:'13px', fontWeight:700, letterSpacing:'0.1em'}}>IA</span>
+                </div>
               </div>
             </div>
             <div className="product-card fade-up d2" onClick={() => router.push('/productos/fsmtool')} role="button" tabIndex={0} onKeyDown={(e) => e.key === 'Enter' && router.push('/productos/fsmtool')}>
               <div>
                 <div className="product-badge"><div className="product-badge-dot" /><span>{tr('Solución propia', 'Proprietary solution')}</span></div>
-                <div style={{display:'inline-flex', alignItems:'center', gap:'6px', background:'rgba(113,177,54,0.12)', border:'1px solid rgba(113,177,54,0.25)', borderRadius:'999px', padding:'5px 12px', marginBottom:'12px'}}>
-                  <svg width="18px" height="15px" viewBox="0 0 28 24" fill="none">
-                    <path d="M16 1.5l.9 3.2 3.2.9-3.2.9L16 9.7l-.9-3.2-3.2-.9 3.2-.9z" fill="#71B136" stroke="#71B136" strokeWidth="0.4" strokeLinejoin="round"/>
-                    <path d="M7 7l.6 2.2 2.2.6-2.2.6L7 12.6l-.6-2.2-2.2-.6 2.2-.6z" fill="#71B136" stroke="#71B136" strokeWidth="0.3" strokeLinejoin="round" opacity="0.65"/>
-                    <path d="M21 14l.5 1.6 1.6.5-1.6.5L21 18.2l-.5-1.6-1.6-.5 1.6-.5z" fill="#71B136" stroke="#71B136" strokeWidth="0.3" strokeLinejoin="round" opacity="0.45"/>
-                  </svg>
-                  <span style={{color:'#71B136', fontSize:'11px', fontWeight:600}}>{tr('Impulsado por IA', 'Powered by AI')}</span>
-                </div>
                 <div className="product-name">FSMTool</div>
                 <p className="product-desc">{tr('Suite de herramientas avanzadas de administración para Oracle Field Service Cloud. Operaciones masivas, gestión de inventarios, actividades y recursos. Con IA integrada podés ejecutar operaciones masivas describiendo lo que necesitás en lenguaje natural.', 'Advanced administration suite for Oracle Field Service Cloud. Bulk operations, inventory management, activities and resources. With integrated AI you can execute bulk operations by describing what you need in natural language.')}</p>
                 <div className="product-bullets">
@@ -733,6 +725,14 @@ export default function HomeClient() {
               </div>
               <div className="product-visual">
                 <svg viewBox="0 0 80 80"><rect x="8" y="20" width="64" height="44" rx="6" /><rect x="14" y="28" width="22" height="14" rx="3" /><rect x="14" y="46" width="22" height="8" rx="2" /><rect x="42" y="28" width="22" height="8" rx="2" /><rect x="42" y="40" width="22" height="14" rx="3" /><circle cx="14" cy="14" r="3" /><circle cx="40" cy="14" r="3" /><circle cx="66" cy="14" r="3" /></svg>
+                <div style={{display:'flex', flexDirection:'column', alignItems:'center', gap:'8px', marginTop:'16px'}}>
+                  <svg width="32" height="27" viewBox="0 0 28 24" fill="none">
+                    <path d="M16 1.5l.9 3.2 3.2.9-3.2.9L16 9.7l-.9-3.2-3.2-.9 3.2-.9z" fill="#71B136" stroke="#71B136" strokeWidth="0.4" strokeLinejoin="round"/>
+                    <path d="M7 7l.6 2.2 2.2.6-2.2.6L7 12.6l-.6-2.2-2.2-.6 2.2-.6z" fill="#71B136" stroke="#71B136" strokeWidth="0.3" strokeLinejoin="round" opacity="0.65"/>
+                    <path d="M21 14l.5 1.6 1.6.5-1.6.5L21 18.2l-.5-1.6-1.6-.5 1.6-.5z" fill="#71B136" stroke="#71B136" strokeWidth="0.3" strokeLinejoin="round" opacity="0.45"/>
+                  </svg>
+                  <span style={{color:'#71B136', fontSize:'13px', fontWeight:700, letterSpacing:'0.1em'}}>IA</span>
+                </div>
               </div>
             </div>
           </div>

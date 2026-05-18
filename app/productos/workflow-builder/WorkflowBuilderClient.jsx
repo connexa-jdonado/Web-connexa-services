@@ -287,85 +287,156 @@ export default function WorkflowBuilderClient() {
       </section>
 
       {/* ── TABS / MÓDULOS ── */}
-      <div className="valor-section white">
-        <div className="container">
-          <div className="section-header-center">
-            <span className="section-label fade-up">{tr('Módulos', 'Modules')}</span>
-            <h2 className="fade-up d1">{tr('Todo lo que podés hacer', 'Everything you can do')}</h2>
+      <div>
+        {/* BLOQUE 1: HEADER */}
+        <div style={{ width:'100%', background:'linear-gradient(135deg, #0d1b3e 0%, #172554 100%)', padding:'80px 60px', textAlign:'center', position:'relative', overflow:'hidden' }}>
+          <svg style={{ position:'absolute', inset:0, width:'100%', height:'100%', opacity:0.1 }} xmlns="http://www.w3.org/2000/svg">
+            <defs><pattern id="dots-mod-hdr" x="0" y="0" width="24" height="24" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1.5" fill="#71B136"/></pattern></defs>
+            <rect width="100%" height="100%" fill="url(#dots-mod-hdr)"/>
+          </svg>
+          <div style={{ position:'relative', zIndex:2 }}>
+            <div style={{ display:'inline-flex', alignItems:'center', gap:'8px', background:'rgba(113,177,54,0.12)', border:'1px solid rgba(113,177,54,0.3)', borderRadius:'999px', padding:'8px 20px', marginBottom:'24px' }}>
+              <svg width="20" height="17" viewBox="0 0 28 24" fill="none"><path d="M16 1.5l.9 3.2 3.2.9-3.2.9L16 9.7l-.9-3.2-3.2-.9 3.2-.9z" fill="#71B136" stroke="#71B136" strokeWidth="0.4" strokeLinejoin="round"/><path d="M7 7l.6 2.2 2.2.6-2.2.6L7 12.6l-.6-2.2-2.2-.6 2.2-.6z" fill="#71B136" stroke="#71B136" strokeWidth="0.3" strokeLinejoin="round" opacity="0.65"/><path d="M21 14l.5 1.6 1.6.5-1.6.5L21 18.2l-.5-1.6-1.6-.5 1.6-.5z" fill="#71B136" stroke="#71B136" strokeWidth="0.3" strokeLinejoin="round" opacity="0.45"/></svg>
+              <span style={{ color:'#71B136', fontSize:'12px', fontWeight:600, letterSpacing:'0.1em' }}>{tr('Impulsado por Inteligencia Artificial', 'Powered by Artificial Intelligence')}</span>
+            </div>
+            <h2 style={{ fontSize:'52px', fontWeight:900, color:'white', lineHeight:1.1, marginBottom:'16px' }}>{tr('Todo lo que podés hacer', 'Everything you can do')}</h2>
+            <p style={{ fontSize:'18px', color:'rgba(255,255,255,0.6)', maxWidth:'600px', margin:'0 auto 16px', lineHeight:1.7 }}>{tr('Sin conocimiento técnico. Describí lo que necesitás en lenguaje natural y la IA configura todo por vos.', 'No technical knowledge needed. Describe what you need in natural language and AI configures everything for you.')}</p>
+            <div style={{ display:'flex', justifyContent:'center', gap:'80px', marginTop:'40px' }}>
+              {[{num:'+40',lbl:tr('APIs de OFS','OFS APIs')},{num:'3',lbl:tr('Tipos de trigger','Trigger types')},{num:'8',lbl:tr('Entidades OFS','OFS entities')}].map((s,i) => (
+                <div key={i} style={{ textAlign:'center' }}>
+                  <div style={{ fontSize:'40px', fontWeight:900, color:'#71B136', lineHeight:1 }}>{s.num}</div>
+                  <div style={{ fontSize:'12px', color:'rgba(255,255,255,0.5)', letterSpacing:'0.1em', textTransform:'uppercase', marginTop:'8px' }}>{s.lbl}</div>
+                </div>
+              ))}
+            </div>
           </div>
-          <div className="func-tabs fade-up d1">
-            {WB_TABS.map((tab) => (
-              <button key={tab.key} className={`func-tab${activeTab === tab.key ? ' active' : ''}`} onClick={() => setActiveTab(tab.key)}>
-                {tab.label}
-              </button>
-            ))}
-          </div>
+        </div>
 
-          <div className={`func-panel${activeTab === 'constructor' ? ' active' : ''} fade-up d2`}>
-            <div className="func-text">
-              <div className="func-module-badge"><span>{tr('Editor de workflows','Workflow editor')}</span></div>
-              <h3>{tr('Constructor visual drag & drop','Visual drag & drop builder')}</h3>
-              <p>{tr('Diseñá workflows complejos arrastrando nodos al canvas. Conectá condiciones, acciones sobre OFSC, loops y notificaciones en una interfaz clara y poderosa.','Design complex workflows by dragging nodes onto the canvas. Connect conditions, OFSC actions, loops, and notifications in a clear and powerful interface.')}</p>
-              <div className="func-actions">
-                {[tr('Paleta de nodos: If, Switch, Loop, Wait, Try/Catch','Node palette: If, Switch, Loop, Wait, Try/Catch'), tr('Acciones directas sobre APIs de Oracle Field Service','Direct actions on Oracle Field Service APIs'), tr('Nodo Notify: webhooks a Slack, Teams, email','Notify node: webhooks to Slack, Teams, email'), tr('Nodo AI Agent: consultas inteligentes sobre OFSC','AI Agent node: intelligent queries on OFSC'), tr('Botón "Probar" para ejecutar en sandbox','"Test" button to run in sandbox')].map((item, i) => (
-                  <div key={i} className="func-action-item"><div className="func-action-dot"></div>{item}</div>
+        {/* BLOQUE 2: TRIGGERS */}
+        <div style={{ width:'100%', background:'#ffffff', padding:'80px 60px' }}>
+          <div style={{ maxWidth:'1400px', margin:'0 auto' }}>
+            <div style={{ fontSize:'11px', color:'#71B136', fontWeight:700, letterSpacing:'0.12em', textTransform:'uppercase', marginBottom:'12px' }}>{tr('TIPOS DE TRIGGER','TRIGGER TYPES')}</div>
+            <h3 style={{ fontSize:'36px', fontWeight:800, color:'#172554', marginBottom:'48px' }}>{tr('¿Cuándo se ejecuta tu workflow?','When does your workflow run?')}</h3>
+            <div style={{ background:'linear-gradient(135deg, #172554 0%, #1a3a6b 100%)', borderRadius:'12px', padding:'20px 32px', marginBottom:'32px', display:'flex', alignItems:'center', gap:'16px' }}>
+              <svg width="28" height="24" viewBox="0 0 28 24" fill="none"><path d="M16 1.5l.9 3.2 3.2.9-3.2.9L16 9.7l-.9-3.2-3.2-.9 3.2-.9z" fill="#71B136" stroke="#71B136" strokeWidth="0.4" strokeLinejoin="round"/><path d="M7 7l.6 2.2 2.2.6-2.2.6L7 12.6l-.6-2.2-2.2-.6 2.2-.6z" fill="#71B136" stroke="#71B136" strokeWidth="0.3" strokeLinejoin="round" opacity="0.65"/><path d="M21 14l.5 1.6 1.6.5-1.6.5L21 18.2l-.5-1.6-1.6-.5 1.6-.5z" fill="#71B136" stroke="#71B136" strokeWidth="0.3" strokeLinejoin="round" opacity="0.45"/></svg>
+              <div>
+                <div style={{ color:'white', fontSize:'16px', fontWeight:700, marginBottom:'4px' }}>{tr('Asistente IA','AI Assistant')}</div>
+                <div style={{ color:'rgba(255,255,255,0.65)', fontSize:'14px' }}>{tr('Describí en lenguaje natural lo que necesitás y la IA configura el trigger','Describe what you need in natural language and AI configures the trigger')}</div>
+              </div>
+            </div>
+            <div style={{ display:'grid', gridTemplateColumns:'repeat(3,1fr)', gap:'24px' }}>
+              <div style={{ background:'#F8FAFC', borderRadius:'16px', padding:'32px', border:'1px solid #E5E7EB' }}>
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#71B136" strokeWidth="1.5"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 010 20M12 2a15 15 0 000 20"/></svg>
+                <div style={{ fontSize:'20px', fontWeight:700, color:'#172554', marginTop:'16px', marginBottom:'8px' }}>Webhook</div>
+                <div style={{ color:'#6B7280', fontSize:'14px', marginBottom:'16px' }}>{tr('Petición HTTP desde un sistema externo','HTTP request from an external system')}</div>
+                {[tr('Cualquier sistema puede disparar el workflow','Any system can trigger the workflow'),tr('Configuración de payload personalizado','Custom payload configuration'),tr('URL única por workflow','Unique URL per workflow'),tr('Autenticación segura','Secure authentication')].map((f,i) => (
+                  <div key={i} style={{ display:'flex', alignItems:'center', gap:'8px', padding:'6px 0', fontSize:'13px', color:'#6B7280', borderBottom:'1px solid #F3F4F6' }}>
+                    <span style={{ width:'6px', height:'6px', borderRadius:'50%', background:'#71B136', flexShrink:0, display:'inline-block' }}/>{f}
+                  </div>
+                ))}
+              </div>
+              <div style={{ background:'#F8FAFC', borderRadius:'16px', padding:'32px', border:'1px solid #E5E7EB' }}>
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#71B136" strokeWidth="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                <div style={{ fontSize:'20px', fontWeight:700, color:'#172554', marginTop:'16px', marginBottom:'8px' }}>{tr('Programado','Scheduled')}</div>
+                <div style={{ color:'#6B7280', fontSize:'14px', marginBottom:'16px' }}>{tr('Se ejecuta según un horario','Runs on a schedule')}</div>
+                {[tr('Cada N minutos u horas','Every N minutes or hours'),tr('Diario, semanal o mensual','Daily, weekly or monthly'),tr('Horario personalizado avanzado','Advanced custom schedule'),tr('Sin intervención manual','No manual intervention')].map((f,i) => (
+                  <div key={i} style={{ display:'flex', alignItems:'center', gap:'8px', padding:'6px 0', fontSize:'13px', color:'#6B7280', borderBottom:'1px solid #F3F4F6' }}>
+                    <span style={{ width:'6px', height:'6px', borderRadius:'50%', background:'#71B136', flexShrink:0, display:'inline-block' }}/>{f}
+                  </div>
+                ))}
+              </div>
+              <div style={{ background:'#F8FAFC', borderRadius:'16px', padding:'32px', border:'1px solid #E5E7EB' }}>
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#71B136" strokeWidth="1.5"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+                <div style={{ fontSize:'20px', fontWeight:700, color:'#172554', marginTop:'16px', marginBottom:'8px' }}>{tr('Evento OFS','OFS Event')}</div>
+                <div style={{ color:'#6B7280', fontSize:'14px', marginBottom:'16px' }}>{tr('Reacciona a eventos de Oracle Field Service','Reacts to Oracle Field Service events')}</div>
+                {[tr('Tiempo real — sin polling','Real time — no polling'),tr('8 entidades disponibles','8 entities available'),tr('Múltiples eventos por trigger','Multiple events per trigger'),tr('Filtros por campo y valor','Filters by field and value')].map((f,i) => (
+                  <div key={i} style={{ display:'flex', alignItems:'center', gap:'8px', padding:'6px 0', fontSize:'13px', color:'#6B7280', borderBottom:'1px solid #F3F4F6' }}>
+                    <span style={{ width:'6px', height:'6px', borderRadius:'50%', background:'#71B136', flexShrink:0, display:'inline-block' }}/>{f}
+                  </div>
                 ))}
               </div>
             </div>
-            <div>
-              <div className="browser-frame"><div className="browser-toolbar"><div className="browser-dots"><span></span><span></span><span></span></div><div className="browser-address">Workflow Builder · {tr('Editor','Editor')}</div></div>
-              <img src="/assets/wb-canvas.png" style={{ width: '100%', display: 'block' }} alt="Workflow Builder editor" /></div>
+          </div>
+        </div>
+
+        {/* BLOQUE 3: EVENTOS OFS */}
+        <div style={{ width:'100%', background:'#0d1b3e', padding:'80px 60px' }}>
+          <div style={{ maxWidth:'1400px', margin:'0 auto' }}>
+            <div style={{ fontSize:'11px', color:'#71B136', fontWeight:700, letterSpacing:'0.12em', textTransform:'uppercase', marginBottom:'12px' }}>{tr('EVENTOS OFS','OFS EVENTS')}</div>
+            <h3 style={{ fontSize:'36px', fontWeight:800, color:'white', lineHeight:1.1, marginBottom:'16px' }}>{tr('Escuchá cualquier evento de tu operación','Listen to any event in your operation')}</h3>
+            <p style={{ color:'rgba(255,255,255,0.5)', fontSize:'16px', marginBottom:'48px' }}>{tr('Suscribite a eventos en tiempo real de estas entidades','Subscribe to real-time events from these entities')}</p>
+            <div style={{ display:'grid', gridTemplateColumns:'repeat(4,1fr)', gap:'16px' }}>
+              {[
+                {icon:<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#71B136" strokeWidth="1.5" strokeLinecap="round"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>,name:tr('Actividades','Activities'),desc:tr('14 eventos','14 events')},
+                {icon:<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#71B136" strokeWidth="1.5"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>,name:tr('Inventario','Inventory'),desc:tr('Eventos de stock','Stock events')},
+                {icon:<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#71B136" strokeWidth="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>,name:tr('Recursos','Resources'),desc:tr('Eventos de técnicos','Technician events')},
+                {icon:<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#71B136" strokeWidth="1.5"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>,name:tr('Rutas','Routes'),desc:tr('Eventos de routing','Routing events')},
+                {icon:<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#71B136" strokeWidth="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>,name:tr('Solicitudes','Requests'),desc:tr('Eventos de requests','Request events')},
+                {icon:<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#71B136" strokeWidth="1.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>,name:tr('Colaboración','Collaboration'),desc:tr('Eventos de chats','Chat events')},
+                {icon:<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#71B136" strokeWidth="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>,name:tr('Usuarios','Users'),desc:tr('Eventos de users','User events')},
+                {icon:<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#71B136" strokeWidth="1.5"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>,name:tr('Otros','Others'),desc:tr('Eventos varios','Various events')},
+              ].map((e,i) => (
+                <div key={i} style={{ background:'rgba(255,255,255,0.05)', border:'1px solid rgba(255,255,255,0.1)', borderRadius:'12px', padding:'24px', textAlign:'center' }}>
+                  <div style={{ marginBottom:'12px' }}>{e.icon}</div>
+                  <div style={{ color:'white', fontSize:'15px', fontWeight:700, marginBottom:'4px' }}>{e.name}</div>
+                  <div style={{ color:'rgba(255,255,255,0.45)', fontSize:'12px' }}>{e.desc}</div>
+                </div>
+              ))}
             </div>
           </div>
+        </div>
 
-          <div className={`func-panel${activeTab === 'ejecuciones' ? ' active' : ''}`}>
-            <div className="func-text">
-              <div className="func-module-badge"><span>{tr('Monitoreo en tiempo real','Real-time monitoring')}</span></div>
-              <h3>{tr('Historial y logs de ejecuciones','Execution history and logs')}</h3>
-              <p>{tr('Monitoreá cada ejecución de tus workflows en tiempo real. Filtrá por estado, revisá los logs detallados de cada paso y exportá para auditoría.','Monitor every execution of your workflows in real time. Filter by status, review detailed logs of each step, and export for auditing.')}</p>
-              <div className="func-actions">
-                {[tr('Vista en tiempo real de todas las ejecuciones','Real-time view of all executions'), tr('Filtros: Running · Success · Error · Pending','Filters: Running · Success · Error · Pending'), tr('Panel lateral con logs JSON detallados','Side panel with detailed JSON logs'), tr('Exportación completa para auditoría','Full export for auditing')].map((item, i) => (
-                  <div key={i} className="func-action-item"><div className="func-action-dot"></div>{item}</div>
-                ))}
-              </div>
-            </div>
-            <div>
-              <div className="browser-frame"><div className="browser-toolbar"><div className="browser-dots"><span></span><span></span><span></span></div><div className="browser-address">Workflow Builder · {tr('Ejecuciones','Executions')}</div></div>
-              <img src="/assets/wb-ejecuciones.png" style={{ width: '100%', display: 'block' }} alt="Workflow Builder ejecuciones" /></div>
+        {/* BLOQUE 4: APIs */}
+        <div style={{ width:'100%', background:'#F8FAFC', padding:'80px 60px' }}>
+          <div style={{ maxWidth:'1400px', margin:'0 auto' }}>
+            <div style={{ fontSize:'11px', color:'#71B136', fontWeight:700, letterSpacing:'0.12em', textTransform:'uppercase', marginBottom:'12px' }}>{tr('APIs DE OFS','OFS APIs')}</div>
+            <h3 style={{ fontSize:'36px', fontWeight:800, color:'#172554', marginBottom:'16px' }}>{tr('+40 APIs de Oracle Field Service','+40 Oracle Field Service APIs')}</h3>
+            <p style={{ color:'#6B7280', fontSize:'16px', marginBottom:'48px' }}>{tr('Todas disponibles como nodos en tu workflow. Sin código.','All available as nodes in your workflow. No code.')}</p>
+            <div style={{ display:'grid', gridTemplateColumns:'repeat(3,1fr)', gap:'24px' }}>
+              {[
+                {cat:'Activities',count:'13',items:['Create','Get activities','Get an activity','Cancel','Stop travel','Complete','Delay','Delete','Move','Reopen','Start','Suspend','Update to enroute','Update to notdone']},
+                {cat:'Activity Inventories',count:'6',items:['Create customer inventory','Get customer inventories','Get deinstalled inventories','Get installed inventories','Get required inventories','Set required inventories']},
+                {cat:'Resources',count:'6',items:['Get a resource','Get child resources','Get descendants','Get resources','Update a resource','Get resource locations']},
+                {cat:'Inventories',count:'10',items:['Create','Deinstall','Delete','Get file property','Get inventory','Install','Set file property','Undo deinstall','Undo install','Update']},
+                {cat:'Users',count:'2',items:['Get a user','Get users']},
+                {cat:'Events & Capacity',count:'3',items:['Get subscriptions','Get capacity area','Get capacity areas']},
+              ].map((card,i) => (
+                <div key={i} style={{ background:'white', borderRadius:'16px', padding:'28px', border:'1px solid #E5E7EB', boxShadow:'0 2px 8px rgba(0,0,0,0.04)' }}>
+                  <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom:'20px' }}>
+                    <span style={{ fontSize:'16px', fontWeight:700, color:'#172554' }}>{card.cat}</span>
+                    <span style={{ background:'#F0FDF4', color:'#71B136', fontSize:'12px', fontWeight:600, padding:'4px 10px', borderRadius:'999px' }}>{card.count}</span>
+                  </div>
+                  {card.items.map((item,j) => (
+                    <div key={j} style={{ display:'flex', alignItems:'center', gap:'8px', padding:'8px 0', borderBottom:'1px solid #F3F4F6', fontSize:'13px', color:'#6B7280' }}>
+                      <span style={{ width:'6px', height:'6px', borderRadius:'50%', background:'#71B136', flexShrink:0, display:'inline-block' }}/>{item}
+                    </div>
+                  ))}
+                </div>
+              ))}
             </div>
           </div>
+        </div>
 
-          <div className={`func-panel${activeTab === 'orquestaciones' ? ' active' : ''}`}>
-            <div className="func-text">
-              <div className="func-module-badge"><span>{tr('Automatización reactiva','Reactive automation')}</span></div>
-              <h3>{tr('Orquestaciones: trigger → workflow','Orchestrations: trigger → workflow')}</h3>
-              <p>{tr('Conectá triggers de eventos OFSC con tus workflows para ejecutarlos automáticamente.','Connect OFSC event triggers to your workflows to run them automatically.')}</p>
-              <div className="func-actions">
-                {[tr('Vinculación de cualquier trigger a cualquier workflow','Link any trigger to any workflow'), tr('Toggle de activación/pausa sin borrar configuración','Activation/pause toggle without deleting configuration'), tr('Ejecución reactiva: trigger recibido → workflow disparado','Reactive execution: trigger received → workflow fired')].map((item, i) => (
-                  <div key={i} className="func-action-item"><div className="func-action-dot"></div>{item}</div>
-                ))}
-              </div>
+        {/* BLOQUE 5: CTA IA FINAL */}
+        <div style={{ width:'100%', background:'linear-gradient(135deg, #071428 0%, #172554 50%, #1a3a2a 100%)', padding:'80px 60px', textAlign:'center', position:'relative', overflow:'hidden' }}>
+          <svg style={{ position:'absolute', inset:0, width:'100%', height:'100%', opacity:0.1 }} xmlns="http://www.w3.org/2000/svg">
+            <defs><pattern id="dots-mod-cta" x="0" y="0" width="24" height="24" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1.5" fill="#71B136"/></pattern></defs>
+            <rect width="100%" height="100%" fill="url(#dots-mod-cta)"/>
+          </svg>
+          <div style={{ position:'absolute', width:'500px', height:'500px', borderRadius:'50%', background:'radial-gradient(circle, rgba(113,177,54,0.15) 0%, transparent 70%)', top:'-100px', left:'50%', transform:'translateX(-50%)', pointerEvents:'none' }}/>
+          <div style={{ position:'relative', zIndex:2 }}>
+            <div style={{ marginBottom:'24px' }}>
+              <svg width="48" height="40" viewBox="0 0 28 24" fill="none"><path d="M16 1.5l.9 3.2 3.2.9-3.2.9L16 9.7l-.9-3.2-3.2-.9 3.2-.9z" fill="#71B136" stroke="#71B136" strokeWidth="0.4" strokeLinejoin="round"/><path d="M7 7l.6 2.2 2.2.6-2.2.6L7 12.6l-.6-2.2-2.2-.6 2.2-.6z" fill="#71B136" stroke="#71B136" strokeWidth="0.3" strokeLinejoin="round" opacity="0.65"/><path d="M21 14l.5 1.6 1.6.5-1.6.5L21 18.2l-.5-1.6-1.6-.5 1.6-.5z" fill="#71B136" stroke="#71B136" strokeWidth="0.3" strokeLinejoin="round" opacity="0.45"/></svg>
             </div>
-            <div>
-              <div className="browser-frame"><div className="browser-toolbar"><div className="browser-dots"><span></span><span></span><span></span></div><div className="browser-address">Workflow Builder · {tr('Orquestaciones','Orchestrations')}</div></div>
-              <img src="/assets/wb-orquestaciones.png" style={{ width: '100%', display: 'block' }} alt="Workflow Builder orquestaciones" /></div>
-            </div>
-          </div>
-
-          <div className={`func-panel${activeTab === 'panel' ? ' active' : ''}`}>
-            <div className="func-text">
-              <div className="func-module-badge"><span>{tr('Visibilidad operacional','Operational visibility')}</span></div>
-              <h3>{tr('Panel principal de actividad','Main activity panel')}</h3>
-              <p>{tr('Visión completa del estado de tu plataforma: ejecuciones recientes, tasa de éxito, errores en las últimas 24h y estado de todos tus workflows.','Complete view of your platform status: recent executions, success rate, errors in the last 24h, and status of all your workflows.')}</p>
-              <div className="func-actions">
-                {[tr('KPIs en tiempo real: ejecuciones, tasa de éxito, errores','Real-time KPIs: executions, success rate, errors'), tr('Gráfico de actividad: 24h · 7d · 30d','Activity chart: 24h · 7d · 30d'), tr('Estado de workflows activos vs pausados','Status of active vs paused workflows')].map((item, i) => (
-                  <div key={i} className="func-action-item"><div className="func-action-dot"></div>{item}</div>
-                ))}
-              </div>
-            </div>
-            <div>
-              <div className="browser-frame"><div className="browser-toolbar"><div className="browser-dots"><span></span><span></span><span></span></div><div className="browser-address">Workflow Builder · {tr('Panel Principal','Main Panel')}</div></div>
-              <img src="/assets/wb-panel.png" style={{ width: '100%', display: 'block' }} alt="Workflow Builder panel" /></div>
+            <h2 style={{ fontSize:'44px', fontWeight:900, color:'white', lineHeight:1.2, maxWidth:'700px', margin:'0 auto 16px' }}>
+              {tr('Describí lo que necesitás.','Describe what you need.')}
+              <br/>
+              <span style={{ color:'#71B136' }}>{tr('La IA lo construye por vos.','AI builds it for you.')}</span>
+            </h2>
+            <p style={{ color:'rgba(255,255,255,0.55)', fontSize:'18px', maxWidth:'500px', margin:'0 auto 40px', lineHeight:1.7 }}>{tr('Sin conocimiento técnico. Sin código. Solo describí tu proceso en lenguaje natural y el Asistente IA configura todo.','No technical knowledge. No code. Just describe your process in natural language and the AI Assistant configures everything.')}</p>
+            <div style={{ display:'flex', justifyContent:'center', gap:'16px', flexWrap:'wrap' }}>
+              <a href="#demo" style={{ display:'inline-flex', alignItems:'center', background:'#71B136', color:'white', padding:'16px 40px', borderRadius:'8px', fontSize:'16px', fontWeight:600, textDecoration:'none' }}>{tr('Solicitar acceso','Request access')}</a>
+              <a href="#demo" style={{ display:'inline-flex', alignItems:'center', border:'1px solid rgba(255,255,255,0.3)', color:'white', padding:'16px 40px', borderRadius:'8px', fontSize:'16px', textDecoration:'none' }}>{tr('Ver demo','See demo')}</a>
             </div>
           </div>
         </div>

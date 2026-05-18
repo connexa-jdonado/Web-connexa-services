@@ -682,14 +682,22 @@ export default function HomeClient() {
           <div className="products-header">
             <span className="section-label fade-up" style={{ color: 'var(--accent)' }}>{tr('Innovación propia', 'Proprietary Innovation')}</span>
             <h2 className="section-title fade-up d1" style={{ color: '#fff' }}>{tr('Nuestras soluciones propias', 'Our proprietary solutions')}</h2>
-            <p className="section-subtitle fade-up d2" style={{ color: 'rgba(255,255,255,0.6)', margin: '0 auto' }}>{tr('Herramientas desarrolladas internamente sobre las plataformas líderes, diseñadas para resolver los desafíos más comunes del Field Service.', 'Internally developed tools built on leading platforms, designed to solve the most common Field Service challenges.')}</p>
+            <p className="section-subtitle fade-up d2" style={{ color: 'rgba(255,255,255,0.6)', margin: '0 auto' }}>{tr('Herramientas desarrolladas internamente con Inteligencia Artificial, diseñadas para que cualquier usuario pueda operar sin conocimiento técnico.', 'Internally developed tools powered by Artificial Intelligence, designed so any user can operate without technical knowledge.')}</p>
           </div>
           <div className="products-grid">
             <div className="product-card fade-up d1" onClick={() => router.push('/productos/workflow-builder')} role="button" tabIndex={0} onKeyDown={(e) => e.key === 'Enter' && router.push('/productos/workflow-builder')}>
               <div>
                 <div className="product-badge"><div className="product-badge-dot" /><span>{tr('Solución propia', 'Proprietary solution')}</span></div>
+                <div style={{display:'inline-flex', alignItems:'center', gap:'6px', background:'rgba(113,177,54,0.12)', border:'1px solid rgba(113,177,54,0.25)', borderRadius:'999px', padding:'5px 12px', marginBottom:'12px'}}>
+                  <svg width="18px" height="15px" viewBox="0 0 28 24" fill="none">
+                    <path d="M16 1.5l.9 3.2 3.2.9-3.2.9L16 9.7l-.9-3.2-3.2-.9 3.2-.9z" fill="#71B136" stroke="#71B136" strokeWidth="0.4" strokeLinejoin="round"/>
+                    <path d="M7 7l.6 2.2 2.2.6-2.2.6L7 12.6l-.6-2.2-2.2-.6 2.2-.6z" fill="#71B136" stroke="#71B136" strokeWidth="0.3" strokeLinejoin="round" opacity="0.65"/>
+                    <path d="M21 14l.5 1.6 1.6.5-1.6.5L21 18.2l-.5-1.6-1.6-.5 1.6-.5z" fill="#71B136" stroke="#71B136" strokeWidth="0.3" strokeLinejoin="round" opacity="0.45"/>
+                  </svg>
+                  <span style={{color:'#71B136', fontSize:'11px', fontWeight:600}}>{tr('Impulsado por IA', 'Powered by AI')}</span>
+                </div>
                 <div className="product-name">Workflow Builder</div>
-                <p className="product-desc">{tr('Constructor visual de flujos de trabajo para Oracle Field Service Cloud. Permite diseñar, testear y publicar workflows sin código, reduciendo el time-to-market de nuevos procesos.', 'Visual workflow builder for Oracle Field Service Cloud. Design, test and publish workflows without code, reducing the time-to-market for new processes.')}</p>
+                <p className="product-desc">{tr('Constructor visual de flujos de trabajo para Oracle Field Service Cloud. Permite diseñar, testear y publicar workflows sin código, reduciendo el time-to-market de nuevos procesos. El Agente de IA te ayuda a crear y configurar workflows en lenguaje natural, sin escribir código.', 'Visual workflow builder for Oracle Field Service Cloud. Design, test and publish workflows without code, reducing the time-to-market for new processes. The AI Agent helps you create and configure workflows in natural language, without writing code.')}</p>
                 <div className="product-bullets">
                   <div className="product-bullet">{tr('Orquestador de eventos de OFS (Event API) – Gestor de suscripciones', 'OFS Event Orchestrator (Event API) – Subscription Manager')}</div>
                   <div className="product-bullet">{tr('Editor de workflow drag and drop para orquestar procesos', 'Drag and drop workflow editor to orchestrate processes')}</div>
@@ -706,8 +714,16 @@ export default function HomeClient() {
             <div className="product-card fade-up d2" onClick={() => router.push('/productos/fsmtool')} role="button" tabIndex={0} onKeyDown={(e) => e.key === 'Enter' && router.push('/productos/fsmtool')}>
               <div>
                 <div className="product-badge"><div className="product-badge-dot" /><span>{tr('Solución propia', 'Proprietary solution')}</span></div>
+                <div style={{display:'inline-flex', alignItems:'center', gap:'6px', background:'rgba(113,177,54,0.12)', border:'1px solid rgba(113,177,54,0.25)', borderRadius:'999px', padding:'5px 12px', marginBottom:'12px'}}>
+                  <svg width="18px" height="15px" viewBox="0 0 28 24" fill="none">
+                    <path d="M16 1.5l.9 3.2 3.2.9-3.2.9L16 9.7l-.9-3.2-3.2-.9 3.2-.9z" fill="#71B136" stroke="#71B136" strokeWidth="0.4" strokeLinejoin="round"/>
+                    <path d="M7 7l.6 2.2 2.2.6-2.2.6L7 12.6l-.6-2.2-2.2-.6 2.2-.6z" fill="#71B136" stroke="#71B136" strokeWidth="0.3" strokeLinejoin="round" opacity="0.65"/>
+                    <path d="M21 14l.5 1.6 1.6.5-1.6.5L21 18.2l-.5-1.6-1.6-.5 1.6-.5z" fill="#71B136" stroke="#71B136" strokeWidth="0.3" strokeLinejoin="round" opacity="0.45"/>
+                  </svg>
+                  <span style={{color:'#71B136', fontSize:'11px', fontWeight:600}}>{tr('Impulsado por IA', 'Powered by AI')}</span>
+                </div>
                 <div className="product-name">FSMTool</div>
-                <p className="product-desc">{tr('Suite de herramientas avanzadas de administración para Oracle Field Service Cloud. Operaciones masivas, gestión de inventarios, actividades y recursos.', 'Advanced administration suite for Oracle Field Service Cloud. Bulk operations, inventory management, activities and resources.')}</p>
+                <p className="product-desc">{tr('Suite de herramientas avanzadas de administración para Oracle Field Service Cloud. Operaciones masivas, gestión de inventarios, actividades y recursos. Con IA integrada podés ejecutar operaciones masivas describiendo lo que necesitás en lenguaje natural.', 'Advanced administration suite for Oracle Field Service Cloud. Bulk operations, inventory management, activities and resources. With integrated AI you can execute bulk operations by describing what you need in natural language.')}</p>
                 <div className="product-bullets">
                   <div className="product-bullet">{tr('Gestión masiva de actividades y recursos', 'Bulk management of activities and resources')}</div>
                   <div className="product-bullet">{tr('Gestión completa de inventarios', 'Complete inventory management')}</div>

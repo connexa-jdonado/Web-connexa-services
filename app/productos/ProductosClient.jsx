@@ -53,7 +53,7 @@ export default function ProductosClient() {
       {/* ── WORKFLOW BUILDER SHOWCASE (FIRST) ── */}
       <div className="showcase alt" id="prod-workflow">
         <div className="container" style={{ maxWidth: '100%', width: '100%' }}>
-          <div className="showcase-grid mirror" style={{ gridTemplateColumns: '3fr 2fr' }}>
+          <div className="showcase-grid mirror" style={{ gridTemplateColumns: '4fr 2fr' }}>
             <div className="fade-up d2">
               <div className="browser-frame">
                 <div className="browser-toolbar">
@@ -105,7 +105,7 @@ export default function ProductosClient() {
       {/* ── FSMTOOL SHOWCASE (SECOND) ── */}
       <div className="showcase" id="prod-fsmtool">
         <div className="container" style={{ maxWidth: '100%', width: '100%' }}>
-          <div className="showcase-grid" style={{ gridTemplateColumns: '2fr 3fr' }}>
+          <div className="showcase-grid" style={{ gridTemplateColumns: '2fr 4fr' }}>
             <div className="showcase-text">
               <h2 className="showcase-name fade-up d1" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>FSMTool <span style={{color:'#172554', fontSize:'0.7em', fontWeight:700, display:'inline-flex', alignItems:'center', gap:'4px'}}><svg width="28" height="24" viewBox="0 0 28 24" fill="none"><path d="M16 1.5l.9 3.2 3.2.9-3.2.9L16 9.7l-.9-3.2-3.2-.9 3.2-.9z" fill="#71B136" stroke="#71B136" strokeWidth="0.4" strokeLinejoin="round"/><path d="M7 7l.6 2.2 2.2.6-2.2.6L7 12.6l-.6-2.2-2.2-.6 2.2-.6z" fill="#71B136" stroke="#71B136" strokeWidth="0.3" strokeLinejoin="round" opacity="0.65"/><path d="M21 14l.5 1.6 1.6.5-1.6.5L21 18.2l-.5-1.6-1.6-.5 1.6-.5z" fill="#71B136" stroke="#71B136" strokeWidth="0.3" strokeLinejoin="round" opacity="0.45"/></svg> AI</span></h2>
               <p className="showcase-tagline fade-up d2">{tr('Operaciones masivas en OFSC, sin complejidad', 'Bulk OFSC operations, without complexity')}</p>

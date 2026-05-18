@@ -112,6 +112,10 @@ export default function ProductosClient() {
               <p className="showcase-desc fade-up d2">{tr('FSMTool es una suite de administración y monitoreo de operaciones construida nativamente sobre Oracle Field Service Cloud. Permite a los equipos de operaciones ejecutar acciones masivas, visualizar el estado en tiempo real y automatizar los procesos del día a día.', 'FSMTool is an operations administration and monitoring suite built natively on Oracle Field Service Cloud. It lets operations teams execute bulk actions, visualize status in real time, and automate day-to-day processes.')}</p>
               <div className="benefits-list fade-up d3">
                 <div className="benefit-row">
+                  <div className="benefit-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 3v18h18"/><polyline points="7 14 10 10 13 12 17 7"/></svg></div>
+                  <div><div className="benefit-title">{tr('Dashboard inteligente con IA', 'Intelligent AI dashboard')}</div><div className="benefit-desc">{tr('Agente de IA para automatizar la gestión masiva de tu operación.', 'AI agent to automate bulk management of your operation.')}</div></div>
+                </div>
+                <div className="benefit-row">
                   <div className="benefit-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/></svg></div>
                   <div><div className="benefit-title">{tr('Eficiencia operacional ×3', 'Operational efficiency ×3')}</div><div className="benefit-desc">{tr('Ejecutá acciones sobre miles de órdenes en segundos.', 'Execute actions on thousands of orders in seconds.')}</div></div>
                 </div>
@@ -126,10 +130,6 @@ export default function ProductosClient() {
                 <div className="benefit-row">
                   <div className="benefit-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></div>
                   <div><div className="benefit-title">{tr('Reportería exportable', 'Exportable reporting')}</div><div className="benefit-desc">{tr('Exportá cualquier vista a Excel o PDF con un clic.', 'Export any view to Excel or PDF with one click.')}</div></div>
-                </div>
-                <div className="benefit-row">
-                  <div className="benefit-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 3v18h18"/><polyline points="7 14 10 10 13 12 17 7"/></svg></div>
-                  <div><div className="benefit-title">{tr('Dashboard inteligente con IA', 'Intelligent AI dashboard')}</div><div className="benefit-desc">{tr('Agente de IA para automatizar la gestión masiva de tu operación.', 'AI agent to automate bulk management of your operation.')}</div></div>
                 </div>
               </div>
               <div className="showcase-ctas fade-up d4">

@@ -1,5 +1,5 @@
 'use client';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -53,6 +53,14 @@ export default function HomeClient() {
   const heroAuroraRef = useRef(null);
 
   useFadeUp();
+
+  const [isNarrow, setIsNarrow] = useState(false);
+  useEffect(() => {
+    const check = () => setIsNarrow(window.innerWidth < 1400);
+    check();
+    window.addEventListener('resize', check);
+    return () => window.removeEventListener('resize', check);
+  }, []);
 
   useEffect(() => {
     const io = new IntersectionObserver((entries) => {
@@ -372,7 +380,7 @@ export default function HomeClient() {
 
       {/* METODOLOGÍA */}
       <section id="metodologia">
-        <div style={{width:'100%', background:'#F3F4F6', padding:'100px 40px', position:'relative', overflow:'hidden'}}>
+        <div style={{width:'100%', background:'#F3F4F6', padding: isNarrow ? '60px 24px' : '100px 40px', position:'relative', overflow:'hidden'}}>
           <svg style={{position:'absolute',inset:0,width:'100%',height:'100%',opacity:0,pointerEvents:'none',zIndex:0}}>
             <defs>
               <pattern id="dots-met" x="0" y="0" width="32" height="32" patternUnits="userSpaceOnUse">
@@ -392,12 +400,12 @@ export default function HomeClient() {
             </p>
           </div>
 
-          <div style={{display:'flex', gap:'48px', maxWidth:'1600px', margin:'60px auto 0', alignItems:'flex-start', position:'relative', zIndex:2}}>
+          <div style={{display:'flex', flexDirection: isNarrow ? 'column' : 'row', gap: isNarrow ? '32px' : '48px', maxWidth:'1600px', margin:'60px auto 0', alignItems:'flex-start', position:'relative', zIndex:2}}>
 
             {/* Columna izquierda 30% — 3 cards */}
-            <div style={{width:'30%', display:'flex', flexDirection:'column', gap:'16px'}}>
+            <div style={{width: isNarrow ? '100%' : '30%', display:'flex', flexDirection: isNarrow ? 'row' : 'column', gap:'16px', flexWrap: isNarrow ? 'wrap' : 'nowrap'}}>
 
-              <div style={{background:'white', border:'1px solid #E5E7EB', borderRadius:'16px', padding:'28px 32px', position:'relative', overflow:'hidden'}}>
+              <div style={{background:'white', border:'1px solid #E5E7EB', borderRadius:'16px', padding:'28px 32px', position:'relative', overflow:'hidden', width: isNarrow ? 'calc(33% - 8px)' : undefined, minWidth: isNarrow ? '280px' : undefined}}>
                 <span style={{position:'absolute', right:'-10px', top:'-20px', fontSize:'120px', fontWeight:900, lineHeight:1, userSelect:'none', pointerEvents:'none', color:'rgba(23,37,84,0.04)', WebkitTextStroke:'1.5px rgba(113,177,54,0.25)', letterSpacing:'-4px'}}>01</span>
                 <div style={{background:'rgba(113,177,54,0.12)', borderRadius:'10px', padding:'10px', display:'inline-flex', marginBottom:'16px'}}>
                   <svg viewBox="0 0 24 24" style={{width:'24px', height:'24px', stroke:'#71B136', fill:'none', strokeWidth:2, strokeLinecap:'round', strokeLinejoin:'round'}}><circle cx="11" cy="11" r="8" /><line x1="21" y1="21" x2="16.65" y2="16.65" /></svg>
@@ -419,7 +427,7 @@ export default function HomeClient() {
                 </ul>
               </div>
 
-              <div style={{background:'white', border:'1px solid #E5E7EB', borderRadius:'16px', padding:'28px 32px', position:'relative', overflow:'hidden'}}>
+              <div style={{background:'white', border:'1px solid #E5E7EB', borderRadius:'16px', padding:'28px 32px', position:'relative', overflow:'hidden', width: isNarrow ? 'calc(33% - 8px)' : undefined, minWidth: isNarrow ? '280px' : undefined}}>
                 <span style={{position:'absolute', right:'-10px', top:'-20px', fontSize:'120px', fontWeight:900, lineHeight:1, userSelect:'none', pointerEvents:'none', color:'rgba(23,37,84,0.04)', WebkitTextStroke:'1.5px rgba(113,177,54,0.25)', letterSpacing:'-4px'}}>02</span>
                 <div style={{background:'rgba(113,177,54,0.12)', borderRadius:'10px', padding:'10px', display:'inline-flex', marginBottom:'16px'}}>
                   <svg viewBox="0 0 24 24" style={{width:'24px', height:'24px', stroke:'#71B136', fill:'none', strokeWidth:2, strokeLinecap:'round', strokeLinejoin:'round'}}><polyline points="23 6 13.5 15.5 8.5 10.5 1 18" /><polyline points="17 6 23 6 23 12" /></svg>
@@ -440,7 +448,7 @@ export default function HomeClient() {
                 </ul>
               </div>
 
-              <div style={{background:'white', border:'1px solid #E5E7EB', borderRadius:'16px', padding:'28px 32px', position:'relative', overflow:'hidden'}}>
+              <div style={{background:'white', border:'1px solid #E5E7EB', borderRadius:'16px', padding:'28px 32px', position:'relative', overflow:'hidden', width: isNarrow ? 'calc(33% - 8px)' : undefined, minWidth: isNarrow ? '280px' : undefined}}>
                 <span style={{position:'absolute', right:'-10px', top:'-20px', fontSize:'120px', fontWeight:900, lineHeight:1, userSelect:'none', pointerEvents:'none', color:'rgba(23,37,84,0.04)', WebkitTextStroke:'1.5px rgba(113,177,54,0.25)', letterSpacing:'-4px'}}>03</span>
                 <div style={{background:'rgba(113,177,54,0.12)', borderRadius:'10px', padding:'10px', display:'inline-flex', marginBottom:'16px'}}>
                   <svg viewBox="0 0 24 24" style={{width:'24px', height:'24px', stroke:'#71B136', fill:'none', strokeWidth:2, strokeLinecap:'round', strokeLinejoin:'round'}}><path d="M9.66 17.33c-1.66 1.66-4 2.67-4 2.67s1-2.34 2.67-4c.94-.94 2.34-.94 3.28 0 .94.94.94 2.34.05 3.33z" /><path d="m14 10-4 4" /><path d="M19 5c0 2.5-2 7-7 10l-3-3c3-5 7.5-7 10-7z" /></svg>
@@ -464,7 +472,7 @@ export default function HomeClient() {
             </div>
 
             {/* Columna derecha 70% — scatter plot */}
-            <div style={{width:'70%', background:'rgba(255,255,255,0.97)', borderRadius:'20px', padding:'8px', boxShadow:'0 40px 100px rgba(0,0,0,0.4)', position:'sticky', top:'100px'}}>
+            <div style={{width: isNarrow ? '100%' : '70%', background:'rgba(255,255,255,0.97)', borderRadius:'20px', padding:'8px', boxShadow:'0 40px 100px rgba(0,0,0,0.4)', position:'sticky', top:'100px'}}>
 
           {/* SCATTER PLOT MAPA DE PRIORIZACIÓN */}
           <div className="fade-up d2" style={{ background: '#fff', borderRadius: '16px', padding: '32px 32px 24px', margin: '0', boxShadow: 'none', border: 'none' }}>

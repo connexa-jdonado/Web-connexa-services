@@ -80,8 +80,8 @@ export default function ProductosClient() {
       {/* ── WORKFLOW BUILDER SHOWCASE (FIRST) ── */}
       <div className="showcase alt" id="prod-workflow">
         <div className="container" style={{ maxWidth: '100%', width: '100%' }}>
-          <div className="showcase-grid mirror" style={{ gridTemplateColumns: '4fr 2fr' }}>
-            <div className="fade-up d2">
+          <div className="showcase-grid mirror" style={{ display: 'flex', flexDirection: 'row', alignItems: 'flex-start', gap: '0', padding: '48px 64px', marginTop: '40px' }}>
+            <div className="fade-up d2" style={{ maxWidth: '55%', marginLeft: '40px' }}>
               <div className="browser-frame" ref={wfImgRef} style={{ opacity: 0 }}>
                 <div className="browser-toolbar">
                   <div className="browser-dots"><span></span><span></span><span></span></div>
@@ -90,7 +90,7 @@ export default function ProductosClient() {
                 <img src="/assets/wb-canvas.png" style={{ width: '100%', display: 'block' }} alt="Workflow Builder canvas" />
               </div>
             </div>
-            <div className="showcase-text">
+            <div className="showcase-text" style={{ alignSelf: 'flex-start', paddingTop: '0', flex: 1 }}>
               <h2 className="showcase-name fade-up d1" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>Workflow Builder <span style={{color:'#172554', fontSize:'0.7em', fontWeight:700, display:'inline-flex', alignItems:'center', gap:'4px'}}>
                 <svg width="58" height="54" viewBox="0 0 28 24" fill="none"><path d="M16 1.5l.9 3.2 3.2.9-3.2.9L16 9.7l-.9-3.2-3.2-.9 3.2-.9z" fill="#71B136" stroke="#71B136" strokeWidth="0.4" strokeLinejoin="round"/><path d="M7 7l.6 2.2 2.2.6-2.2.6L7 12.6l-.6-2.2-2.2-.6 2.2-.6z" fill="#71B136" stroke="#71B136" strokeWidth="0.3" strokeLinejoin="round" opacity="0.65"/><path d="M21 14l.5 1.6 1.6.5-1.6.5L21 18.2l-.5-1.6-1.6-.5 1.6-.5z" fill="#71B136" stroke="#71B136" strokeWidth="0.3" strokeLinejoin="round" opacity="0.45"/></svg> AI</span></h2>
               <p className="showcase-tagline fade-up d2">{tr('Automatizá tus procesos OFSC sin código', 'Automate your OFSC processes without code')}</p>

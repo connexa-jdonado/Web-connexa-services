@@ -108,7 +108,7 @@ export default function HomeClient() {
         <div className="hero-inner" ref={heroInnerRef}>
           <div className="hero-eyebrow" style={{whiteSpace:'nowrap'}}>
             <div className="hero-eyebrow-dot" />
-            <span>{tr('Field Service Management · Experts certificados', 'Field Service Management · Certified Experts')}</span>
+            <span>{tr('Field Service Management', 'Field Service Management')}<span style={{margin:'0 8px'}}>·</span>{tr('Experts certificados', 'Certified Experts')}</span>
           </div>
           <h1 className="hero-headline">
             <span>{tr('Transformamos el Field Service', 'We Transform Field Service')}</span><br />
@@ -122,7 +122,7 @@ export default function HomeClient() {
           </p>
           <div style={{display:'flex', gap:'12px', flexWrap:'wrap', marginTop:'8px'}}>
             <span style={{display:'inline-flex', alignItems:'center', gap:'8px', background:'rgba(113,177,54,0.12)', border:'1px solid rgba(113,177,54,0.3)', borderRadius:'999px', padding:'7px 16px'}}>
-              <svg width="1em" height="0.85em" viewBox="0 0 28 24" fill="none" style={{display:'inline-block', verticalAlign:'middle'}}>
+              <svg width="18px" height="15px" viewBox="0 0 28 24" fill="none" style={{display:'inline-block', verticalAlign:'middle'}}>
                 <path d="M16 1.5l.9 3.2 3.2.9-3.2.9L16 9.7l-.9-3.2-3.2-.9 3.2-.9z" fill="#71B136" stroke="#71B136" strokeWidth="0.4" strokeLinejoin="round"/>
                 <path d="M7 7l.6 2.2 2.2.6-2.2.6L7 12.6l-.6-2.2-2.2-.6 2.2-.6z" fill="#71B136" stroke="#71B136" strokeWidth="0.3" strokeLinejoin="round" opacity="0.65"/>
                 <path d="M21 14l.5 1.6 1.6.5-1.6.5L21 18.2l-.5-1.6-1.6-.5 1.6-.5z" fill="#71B136" stroke="#71B136" strokeWidth="0.3" strokeLinejoin="round" opacity="0.45"/>
@@ -130,7 +130,7 @@ export default function HomeClient() {
               <span style={{color:'#71B136', fontSize:'13px', fontWeight:600}}>{tr('Workflow Builder', 'Workflow Builder')}</span>
             </span>
             <span style={{display:'inline-flex', alignItems:'center', gap:'8px', background:'rgba(113,177,54,0.12)', border:'1px solid rgba(113,177,54,0.3)', borderRadius:'999px', padding:'7px 16px'}}>
-              <svg width="1em" height="0.85em" viewBox="0 0 28 24" fill="none" style={{display:'inline-block', verticalAlign:'middle'}}>
+              <svg width="18px" height="15px" viewBox="0 0 28 24" fill="none" style={{display:'inline-block', verticalAlign:'middle'}}>
                 <path d="M16 1.5l.9 3.2 3.2.9-3.2.9L16 9.7l-.9-3.2-3.2-.9 3.2-.9z" fill="#71B136" stroke="#71B136" strokeWidth="0.4" strokeLinejoin="round"/>
                 <path d="M7 7l.6 2.2 2.2.6-2.2.6L7 12.6l-.6-2.2-2.2-.6 2.2-.6z" fill="#71B136" stroke="#71B136" strokeWidth="0.3" strokeLinejoin="round" opacity="0.65"/>
                 <path d="M21 14l.5 1.6 1.6.5-1.6.5L21 18.2l-.5-1.6-1.6-.5 1.6-.5z" fill="#71B136" stroke="#71B136" strokeWidth="0.3" strokeLinejoin="round" opacity="0.45"/>

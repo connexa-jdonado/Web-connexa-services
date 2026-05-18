@@ -398,7 +398,7 @@ export default function HomeClient() {
             <div style={{width:'30%', display:'flex', flexDirection:'column', gap:'16px'}}>
 
               <div style={{background:'white', border:'1px solid #E5E7EB', borderRadius:'16px', padding:'28px 32px', position:'relative', overflow:'hidden'}}>
-                <span style={{position:'absolute', right:'-10px', top:'-20px', fontSize:'120px', fontWeight:900, color:'rgba(23,37,84,0.04)', lineHeight:1, userSelect:'none', pointerEvents:'none'}}>01</span>
+                <span style={{position:'absolute', right:'-10px', top:'-20px', fontSize:'120px', fontWeight:900, lineHeight:1, userSelect:'none', pointerEvents:'none', color:'transparent', WebkitTextStroke:'1.5px rgba(113,177,54,0.25)', letterSpacing:'-4px'}}>01</span>
                 <div style={{background:'rgba(113,177,54,0.12)', borderRadius:'10px', padding:'10px', display:'inline-flex', marginBottom:'16px'}}>
                   <svg viewBox="0 0 24 24" style={{width:'24px', height:'24px', stroke:'#71B136', fill:'none', strokeWidth:2, strokeLinecap:'round', strokeLinejoin:'round'}}><circle cx="11" cy="11" r="8" /><line x1="21" y1="21" x2="16.65" y2="16.65" /></svg>
                 </div>
@@ -420,7 +420,7 @@ export default function HomeClient() {
               </div>
 
               <div style={{background:'white', border:'1px solid #E5E7EB', borderRadius:'16px', padding:'28px 32px', position:'relative', overflow:'hidden'}}>
-                <span style={{position:'absolute', right:'-10px', top:'-20px', fontSize:'120px', fontWeight:900, color:'rgba(23,37,84,0.04)', lineHeight:1, userSelect:'none', pointerEvents:'none'}}>02</span>
+                <span style={{position:'absolute', right:'-10px', top:'-20px', fontSize:'120px', fontWeight:900, lineHeight:1, userSelect:'none', pointerEvents:'none', color:'transparent', WebkitTextStroke:'1.5px rgba(113,177,54,0.25)', letterSpacing:'-4px'}}>02</span>
                 <div style={{background:'rgba(113,177,54,0.12)', borderRadius:'10px', padding:'10px', display:'inline-flex', marginBottom:'16px'}}>
                   <svg viewBox="0 0 24 24" style={{width:'24px', height:'24px', stroke:'#71B136', fill:'none', strokeWidth:2, strokeLinecap:'round', strokeLinejoin:'round'}}><polyline points="23 6 13.5 15.5 8.5 10.5 1 18" /><polyline points="17 6 23 6 23 12" /></svg>
                 </div>
@@ -441,7 +441,7 @@ export default function HomeClient() {
               </div>
 
               <div style={{background:'white', border:'1px solid #E5E7EB', borderRadius:'16px', padding:'28px 32px', position:'relative', overflow:'hidden'}}>
-                <span style={{position:'absolute', right:'-10px', top:'-20px', fontSize:'120px', fontWeight:900, color:'rgba(23,37,84,0.04)', lineHeight:1, userSelect:'none', pointerEvents:'none'}}>03</span>
+                <span style={{position:'absolute', right:'-10px', top:'-20px', fontSize:'120px', fontWeight:900, lineHeight:1, userSelect:'none', pointerEvents:'none', color:'transparent', WebkitTextStroke:'1.5px rgba(113,177,54,0.25)', letterSpacing:'-4px'}}>03</span>
                 <div style={{background:'rgba(113,177,54,0.12)', borderRadius:'10px', padding:'10px', display:'inline-flex', marginBottom:'16px'}}>
                   <svg viewBox="0 0 24 24" style={{width:'24px', height:'24px', stroke:'#71B136', fill:'none', strokeWidth:2, strokeLinecap:'round', strokeLinejoin:'round'}}><path d="M9.66 17.33c-1.66 1.66-4 2.67-4 2.67s1-2.34 2.67-4c.94-.94 2.34-.94 3.28 0 .94.94.94 2.34.05 3.33z" /><path d="m14 10-4 4" /><path d="M19 5c0 2.5-2 7-7 10l-3-3c3-5 7.5-7 10-7z" /></svg>
                 </div>
@@ -676,7 +676,7 @@ export default function HomeClient() {
           </div>{/* /flex 2 columnas */}
 
           <div style={{ paddingTop: '32px', textAlign: 'center', position:'relative', zIndex:2 }}>
-            <p style={{ fontSize: '14px', color: 'rgba(255,255,255,0.45)', fontStyle: 'italic', maxWidth: '600px', margin: '0 auto', fontFamily: 'var(--font-body)', lineHeight: '1.6' }}>
+            <p style={{ fontSize: '14px', color: 'rgb(23, 37, 84)', fontStyle: 'italic', maxWidth: '600px', margin: '0 auto', fontFamily: 'var(--font-body)', lineHeight: '1.6' }}>
               {tr('Cada assessment es único. Los resultados dependen de tu operación, tu plataforma y tus objetivos.', 'Every assessment is unique. Results depend on your operation, your platform, and your goals.')}
             </p>
           </div>

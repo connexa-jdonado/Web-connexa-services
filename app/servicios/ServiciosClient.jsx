@@ -289,7 +289,7 @@ export default function ServiciosClient() {
             <p style={{fontSize:'18px', color:'#6B7280', textAlign:'center', maxWidth:'600px', margin:'0 auto 60px', lineHeight:1.7}}>{tr('Analizamos tu operación actual para identificar brechas y proponer iniciativas concretas y priorizadas.', 'We analyze your current operation to identify gaps and propose specific, prioritized initiatives.')}</p>
           </div>
 
-          <div style={{display:'flex', flexDirection:'row', gap:'48px', maxWidth:'1600px', margin:'0 auto 0', alignItems:'flex-start', position:'relative', zIndex:2}}>
+          <div style={{display:'flex', flexDirection:'row', gap:'48px', maxWidth:'1600px', margin:'0 auto 0', alignItems:'stretch', position:'relative', zIndex:2}}>
 
             {/* Columna izquierda 30% — 3 cards */}
             <div style={{width:'30%', display:'flex', flexDirection:'column', gap:'16px'}}>
@@ -361,7 +361,7 @@ export default function ServiciosClient() {
             </div>
 
             {/* Columna derecha 70% — scatter plot */}
-            <div style={{width:'70%', background:'rgba(255,255,255,0.97)', borderRadius:'20px', padding:'8px', boxShadow:'0 40px 100px rgba(0,0,0,0.4)', position:'sticky', top:'100px'}}>
+            <div style={{width:'70%', background:'rgba(255,255,255,0.97)', borderRadius:'20px', padding:'8px', boxShadow:'0 40px 100px rgba(0,0,0,0.4)', position:'sticky', top:'100px', height:'100%'}}>
 
           {/* SCATTER PLOT MAPA DE PRIORIZACIÓN */}
           <div className="fade-up d2" style={{ background: '#fff', borderRadius: '16px', padding: '32px 32px 24px', margin: '0', boxShadow: 'none', border: 'none' }}>

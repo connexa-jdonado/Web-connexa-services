@@ -277,13 +277,7 @@ export default function ServiciosClient() {
             <rect width="100%" height="100%" fill="url(#dots-cons)"/>
           </svg>
 
-          <div className="section-header center fade-up" style={{position:'relative', zIndex:2}}>
-            <div className="section-eyebrow">{tr('CONSULTORÍA', 'CONSULTING')}</div>
-            <h2>{tr('Consultoría estratégica en Field Service', 'Strategic Field Service Consulting')}</h2>
-            <p>{tr('Analizamos tu operación actual y diseñamos la estrategia óptima para maximizar la eficiencia de tu fuerza de trabajo en campo.', 'We analyze your current operation and design the optimal strategy to maximize the efficiency of your field workforce.')}</p>
-          </div>
-
-          <div style={{position:'relative', zIndex:2, textAlign:'center', marginTop:'60px'}}>
+          <div style={{position:'relative', zIndex:2, textAlign:'center'}}>
             <span style={{color:'#71B136', fontSize:'11px', fontWeight:600, letterSpacing:'0.14em', textAlign:'center', display:'block', marginBottom:'16px'}}>{tr('NUESTRA METODOLOGÍA', 'OUR METHODOLOGY')}</span>
             <h2 style={{fontSize:'42px', fontWeight:800, color:'#172554', textAlign:'center', lineHeight:1.2, marginBottom:'16px'}}>{tr('Un assessment que convierte dolores en resultados', 'An assessment that turns pain points into results')}</h2>
             <p style={{fontSize:'18px', color:'#6B7280', textAlign:'center', maxWidth:'600px', margin:'0 auto 60px', lineHeight:1.7}}>{tr('Analizamos tu operación actual para identificar brechas y proponer iniciativas concretas y priorizadas.', 'We analyze your current operation to identify gaps and propose specific, prioritized initiatives.')}</p>
@@ -361,7 +355,7 @@ export default function ServiciosClient() {
             </div>
 
             {/* Columna derecha 70% — scatter plot */}
-            <div style={{width:'70%', background:'rgba(255,255,255,0.97)', borderRadius:'20px', padding:'8px', boxShadow:'0 40px 100px rgba(0,0,0,0.4)', position:'sticky', top:'100px', height:'100%'}}>
+            <div style={{width:'70%', background:'rgba(255,255,255,0.97)', borderRadius:'20px', padding:'8px', boxShadow:'0 40px 100px rgba(0,0,0,0.4)', position:'sticky', top:'100px', height:'100%', overflow:'hidden', display:'flex', flexDirection:'column'}}>
 
           {/* SCATTER PLOT MAPA DE PRIORIZACIÓN */}
           <div className="fade-up d2" style={{ background: '#fff', borderRadius: '16px', padding: '32px 32px 24px', margin: '0', boxShadow: 'none', border: 'none' }}>
@@ -372,7 +366,7 @@ export default function ServiciosClient() {
             </div>
             <div style={{display:'flex', flexDirection:'column', gap:'24px'}}>
             <div style={{ flex: 1, minWidth: 0 }}>
-            <svg viewBox="0 0 800 600" width="100%" style={{ display: 'block', overflow: 'visible' }}>
+            <svg viewBox="0 0 800 600" width="100%" style={{ display: 'block', overflow: 'visible', flex: 1, height: 'auto', maxHeight: '480px' }}>
               <defs>
                 <filter id="tt-shadow-svc" x="-10%" y="-10%" width="120%" height="120%">
                   <feDropShadow dx="0" dy="2" stdDeviation="3" floodColor="rgba(0,0,0,0.18)" />

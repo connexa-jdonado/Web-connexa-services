@@ -67,6 +67,7 @@ export default function ProductosClient() {
       {/* ── HERO ── */}
       <section className="prod-hero">
         <div className="container prod-hero-inner" style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
+          <div style={{ textAlign: 'left', display: 'flex', flexDirection: 'column', alignItems: 'flex-start', maxWidth: '50%' }}>
           <nav className="breadcrumb">
             <Link href="/">{tr('Inicio', 'Home')}</Link>
             <span className="breadcrumb-sep">/</span>
@@ -78,6 +79,30 @@ export default function ProductosClient() {
           </div>
           <h1 className="page-hero-h1" dangerouslySetInnerHTML={{ __html: tr('Herramientas que potencian<br/>tu plataforma <em>OFSC</em>', 'Tools that power<br/>your <em>OFSC</em> platform') }} />
           <p className="page-hero-sub">{tr('Apps web nativas construidas sobre Oracle Field Service Cloud para resolver los desafíos operacionales más complejos del Field Service, sin fricciones y sin código adicional.', 'Native web apps built on Oracle Field Service Cloud to solve the most complex Field Service operational challenges, without friction and without additional code.')}</p>
+          </div>
+          <div style={{ flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <svg width="420" height="320" viewBox="0 0 420 320" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ overflow: 'visible' }}>
+              <g style={{ animation: 'heroFloat 3.5s ease-in-out infinite', filter: 'drop-shadow(0 0 18px #71B136)' }}>
+                <rect x="20" y="20" width="175" height="115" rx="14" fill="#1e3a5f" stroke="#71B136" strokeWidth="1"/>
+                <svg x="32" y="30" width="32" height="28" viewBox="0 0 28 24" fill="none">
+                  <path d="M16 1.5l.9 3.2 3.2.9-3.2.9L16 9.7l-.9-3.2-3.2-.9 3.2-.9z" fill="#71B136" stroke="#71B136" strokeWidth="0.4" strokeLinejoin="round"/>
+                  <path d="M7 7l.6 2.2 2.2.6-2.2.6L7 12.6l-.6-2.2-2.2-.6 2.2-.6z" fill="#71B136" stroke="#71B136" strokeWidth="0.3" strokeLinejoin="round" opacity="0.65"/>
+                  <path d="M21 14l.5 1.6 1.6.5-1.6.5L21 18.2l-.5-1.6-1.6-.5 1.6-.5z" fill="#71B136" stroke="#71B136" strokeWidth="0.3" strokeLinejoin="round" opacity="0.45"/>
+                </svg>
+                <text x="32" y="90" fontFamily="Plus Jakarta Sans, sans-serif" fontSize="15" fontWeight="700" fill="white">Workflow</text>
+                <text x="32" y="110" fontFamily="Plus Jakarta Sans, sans-serif" fontSize="15" fontWeight="700" fill="white">Builder</text>
+              </g>
+              <g style={{ animation: 'heroFloat 3.5s ease-in-out 1.2s infinite', filter: 'drop-shadow(0 0 18px #71B136)' }}>
+                <rect x="225" y="185" width="165" height="115" rx="14" fill="#1e3a5f" stroke="#71B136" strokeWidth="1"/>
+                <svg x="237" y="197" width="32" height="28" viewBox="0 0 28 24" fill="none">
+                  <path d="M16 1.5l.9 3.2 3.2.9-3.2.9L16 9.7l-.9-3.2-3.2-.9 3.2-.9z" fill="#71B136" stroke="#71B136" strokeWidth="0.4" strokeLinejoin="round"/>
+                  <path d="M7 7l.6 2.2 2.2.6-2.2.6L7 12.6l-.6-2.2-2.2-.6 2.2-.6z" fill="#71B136" stroke="#71B136" strokeWidth="0.3" strokeLinejoin="round" opacity="0.65"/>
+                  <path d="M21 14l.5 1.6 1.6.5-1.6.5L21 18.2l-.5-1.6-1.6-.5 1.6-.5z" fill="#71B136" stroke="#71B136" strokeWidth="0.3" strokeLinejoin="round" opacity="0.45"/>
+                </svg>
+                <text x="237" y="265" fontFamily="Plus Jakarta Sans, sans-serif" fontSize="15" fontWeight="700" fill="white">FSMTool</text>
+              </g>
+            </svg>
+          </div>
         </div>
       </section>
 

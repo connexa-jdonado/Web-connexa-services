@@ -53,8 +53,8 @@ export default function ProductosClient() {
       {/* ── WORKFLOW BUILDER SHOWCASE (FIRST) ── */}
       <div className="showcase alt" id="prod-workflow">
         <div className="container">
-          <div className="showcase-grid mirror" style={{ gridTemplateColumns: '3fr 2fr' }}>
-            <div className="fade-up d2">
+          <div className="showcase-grid mirror" style={{ gridTemplateColumns: '7fr 5fr' }}>
+            <div className="fade-up d2" style={{ overflow: 'hidden' }}>
               <div className="browser-frame">
                 <div className="browser-toolbar">
                   <div className="browser-dots"><span></span><span></span><span></span></div>
@@ -104,7 +104,7 @@ export default function ProductosClient() {
       {/* ── FSMTOOL SHOWCASE (SECOND) ── */}
       <div className="showcase" id="prod-fsmtool">
         <div className="container">
-          <div className="showcase-grid" style={{ gridTemplateColumns: '2fr 3fr' }}>
+          <div className="showcase-grid" style={{ gridTemplateColumns: '5fr 7fr' }}>
             <div className="showcase-text">
               <h2 className="showcase-name fade-up d1">FSMTool <span style={{color:'#172554', fontSize:'0.7em', fontWeight:700}}><svg width="28" height="24" viewBox="0 0 28 24" fill="none" style={{display:'inline-block', verticalAlign:'middle', marginRight:'4px'}}><path d="M20 2l1 3.5L24.5 7l-3.5 1L20 11.5l-1-3.5L15.5 7l3.5-1z" fill="#172554" stroke="#172554" strokeWidth="0.5"/><path d="M11 0l.8 2.8L14.5 4l-2.7.8L11 7.5l-.8-2.7L7.5 4l2.7-.8z" fill="#172554" stroke="#172554" strokeWidth="0.5" opacity="0.6"/><path d="M23 14l.6 2L25.5 17l-2 .6L23 19.5l-.6-2L20.5 17l2-.6z" fill="#172554" stroke="#172554" strokeWidth="0.5" opacity="0.4"/></svg> AI</span></h2>
               <p className="showcase-tagline fade-up d2">{tr('Operaciones masivas en OFSC, sin complejidad', 'Bulk OFSC operations, without complexity')}</p>
@@ -139,7 +139,7 @@ export default function ProductosClient() {
                 <Link href="/productos/fsmtool" className="btn-secondary">{tr('Solicitar acceso', 'Request access')}</Link>
               </div>
             </div>
-            <div className="fade-up d2">
+            <div className="fade-up d2" style={{ overflow: 'hidden' }}>
               <div className="browser-frame">
                 <div className="browser-toolbar">
                   <div className="browser-dots"><span></span><span></span><span></span></div>

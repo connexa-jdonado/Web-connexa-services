@@ -283,7 +283,13 @@ export default function ServiciosClient() {
             <p>{tr('Analizamos tu operación actual y diseñamos la estrategia óptima para maximizar la eficiencia de tu fuerza de trabajo en campo.', 'We analyze your current operation and design the optimal strategy to maximize the efficiency of your field workforce.')}</p>
           </div>
 
-          <div style={{display:'flex', flexDirection:'row', gap:'48px', maxWidth:'1600px', margin:'60px auto 0', alignItems:'flex-start', position:'relative', zIndex:2}}>
+          <div style={{position:'relative', zIndex:2, textAlign:'center', marginTop:'60px'}}>
+            <span style={{color:'#71B136', fontSize:'11px', fontWeight:600, letterSpacing:'0.14em', textAlign:'center', display:'block', marginBottom:'16px'}}>{tr('NUESTRA METODOLOGÍA', 'OUR METHODOLOGY')}</span>
+            <h2 style={{fontSize:'42px', fontWeight:800, color:'#172554', textAlign:'center', lineHeight:1.2, marginBottom:'16px'}}>{tr('Un assessment que convierte dolores en resultados', 'An assessment that turns pain points into results')}</h2>
+            <p style={{fontSize:'18px', color:'#6B7280', textAlign:'center', maxWidth:'600px', margin:'0 auto 60px', lineHeight:1.7}}>{tr('Analizamos tu operación actual para identificar brechas y proponer iniciativas concretas y priorizadas.', 'We analyze your current operation to identify gaps and propose specific, prioritized initiatives.')}</p>
+          </div>
+
+          <div style={{display:'flex', flexDirection:'row', gap:'48px', maxWidth:'1600px', margin:'0 auto 0', alignItems:'flex-start', position:'relative', zIndex:2}}>
 
             {/* Columna izquierda 30% — 3 cards */}
             <div style={{width:'30%', display:'flex', flexDirection:'column', gap:'16px'}}>

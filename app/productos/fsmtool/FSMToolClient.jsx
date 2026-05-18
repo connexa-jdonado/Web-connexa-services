@@ -211,7 +211,7 @@ export default function FSMToolClient() {
           <h2 style={{ fontSize:'52px', fontWeight:900, color:'white', lineHeight:1.1, marginBottom:'16px', position:'relative', zIndex:2 }}>{tr('Todo lo que podés hacer', 'Everything you can do')}</h2>
           <p style={{ fontSize:'18px', color:'rgba(255,255,255,0.6)', maxWidth:'600px', margin:'0 auto 16px', lineHeight:1.7, position:'relative', zIndex:2 }}>{tr('Gestioná tu operación de Oracle Field Service de forma masiva, sin límites y con IA.', 'Manage your Oracle Field Service operation massively, without limits and with AI.')}</p>
           <div style={{ display:'flex', justifyContent:'center', gap:'80px', marginTop:'40px', position:'relative', zIndex:2 }}>
-            {[['4', tr('Módulos','Modules')], ['13', tr('APIs disponibles','Available APIs')], ['100%', tr('Gestión masiva','Bulk management')]].map(([num, label]) => (
+            {[['4', tr('Módulos','Modules')], ['17', tr('APIs disponibles','Available APIs')], ['100%', tr('Gestión masiva','Bulk management')]].map(([num, label]) => (
               <div key={label} style={{ textAlign:'center' }}>
                 <div style={{ fontSize:'40px', fontWeight:900, color:'#71B136' }}>{num}</div>
                 <div style={{ fontSize:'12px', color:'rgba(255,255,255,0.5)', letterSpacing:'0.1em', textTransform:'uppercase' }}>{label}</div>
@@ -273,7 +273,7 @@ export default function FSMToolClient() {
           <div style={{ marginBottom:'8px' }}>
             <span style={{ color:'#71B136', fontSize:'11px', fontWeight:700, letterSpacing:'0.12em', textTransform:'uppercase' }}>{tr('APIs DE OFS','OFS APIs')}</span>
           </div>
-          <h3 style={{ fontSize:'36px', fontWeight:800, color:'#172554', marginBottom:'16px' }}>{tr('+13 APIs de Oracle Field Service','13+ Oracle Field Service APIs')}</h3>
+          <h3 style={{ fontSize:'36px', fontWeight:800, color:'#172554', marginBottom:'16px' }}>{tr('+17 APIs de Oracle Field Service','17+ Oracle Field Service APIs')}</h3>
           <p style={{ color:'#6B7280', fontSize:'16px', marginBottom:'48px' }}>{tr('Todas disponibles para gestión masiva. Sin límites de volumen.','All available for bulk management. No volume limits.')}</p>
 
           <div style={{ background:'linear-gradient(135deg, #172554 0%, #1a3a6b 100%)', borderRadius:'12px', padding:'20px 32px', marginBottom:'32px', display:'flex', alignItems:'center', gap:'16px' }}>
@@ -288,7 +288,7 @@ export default function FSMToolClient() {
             {[
               { name:'Activities', count:'6', endpoints:[tr('Create activities','Create activities'), tr('Update activities','Update activities'), tr('Change activity status','Change activity status'), tr('Change activity date','Change activity date'), tr('Change activity resource','Change activity resource'), tr('Download activities','Download activities')] },
               { name:'Resources', count:'5', endpoints:[tr('Create resources','Create resources'), tr('Update resource properties','Update resource properties'), tr('Update resources work zones','Update resources work zones'), tr('Update resources work skills','Update resources work skills'), tr('Update resources work schedules','Update resources work schedules')] },
-              { name:'Inventories', count:'2', endpoints:[tr('Inventory management','Inventory management'), tr('Inventory transfer','Inventory transfer')] },
+              { name:'Inventories', count:'6', endpoints:[tr('Get an inventory','Get an inventory'), tr('Install an inventory','Install an inventory'), tr('Delete an inventory','Delete an inventory'), tr('Update an inventory','Update an inventory'), tr('Undo deinstall an inventory','Undo deinstall an inventory'), tr('Undo install an inventory','Undo install an inventory')] },
             ].map((cat) => (
               <div key={cat.name} style={{ background:'white', borderRadius:'16px', padding:'28px', border:'1px solid #E5E7EB', boxShadow:'0 2px 8px rgba(0,0,0,0.04)' }}>
                 <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom:'20px' }}>

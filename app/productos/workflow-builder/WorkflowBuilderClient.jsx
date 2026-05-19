@@ -147,20 +147,17 @@ export default function WorkflowBuilderClient() {
               ))}
             </div>
             <div style={{ display: 'flex', gap: '16px' }}>
-              <button onClick={() => scrollTo('casos-uso')} style={{ background: '#71B136', color: 'white', border: 'none', padding: '16px 32px', borderRadius: '8px', fontSize: '15px', fontWeight: 600, cursor: 'pointer' }}>
-                {tr('Ver más →', 'Learn more →')}
-              </button>
               <button onClick={() => scrollTo('demo')} style={{ background: 'transparent', color: 'white', border: '1px solid rgba(255,255,255,0.3)', padding: '16px 32px', borderRadius: '8px', fontSize: '15px', fontWeight: 400, cursor: 'pointer' }}>
                 {tr('Solicitar acceso', 'Request access')}
               </button>
             </div>
           </div>
           {/* Columna derecha 52% */}
-          <div style={{ flex: '0 0 52%' }}>
+          <div style={{ flex: '0 0 58%' }}>
             <div style={{ width: '100%', position: 'relative', transform: 'perspective(1200px) rotateY(-4deg) rotateX(2deg)', transformStyle: 'preserve-3d' }}>
               <div style={{ position: 'absolute', inset: '-20px', background: 'radial-gradient(ellipse, rgba(113,177,54,0.15) 0%, transparent 70%)', borderRadius: '20px', zIndex: 0 }} />
-              <div style={{ borderRadius: '14px', overflow: 'hidden', boxShadow: '0 50px 120px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.08)', position: 'relative', zIndex: 1 }}>
-                <div style={{ height: '40px', background: '#1e1e2e', display: 'flex', alignItems: 'center', padding: '0 16px', gap: '7px' }}>
+              <div style={{ borderRadius: '14px', overflow: 'hidden', boxShadow: '0 50px 120px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.08)', position: 'relative', zIndex: 1, background: '#F3F4F6' }}>
+                <div style={{ height: '40px', background: '#E5E7EB', display: 'flex', alignItems: 'center', padding: '0 16px', gap: '7px' }}>
                   <div style={{ width: '11px', height: '11px', borderRadius: '50%', background: '#FF5F57' }} />
                   <div style={{ width: '11px', height: '11px', borderRadius: '50%', background: '#FFBD2E' }} />
                   <div style={{ width: '11px', height: '11px', borderRadius: '50%', background: '#28CA41' }} />

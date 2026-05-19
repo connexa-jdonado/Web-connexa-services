@@ -277,13 +277,16 @@ export default function WorkflowBuilderClient() {
                 </div>
                 {/* Columna derecha 60% */}
                 <div style={{ width: '60%', padding: '60px', display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative' }}>
-                  <div style={{ width: '100%', maxWidth: '760px', borderRadius: '16px', overflow: 'hidden', boxShadow: '0 40px 100px rgba(0,0,0,0.25)', position: 'relative' }}>
+                  <div style={{ width: '100%', maxWidth: '900px', borderRadius: '16px', overflow: 'hidden', boxShadow: '0 40px 100px rgba(0,0,0,0.25)', position: 'relative' }}>
                     <div style={{ height: '40px', background: '#e8e8ed', display: 'flex', alignItems: 'center', padding: '0 16px', gap: '7px' }}>
                       <div style={{ width: '11px', height: '11px', borderRadius: '50%', background: '#FF5F57' }} />
                       <div style={{ width: '11px', height: '11px', borderRadius: '50%', background: '#FFBD2E' }} />
                       <div style={{ width: '11px', height: '11px', borderRadius: '50%', background: '#28CA41' }} />
                     </div>
-                    <div style={{ background: mockupBg, height: '520px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '20px', position: 'relative', overflow: 'hidden' }}>
+                    {idx === 0 ? (
+                      <img src="/assets/Actividades.png" style={{ width: '100%', height: '600px', display: 'block', objectFit: 'cover' }} alt={tr(caso.titleEs, caso.titleEn)} />
+                    ) : (
+                    <div style={{ background: mockupBg, height: '600px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '20px', position: 'relative', overflow: 'hidden' }}>
                       <div style={{ position: 'absolute', fontSize: '320px', fontWeight: 900, color: 'rgba(255,255,255,0.03)', userSelect: 'none', lineHeight: 1 }}>
                         {caso.num}
                       </div>
@@ -299,6 +302,7 @@ export default function WorkflowBuilderClient() {
                         {tr('Imagen próximamente', 'Image coming soon')}
                       </div>
                     </div>
+                    )}
                   </div>
                 </div>
               </div>

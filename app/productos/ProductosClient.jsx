@@ -116,7 +116,7 @@ export default function ProductosClient() {
                   <div className="browser-dots"><span></span><span></span><span></span></div>
                   <div className="browser-address">newwfbuilder.fsmtool.com/workflows</div>
                 </div>
-                <img src="/assets/wb-canvas.png" style={{ width: '100%', display: 'block', borderRadius: '12px' }} alt="Workflow Builder canvas" />
+                <img src="/assets/WFBuilder01.png" style={{ width: '100%', display: 'block', borderRadius: '12px' }} alt="Workflow Builder canvas" />
               </div>
             </div>
             <div className="showcase-text" style={{ alignSelf: 'flex-start', paddingTop: '0', flex: 1 }}>

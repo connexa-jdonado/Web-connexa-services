@@ -103,12 +103,21 @@ export default function WorkflowBuilderClient() {
     if (!section || !container) return;
     const io = new IntersectionObserver(
       ([entry]) => {
-        container.style.overflowY = entry.intersectionRatio >= 0.9 ? 'scroll' : 'hidden';
+        if (entry.intersectionRatio >= 0.9) {
+          container.style.overflowY = 'scroll';
+          document.body.style.overflow = 'hidden';
+        } else {
+          container.style.overflowY = 'hidden';
+          document.body.style.overflow = '';
+        }
       },
       { threshold: 0.9 }
     );
     io.observe(section);
-    return () => io.disconnect();
+    return () => {
+      io.disconnect();
+      document.body.style.overflow = '';
+    };
   }, []);
 
   const scrollToCase = (idx) => {

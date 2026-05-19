@@ -284,7 +284,7 @@ export default function WorkflowBuilderClient() {
                       <div style={{ width: '11px', height: '11px', borderRadius: '50%', background: '#28CA41' }} />
                     </div>
                     {idx === 0 ? (
-                      <img src="/assets/Actividades.png" style={{ width: '100%', height: 'calc(100vh - 160px)', display: 'block', objectFit: 'contain' }} alt={tr(caso.titleEs, caso.titleEn)} />
+                      <img src="/assets/Actividades.png" style={{ width: '100%', height: 'auto', display: 'block' }} alt={tr(caso.titleEs, caso.titleEn)} />
                     ) : (
                     <div style={{ background: mockupBg, height: '600px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '20px', position: 'relative', overflow: 'hidden' }}>
                       <div style={{ position: 'absolute', fontSize: '320px', fontWeight: 900, color: 'rgba(255,255,255,0.03)', userSelect: 'none', lineHeight: 1 }}>

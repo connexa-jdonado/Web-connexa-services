@@ -113,8 +113,8 @@ export default function ProductosClient() {
             <div className="fade-up d2" style={{ maxWidth: '55%', marginLeft: '40px' }}>
               <div ref={wfImgRef} style={{ position: 'relative', overflow: 'visible', minHeight: '420px', width: '100%', paddingBottom: '40px', paddingTop: '30px', paddingRight: '25px', opacity: 0 }}>
                 <img src="/assets/WFBuilder01.png" style={{ position: 'relative', zIndex: 1, width: '100%', borderRadius: '16px', boxShadow: '0 20px 60px rgba(0,0,0,0.15)', display: 'block' }} alt="Workflow Builder canvas" />
-                <img src="/assets/asistenteIA.png" style={{ position: 'absolute', bottom: '-20px', left: '-20px', width: '44%', borderRadius: '14px', zIndex: 2, boxShadow: '0 12px 40px rgba(0,0,0,0.18)', transform: 'rotate(-2deg)', border: '2px solid rgba(255,255,255,0.7)' }} alt="Asistente IA" />
-                <img src="/assets/nodoIA.png" style={{ position: 'absolute', top: '-20px', right: '-15px', width: '40%', borderRadius: '14px', zIndex: 2, boxShadow: '0 12px 40px rgba(0,0,0,0.18)', transform: 'rotate(1.5deg)', border: '2px solid rgba(255,255,255,0.7)' }} alt="Nodo IA" />
+                <img src="/assets/asistenteIA.png" style={{ position: 'absolute', bottom: '-30px', left: '5%', width: '48%', borderRadius: '14px', zIndex: 2, boxShadow: '0 12px 40px rgba(0,0,0,0.18)', transform: 'rotate(-1.5deg)', border: '1.5px solid rgba(255,255,255,0.5)' }} alt="Asistente IA" />
+                <img src="/assets/nodoIA.png" style={{ position: 'absolute', top: '10px', right: '-10px', width: '38%', borderRadius: '14px', zIndex: 2, boxShadow: '0 12px 40px rgba(0,0,0,0.18)', transform: 'rotate(1deg)', border: '1.5px solid rgba(255,255,255,0.5)' }} alt="Nodo IA" />
               </div>
             </div>
             <div className="showcase-text" style={{ alignSelf: 'flex-start', paddingTop: '0', flex: 1 }}>

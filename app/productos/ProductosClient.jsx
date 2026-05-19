@@ -221,7 +221,7 @@ export default function ProductosClient() {
               </div>
             </div>
             <div className="fade-up d2" style={{ maxWidth: '55%', marginLeft: '40px' }}>
-              <div className="browser-frame" ref={fsmImgRef} style={{ opacity: 0 }}>
+              <div className="browser-frame" ref={fsmImgRef} style={{ opacity: 0, boxShadow: '0 32px 80px rgba(0,0,0,0.15)', borderRadius: '12px', border: 'none' }}>
                 <div className="browser-toolbar">
                   <div className="browser-dots"><span></span><span></span><span></span></div>
                   <div className="browser-address">app.connexaservices.com/fsmtool</div>

@@ -111,10 +111,12 @@ export default function ProductosClient() {
         <div className="container" style={{ maxWidth: '100%', width: '100%' }}>
           <div className="showcase-grid mirror" style={{ display: 'flex', flexDirection: 'row', alignItems: 'flex-start', gap: '0', padding: '48px 64px', marginTop: '40px' }}>
             <div className="fade-up d2" style={{ maxWidth: '55%', marginLeft: '40px' }}>
-              <div ref={wfImgRef} style={{ position: 'relative', overflow: 'visible', minHeight: '420px', width: '100%', paddingBottom: '40px', paddingTop: '30px', paddingRight: '25px', opacity: 0 }}>
-                <img src="/assets/WFBuilder01.png" style={{ position: 'relative', zIndex: 1, width: '100%', borderRadius: '16px', boxShadow: '0 20px 60px rgba(0,0,0,0.15)', display: 'block' }} alt="Workflow Builder canvas" />
-                <img src="/assets/asistenteIA.png" style={{ position: 'absolute', bottom: '-30px', left: '5%', width: '48%', borderRadius: '14px', zIndex: 2, boxShadow: '0 12px 40px rgba(0,0,0,0.18)', transform: 'rotate(-1.5deg)', border: '1.5px solid rgba(255,255,255,0.5)' }} alt="Asistente IA" />
-                <img src="/assets/nodoIA.png" style={{ position: 'absolute', top: '10px', right: '-10px', width: '38%', borderRadius: '14px', zIndex: 2, boxShadow: '0 12px 40px rgba(0,0,0,0.18)', transform: 'rotate(1deg)', border: '1.5px solid rgba(255,255,255,0.5)' }} alt="Nodo IA" />
+              <div className="browser-frame" ref={wfImgRef} style={{ opacity: 0 }}>
+                <div className="browser-toolbar">
+                  <div className="browser-dots"><span></span><span></span><span></span></div>
+                  <div className="browser-address">newwfbuilder.fsmtool.com/workflows</div>
+                </div>
+                <img src="/assets/wb-canvas.png" style={{ width: '100%', display: 'block', borderRadius: '12px' }} alt="Workflow Builder canvas" />
               </div>
             </div>
             <div className="showcase-text" style={{ alignSelf: 'flex-start', paddingTop: '0', flex: 1 }}>

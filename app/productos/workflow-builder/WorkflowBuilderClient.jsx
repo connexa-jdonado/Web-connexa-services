@@ -58,6 +58,7 @@ export default function WorkflowBuilderClient() {
   const [activeTab, setActiveTab] = useState('constructor');
   const [formSent, setFormSent] = useState(false);
   const casosContainerRef = useRef(null);
+  const casosSectionRef = useRef(null);
   const caseRefs = useRef([]);
 
   const tr = (es, en) => (lang === 'es' ? es : en);
@@ -94,6 +95,20 @@ export default function WorkflowBuilderClient() {
       observers.push(obs);
     });
     return () => observers.forEach((obs) => obs.disconnect());
+  }, []);
+
+  useEffect(() => {
+    const section = casosSectionRef.current;
+    const container = casosContainerRef.current;
+    if (!section || !container) return;
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        container.style.overflowY = entry.intersectionRatio >= 0.9 ? 'scroll' : 'hidden';
+      },
+      { threshold: 0.9 }
+    );
+    io.observe(section);
+    return () => io.disconnect();
   }, []);
 
   const scrollToCase = (idx) => {
@@ -191,10 +206,10 @@ export default function WorkflowBuilderClient() {
       </div>
 
       {/* ── CASOS DE USO — SCROLL SNAP ── */}
-      <section id="casos-uso" style={{ position: 'relative' }}>
+      <section ref={casosSectionRef} id="casos-uso" style={{ position: 'relative' }}>
         <div
           ref={casosContainerRef}
-          style={{ height: '100vh', overflowY: 'scroll', scrollSnapType: 'y mandatory', scrollBehavior: 'smooth' }}
+          style={{ height: '100vh', overflowY: 'hidden', scrollSnapType: 'y mandatory', scrollBehavior: 'smooth' }}
         >
           {WB_CASOS.map((caso, idx) => {
             const isDark = idx % 2 === 0;

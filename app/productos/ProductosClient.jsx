@@ -116,7 +116,7 @@ export default function ProductosClient() {
                   <div className="browser-dots"><span></span><span></span><span></span></div>
                   <div className="browser-address">newwfbuilder.fsmtool.com/workflows</div>
                 </div>
-                <img src="/assets/WFBuilder01.png" style={{ width: '100%', display: 'block', borderRadius: '12px' }} alt="Workflow Builder canvas" />
+                <img src="/assets/WFBuilder01.png" style={{ width: '100%', display: 'block', borderRadius: '12px', borderBottomLeftRadius: '12px', borderBottomRightRadius: '12px' }} alt="Workflow Builder canvas" />
               </div>
             </div>
             <div className="showcase-text" style={{ alignSelf: 'flex-start', paddingTop: '0', flex: 1 }}>
@@ -226,7 +226,7 @@ export default function ProductosClient() {
                   <div className="browser-dots"><span></span><span></span><span></span></div>
                   <div className="browser-address">app.connexaservices.com/fsmtool</div>
                 </div>
-                <img src="/assets/fsmtool-home.png" style={{ width: '100%', display: 'block', borderRadius: '12px', border: 'none' }} alt="FSMTool dashboard" />
+                <img src="/assets/fsmtool-home.png" style={{ width: '100%', display: 'block', borderRadius: '12px', borderBottomLeftRadius: '12px', borderBottomRightRadius: '12px' }} alt="FSMTool dashboard" />
               </div>
             </div>
           </div>

@@ -114,8 +114,18 @@ export default function WorkflowBuilderClient() {
       { threshold: 0.9 }
     );
     io.observe(section);
+    const onWheel = (e) => {
+      const atTop    = container.scrollTop <= 0;
+      const atBottom = container.scrollTop >= container.scrollHeight - container.clientHeight - 1;
+      if ((atTop && e.deltaY < 0) || (atBottom && e.deltaY > 0)) {
+        container.style.overflowY = 'hidden';
+        document.body.style.overflow = '';
+      }
+    };
+    container.addEventListener('wheel', onWheel, { passive: true });
     return () => {
       io.disconnect();
+      container.removeEventListener('wheel', onWheel);
       document.body.style.overflow = '';
     };
   }, []);

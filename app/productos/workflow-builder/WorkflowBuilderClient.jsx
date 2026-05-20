@@ -444,7 +444,7 @@ export default function WorkflowBuilderClient() {
                           </p>
                         </div>
                         <div style={{ marginTop: '16px', opacity: caso1ShowImg ? 1 : 0, transition: 'opacity 0.8s ease' }}>
-                          <img src="/assets/Actividades.png" style={{ width: '100%', height: 'auto', display: 'block', borderRadius: '10px' }} alt={tr(caso.titleEs, caso.titleEn)} />
+                          <img src="/assets/caso1.png" style={{ width: '100%', height: 'auto', display: 'block', borderRadius: '10px' }} alt={tr(caso.titleEs, caso.titleEn)} />
                         </div>
                       </div>
                     ) : idx === 1 ? (

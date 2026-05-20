@@ -393,6 +393,9 @@ export default function HomeClient() {
             #por-que-connexa      { padding-bottom: 24px !important; }
             #nosotros             { display: none !important; padding: 0 !important; margin: 0 !important; height: 0 !important; overflow: hidden !important; }
           }
+          @media (min-width: 769px) {
+            .hero-partners-list { display: contents; }
+          }
         `}</style>
         <div className="metodologia-wrapper" style={{width:'100%', background:'#F3F4F6', padding:'100px 40px', position:'relative', overflow:'hidden', overflowX:'auto'}}>
           <svg style={{position:'absolute',inset:0,width:'100%',height:'100%',opacity:0,pointerEvents:'none',zIndex:0}}>

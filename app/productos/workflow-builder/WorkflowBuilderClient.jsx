@@ -50,6 +50,14 @@ const CASO1_SEGS = [
   { t: 'las programe para mañana', g: true },
 ];
 
+const CASO2_TEXT = 'Cuántas actividades tiene asignadas el recurso García para mañana en zona norte';
+const CASO2_SEGS = [
+  { t: 'Cuántas actividades tiene ', g: false },
+  { t: 'asignadas el recurso García ', g: true },
+  { t: 'para mañana ', g: false },
+  { t: 'en zona norte', g: true },
+];
+
 const WB_TABS = [
   { key: 'constructor', label: 'Constructor visual' },
   { key: 'ejecuciones', label: 'Ejecuciones' },
@@ -70,6 +78,8 @@ export default function WorkflowBuilderClient() {
   const caseRefs = useRef([]);
   const [caso1Chars, setCaso1Chars] = useState(0);
   const [caso1ShowImg, setCaso1ShowImg] = useState(false);
+  const [caso2Chars, setCaso2Chars] = useState(0);
+  const [caso2ShowAsis, setCaso2ShowAsis] = useState(false);
   const [caso2ShowImg, setCaso2ShowImg] = useState(false);
   const [caso2Scale, setCaso2Scale] = useState(1);
 
@@ -158,16 +168,21 @@ export default function WorkflowBuilderClient() {
   }, [caso1Chars, caso1ShowImg]);
 
   useEffect(() => {
+    const full = CASO2_TEXT.length;
     let t;
-    if (!caso2ShowImg) {
-      t = setTimeout(() => setCaso2ShowImg(true), 400);
-    } else if (caso2Scale === 1) {
+    if (caso2Chars < full) {
+      t = setTimeout(() => setCaso2Chars(c => c + 1), 45);
+    } else if (!caso2ShowAsis && !caso2ShowImg) {
+      t = setTimeout(() => setCaso2ShowAsis(true), 600);
+    } else if (caso2ShowAsis && !caso2ShowImg) {
+      t = setTimeout(() => { setCaso2ShowAsis(false); setCaso2ShowImg(true); }, 2000);
+    } else if (!caso2ShowAsis && caso2ShowImg && caso2Scale === 1) {
       t = setTimeout(() => setCaso2Scale(1.15), 1000);
-    } else {
-      t = setTimeout(() => { setCaso2ShowImg(false); setCaso2Scale(1); }, 5000);
+    } else if (!caso2ShowAsis && caso2ShowImg && caso2Scale !== 1) {
+      t = setTimeout(() => { setCaso2Chars(0); setCaso2ShowAsis(false); setCaso2ShowImg(false); setCaso2Scale(1); }, 5000);
     }
     return () => clearTimeout(t);
-  }, [caso2ShowImg, caso2Scale]);
+  }, [caso2Chars, caso2ShowAsis, caso2ShowImg, caso2Scale]);
 
   const scrollToCase = (idx) => {
     const container = casosContainerRef.current;
@@ -351,21 +366,55 @@ export default function WorkflowBuilderClient() {
                           <img src="/assets/Actividades.png" style={{ width: '100%', height: 'auto', display: 'block', borderRadius: '10px' }} alt={tr(caso.titleEs, caso.titleEn)} />
                         </div>
                       </div>
+                    ) : idx === 1 ? (
+                      <div style={{ background: '#0f172a', padding: '20px' }}>
+                        <div style={{ border: '1px solid #71B136', borderRadius: '12px', padding: '20px' }}>
+                          <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '16px' }}>
+                            <svg width="14" height="12" viewBox="0 0 28 24" fill="none">
+                              <path d="M16 1.5l.9 3.2 3.2.9-3.2.9L16 9.7l-.9-3.2-3.2-.9 3.2-.9z" fill="#71B136" stroke="#71B136" strokeWidth="0.4" strokeLinejoin="round"/>
+                              <path d="M7 7l.6 2.2 2.2.6-2.2.6L7 12.6l-.6-2.2-2.2-.6 2.2-.6z" fill="#71B136" stroke="#71B136" strokeWidth="0.3" strokeLinejoin="round" opacity="0.65"/>
+                              <path d="M21 14l.5 1.6 1.6.5-1.6.5L21 18.2l-.5-1.6-1.6-.5 1.6-.5z" fill="#71B136" stroke="#71B136" strokeWidth="0.3" strokeLinejoin="round" opacity="0.45"/>
+                            </svg>
+                            <span style={{ color: '#71B136', fontSize: '12px', fontWeight: 600, letterSpacing: '0.06em' }}>Asistente IA</span>
+                          </div>
+                          <p style={{ margin: 0, fontSize: '15px', lineHeight: 1.7, minHeight: '80px' }}>
+                            {(() => {
+                              let rem = caso2Chars;
+                              return CASO2_SEGS.map((seg, si) => {
+                                if (rem <= 0) return null;
+                                const show = seg.t.slice(0, rem);
+                                rem -= seg.t.length;
+                                return <span key={si} style={{ color: seg.g ? '#71B136' : 'white' }}>{show}</span>;
+                              });
+                            })()}
+                            <span style={{ display: 'inline-block', width: '2px', height: '1em', background: '#71B136', marginLeft: '2px', verticalAlign: 'text-bottom', animation: 'blink 1s step-end infinite' }} />
+                          </p>
+                        </div>
+                        <div style={{ marginTop: '16px', position: 'relative' }}>
+                          <div style={{ overflow: 'hidden', opacity: caso2ShowImg ? 1 : 0, transition: 'opacity 0.8s ease' }}>
+                            <img src="/assets/caso2.png" style={{ width: '100%', height: 'auto', display: 'block', borderRadius: '10px', transform: `scale(${caso2Scale})`, transformOrigin: 'center center', transition: 'transform 3s ease-in-out' }} alt={tr(caso.titleEs, caso.titleEn)} />
+                          </div>
+                          <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, opacity: caso2ShowAsis ? 1 : 0, transition: 'opacity 0.8s ease', borderRadius: '10px', overflow: 'hidden' }}>
+                            <img src="/assets/asis2.png" style={{ width: '100%', height: '100%', display: 'block', objectFit: 'cover', borderRadius: '10px' }} alt={tr(caso.titleEs, caso.titleEn)} />
+                          </div>
+                        </div>
+                      </div>
                     ) : (
-                    <div style={{ overflow: 'hidden' }}>
-                      <img
-                        src="/assets/caso2.png"
-                        style={{
-                          width: '100%',
-                          height: 'auto',
-                          display: 'block',
-                          opacity: caso2ShowImg ? 1 : 0,
-                          transform: `scale(${caso2Scale})`,
-                          transformOrigin: 'center center',
-                          transition: 'opacity 0.8s ease, transform 3s ease-in-out',
-                        }}
-                        alt={tr(caso.titleEs, caso.titleEn)}
-                      />
+                    <div style={{ background: mockupBg, height: '600px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '20px', position: 'relative', overflow: 'hidden' }}>
+                      <div style={{ position: 'absolute', fontSize: '320px', fontWeight: 900, color: 'rgba(255,255,255,0.03)', userSelect: 'none', lineHeight: 1 }}>
+                        {caso.num}
+                      </div>
+                      <svg width="56" height="56" viewBox="0 0 56 56" fill="none" style={{ position: 'relative', zIndex: 2 }}>
+                        <rect x="4" y="10" width="48" height="36" rx="6" stroke="rgba(255,255,255,0.25)" strokeWidth="2"/>
+                        <circle cx="18" cy="24" r="4" fill="rgba(255,255,255,0.2)"/>
+                        <path d="M4 38l14-10 10 7 8-6 20 13" stroke="rgba(255,255,255,0.2)" strokeWidth="2" fill="none"/>
+                      </svg>
+                      <div style={{ color: 'rgba(255,255,255,0.85)', fontSize: '20px', fontWeight: 700, textAlign: 'center', maxWidth: '360px', position: 'relative', zIndex: 2 }}>
+                        {tr(caso.titleEs, caso.titleEn)}
+                      </div>
+                      <div style={{ color: 'rgba(255,255,255,0.35)', fontSize: '13px', letterSpacing: '0.08em', position: 'relative', zIndex: 2 }}>
+                        {tr('Imagen próximamente', 'Image coming soon')}
+                      </div>
                     </div>
                     )}
                   </div>

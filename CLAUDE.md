@@ -118,3 +118,78 @@ WORKFLOW:
 - Un cambio a la vez
 - Commit después de cada cambio exitoso
 - Nunca acumular muchos cambios sin commitear
+
+## MOBILE — REGLA CRÍTICA
+
+Prioridad: desktop intacto, mobile funcional.
+
+### PRINCIPIO BASE
+Nunca modificar estilos desktop para arreglar mobile.
+Todo ajuste mobile va EXCLUSIVAMENTE en media queries
+o condiciones responsive, nunca tocando el estilo base.
+
+### OBLIGATORIO EN CADA COMPONENTE NUEVO O MODIFICADO
+1. Verificar que el componente se ve en 375px y 768px
+2. Agregar estilos mobile SIEMPRE como adición, nunca reemplazando
+3. Usar este patrón para responsive inline:
+   - Desktop: estilo base en style={{}}
+   - Mobile: usar <style> tag con @media (max-width: 768px)
+     o estado con useWindowSize hook si es necesario
+
+### BREAKPOINTS DEL PROYECTO
+- Mobile: max-width 768px
+- Tablet: max-width 1024px
+- Desktop: todo lo demás (estilo base)
+
+### CHECKLIST ANTES DE CADA COMMIT
+- [ ] El diseño desktop no cambió visualmente
+- [ ] El componente es usable en 375px (iPhone SE)
+- [ ] El componente es usable en 768px (tablet)
+- [ ] Las animaciones no bloquean el scroll en mobile
+- [ ] Los textos no se cortan ni desbordan
+- [ ] Los botones tienen mínimo 44px de alto (touch target)
+- [ ] Las imágenes no desbordan su contenedor
+- [ ] El overflow horizontal está controlado (no hay scroll horizontal)
+
+### SECCIONES CONOCIDAS CON PROBLEMAS MOBILE
+Verificar y reparar en este orden de prioridad:
+1. Casos de uso WFBuilder — scroll snap en mobile
+2. Typing effect casos de uso — layout en pantalla angosta
+3. Collage de imágenes productos — posicionamiento absoluto
+4. Hero de productos — flex row en mobile debe ser column
+5. Cards WFBuilder y FSMTool — imagen y texto en columna
+
+### PROHIBIDO
+- Nunca tocar lógica de animaciones desktop
+- Nunca cambiar valores de style={{}} existentes
+- Nunca modificar colores ni tipografías
+- Nunca reescribir archivos completos
+- Nunca mergear a main sin revisar en mobile real o DevTools
+
+
+## RESPONSIVE — OBLIGATORIO EN TODO EL PROYECTO
+
+Todo componente, sección o página debe funcionar correctamente
+en estos anchos mínimos sin excepción:
+- 375px — iPhone SE / móviles pequeños
+- 390px — iPhone 14
+- 768px — tablets
+- 1024px — laptops
+- 1280px+ — desktop
+
+### REGLA DE ORO
+Ningún cambio se considera terminado hasta que
+funciona en los 5 breakpoints. Sin excepción.
+
+### PATRONES OBLIGATORIOS
+- Flex rows en desktop → flex column en mobile
+- Imágenes: siempre maxWidth 100%, nunca ancho fijo en mobile
+- Texto: nunca font-size fijo menor a 14px en mobile
+- Padding horizontal en mobile: mínimo 16px en los costados
+- Ningún elemento puede causar scroll horizontal
+
+### CÓMO IMPLEMENTAR
+- Estilos base (style={{}}) = desktop
+- Media queries via <style> tag para mobile/tablet
+- Nunca usar px fijos en widths de contenedores principales
+- Usar %, vw, o maxWidth con width 100%

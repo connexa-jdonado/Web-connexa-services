@@ -70,6 +70,8 @@ export default function WorkflowBuilderClient() {
   const caseRefs = useRef([]);
   const [caso1Chars, setCaso1Chars] = useState(0);
   const [caso1ShowImg, setCaso1ShowImg] = useState(false);
+  const [caso2ShowImg, setCaso2ShowImg] = useState(false);
+  const [caso2Scale, setCaso2Scale] = useState(1);
 
   const tr = (es, en) => (lang === 'es' ? es : en);
 
@@ -154,6 +156,18 @@ export default function WorkflowBuilderClient() {
     }
     return () => clearTimeout(t);
   }, [caso1Chars, caso1ShowImg]);
+
+  useEffect(() => {
+    let t;
+    if (!caso2ShowImg) {
+      t = setTimeout(() => setCaso2ShowImg(true), 400);
+    } else if (caso2Scale === 1) {
+      t = setTimeout(() => setCaso2Scale(1.15), 1000);
+    } else {
+      t = setTimeout(() => { setCaso2ShowImg(false); setCaso2Scale(1); }, 5000);
+    }
+    return () => clearTimeout(t);
+  }, [caso2ShowImg, caso2Scale]);
 
   const scrollToCase = (idx) => {
     const container = casosContainerRef.current;
@@ -338,21 +352,20 @@ export default function WorkflowBuilderClient() {
                         </div>
                       </div>
                     ) : (
-                    <div style={{ background: mockupBg, height: '600px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '20px', position: 'relative', overflow: 'hidden' }}>
-                      <div style={{ position: 'absolute', fontSize: '320px', fontWeight: 900, color: 'rgba(255,255,255,0.03)', userSelect: 'none', lineHeight: 1 }}>
-                        {caso.num}
-                      </div>
-                      <svg width="56" height="56" viewBox="0 0 56 56" fill="none" style={{ position: 'relative', zIndex: 2 }}>
-                        <rect x="4" y="10" width="48" height="36" rx="6" stroke="rgba(255,255,255,0.25)" strokeWidth="2"/>
-                        <circle cx="18" cy="24" r="4" fill="rgba(255,255,255,0.2)"/>
-                        <path d="M4 38l14-10 10 7 8-6 20 13" stroke="rgba(255,255,255,0.2)" strokeWidth="2" fill="none"/>
-                      </svg>
-                      <div style={{ color: 'rgba(255,255,255,0.85)', fontSize: '20px', fontWeight: 700, textAlign: 'center', maxWidth: '360px', position: 'relative', zIndex: 2 }}>
-                        {tr(caso.titleEs, caso.titleEn)}
-                      </div>
-                      <div style={{ color: 'rgba(255,255,255,0.35)', fontSize: '13px', letterSpacing: '0.08em', position: 'relative', zIndex: 2 }}>
-                        {tr('Imagen próximamente', 'Image coming soon')}
-                      </div>
+                    <div style={{ overflow: 'hidden' }}>
+                      <img
+                        src="/assets/caso2.png"
+                        style={{
+                          width: '100%',
+                          height: 'auto',
+                          display: 'block',
+                          opacity: caso2ShowImg ? 1 : 0,
+                          transform: `scale(${caso2Scale})`,
+                          transformOrigin: 'center center',
+                          transition: 'opacity 0.8s ease, transform 3s ease-in-out',
+                        }}
+                        alt={tr(caso.titleEs, caso.titleEn)}
+                      />
                     </div>
                     )}
                   </div>

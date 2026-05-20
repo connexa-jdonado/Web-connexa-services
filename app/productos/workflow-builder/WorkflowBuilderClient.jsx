@@ -78,6 +78,16 @@ const CASO4_SEGS = [
   { t: 'enviá notificacion por Slack', g: true },
 ];
 
+const CASO5_TEXT = 'Crea un flujo que cada vez que se guarda un formulario en OFS, envíe la información automáticamente al sistema legado vía API';
+const CASO5_SEGS = [
+  { t: 'Crea un flujo que cada vez que ', g: false },
+  { t: 'se guarda un formulario en OFS', g: true },
+  { t: ', ', g: false },
+  { t: 'envíe la información automáticamente ', g: true },
+  { t: 'al ', g: false },
+  { t: 'sistema legado vía API', g: true },
+];
+
 const WB_TABS = [
   { key: 'constructor', label: 'Constructor visual' },
   { key: 'ejecuciones', label: 'Ejecuciones' },
@@ -106,6 +116,8 @@ export default function WorkflowBuilderClient() {
   const [caso3ShowImg, setCaso3ShowImg] = useState(false);
   const [caso4Chars, setCaso4Chars] = useState(0);
   const [caso4ShowImg, setCaso4ShowImg] = useState(false);
+  const [caso5Chars, setCaso5Chars] = useState(0);
+  const [caso5ShowImg, setCaso5ShowImg] = useState(false);
 
   const tr = (es, en) => (lang === 'es' ? es : en);
 
@@ -237,6 +249,21 @@ export default function WorkflowBuilderClient() {
     }
     return () => clearTimeout(t);
   }, [caso4Chars, caso4ShowImg]);
+
+  useEffect(() => {
+    const full = CASO5_TEXT.length;
+    let t;
+    if (!caso5ShowImg) {
+      if (caso5Chars < full) {
+        t = setTimeout(() => setCaso5Chars(c => c + 1), 45);
+      } else {
+        t = setTimeout(() => setCaso5ShowImg(true), 600);
+      }
+    } else {
+      t = setTimeout(() => { setCaso5Chars(0); setCaso5ShowImg(false); }, 3000);
+    }
+    return () => clearTimeout(t);
+  }, [caso5Chars, caso5ShowImg]);
 
   const scrollToCase = (idx) => {
     const container = casosContainerRef.current;
@@ -510,22 +537,33 @@ export default function WorkflowBuilderClient() {
                         </div>
                       </div>
                     ) : (
-                    <div style={{ background: mockupBg, height: '600px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '20px', position: 'relative', overflow: 'hidden' }}>
-                      <div style={{ position: 'absolute', fontSize: '320px', fontWeight: 900, color: 'rgba(255,255,255,0.03)', userSelect: 'none', lineHeight: 1 }}>
-                        {caso.num}
+                      <div style={{ background: '#0f172a', padding: '20px' }}>
+                        <div style={{ border: '1px solid #71B136', borderRadius: '12px', padding: '20px' }}>
+                          <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '16px' }}>
+                            <svg width="14" height="12" viewBox="0 0 28 24" fill="none">
+                              <path d="M16 1.5l.9 3.2 3.2.9-3.2.9L16 9.7l-.9-3.2-3.2-.9 3.2-.9z" fill="#71B136" stroke="#71B136" strokeWidth="0.4" strokeLinejoin="round"/>
+                              <path d="M7 7l.6 2.2 2.2.6-2.2.6L7 12.6l-.6-2.2-2.2-.6 2.2-.6z" fill="#71B136" stroke="#71B136" strokeWidth="0.3" strokeLinejoin="round" opacity="0.65"/>
+                              <path d="M21 14l.5 1.6 1.6.5-1.6.5L21 18.2l-.5-1.6-1.6-.5 1.6-.5z" fill="#71B136" stroke="#71B136" strokeWidth="0.3" strokeLinejoin="round" opacity="0.45"/>
+                            </svg>
+                            <span style={{ color: '#71B136', fontSize: '12px', fontWeight: 600, letterSpacing: '0.06em' }}>Asistente IA</span>
+                          </div>
+                          <p style={{ margin: 0, fontSize: '15px', lineHeight: 1.7, minHeight: '80px' }}>
+                            {(() => {
+                              let rem = caso5Chars;
+                              return CASO5_SEGS.map((seg, si) => {
+                                if (rem <= 0) return null;
+                                const show = seg.t.slice(0, rem);
+                                rem -= seg.t.length;
+                                return <span key={si} style={{ color: seg.g ? '#71B136' : 'white' }}>{show}</span>;
+                              });
+                            })()}
+                            <span style={{ display: 'inline-block', width: '2px', height: '1em', background: '#71B136', marginLeft: '2px', verticalAlign: 'text-bottom', animation: 'blink 1s step-end infinite' }} />
+                          </p>
+                        </div>
+                        <div style={{ marginTop: '16px', opacity: caso5ShowImg ? 1 : 0, transition: 'opacity 0.8s ease' }}>
+                          <img src="/assets/caso5.png" style={{ width: '100%', height: 'auto', display: 'block', borderRadius: '10px' }} alt={tr(caso.titleEs, caso.titleEn)} />
+                        </div>
                       </div>
-                      <svg width="56" height="56" viewBox="0 0 56 56" fill="none" style={{ position: 'relative', zIndex: 2 }}>
-                        <rect x="4" y="10" width="48" height="36" rx="6" stroke="rgba(255,255,255,0.25)" strokeWidth="2"/>
-                        <circle cx="18" cy="24" r="4" fill="rgba(255,255,255,0.2)"/>
-                        <path d="M4 38l14-10 10 7 8-6 20 13" stroke="rgba(255,255,255,0.2)" strokeWidth="2" fill="none"/>
-                      </svg>
-                      <div style={{ color: 'rgba(255,255,255,0.85)', fontSize: '20px', fontWeight: 700, textAlign: 'center', maxWidth: '360px', position: 'relative', zIndex: 2 }}>
-                        {tr(caso.titleEs, caso.titleEn)}
-                      </div>
-                      <div style={{ color: 'rgba(255,255,255,0.35)', fontSize: '13px', letterSpacing: '0.08em', position: 'relative', zIndex: 2 }}>
-                        {tr('Imagen próximamente', 'Image coming soon')}
-                      </div>
-                    </div>
                     )}
                   </div>
                 </div>

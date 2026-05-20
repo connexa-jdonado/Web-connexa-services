@@ -375,7 +375,6 @@ export default function HomeClient() {
       {/* METODOLOGÍA */}
       <section id="metodologia" className="metodologia-section-end">
         <style>{`
-          .hero-partners-list { display: contents; }
           @media (max-width: 768px) {
             .metodologia-wrapper { padding: 48px 20px !important; }
             .metodologia-layout { flex-direction: column !important; gap: 24px !important; }
@@ -388,7 +387,8 @@ export default function HomeClient() {
             .metodologia-gap { margin-top: 0 !important; padding-top: 0 !important; }
             .metodologia-disclaimer { position: relative !important; margin-top: 24px !important; z-index: 1; }
             .metodologia-section-end { margin-bottom: 0 !important; padding-bottom: 0 !important; background: transparent !important; }
-            .hero-partners-block { display: flex !important; flex-direction: row !important; justify-content: space-between !important; align-items: center !important; width: 100% !important; }
+            #nosotros { display: none !important; }
+            .hero-partners-block { display: flex !important; flex-direction: row !important; justify-content: space-between !important; align-items: center !important; }
             .hero-partners-list { display: flex !important; flex-direction: column !important; align-items: flex-end !important; gap: 8px !important; }
             .hero-content-mobile { padding-top: 24px !important; }
             .metodologia-divider { margin-top: 0 !important; padding-top: 0 !important; height: auto !important; min-height: 0 !important; }

@@ -389,13 +389,12 @@ export default function HomeClient() {
             .metodologia-section-end { margin-bottom: 0 !important; padding-bottom: 0 !important; background: transparent !important; }
             #por-que-connexa { padding-bottom: 24px !important; }
             #nosotros { display: none !important; padding: 0 !important; margin: 0 !important; height: 0 !important; min-height: 0 !important; overflow: hidden !important; }
-            .hero-partners-block { flex-wrap: nowrap !important; }
-            .hero-partners-list { display: flex !important; flex-direction: row !important; align-items: center !important; gap: 16px !important; flex-wrap: nowrap !important; }
             .hero-content-mobile { padding-top: 24px !important; }
             .metodologia-divider { margin-top: 0 !important; padding-top: 0 !important; height: auto !important; min-height: 0 !important; }
           }
           @media (min-width: 769px) {
-            #nosotros { padding: 0 !important; min-height: 0 !important; }
+            #nosotros { padding: 0 !important; min-height: 0 !important; overflow: hidden !important; }
+            .clients-separator { display: none !important; }
           }
         `}</style>
         <div className="metodologia-wrapper" style={{width:'100%', background:'#F3F4F6', padding:'100px 40px', position:'relative', overflow:'hidden', overflowX:'auto'}}>

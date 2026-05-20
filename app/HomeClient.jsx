@@ -376,25 +376,22 @@ export default function HomeClient() {
       <section id="metodologia" className="metodologia-section-end">
         <style>{`
           @media (max-width: 768px) {
-            .metodologia-wrapper { padding: 48px 20px !important; }
-            .metodologia-layout { flex-direction: column !important; gap: 24px !important; }
-            .metodologia-left { width: 100% !important; }
-            .metodologia-right { width: 100% !important; position: relative !important; top: 0 !important; }
-            .hero-eyebrow { white-space: normal !important; }
-            .metodologia-legend { grid-template-columns: repeat(2, 1fr) !important; }
-            .hero-partners { display: flex; flex-direction: column; align-items: flex-start; gap: 12px; }
-            .hero-cta-btn { width: calc(100% - 80px) !important; margin: 0 40px !important; font-size: 15px !important; padding: 14px 20px !important; }
-            .metodologia-gap { margin-top: 0 !important; padding-top: 0 !important; }
+            /* METODOLOGÍA */
+            .metodologia-wrapper  { padding: 48px 20px !important; }
+            .metodologia-layout   { flex-direction: column !important; gap: 24px !important; }
+            .metodologia-left     { width: 100% !important; }
+            .metodologia-right    { width: 100% !important; position: relative !important; top: 0 !important; }
+            .metodologia-legend   { grid-template-columns: repeat(2, 1fr) !important; }
+            .metodologia-gap      { margin-top: 0 !important; padding-top: 0 !important; }
             .metodologia-disclaimer { position: relative !important; margin-top: 24px !important; z-index: 1; }
-            .metodologia-section-end { margin-bottom: 0 !important; padding-bottom: 0 !important; background: transparent !important; }
-            #por-que-connexa { padding-bottom: 24px !important; }
-            #nosotros { display: none !important; padding: 0 !important; margin: 0 !important; height: 0 !important; min-height: 0 !important; overflow: hidden !important; }
-            .hero-content-mobile { padding-top: 24px !important; }
-            .metodologia-divider { margin-top: 0 !important; padding-top: 0 !important; height: auto !important; min-height: 0 !important; }
-          }
-          @media (min-width: 769px) {
-            #nosotros { padding: 0 !important; min-height: 0 !important; overflow: hidden !important; }
-            .clients-separator { display: none !important; }
+
+            /* HERO */
+            .hero-eyebrow         { white-space: normal !important; }
+            .hero-cta-btn         { width: calc(100% - 80px) !important; margin: 0 40px !important; font-size: 15px !important; padding: 14px 20px !important; }
+
+            /* SECCIONES */
+            #por-que-connexa      { padding-bottom: 24px !important; }
+            #nosotros             { display: none !important; padding: 0 !important; margin: 0 !important; height: 0 !important; overflow: hidden !important; }
           }
         `}</style>
         <div className="metodologia-wrapper" style={{width:'100%', background:'#F3F4F6', padding:'100px 40px', position:'relative', overflow:'hidden', overflowX:'auto'}}>

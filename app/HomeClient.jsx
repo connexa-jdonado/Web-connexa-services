@@ -392,6 +392,7 @@ export default function HomeClient() {
             /* SECCIONES */
             #por-que-connexa      { padding-bottom: 24px !important; }
             #nosotros             { display: none !important; padding: 0 !important; margin: 0 !important; height: 0 !important; overflow: hidden !important; }
+            #clients-carousel     { padding-bottom: 0 !important; }
           }
           @media (min-width: 769px) {
             .hero-partners-list { display: contents; }

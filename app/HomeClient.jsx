@@ -105,7 +105,7 @@ export default function HomeClient() {
           <div className="aurora-blob aurora-blob-3" />
         </div>
         <ParticlesCanvas heroRef={heroRef} heroInnerRef={heroInnerRef} heroAuroraRef={heroAuroraRef} />
-        <div className="hero-inner" ref={heroInnerRef}>
+        <div className="hero-inner hero-content-mobile" ref={heroInnerRef}>
           <div className="hero-eyebrow" style={{whiteSpace:'nowrap'}}>
             {/* <div className="hero-eyebrow-dot" /> */}
             <span>{tr('Field Service Management', 'Field Service Management')}<span style={{margin:'0 8px'}}>·</span>{tr('Experts certificados', 'Certified Experts')}</span>
@@ -145,17 +145,19 @@ export default function HomeClient() {
             </Link>
           </div>
         </div>
-        <div className="hero-trust-bar hero-partners">
+        <div className="hero-trust-bar hero-partners hero-partners-block">
           <span className="trust-label-text">{tr('Partner oficial', 'Official Partner')}</span>
-          <div className="trust-sep" />
-          <div className="trust-partner">
-            <Image src="/assets/OFSC-hq.png" alt="Oracle" width={32} height={32} priority sizes="32px" />
-            <div className="trust-partner-text"><span className="trust-partner-name">Oracle</span><span className="trust-partner-caption">Field Service Cloud</span></div>
-          </div>
-          <div className="trust-sep" />
-          <div className="trust-partner">
-            <Image src="/assets/zinier-hq.webp" alt="Zinier" width={32} height={32} priority sizes="32px" style={{ background: '#fff', borderRadius: 7 }} />
-            <div className="trust-partner-text"><span className="trust-partner-name">Zinier</span><span className="trust-partner-caption">Certified Partner</span></div>
+          <div className="hero-partners-list">
+            <div className="trust-sep" />
+            <div className="trust-partner">
+              <Image src="/assets/OFSC-hq.png" alt="Oracle" width={32} height={32} priority sizes="32px" />
+              <div className="trust-partner-text"><span className="trust-partner-name">Oracle</span><span className="trust-partner-caption">Field Service Cloud</span></div>
+            </div>
+            <div className="trust-sep" />
+            <div className="trust-partner">
+              <Image src="/assets/zinier-hq.webp" alt="Zinier" width={32} height={32} priority sizes="32px" style={{ background: '#fff', borderRadius: 7 }} />
+              <div className="trust-partner-text"><span className="trust-partner-name">Zinier</span><span className="trust-partner-caption">Certified Partner</span></div>
+            </div>
           </div>
         </div>
       </section>
@@ -295,7 +297,7 @@ export default function HomeClient() {
       </section>
 
       {/* EQUIPO Y CASO DE ÉXITO */}
-      <section id="nosotros">
+      <section id="nosotros" className="metodologia-divider">
         <div className="container">
           {/* SECCIÓN LIDERAZGO Y EXPERIENCIA — temporalmente comentada
           <div className="ec-header">
@@ -373,6 +375,7 @@ export default function HomeClient() {
       {/* METODOLOGÍA */}
       <section id="metodologia" className="metodologia-section-end">
         <style>{`
+          .hero-partners-list { display: contents; }
           @media (max-width: 768px) {
             .metodologia-wrapper { padding: 48px 20px !important; }
             .metodologia-layout { flex-direction: column !important; gap: 24px !important; }
@@ -385,6 +388,10 @@ export default function HomeClient() {
             .metodologia-gap { margin-top: 0 !important; padding-top: 0 !important; }
             .metodologia-disclaimer { position: relative !important; margin-top: 24px !important; z-index: 1; }
             .metodologia-section-end { margin-bottom: 0 !important; padding-bottom: 0 !important; background: transparent !important; }
+            .hero-partners-block { display: flex !important; flex-direction: row !important; justify-content: space-between !important; align-items: center !important; width: 100% !important; }
+            .hero-partners-list { display: flex !important; flex-direction: column !important; align-items: flex-end !important; gap: 8px !important; }
+            .hero-content-mobile { padding-top: 24px !important; }
+            .metodologia-divider { margin-top: 0 !important; padding-top: 0 !important; height: auto !important; min-height: 0 !important; }
           }
         `}</style>
         <div className="metodologia-wrapper" style={{width:'100%', background:'#F3F4F6', padding:'100px 40px', position:'relative', overflow:'hidden', overflowX:'auto'}}>

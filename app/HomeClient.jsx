@@ -375,10 +375,11 @@ export default function HomeClient() {
         <style>{`
           @media (max-width: 768px) {
             .metodologia-wrapper { padding: 48px 20px !important; }
-            .metodologia-layout { flex-direction: column !important; }
+            .metodologia-layout { flex-direction: column !important; gap: 24px !important; }
             .metodologia-left { width: 100% !important; }
             .metodologia-right { width: 100% !important; position: relative !important; }
             .hero-eyebrow { white-space: normal !important; }
+            .metodologia-legend { grid-template-columns: repeat(2, 1fr) !important; }
           }
         `}</style>
         <div className="metodologia-wrapper" style={{width:'100%', background:'#F3F4F6', padding:'100px 40px', position:'relative', overflow:'hidden', overflowX:'auto'}}>
@@ -639,7 +640,7 @@ export default function HomeClient() {
             </svg>
             </div>
             {/* Leyenda horizontal 4 columnas */}
-            <div style={{display:'grid', gridTemplateColumns:'repeat(4,1fr)', gap:'16px', padding:'0 8px 8px'}}>
+            <div className="metodologia-legend" style={{display:'grid', gridTemplateColumns:'repeat(4,1fr)', gap:'16px', padding:'0 8px 8px'}}>
               {[
                 { color: '#71B136', title: tr('Quick Wins', 'Quick Wins'), items: [
                   { code: 'A1', name: tr('Segmentar cuotas por zona', 'Segment quotas by zone') },

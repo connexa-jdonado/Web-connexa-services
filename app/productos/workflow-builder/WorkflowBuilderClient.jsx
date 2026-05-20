@@ -58,6 +58,16 @@ const CASO2_SEGS = [
   { t: 'en zona norte', g: true },
 ];
 
+const CASO3_TEXT = 'Crea un flujo para capturar todos los mensajes de OFS Collaboration automáticamente y guardalos en la base de datos';
+const CASO3_SEGS = [
+  { t: 'Crea un flujo para ', g: false },
+  { t: 'capturar todos los mensajes ', g: true },
+  { t: 'de ', g: false },
+  { t: 'OFS Collaboration ', g: true },
+  { t: 'automáticamente y ', g: false },
+  { t: 'guardalos en la base de datos', g: true },
+];
+
 const WB_TABS = [
   { key: 'constructor', label: 'Constructor visual' },
   { key: 'ejecuciones', label: 'Ejecuciones' },
@@ -82,6 +92,8 @@ export default function WorkflowBuilderClient() {
   const [caso2ShowAsis, setCaso2ShowAsis] = useState(false);
   const [caso2ShowImg, setCaso2ShowImg] = useState(false);
   const [caso2Scale, setCaso2Scale] = useState(1);
+  const [caso3Chars, setCaso3Chars] = useState(0);
+  const [caso3ShowImg, setCaso3ShowImg] = useState(false);
 
   const tr = (es, en) => (lang === 'es' ? es : en);
 
@@ -183,6 +195,21 @@ export default function WorkflowBuilderClient() {
     }
     return () => clearTimeout(t);
   }, [caso2Chars, caso2ShowAsis, caso2ShowImg, caso2Scale]);
+
+  useEffect(() => {
+    const full = CASO3_TEXT.length;
+    let t;
+    if (!caso3ShowImg) {
+      if (caso3Chars < full) {
+        t = setTimeout(() => setCaso3Chars(c => c + 1), 45);
+      } else {
+        t = setTimeout(() => setCaso3ShowImg(true), 600);
+      }
+    } else {
+      t = setTimeout(() => { setCaso3Chars(0); setCaso3ShowImg(false); }, 3000);
+    }
+    return () => clearTimeout(t);
+  }, [caso3Chars, caso3ShowImg]);
 
   const scrollToCase = (idx) => {
     const container = casosContainerRef.current;
@@ -397,6 +424,34 @@ export default function WorkflowBuilderClient() {
                           <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, opacity: caso2ShowAsis ? 1 : 0, transition: 'opacity 0.8s ease', borderRadius: '10px', overflow: 'hidden' }}>
                             <img src="/assets/asis2.png" style={{ width: '100%', height: '100%', display: 'block', objectFit: 'cover', borderRadius: '10px' }} alt={tr(caso.titleEs, caso.titleEn)} />
                           </div>
+                        </div>
+                      </div>
+                    ) : idx === 2 ? (
+                      <div style={{ background: '#0f172a', padding: '20px' }}>
+                        <div style={{ border: '1px solid #71B136', borderRadius: '12px', padding: '20px' }}>
+                          <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '16px' }}>
+                            <svg width="14" height="12" viewBox="0 0 28 24" fill="none">
+                              <path d="M16 1.5l.9 3.2 3.2.9-3.2.9L16 9.7l-.9-3.2-3.2-.9 3.2-.9z" fill="#71B136" stroke="#71B136" strokeWidth="0.4" strokeLinejoin="round"/>
+                              <path d="M7 7l.6 2.2 2.2.6-2.2.6L7 12.6l-.6-2.2-2.2-.6 2.2-.6z" fill="#71B136" stroke="#71B136" strokeWidth="0.3" strokeLinejoin="round" opacity="0.65"/>
+                              <path d="M21 14l.5 1.6 1.6.5-1.6.5L21 18.2l-.5-1.6-1.6-.5 1.6-.5z" fill="#71B136" stroke="#71B136" strokeWidth="0.3" strokeLinejoin="round" opacity="0.45"/>
+                            </svg>
+                            <span style={{ color: '#71B136', fontSize: '12px', fontWeight: 600, letterSpacing: '0.06em' }}>Asistente IA</span>
+                          </div>
+                          <p style={{ margin: 0, fontSize: '15px', lineHeight: 1.7, minHeight: '80px' }}>
+                            {(() => {
+                              let rem = caso3Chars;
+                              return CASO3_SEGS.map((seg, si) => {
+                                if (rem <= 0) return null;
+                                const show = seg.t.slice(0, rem);
+                                rem -= seg.t.length;
+                                return <span key={si} style={{ color: seg.g ? '#71B136' : 'white' }}>{show}</span>;
+                              });
+                            })()}
+                            <span style={{ display: 'inline-block', width: '2px', height: '1em', background: '#71B136', marginLeft: '2px', verticalAlign: 'text-bottom', animation: 'blink 1s step-end infinite' }} />
+                          </p>
+                        </div>
+                        <div style={{ marginTop: '16px', opacity: caso3ShowImg ? 1 : 0, transition: 'opacity 0.8s ease' }}>
+                          <img src="/assets/caso3.png" style={{ width: '100%', height: 'auto', display: 'block', borderRadius: '10px' }} alt={tr(caso.titleEs, caso.titleEn)} />
                         </div>
                       </div>
                     ) : (

@@ -387,9 +387,10 @@ export default function HomeClient() {
             .metodologia-gap { margin-top: 0 !important; padding-top: 0 !important; }
             .metodologia-disclaimer { position: relative !important; margin-top: 24px !important; z-index: 1; }
             .metodologia-section-end { margin-bottom: 0 !important; padding-bottom: 0 !important; background: transparent !important; }
-            #nosotros { display: none !important; }
+            #por-que-connexa { padding-bottom: 24px !important; }
+            #nosotros { display: none !important; padding: 0 !important; margin: 0 !important; height: 0 !important; min-height: 0 !important; overflow: hidden !important; }
             .hero-partners-block { display: flex !important; flex-direction: row !important; justify-content: space-between !important; align-items: center !important; }
-            .hero-partners-list { display: flex !important; flex-direction: column !important; align-items: flex-end !important; gap: 8px !important; }
+            .hero-partners-list { display: flex !important; flex-direction: row !important; align-items: center !important; gap: 16px !important; }
             .hero-content-mobile { padding-top: 24px !important; }
             .metodologia-divider { margin-top: 0 !important; padding-top: 0 !important; height: auto !important; min-height: 0 !important; }
           }

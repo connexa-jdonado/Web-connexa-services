@@ -139,13 +139,13 @@ export default function HomeClient() {
             </span>
           </div>
           <div className="hero-ctas">
-            <Link href="/productos" className="btn-primary" style={{ fontSize: 16, padding: '16px 32px' }}>
+            <Link href="/productos" className="btn-primary hero-cta-btn" style={{ fontSize: 16, padding: '16px 32px' }}>
               {tr('Conocé nuestras soluciones', 'Explore our solutions')}
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6" /></svg>
             </Link>
           </div>
         </div>
-        <div className="hero-trust-bar">
+        <div className="hero-trust-bar hero-partners">
           <span className="trust-label-text">{tr('Partner oficial', 'Official Partner')}</span>
           <div className="trust-sep" />
           <div className="trust-partner">
@@ -371,15 +371,20 @@ export default function HomeClient() {
       </section>
 
       {/* METODOLOGÍA */}
-      <section id="metodologia">
+      <section id="metodologia" className="metodologia-section-end">
         <style>{`
           @media (max-width: 768px) {
             .metodologia-wrapper { padding: 48px 20px !important; }
             .metodologia-layout { flex-direction: column !important; gap: 24px !important; }
             .metodologia-left { width: 100% !important; }
-            .metodologia-right { width: 100% !important; position: relative !important; }
+            .metodologia-right { width: 100% !important; position: relative !important; top: 0 !important; }
             .hero-eyebrow { white-space: normal !important; }
             .metodologia-legend { grid-template-columns: repeat(2, 1fr) !important; }
+            .hero-partners { display: flex; flex-direction: column; align-items: flex-start; gap: 12px; }
+            .hero-cta-btn { width: calc(100% - 40px) !important; margin: 0 20px !important; font-size: 15px !important; padding: 14px 20px !important; }
+            .metodologia-gap { margin-top: 0 !important; padding-top: 0 !important; }
+            .metodologia-disclaimer { position: relative !important; margin-top: 24px !important; z-index: 1; }
+            .metodologia-section-end { margin-bottom: 0 !important; padding-bottom: 0 !important; background: transparent !important; }
           }
         `}</style>
         <div className="metodologia-wrapper" style={{width:'100%', background:'#F3F4F6', padding:'100px 40px', position:'relative', overflow:'hidden', overflowX:'auto'}}>
@@ -402,7 +407,7 @@ export default function HomeClient() {
             </p>
           </div>
 
-          <div className="metodologia-layout" style={{display:'flex', flexDirection:'row', gap:'48px', maxWidth:'1600px', margin:'60px auto 0', alignItems:'flex-start', position:'relative', zIndex:2}}>
+          <div className="metodologia-layout metodologia-gap" style={{display:'flex', flexDirection:'row', gap:'48px', maxWidth:'1600px', margin:'60px auto 0', alignItems:'flex-start', position:'relative', zIndex:2}}>
 
             {/* Columna izquierda 30% — 3 cards */}
             <div className="metodologia-left" style={{width:'30%', display:'flex', flexDirection:'column', gap:'16px'}}>
@@ -685,7 +690,7 @@ export default function HomeClient() {
             </div>{/* /columna derecha */}
           </div>{/* /flex 2 columnas */}
 
-          <div style={{ paddingTop: '32px', textAlign: 'center', position:'relative', zIndex:2 }}>
+          <div className="metodologia-disclaimer" style={{ paddingTop: '32px', textAlign: 'center', position:'relative', zIndex:2 }}>
             <p style={{ fontSize: '14px', color: 'rgb(23, 37, 84)', fontStyle: 'italic', maxWidth: '600px', margin: '0 auto', fontFamily: 'var(--font-body)', lineHeight: '1.6' }}>
               {tr('Cada assessment es único. Los resultados dependen de tu operación, tu plataforma y tus objetivos.', 'Every assessment is unique. Results depend on your operation, your platform, and your goals.')}
             </p>

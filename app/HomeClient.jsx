@@ -395,6 +395,7 @@ export default function HomeClient() {
           }
           @media (min-width: 769px) {
             .hero-partners-list { display: contents; }
+            #nosotros { display: none !important; }
           }
         `}</style>
         <div className="metodologia-wrapper" style={{width:'100%', background:'#F3F4F6', padding:'100px 40px', position:'relative', overflow:'hidden', overflowX:'auto'}}>

@@ -118,6 +118,9 @@ export default function ServiciosClient() {
           .srv-integraciones-section { padding: 48px 20px !important; }
           .srv-contacto-section      { padding: 48px 20px !important; }
           .srv-contacto-h2           { font-size: 28px !important; }
+          .srv-soporte-section    { padding: 48px 20px !important; }
+          .srv-desarrollo-section { padding: 48px 20px !important; }
+          .srv-training-section   { padding: 48px 20px !important; }
         }
       `}</style>
       {/* ── IMPLEMENTACIÓN OFSC ── */}
@@ -608,7 +611,7 @@ export default function ServiciosClient() {
       </section>
 
       {/* ── SOPORTE ── */}
-      <section id="soporte" className="sec-soporte">
+      <section id="soporte" className="sec-soporte srv-soporte-section">
         <div className="container">
           <div className="section-header center fade-up">
             <div className="section-eyebrow">{tr('SOPORTE', 'SUPPORT')}</div>
@@ -646,7 +649,7 @@ export default function ServiciosClient() {
       </section>
 
       {/* ── DESARROLLO ── */}
-      <section id="desarrollo" className="sec-desarrollo">
+      <section id="desarrollo" className="sec-desarrollo srv-desarrollo-section">
         <div className="container">
           <div className="desarrollo-grid">
             <div>
@@ -679,7 +682,7 @@ export default function ServiciosClient() {
       </section>
 
       {/* ── TRAINING ── */}
-      <section id="training" className="sec-training">
+      <section id="training" className="sec-training srv-training-section">
         <div className="container">
           <div className="section-header center fade-up">
             <div className="section-eyebrow">{tr('CAPACITACIÓN', 'TRAINING')}</div>

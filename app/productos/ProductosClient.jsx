@@ -65,7 +65,7 @@ export default function ProductosClient() {
         }
       `}</style>
       {/* ── HERO ── */}
-      <section className="prod-hero">
+      <section className="prod-hero prod-hero-section">
         <div className="container prod-hero-inner" style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
           <div style={{ textAlign: 'left', display: 'flex', flexDirection: 'column', alignItems: 'flex-start', maxWidth: '58%' }}>
           <nav className="breadcrumb">
@@ -80,7 +80,7 @@ export default function ProductosClient() {
           <h1 className="page-hero-h1" dangerouslySetInnerHTML={{ __html: tr('Herramientas que potencian<br/>tu plataforma <em>OFSC</em>', 'Tools that power<br/>your <em>OFSC</em> platform') }} />
           <p className="page-hero-sub">{tr('Apps web nativas construidas sobre Oracle Field Service Cloud para resolver los desafíos operacionales más complejos del Field Service, sin fricciones y sin código adicional.', 'Native web apps built on Oracle Field Service Cloud to solve the most complex Field Service operational challenges, without friction and without additional code.')}</p>
           </div>
-          <div style={{ flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <div className="prod-hero-svg" style={{ flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             <svg width="420" height="320" viewBox="0 0 420 320" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ overflow: 'visible' }}>
               <g style={{ animation: 'heroFloat 3.5s ease-in-out infinite', filter: 'drop-shadow(0 0 18px #71B136)' }}>
                 <rect x="20" y="20" width="175" height="115" rx="14" fill="#1e3a5f" stroke="#71B136" strokeWidth="1"/>
@@ -108,12 +108,14 @@ export default function ProductosClient() {
 
       <style>{`
         @media (max-width: 768px) {
+          .prod-hero-svg    { display: none !important; }
+          .prod-hero-section { padding-bottom: 24px !important; }
           .prod-wfb-layout  { flex-direction: column !important; padding: 48px 20px !important; }
-          .prod-wfb-text    { flex: none !important; width: 100% !important; }
-          .prod-wfb-image   { max-width: 100% !important; margin-left: 0 !important; margin-top: 24px !important; }
+          .prod-wfb-text    { flex: none !important; width: 100% !important; order: 1 !important; }
+          .prod-wfb-image   { max-width: 100% !important; margin-left: 0 !important; margin-top: 24px !important; order: 2 !important; }
           .prod-fsm-layout  { flex-direction: column !important; padding: 48px 20px !important; }
-          .prod-fsm-text    { flex: none !important; width: 100% !important; }
-          .prod-fsm-image   { max-width: 100% !important; margin-left: 0 !important; margin-top: 24px !important; }
+          .prod-fsm-text    { flex: none !important; width: 100% !important; order: 1 !important; }
+          .prod-fsm-image   { max-width: 100% !important; margin-left: 0 !important; margin-top: 24px !important; order: 2 !important; }
         }
       `}</style>
 

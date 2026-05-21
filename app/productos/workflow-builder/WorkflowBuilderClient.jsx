@@ -283,12 +283,14 @@ export default function WorkflowBuilderClient() {
           .wfb-hero-left    { flex: none !important; width: 100% !important; }
           .wfb-hero-right   { flex: none !important; width: 100% !important; display: none !important; }
           .wfb-hero-title   { font-size: 36px !important; }
-          .wfb-features-bar { flex-wrap: wrap !important; padding: 24px 20px !important; gap: 12px !important; }
-          .wfb-feature-item { flex: none !important; width: calc(50% - 6px) !important; }
+          .wfb-features-wrapper { padding: 24px 20px !important; }
+          .wfb-features-bar     { flex-wrap: wrap !important; gap: 16px !important; justify-content: flex-start !important; }
+          .wfb-feature-item     { flex: none !important; width: calc(50% - 8px) !important; padding: 0 8px !important; }
           .wfb-casos-container { overflow-x: hidden !important; width: 100% !important; }
           .wfb-caso-wrapper { flex-direction: column !important; width: 100% !important; overflow: hidden !important; }
           .wfb-caso-left    { width: 100% !important; padding: 32px 20px !important; box-sizing: border-box !important; }
-          .wfb-caso-right   { width: 100% !important; padding: 20px !important; box-sizing: border-box !important; order: 2 !important; }
+          .wfb-caso-right   { width: 100% !important; padding: 16px 20px !important; box-sizing: border-box !important; order: 2 !important; overflow: hidden !important; }
+          .wfb-caso-right img { width: 100% !important; height: auto !important; }
           .wfb-caso-numero { font-size: 80px !important; }
           .wfb-triggers-grid { grid-template-columns: 1fr !important; }
           .wfb-eventos-grid  { grid-template-columns: repeat(2, 1fr) !important; }
@@ -362,7 +364,7 @@ export default function WorkflowBuilderClient() {
       </div>
 
       {/* ── FEATURES FRANJA ── */}
-      <div style={{ background: '#0d1b3e', padding: '32px 60px' }}>
+      <div className="wfb-features-wrapper" style={{ background: '#0d1b3e', padding: '32px 60px' }}>
         <div className="wfb-features-bar" style={{ display: 'flex', maxWidth: '1400px', margin: '0 auto' }}>
           {[
             { icon: <svg key="i0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#71B136" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>, text: tr('Sin código — solo drag & drop', 'No code — just drag & drop') },

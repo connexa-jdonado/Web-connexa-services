@@ -162,6 +162,10 @@ export default function WorkflowBuilderClient() {
     if (window.innerWidth <= 768) return;
     const io = new IntersectionObserver(
       ([entry]) => {
+        if (window.innerWidth <= 768) {
+          document.body.style.overflow = '';
+          return;
+        }
         if (entry.intersectionRatio >= 0.9) {
           container.style.overflowY = 'scroll';
           document.body.style.overflow = 'hidden';
@@ -174,6 +178,10 @@ export default function WorkflowBuilderClient() {
     );
     io.observe(section);
     const onWheel = (e) => {
+      if (window.innerWidth <= 768) {
+        document.body.style.overflow = '';
+        return;
+      }
       const atTop    = container.scrollTop <= 0;
       const atBottom = container.scrollTop >= container.scrollHeight - container.clientHeight - 1;
       if ((atTop && e.deltaY < 0) || (atBottom && e.deltaY > 0)) {
@@ -288,6 +296,7 @@ export default function WorkflowBuilderClient() {
           .wfb-features-bar     { flex-wrap: wrap !important; gap: 16px !important; justify-content: flex-start !important; }
           .wfb-feature-item     { flex: none !important; width: calc(50% - 8px) !important; padding: 0 8px !important; }
           .wfb-casos-container { overflow-x: hidden !important; width: 100% !important; }
+          .wfb-casos-section   { overflow-y: auto !important; scroll-snap-type: none !important; height: auto !important; }
           .wfb-caso-wrapper { flex-direction: column !important; width: 100% !important; overflow: hidden !important; }
           .wfb-caso-left    { width: 100% !important; padding: 32px 20px !important; box-sizing: border-box !important; }
           .wfb-caso-right   { width: 100% !important; padding: 16px 20px 60px 20px !important; box-sizing: border-box !important; order: 2 !important; overflow: visible !important; min-height: 400px !important; }
@@ -386,7 +395,7 @@ export default function WorkflowBuilderClient() {
       <section ref={casosSectionRef} id="casos-uso" style={{ position: 'relative' }}>
         <div
           ref={casosContainerRef}
-          className="wfb-casos-container"
+          className="wfb-casos-container wfb-casos-section"
           style={{ height: '100vh', overflowY: 'hidden', scrollSnapType: 'y mandatory', scrollBehavior: 'smooth' }}
         >
           {WB_CASOS.map((caso, idx) => {

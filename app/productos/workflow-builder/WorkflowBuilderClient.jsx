@@ -182,6 +182,7 @@ export default function WorkflowBuilderClient() {
         document.body.style.overflow = '';
         return;
       }
+      e.preventDefault();
       const atTop    = container.scrollTop <= 0;
       const atBottom = container.scrollTop >= container.scrollHeight - container.clientHeight - 1;
       if ((atTop && e.deltaY < 0) || (atBottom && e.deltaY > 0)) {
@@ -189,7 +190,7 @@ export default function WorkflowBuilderClient() {
         document.body.style.overflow = '';
       }
     };
-    container.addEventListener('wheel', onWheel, { passive: true });
+    container.addEventListener('wheel', onWheel, { passive: false });
     return () => {
       io.disconnect();
       container.removeEventListener('wheel', onWheel);

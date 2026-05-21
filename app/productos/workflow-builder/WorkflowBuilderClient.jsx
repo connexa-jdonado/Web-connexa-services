@@ -290,8 +290,8 @@ export default function WorkflowBuilderClient() {
           .wfb-casos-container { overflow-x: hidden !important; width: 100% !important; }
           .wfb-caso-wrapper { flex-direction: column !important; width: 100% !important; overflow: hidden !important; }
           .wfb-caso-left    { width: 100% !important; padding: 32px 20px !important; box-sizing: border-box !important; }
-          .wfb-caso-right   { width: 100% !important; padding: 16px 20px 40px 20px !important; box-sizing: border-box !important; order: 2 !important; overflow: visible !important; }
-          .wfb-caso-right img { width: 100% !important; height: auto !important; max-height: none !important; }
+          .wfb-caso-right   { width: 100% !important; padding: 16px 20px 60px 20px !important; box-sizing: border-box !important; order: 2 !important; overflow: visible !important; min-height: 400px !important; }
+          .wfb-caso-right img { width: 100% !important; height: auto !important; max-height: none !important; display: block !important; }
           .wfb-caso-numero { font-size: 80px !important; }
           .wfb-triggers-grid { grid-template-columns: 1fr !important; }
           .wfb-eventos-grid  { grid-template-columns: repeat(2, 1fr) !important; }

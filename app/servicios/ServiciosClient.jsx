@@ -121,6 +121,7 @@ export default function ServiciosClient() {
           .srv-soporte-section    { padding: 48px 20px !important; }
           .srv-desarrollo-section { padding: 48px 20px !important; }
           .srv-training-section   { padding: 48px 20px !important; }
+          .srv-cta-flotante { padding: 16px !important; min-width: 44px !important; }
         }
       `}</style>
       {/* ── IMPLEMENTACIÓN OFSC ── */}
@@ -758,7 +759,7 @@ export default function ServiciosClient() {
         </div>
       </section>
 
-      <button ref={ctaRef} className="cta-flotante" onClick={() => scrollTo('contacto')}>
+      <button ref={ctaRef} className="cta-flotante srv-cta-flotante" onClick={() => scrollTo('contacto')}>
         {tr('HABLAR CON UN EXPERTO', 'TALK TO AN EXPERT')}
       </button>
     </>

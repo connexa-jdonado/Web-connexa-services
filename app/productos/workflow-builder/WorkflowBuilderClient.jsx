@@ -187,6 +187,7 @@ export default function WorkflowBuilderClient() {
       const atBottom = container.scrollTop >= container.scrollHeight - container.clientHeight - 1;
       if ((atTop && e.deltaY < 0) || (atBottom && e.deltaY > 0)) {
         document.body.style.overflow = '';
+        container.style.overflowY = 'hidden';
         container.removeEventListener('wheel', onWheel);
         setTimeout(() => {
           container.addEventListener('wheel', onWheel, { passive: false });

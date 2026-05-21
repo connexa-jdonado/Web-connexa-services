@@ -97,6 +97,12 @@ export default function FSMToolClient() {
           .fsm-feature-item  { padding: 0 20px !important; }
         }
       `}</style>
+      {/* ── BREADCRUMB ── */}
+      <div style={{ padding: '12px 40px', background: 'rgba(23,37,84,0.95)', borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
+        <Link href="/productos" style={{ color: 'rgba(255,255,255,0.6)', fontSize: '14px', display: 'inline-flex', alignItems: 'center', gap: '6px', textDecoration: 'none' }}>
+          ← {tr('Productos', 'Products')}
+        </Link>
+      </div>
       {/* ── HERO FULLSCREEN ── */}
       <div style={{ width: '100%', minHeight: '100vh', background: 'linear-gradient(135deg, #0d1b3e 0%, #172554 60%, #1a3a2a 100%)', display: 'flex', alignItems: 'center', position: 'relative', overflow: 'hidden', padding: '0' }}>
         <svg style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', opacity: 0.15 }}>

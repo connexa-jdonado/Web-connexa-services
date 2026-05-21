@@ -286,8 +286,9 @@ export default function WorkflowBuilderClient() {
           .wfb-features-bar { flex-wrap: wrap !important; padding: 24px 20px !important; gap: 12px !important; }
           .wfb-feature-item { flex: none !important; width: calc(50% - 6px) !important; }
           .wfb-casos-container { overflow-x: hidden !important; width: 100% !important; }
-          .wfb-caso-left   { width: 100% !important; padding: 32px 20px !important; box-sizing: border-box !important; }
-          .wfb-caso-right  { width: 100% !important; padding: 20px !important; box-sizing: border-box !important; }
+          .wfb-caso-wrapper { flex-direction: column !important; width: 100% !important; overflow: hidden !important; }
+          .wfb-caso-left    { width: 100% !important; padding: 32px 20px !important; box-sizing: border-box !important; }
+          .wfb-caso-right   { width: 100% !important; padding: 20px !important; box-sizing: border-box !important; order: 2 !important; }
           .wfb-caso-numero { font-size: 80px !important; }
           .wfb-triggers-grid { grid-template-columns: 1fr !important; }
           .wfb-eventos-grid  { grid-template-columns: repeat(2, 1fr) !important; }
@@ -397,6 +398,7 @@ export default function WorkflowBuilderClient() {
               <div
                 key={idx}
                 ref={(el) => { caseRefs.current[idx] = el; }}
+                className="wfb-caso-wrapper"
                 style={{ height: '100vh', width: '100%', scrollSnapAlign: 'start', scrollSnapStop: 'always', display: 'flex', position: 'relative', overflow: 'hidden', background: bg }}
               >
                 {/* Columna izquierda 40% */}

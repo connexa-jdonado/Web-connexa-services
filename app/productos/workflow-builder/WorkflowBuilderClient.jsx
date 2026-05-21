@@ -267,6 +267,7 @@ export default function WorkflowBuilderClient() {
   }, [caso5Chars, caso5ShowImg]);
 
   const scrollToCase = (idx) => {
+    if (window.innerWidth <= 768) return;
     const container = casosContainerRef.current;
     if (!container) return;
     container.scrollTo({ top: idx * window.innerHeight, behavior: 'smooth' });
@@ -289,8 +290,8 @@ export default function WorkflowBuilderClient() {
           .wfb-casos-container { overflow-x: hidden !important; width: 100% !important; }
           .wfb-caso-wrapper { flex-direction: column !important; width: 100% !important; overflow: hidden !important; }
           .wfb-caso-left    { width: 100% !important; padding: 32px 20px !important; box-sizing: border-box !important; }
-          .wfb-caso-right   { width: 100% !important; padding: 16px 20px !important; box-sizing: border-box !important; order: 2 !important; overflow: hidden !important; }
-          .wfb-caso-right img { width: 100% !important; height: auto !important; }
+          .wfb-caso-right   { width: 100% !important; padding: 16px 20px 40px 20px !important; box-sizing: border-box !important; order: 2 !important; overflow: visible !important; }
+          .wfb-caso-right img { width: 100% !important; height: auto !important; max-height: none !important; }
           .wfb-caso-numero { font-size: 80px !important; }
           .wfb-triggers-grid { grid-template-columns: 1fr !important; }
           .wfb-eventos-grid  { grid-template-columns: repeat(2, 1fr) !important; }

@@ -101,6 +101,7 @@ export default function WorkflowBuilderClient() {
   const ctaRef = useRef(null);
 
   const [activeCaso, setActiveCaso] = useState(0);
+  const [hoveredDot, setHoveredDot] = useState(null);
   const [activeTab, setActiveTab] = useState('constructor');
   const [formSent, setFormSent] = useState(false);
   const casosContainerRef = useRef(null);
@@ -317,7 +318,8 @@ export default function WorkflowBuilderClient() {
           .wfb-apis-section     { padding: 48px 20px !important; }
           .wfb-cta-section      { padding: 48px 20px !important; }
           .wfb-cta-title        { font-size: 28px !important; }
-          .wfb-nav-dots         { display: none !important; }
+          .wfb-dots-nav { gap: 10px !important; }
+          .wfb-dot      { width: 36px !important; height: 36px !important; font-size: 11px !important; }
           .wfb-tabs { padding: 0 20px 16px; }
           .wfb-tab  { font-size: 12px; padding: 8px 14px; }
         }
@@ -624,6 +626,45 @@ export default function WorkflowBuilderClient() {
                     )}
                   </div>
                 </div>
+              </div>
+            );
+          })}
+        </div>
+        {/* Dots de navegación numerados */}
+        <div
+          className="wfb-dots-nav"
+          style={{ position: 'fixed', right: '32px', top: '50%', transform: 'translateY(-50%)', display: 'flex', flexDirection: 'column', gap: '12px', zIndex: 100 }}
+        >
+          {WB_CASOS.map((_, idx) => {
+            const isActive = idx === activeCaso;
+            const isHovered = idx === hoveredDot;
+            const num = String(idx + 1).padStart(2, '0');
+            return (
+              <div
+                key={idx}
+                className="wfb-dot"
+                onClick={() => scrollToCase(idx)}
+                onMouseEnter={() => setHoveredDot(idx)}
+                onMouseLeave={() => setHoveredDot(null)}
+                style={{
+                  width: '44px',
+                  height: '44px',
+                  borderRadius: '50%',
+                  cursor: 'pointer',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  fontSize: '12px',
+                  fontWeight: 700,
+                  transition: 'all 0.2s ease',
+                  background: isActive ? '#71B136' : isHovered ? 'rgba(113,177,54,0.3)' : 'rgba(255,255,255,0.1)',
+                  border: `1px solid ${isActive ? '#71B136' : 'rgba(255,255,255,0.2)'}`,
+                  color: isActive ? 'white' : 'rgba(255,255,255,0.4)',
+                  boxShadow: isActive ? '0 0 12px rgba(113,177,54,0.5)' : 'none',
+                  transform: isHovered && !isActive ? 'scale(1.1)' : 'scale(1)',
+                }}
+              >
+                {num}
               </div>
             );
           })}

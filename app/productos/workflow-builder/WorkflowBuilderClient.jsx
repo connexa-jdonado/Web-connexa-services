@@ -160,40 +160,55 @@ export default function WorkflowBuilderClient() {
     const container = casosContainerRef.current;
     if (!section || !container) return;
     if (window.innerWidth <= 768) return;
+
+    let isTrapped = false;
+    let cooldown  = false;
+
+    const activate = () => {
+      isTrapped = true;
+      container.style.overflowY = 'scroll';
+      document.body.style.overflow = 'hidden';
+    };
+
+    const deactivate = () => {
+      isTrapped = false;
+      cooldown  = true;
+      document.body.style.overflow = '';
+      container.style.overflowY = 'hidden';
+      setTimeout(() => { cooldown = false; }, 1000);
+    };
+
     const io = new IntersectionObserver(
       ([entry]) => {
         if (window.innerWidth <= 768) {
           document.body.style.overflow = '';
           return;
         }
+        if (cooldown) return;
         if (entry.intersectionRatio >= 0.9) {
-          container.style.overflowY = 'scroll';
-          document.body.style.overflow = 'hidden';
+          if (!isTrapped) activate();
         } else {
-          container.style.overflowY = 'hidden';
-          document.body.style.overflow = '';
+          if (isTrapped) deactivate();
         }
       },
       { threshold: 0.9 }
     );
     io.observe(section);
+
     const onWheel = (e) => {
       if (window.innerWidth <= 768) {
         document.body.style.overflow = '';
         return;
       }
+      if (!isTrapped) return;
       e.preventDefault();
       const atTop    = container.scrollTop <= 0;
       const atBottom = container.scrollTop >= container.scrollHeight - container.clientHeight - 1;
       if ((atTop && e.deltaY < 0) || (atBottom && e.deltaY > 0)) {
-        document.body.style.overflow = '';
-        container.style.overflowY = 'hidden';
-        container.removeEventListener('wheel', onWheel);
-        setTimeout(() => {
-          container.addEventListener('wheel', onWheel, { passive: false });
-        }, 1000);
+        deactivate();
       }
     };
+
     container.addEventListener('wheel', onWheel, { passive: false });
     return () => {
       io.disconnect();

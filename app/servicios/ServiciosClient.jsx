@@ -110,6 +110,11 @@ export default function ServiciosClient() {
           .sec-ofsc-layout   { flex-direction: column !important; }
           .sec-zinier-layout { flex-direction: column !important; }
           .srv-mockup-img    { display: none !important; }
+          .srv-consultoria-wrapper { padding: 48px 20px !important; }
+          .srv-consultoria-layout  { flex-direction: column !important; gap: 24px !important; }
+          .srv-consultoria-left    { width: 100% !important; }
+          .srv-consultoria-right   { width: 100% !important; position: relative !important; top: 0 !important; }
+          .srv-consultoria-legend  { grid-template-columns: repeat(2, 1fr) !important; }
         }
       `}</style>
       {/* ── IMPLEMENTACIÓN OFSC ── */}
@@ -288,7 +293,7 @@ export default function ServiciosClient() {
 
       {/* ── CONSULTORÍA ── */}
       <section id="consultoria" className="sec-consultoria" style={{padding:0}}>
-        <div style={{width:'100%', background:'#F3F4F6', padding:'100px 40px', position:'relative', overflow:'hidden', overflowX:'auto'}}>
+        <div className="srv-consultoria-wrapper" style={{width:'100%', background:'#F3F4F6', padding:'100px 40px', position:'relative', overflow:'hidden', overflowX:'auto'}}>
           <svg style={{position:'absolute',inset:0,width:'100%',height:'100%',opacity:0,pointerEvents:'none',zIndex:0}}>
             <defs>
               <pattern id="dots-cons" x="0" y="0" width="32" height="32" patternUnits="userSpaceOnUse">
@@ -308,10 +313,10 @@ export default function ServiciosClient() {
             </p>
           </div>
 
-          <div style={{display:'flex', gap:'48px', maxWidth:'1600px', margin:'60px auto 0', alignItems:'flex-start', position:'relative', zIndex:2}}>
+          <div className="srv-consultoria-layout" style={{display:'flex', gap:'48px', maxWidth:'1600px', margin:'60px auto 0', alignItems:'flex-start', position:'relative', zIndex:2}}>
 
             {/* Columna izquierda 30% — 3 cards */}
-            <div style={{width:'30%', display:'flex', flexDirection:'column', gap:'16px'}}>
+            <div className="srv-consultoria-left" style={{width:'30%', display:'flex', flexDirection:'column', gap:'16px'}}>
 
               <div style={{background:'white', border:'1px solid #E5E7EB', borderRadius:'16px', padding:'28px 32px', position:'relative', overflow:'hidden'}}>
                 <span style={{position:'absolute', right:'-10px', top:'-20px', fontSize:'120px', fontWeight:900, lineHeight:1, userSelect:'none', pointerEvents:'none', color:'rgba(23,37,84,0.04)', WebkitTextStroke:'1.5px rgba(113,177,54,0.25)', letterSpacing:'-4px'}}>01</span>
@@ -380,7 +385,7 @@ export default function ServiciosClient() {
             </div>
 
             {/* Columna derecha 70% — scatter plot */}
-            <div style={{width:'70%', background:'rgba(255,255,255,0.97)', borderRadius:'20px', padding:'8px', boxShadow:'0 40px 100px rgba(0,0,0,0.4)', position:'sticky', top:'100px'}}>
+            <div className="srv-consultoria-right" style={{width:'70%', background:'rgba(255,255,255,0.97)', borderRadius:'20px', padding:'8px', boxShadow:'0 40px 100px rgba(0,0,0,0.4)', position:'sticky', top:'100px'}}>
 
           {/* SCATTER PLOT MAPA DE PRIORIZACIÓN */}
           <div className="fade-up d2" style={{ background: '#fff', borderRadius: '16px', padding: '32px 32px 24px', margin: '0', boxShadow: 'none', border: 'none' }}>
@@ -546,7 +551,7 @@ export default function ServiciosClient() {
             </svg>
             </div>
             {/* Leyenda horizontal 4 columnas */}
-            <div style={{display:'grid', gridTemplateColumns:'repeat(4,1fr)', gap:'16px', padding:'0 8px 8px'}}>
+            <div className="srv-consultoria-legend" style={{display:'grid', gridTemplateColumns:'repeat(4,1fr)', gap:'16px', padding:'0 8px 8px'}}>
               {[
                 { color: '#71B136', title: tr('Quick Wins', 'Quick Wins'), items: [
                   { code: 'A1', name: tr('Segmentar cuotas por zona', 'Segment quotas by zone') },

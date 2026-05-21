@@ -105,10 +105,17 @@ export default function ServiciosClient() {
         </div>
       </section>
 
+      <style>{`
+        @media (max-width: 768px) {
+          .sec-ofsc-layout   { flex-direction: column !important; }
+          .sec-zinier-layout { flex-direction: column !important; }
+          .srv-mockup-img    { display: none !important; }
+        }
+      `}</style>
       {/* ── IMPLEMENTACIÓN OFSC ── */}
       <section id="implementacion-ofsc" className="sec-ofsc">
         <div className="container">
-          <div style={{ display: 'flex', flexDirection: 'row', gap: '48px', alignItems: 'center', marginBottom: '48px' }}>
+          <div className="sec-ofsc-layout" style={{ display: 'flex', flexDirection: 'row', gap: '48px', alignItems: 'center', marginBottom: '48px' }}>
             <div style={{ flex: 1 }}>
               <div className="section-header fade-up">
                 <div className="section-eyebrow">{tr('IMPLEMENTACIÓN', 'IMPLEMENTATION')}</div>
@@ -128,7 +135,7 @@ export default function ServiciosClient() {
                 <span>{tr('Oracle Certified Partner', 'Oracle Certified Partner')}</span>
               </div>
             </div>
-            <div className="hidden md:block" style={{ flexShrink: 0, maxWidth: '560px', width: '100%', background: '#1a1a2e', borderRadius: '12px', overflow: 'hidden', boxShadow: '0 30px 80px rgba(0,0,0,0.3)' }}>
+            <div className="hidden md:block srv-mockup-img" style={{ flexShrink: 0, maxWidth: '560px', width: '100%', background: '#1a1a2e', borderRadius: '12px', overflow: 'hidden', boxShadow: '0 30px 80px rgba(0,0,0,0.3)' }}>
               <div style={{ height: '32px', background: '#e8e8ed', display: 'flex', alignItems: 'center', padding: '0 12px', gap: '6px' }}>
                 <div style={{ width: '10px', height: '10px', borderRadius: '50%', background: '#FF5F57' }}></div>
                 <div style={{ width: '10px', height: '10px', borderRadius: '50%', background: '#FFBD2E' }}></div>
@@ -168,7 +175,7 @@ export default function ServiciosClient() {
       {/* ── IMPLEMENTACIÓN ZINIER ── */}
       <section id="implementacion-zinier" className="sec-zinier">
         <div className="container">
-          <div style={{ display: 'flex', flexDirection: 'row', gap: '48px', alignItems: 'center', marginBottom: '48px' }}>
+          <div className="sec-zinier-layout" style={{ display: 'flex', flexDirection: 'row', gap: '48px', alignItems: 'center', marginBottom: '48px' }}>
             <div style={{ flex: 1 }}>
               <div className="section-header fade-up">
                 <div className="section-eyebrow">{tr('IMPLEMENTACIÓN', 'IMPLEMENTATION')}</div>
@@ -188,7 +195,7 @@ export default function ServiciosClient() {
                 <span>{tr('Zinier Certified Partner', 'Zinier Certified Partner')}</span>
               </div>
             </div>
-            <div className="hidden md:block" style={{ flexShrink: 0, maxWidth: '560px', width: '100%', background: '#1a1a2e', borderRadius: '12px', overflow: 'hidden', boxShadow: '0 30px 80px rgba(0,0,0,0.3)' }}>
+            <div className="hidden md:block srv-mockup-img" style={{ flexShrink: 0, maxWidth: '560px', width: '100%', background: '#1a1a2e', borderRadius: '12px', overflow: 'hidden', boxShadow: '0 30px 80px rgba(0,0,0,0.3)' }}>
               <div style={{ height: '32px', background: '#e8e8ed', display: 'flex', alignItems: 'center', padding: '0 12px', gap: '6px' }}>
                 <div style={{ width: '10px', height: '10px', borderRadius: '50%', background: '#FF5F57' }}></div>
                 <div style={{ width: '10px', height: '10px', borderRadius: '50%', background: '#FFBD2E' }}></div>

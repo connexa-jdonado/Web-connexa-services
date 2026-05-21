@@ -101,7 +101,6 @@ export default function WorkflowBuilderClient() {
   const ctaRef = useRef(null);
 
   const [activeCaso, setActiveCaso] = useState(0);
-  const [hoveredDot, setHoveredDot] = useState(null);
   const [activeTab, setActiveTab] = useState('constructor');
   const [formSent, setFormSent] = useState(false);
   const casosContainerRef = useRef(null);
@@ -289,9 +288,6 @@ export default function WorkflowBuilderClient() {
     <>
       <style>{`@keyframes blink { 50% { opacity: 0; } }`}</style>
       <style>{`
-        .wfb-tabs { display: flex; gap: 8px; padding: 0 60px 24px; overflow-x: auto; }
-        .wfb-tab  { padding: 10px 20px; border-radius: 8px; cursor: pointer; font-size: 14px; white-space: nowrap; border: 1px solid rgba(255,255,255,0.2); background: transparent; color: rgba(255,255,255,0.5); }
-        .wfb-tab.active { background: #71B136; color: white; border-color: #71B136; }
         @media (max-width: 768px) {
           .wfb-hero-layout  { flex-direction: column !important; padding: 48px 20px !important; gap: 24px !important; }
           .wfb-hero-left    { flex: none !important; width: 100% !important; }
@@ -318,10 +314,7 @@ export default function WorkflowBuilderClient() {
           .wfb-apis-section     { padding: 48px 20px !important; }
           .wfb-cta-section      { padding: 48px 20px !important; }
           .wfb-cta-title        { font-size: 28px !important; }
-          .wfb-dots-nav { gap: 10px !important; }
-          .wfb-dot      { width: 36px !important; height: 36px !important; font-size: 11px !important; }
-          .wfb-tabs { padding: 0 20px 16px; }
-          .wfb-tab  { font-size: 12px; padding: 8px 14px; }
+          .wfb-nav-dots         { display: none !important; }
         }
       `}</style>
       {/* ── HERO FULLSCREEN ── */}
@@ -410,24 +403,6 @@ export default function WorkflowBuilderClient() {
 
       {/* ── CASOS DE USO — SCROLL SNAP ── */}
       <section ref={casosSectionRef} id="casos-uso" style={{ position: 'relative' }}>
-        {/* Tabs de navegación */}
-        <div className="wfb-tabs" style={{ background: '#172554', position: 'sticky', top: 0, zIndex: 50 }}>
-          {[
-            tr('01 Automatización', '01 Automation'),
-            tr('02 Análisis IA', '02 AI Analysis'),
-            '03 Backup Chats',
-            tr('04 Inventario', '04 Inventory'),
-            tr('05 Formularios', '05 Forms'),
-          ].map((label, tabIdx) => (
-            <button
-              key={tabIdx}
-              className={`wfb-tab${tabIdx === activeCaso ? ' active' : ''}`}
-              onClick={() => scrollToCase(tabIdx)}
-            >
-              {label}
-            </button>
-          ))}
-        </div>
         <div
           ref={casosContainerRef}
           className="wfb-casos-container wfb-casos-section"
@@ -469,6 +444,15 @@ export default function WorkflowBuilderClient() {
                   <p style={{ fontSize: '17px', lineHeight: 1.7, maxWidth: '400px', color: fgSub, zIndex: 2, margin: 0, position: 'relative' }}>
                     {tr(caso.descEs, caso.descEn)}
                   </p>
+                  <div style={{ display: 'flex', gap: '8px', marginTop: '48px', zIndex: 2, position: 'relative' }}>
+                    {WB_CASOS.map((_, dotIdx) => (
+                      <div
+                        key={dotIdx}
+                        onClick={() => scrollToCase(dotIdx)}
+                        style={{ width: dotIdx === activeCaso ? '32px' : '8px', height: '4px', borderRadius: '2px', background: dotIdx === activeCaso ? '#71B136' : 'rgba(113,177,54,0.3)', transition: 'all 0.3s ease', cursor: 'pointer' }}
+                      />
+                    ))}
+                  </div>
                 </div>
                 {/* Columna derecha 60% */}
                 <div className="wfb-caso-right" style={{ width: '60%', padding: '60px', display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative' }}>
@@ -630,44 +614,15 @@ export default function WorkflowBuilderClient() {
             );
           })}
         </div>
-        {/* Dots de navegación numerados */}
-        <div
-          className="wfb-dots-nav"
-          style={{ position: 'fixed', right: '32px', top: '50%', transform: 'translateY(-50%)', display: 'flex', flexDirection: 'column', gap: '12px', zIndex: 100 }}
-        >
-          {WB_CASOS.map((_, idx) => {
-            const isActive = idx === activeCaso;
-            const isHovered = idx === hoveredDot;
-            const num = String(idx + 1).padStart(2, '0');
-            return (
-              <div
-                key={idx}
-                className="wfb-dot"
-                onClick={() => scrollToCase(idx)}
-                onMouseEnter={() => setHoveredDot(idx)}
-                onMouseLeave={() => setHoveredDot(null)}
-                style={{
-                  width: '44px',
-                  height: '44px',
-                  borderRadius: '50%',
-                  cursor: 'pointer',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  fontSize: '12px',
-                  fontWeight: 700,
-                  transition: 'all 0.2s ease',
-                  background: isActive ? '#71B136' : isHovered ? 'rgba(113,177,54,0.3)' : 'rgba(255,255,255,0.1)',
-                  border: `1px solid ${isActive ? '#71B136' : 'rgba(255,255,255,0.2)'}`,
-                  color: isActive ? 'white' : 'rgba(255,255,255,0.4)',
-                  boxShadow: isActive ? '0 0 12px rgba(113,177,54,0.5)' : 'none',
-                  transform: isHovered && !isActive ? 'scale(1.1)' : 'scale(1)',
-                }}
-              >
-                {num}
-              </div>
-            );
-          })}
+        {/* Navegación lateral fija */}
+        <div className="wfb-nav-dots" style={{ position: 'fixed', right: '32px', top: '50%', transform: 'translateY(-50%)', display: 'flex', flexDirection: 'column', gap: '10px', zIndex: 100 }}>
+          {WB_CASOS.map((_, idx) => (
+            <div
+              key={idx}
+              onClick={() => scrollToCase(idx)}
+              style={{ width: idx === activeCaso ? '12px' : '8px', height: idx === activeCaso ? '12px' : '8px', borderRadius: '50%', background: idx === activeCaso ? '#71B136' : 'rgba(113,177,54,0.3)', cursor: 'pointer', transition: 'all 0.3s ease' }}
+            />
+          ))}
         </div>
       </section>
 

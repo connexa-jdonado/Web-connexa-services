@@ -106,11 +106,22 @@ export default function ProductosClient() {
         </div>
       </section>
 
+      <style>{`
+        @media (max-width: 768px) {
+          .prod-wfb-layout  { flex-direction: column !important; padding: 48px 20px !important; }
+          .prod-wfb-text    { flex: none !important; width: 100% !important; }
+          .prod-wfb-image   { max-width: 100% !important; margin-left: 0 !important; margin-top: 24px !important; }
+          .prod-fsm-layout  { flex-direction: column !important; padding: 48px 20px !important; }
+          .prod-fsm-text    { flex: none !important; width: 100% !important; }
+          .prod-fsm-image   { max-width: 100% !important; margin-left: 0 !important; margin-top: 24px !important; }
+        }
+      `}</style>
+
       {/* ── WORKFLOW BUILDER SHOWCASE (FIRST) ── */}
       <div className="showcase alt" id="prod-workflow">
         <div className="container" style={{ maxWidth: '100%', width: '100%' }}>
-          <div className="showcase-grid mirror" style={{ display: 'flex', flexDirection: 'row', alignItems: 'flex-start', gap: '0', padding: '48px 64px', marginTop: '40px' }}>
-            <div className="fade-up d2" style={{ maxWidth: '55%', marginLeft: '40px' }}>
+          <div className="showcase-grid mirror prod-wfb-layout" style={{ display: 'flex', flexDirection: 'row', alignItems: 'flex-start', gap: '0', padding: '48px 64px', marginTop: '40px' }}>
+            <div className="fade-up d2 prod-wfb-image" style={{ maxWidth: '55%', marginLeft: '40px' }}>
               <div className="browser-frame" ref={wfImgRef} style={{ opacity: 0 }}>
                 <div className="browser-toolbar">
                   <div className="browser-dots"><span></span><span></span><span></span></div>
@@ -119,7 +130,7 @@ export default function ProductosClient() {
                 <img src="/assets/WFBuilder01.png" style={{ width: '100%', display: 'block', borderRadius: '12px', borderBottomLeftRadius: '12px', borderBottomRightRadius: '12px' }} alt="Workflow Builder canvas" />
               </div>
             </div>
-            <div className="showcase-text" style={{ alignSelf: 'flex-start', paddingTop: '0', flex: 1 }}>
+            <div className="showcase-text prod-wfb-text" style={{ alignSelf: 'flex-start', paddingTop: '0', flex: 1 }}>
               <h2 className="showcase-name fade-up d1" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>Workflow Builder <span style={{color:'#172554', fontSize:'0.7em', fontWeight:700, display:'inline-flex', alignItems:'center', gap:'4px'}}>
                 <svg width="58" height="54" viewBox="0 0 28 24" fill="none"><path d="M16 1.5l.9 3.2 3.2.9-3.2.9L16 9.7l-.9-3.2-3.2-.9 3.2-.9z" fill="#71B136" stroke="#71B136" strokeWidth="0.4" strokeLinejoin="round"/><path d="M7 7l.6 2.2 2.2.6-2.2.6L7 12.6l-.6-2.2-2.2-.6 2.2-.6z" fill="#71B136" stroke="#71B136" strokeWidth="0.3" strokeLinejoin="round" opacity="0.65"/><path d="M21 14l.5 1.6 1.6.5-1.6.5L21 18.2l-.5-1.6-1.6-.5 1.6-.5z" fill="#71B136" stroke="#71B136" strokeWidth="0.3" strokeLinejoin="round" opacity="0.45"/></svg> AI</span></h2>
               <p className="showcase-tagline fade-up d2">{tr('Automatizá tus procesos OFSC sin código', 'Automate your OFSC processes without code')}</p>
@@ -171,8 +182,8 @@ export default function ProductosClient() {
       {/* ── FSMTOOL SHOWCASE (SECOND) ── */}
       <div className="showcase" id="prod-fsmtool">
         <div className="container" style={{ maxWidth: '100%', width: '100%' }}>
-          <div className="showcase-grid" style={{ display: 'flex', flexDirection: 'row', alignItems: 'flex-start', gap: '0', padding: '48px 64px', marginTop: '40px' }}>
-            <div className="showcase-text" style={{ alignSelf: 'flex-start', paddingTop: '0', flex: 1 }}>
+          <div className="showcase-grid prod-fsm-layout" style={{ display: 'flex', flexDirection: 'row', alignItems: 'flex-start', gap: '0', padding: '48px 64px', marginTop: '40px' }}>
+            <div className="showcase-text prod-fsm-text" style={{ alignSelf: 'flex-start', paddingTop: '0', flex: 1 }}>
               <h2 className="showcase-name fade-up d1" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>FSMTool <span style={{color:'#172554', fontSize:'0.7em', fontWeight:700, display:'inline-flex', alignItems:'center', gap:'4px'}}><svg width="28" height="24" viewBox="0 0 28 24" fill="none"><path d="M16 1.5l.9 3.2 3.2.9-3.2.9L16 9.7l-.9-3.2-3.2-.9 3.2-.9z" fill="#71B136" stroke="#71B136" strokeWidth="0.4" strokeLinejoin="round"/><path d="M7 7l.6 2.2 2.2.6-2.2.6L7 12.6l-.6-2.2-2.2-.6 2.2-.6z" fill="#71B136" stroke="#71B136" strokeWidth="0.3" strokeLinejoin="round" opacity="0.65"/><path d="M21 14l.5 1.6 1.6.5-1.6.5L21 18.2l-.5-1.6-1.6-.5 1.6-.5z" fill="#71B136" stroke="#71B136" strokeWidth="0.3" strokeLinejoin="round" opacity="0.45"/></svg> AI</span></h2>
               <p className="showcase-tagline fade-up d2">{tr('Operaciones masivas en OFSC, sin complejidad', 'Bulk OFSC operations, without complexity')}</p>
               <p className="showcase-desc fade-up d2">{tr('FSMTool es una suite de administración y monitoreo de operaciones construida nativamente sobre Oracle Field Service Cloud. Permite a los equipos de operaciones ejecutar acciones masivas, visualizar el estado en tiempo real y automatizar los procesos del día a día.', 'FSMTool is an operations administration and monitoring suite built natively on Oracle Field Service Cloud. It lets operations teams execute bulk actions, visualize status in real time, and automate day-to-day processes.')}</p>
@@ -220,7 +231,7 @@ export default function ProductosClient() {
                     : { transition: 'transform 0.2s ease, box-shadow 0.2s ease' }}>{tr('Solicitar acceso', 'Request access')}</Link>
               </div>
             </div>
-            <div className="fade-up d2" style={{ maxWidth: '55%', marginLeft: '40px' }}>
+            <div className="fade-up d2 prod-fsm-image" style={{ maxWidth: '55%', marginLeft: '40px' }}>
               <div className="browser-frame" ref={fsmImgRef} style={{ opacity: 0 }}>
                 <div className="browser-toolbar">
                   <div className="browser-dots"><span></span><span></span><span></span></div>

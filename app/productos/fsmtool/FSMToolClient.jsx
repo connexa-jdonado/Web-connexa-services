@@ -84,6 +84,19 @@ export default function FSMToolClient() {
           .fsm-cta-line       { font-size: 28px !important; }
         }
       `}</style>
+      <style>{`
+        @media (max-width: 768px) {
+          .fsm-hero-right  { flex: none !important; width: 100% !important; display: none !important; }
+          .fsm-hero-stats  { gap: 24px !important; flex-wrap: wrap !important; }
+        }
+        @media (min-width: 769px) and (max-width: 1023px) {
+          .fsm-hero-layout   { padding: 60px 40px !important; gap: 40px !important; }
+          .fsm-hero-left     { flex: 0 0 50% !important; }
+          .fsm-hero-right    { flex: 0 0 45% !important; }
+          .fsm-features-bar  { flex-wrap: wrap !important; gap: 8px !important; }
+          .fsm-feature-item  { padding: 0 20px !important; }
+        }
+      `}</style>
       {/* ── HERO FULLSCREEN ── */}
       <div style={{ width: '100%', minHeight: '100vh', background: 'linear-gradient(135deg, #0d1b3e 0%, #172554 60%, #1a3a2a 100%)', display: 'flex', alignItems: 'center', position: 'relative', overflow: 'hidden', padding: '0' }}>
         <svg style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', opacity: 0.15 }}>
@@ -112,7 +125,7 @@ export default function FSMToolClient() {
             <p style={{ fontSize: '16px', color: 'rgba(255,255,255,0.55)', lineHeight: 1.8, margin: '0 0 40px 0', maxWidth: '460px' }}>
               {tr('FSMTool es la herramienta web que permite gestionar de forma masiva actividades, recursos e inventarios en Oracle Field Service Cloud de manera fácil e intuitiva.', 'FSMTool is the web tool that lets you manage activities, resources, and inventories in Oracle Field Service Cloud in bulk, easily and intuitively.')}
             </p>
-            <div style={{ display: 'flex', gap: '40px', marginBottom: '48px' }}>
+            <div className="fsm-hero-stats" style={{ display: 'flex', gap: '40px', marginBottom: '48px' }}>
               {[
                 { num: '30+', lbl: tr('Implementaciones OFS', 'OFS Implementations') },
                 { num: '99%', lbl: tr('Satisfacción', 'Satisfaction') },

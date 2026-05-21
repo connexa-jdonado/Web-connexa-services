@@ -115,6 +115,9 @@ export default function ServiciosClient() {
           .srv-consultoria-left    { width: 100% !important; }
           .srv-consultoria-right   { width: 100% !important; position: relative !important; top: 0 !important; }
           .srv-consultoria-legend  { grid-template-columns: repeat(2, 1fr) !important; }
+          .srv-integraciones-section { padding: 48px 20px !important; }
+          .srv-contacto-section      { padding: 48px 20px !important; }
+          .srv-contacto-h2           { font-size: 28px !important; }
         }
       `}</style>
       {/* ── IMPLEMENTACIÓN OFSC ── */}
@@ -231,7 +234,7 @@ export default function ServiciosClient() {
       </section>
 
       {/* ── INTEGRACIONES ── */}
-      <section id="integraciones" className="sec-integraciones">
+      <section id="integraciones" className="sec-integraciones srv-integraciones-section">
         <div className="container">
           <div className="section-header center fade-up">
             <div className="section-eyebrow light">{tr('INTEGRACIONES', 'INTEGRATIONS')}</div>
@@ -701,11 +704,11 @@ export default function ServiciosClient() {
       </section>
 
       {/* ── FORMULARIO DE CONTACTO ── */}
-      <section id="contacto" className="sec-contacto">
+      <section id="contacto" className="sec-contacto srv-contacto-section">
         <div className="container">
           <div className="form-wrap">
             <div className="form-left">
-              <h2 dangerouslySetInnerHTML={{ __html: tr('¿Listo para transformar<br/>tu <em>Field Service</em>?', 'Ready to transform<br/>your <em>Field Service</em>?') }} />
+              <h2 className="srv-contacto-h2" dangerouslySetInnerHTML={{ __html: tr('¿Listo para transformar<br/>tu <em>Field Service</em>?', 'Ready to transform<br/>your <em>Field Service</em>?') }} />
               <p>{tr('Contactanos y diseñamos juntos la solución ideal para tu empresa.', "Contact us and we'll design together the ideal solution for your company.")}</p>
               <div className="form-trust">
                 {[tr('Sin costo. Sin compromiso.', 'No cost. No commitment.'), tr('Partner certificado Oracle y Zinier', 'Certified Oracle and Zinier Partner'), tr('+50 proyectos de Field Service', '+50 Field Service projects')].map((item, i) => (

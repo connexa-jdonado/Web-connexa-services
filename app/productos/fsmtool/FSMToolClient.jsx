@@ -63,6 +63,40 @@ export default function FSMToolClient() {
 
   return (
     <>
+      <style>{`
+        @media (max-width: 768px) {
+          .fsm-hero-layout    { flex-direction: column !important; padding: 48px 20px !important; gap: 24px !important; }
+          .fsm-hero-left      { flex: none !important; width: 100% !important; }
+          .fsm-hero-right     { display: none !important; }
+          .fsm-hero-title     { font-size: 36px !important; }
+          .fsm-hero-subtitle  { font-size: 36px !important; }
+          .fsm-features-wrapper { padding: 24px 20px !important; }
+          .fsm-features-bar   { flex-wrap: wrap !important; gap: 16px !important; }
+          .fsm-feature-item   { flex: none !important; width: calc(50% - 8px) !important; padding: 0 8px !important; }
+          .fsm-modulos-hdr    { padding: 48px 20px !important; }
+          .fsm-modulos-title  { font-size: 28px !important; }
+          .fsm-modulos-stats  { gap: 32px !important; flex-wrap: wrap !important; justify-content: center !important; }
+          .fsm-modulos-cards  { padding: 48px 20px !important; }
+          .fsm-modulos-grid   { grid-template-columns: 1fr !important; }
+          .fsm-apis-section   { padding: 48px 20px !important; }
+          .fsm-apis-grid      { grid-template-columns: 1fr !important; }
+          .fsm-cta-section    { padding: 48px 20px !important; }
+          .fsm-cta-line       { font-size: 28px !important; }
+        }
+      `}</style>
+      <style>{`
+        @media (max-width: 768px) {
+          .fsm-hero-right  { flex: none !important; width: 100% !important; display: none !important; }
+          .fsm-hero-stats  { gap: 24px !important; flex-wrap: wrap !important; }
+        }
+        @media (min-width: 769px) and (max-width: 1023px) {
+          .fsm-hero-layout   { padding: 60px 40px !important; gap: 40px !important; }
+          .fsm-hero-left     { flex: 0 0 50% !important; }
+          .fsm-hero-right    { flex: 0 0 45% !important; }
+          .fsm-features-bar  { flex-wrap: wrap !important; gap: 8px !important; }
+          .fsm-feature-item  { padding: 0 20px !important; }
+        }
+      `}</style>
       {/* ── HERO FULLSCREEN ── */}
       <div style={{ width: '100%', minHeight: '100vh', background: 'linear-gradient(135deg, #0d1b3e 0%, #172554 60%, #1a3a2a 100%)', display: 'flex', alignItems: 'center', position: 'relative', overflow: 'hidden', padding: '0' }}>
         <svg style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', opacity: 0.15 }}>
@@ -74,24 +108,24 @@ export default function FSMToolClient() {
           <rect width="100%" height="100%" fill="url(#dots-fsm)"/>
         </svg>
         <div style={{ position: 'absolute', width: '600px', height: '600px', borderRadius: '50%', background: 'radial-gradient(circle, rgba(113,177,54,0.12) 0%, transparent 70%)', top: '-100px', right: '20%', pointerEvents: 'none' }} />
-        <div style={{ display: 'flex', width: '100%', maxWidth: '1400px', margin: '0 auto', padding: '80px 60px', alignItems: 'center', gap: '80px', position: 'relative', zIndex: 2 }}>
+        <div className="fsm-hero-layout" style={{ display: 'flex', width: '100%', maxWidth: '1400px', margin: '0 auto', padding: '80px 60px', alignItems: 'center', gap: '80px', position: 'relative', zIndex: 2 }}>
           {/* Columna izquierda 48% */}
-          <div style={{ flex: '0 0 48%' }}>
+          <div className="fsm-hero-left" style={{ flex: '0 0 48%' }}>
             <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', background: 'rgba(113,177,54,0.12)', border: '1px solid rgba(113,177,54,0.3)', borderRadius: '999px', padding: '8px 18px', marginBottom: '32px' }}>
               <svg width="1em" height="0.85em" viewBox="0 0 28 24" fill="none" style={{display:'inline-block', verticalAlign:'middle'}}><path d="M16 1.5l.9 3.2 3.2.9-3.2.9L16 9.7l-.9-3.2-3.2-.9 3.2-.9z" fill="#71B136" stroke="#71B136" strokeWidth="0.4" strokeLinejoin="round"/><path d="M7 7l.6 2.2 2.2.6-2.2.6L7 12.6l-.6-2.2-2.2-.6 2.2-.6z" fill="#71B136" stroke="#71B136" strokeWidth="0.3" strokeLinejoin="round" opacity="0.65"/><path d="M21 14l.5 1.6 1.6.5-1.6.5L21 18.2l-.5-1.6-1.6-.5 1.6-.5z" fill="#71B136" stroke="#71B136" strokeWidth="0.3" strokeLinejoin="round" opacity="0.45"/></svg>
               <span style={{ color: '#71B136', fontSize: '12px', fontWeight: 600, letterSpacing: '0.08em' }}>
                 {tr('Impulsado por Inteligencia Artificial', 'Powered by Artificial Intelligence')}
               </span>
             </div>
-            <div style={{ fontSize: '64px', fontWeight: 900, lineHeight: 1.05, color: 'white', marginBottom: '8px' }}>FSMTool</div>
-            <div style={{ fontSize: '64px', fontWeight: 900, color: '#71B136', marginBottom: '16px' }}><span style={{display:'inline-flex', alignItems:'center', gap:'12px', verticalAlign:'middle'}}><svg width="1em" height="0.85em" viewBox="0 0 28 24" fill="none" style={{display:'inline-block', verticalAlign:'middle'}}><path d="M16 1.5l.9 3.2 3.2.9-3.2.9L16 9.7l-.9-3.2-3.2-.9 3.2-.9z" fill="#71B136" stroke="#71B136" strokeWidth="0.4" strokeLinejoin="round"/><path d="M7 7l.6 2.2 2.2.6-2.2.6L7 12.6l-.6-2.2-2.2-.6 2.2-.6z" fill="#71B136" stroke="#71B136" strokeWidth="0.3" strokeLinejoin="round" opacity="0.65"/><path d="M21 14l.5 1.6 1.6.5-1.6.5L21 18.2l-.5-1.6-1.6-.5 1.6-.5z" fill="#71B136" stroke="#71B136" strokeWidth="0.3" strokeLinejoin="round" opacity="0.45"/></svg>AI</span></div>
+            <div className="fsm-hero-title" style={{ fontSize: '64px', fontWeight: 900, lineHeight: 1.05, color: 'white', marginBottom: '8px' }}>FSMTool</div>
+            <div className="fsm-hero-subtitle" style={{ fontSize: '64px', fontWeight: 900, color: '#71B136', marginBottom: '16px' }}><span style={{display:'inline-flex', alignItems:'center', gap:'12px', verticalAlign:'middle'}}><svg width="1em" height="0.85em" viewBox="0 0 28 24" fill="none" style={{display:'inline-block', verticalAlign:'middle'}}><path d="M16 1.5l.9 3.2 3.2.9-3.2.9L16 9.7l-.9-3.2-3.2-.9 3.2-.9z" fill="#71B136" stroke="#71B136" strokeWidth="0.4" strokeLinejoin="round"/><path d="M7 7l.6 2.2 2.2.6-2.2.6L7 12.6l-.6-2.2-2.2-.6 2.2-.6z" fill="#71B136" stroke="#71B136" strokeWidth="0.3" strokeLinejoin="round" opacity="0.65"/><path d="M21 14l.5 1.6 1.6.5-1.6.5L21 18.2l-.5-1.6-1.6-.5 1.6-.5z" fill="#71B136" stroke="#71B136" strokeWidth="0.3" strokeLinejoin="round" opacity="0.45"/></svg>AI</span></div>
             <div style={{ fontSize: '22px', color: 'rgba(255,255,255,0.7)', fontWeight: 400, marginBottom: '24px', lineHeight: 1.5 }}>
               {tr('Administrá Oracle Field Service Cloud sin límites', 'Manage Oracle Field Service Cloud without limits')}
             </div>
             <p style={{ fontSize: '16px', color: 'rgba(255,255,255,0.55)', lineHeight: 1.8, margin: '0 0 40px 0', maxWidth: '460px' }}>
               {tr('FSMTool es la herramienta web que permite gestionar de forma masiva actividades, recursos e inventarios en Oracle Field Service Cloud de manera fácil e intuitiva.', 'FSMTool is the web tool that lets you manage activities, resources, and inventories in Oracle Field Service Cloud in bulk, easily and intuitively.')}
             </p>
-            <div style={{ display: 'flex', gap: '40px', marginBottom: '48px' }}>
+            <div className="fsm-hero-stats" style={{ display: 'flex', gap: '40px', marginBottom: '48px' }}>
               {[
                 { num: '30+', lbl: tr('Implementaciones OFS', 'OFS Implementations') },
                 { num: '99%', lbl: tr('Satisfacción', 'Satisfaction') },
@@ -110,7 +144,7 @@ export default function FSMToolClient() {
             </div>
           </div>
           {/* Columna derecha 58% */}
-          <div style={{ flex: '0 0 58%' }}>
+          <div className="fsm-hero-right" style={{ flex: '0 0 58%' }}>
             <div style={{ width: '100%', position: 'relative', transform: 'perspective(1200px) rotateY(-4deg) rotateX(2deg)', transformStyle: 'preserve-3d' }}>
               <div style={{ position: 'absolute', inset: '-20px', background: 'radial-gradient(ellipse, rgba(113,177,54,0.15) 0%, transparent 70%)', borderRadius: '20px', zIndex: 0 }} />
               <div style={{ borderRadius: '14px', overflow: 'hidden', boxShadow: '0 50px 120px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.08)', position: 'relative', zIndex: 1, background: '#F3F4F6' }}>
@@ -130,8 +164,8 @@ export default function FSMToolClient() {
       </div>
 
       {/* ── FEATURES FRANJA ── */}
-      <div style={{ background: '#0d1b3e', padding: '32px 60px' }}>
-        <div style={{ display: 'flex', maxWidth: '1400px', margin: '0 auto' }}>
+      <div className="fsm-features-wrapper" style={{ background: '#0d1b3e', padding: '32px 60px' }}>
+        <div className="fsm-features-bar" style={{ display: 'flex', maxWidth: '1400px', margin: '0 auto' }}>
           {[
             { icon: <svg key="f0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#71B136" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"><polyline points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>, text: tr('×10 más rápido que operación manual', '×10 faster than manual operation') },
             { icon: <svg key="f1" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#71B136" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>, text: tr('Interfaz sin curva de aprendizaje', 'Zero-learning-curve interface') },
@@ -139,7 +173,7 @@ export default function FSMToolClient() {
             { icon: <svg key="f3" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#71B136" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>, text: tr('Operaciones masivas nativas OFSC', 'Native bulk OFSC operations') },
             { icon: <svg key="f4" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#71B136" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>, text: tr('Soporte de expertos certificados OFSC', 'Certified OFSC expert support') },
           ].map((f, i) => (
-            <div key={i} style={{ flex: 1, padding: '0 40px', display: 'flex', alignItems: 'center', gap: '12px', borderRight: i < 4 ? '1px solid rgba(255,255,255,0.08)' : 'none' }}>
+            <div key={i} className="fsm-feature-item" style={{ flex: 1, padding: '0 40px', display: 'flex', alignItems: 'center', gap: '12px', borderRight: i < 4 ? '1px solid rgba(255,255,255,0.08)' : 'none' }}>
               {f.icon}
               <span style={{ color: 'rgba(255,255,255,0.8)', fontSize: '13px', fontWeight: 500 }}>{f.text}</span>
             </div>
@@ -195,7 +229,7 @@ export default function FSMToolClient() {
       {/* ── MÓDULOS ── */}
 
       {/* BLOQUE 1: HEADER */}
-      <div style={{ width:'100%', background:'linear-gradient(135deg, #0d1b3e 0%, #172554 100%)', padding:'80px 60px', textAlign:'center', position:'relative', overflow:'hidden' }}>
+      <div className="fsm-modulos-hdr" style={{ width:'100%', background:'linear-gradient(135deg, #0d1b3e 0%, #172554 100%)', padding:'80px 60px', textAlign:'center', position:'relative', overflow:'hidden' }}>
         <svg style={{ position:'absolute', inset:0, width:'100%', height:'100%', opacity:0.1, pointerEvents:'none' }} aria-hidden="true">
           <defs><pattern id="dots-fsm-mod" x="0" y="0" width="32" height="32" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r="1" fill="#71B136"/></pattern></defs>
           <rect width="100%" height="100%" fill="url(#dots-fsm-mod)"/>
@@ -205,9 +239,9 @@ export default function FSMToolClient() {
             <svg width="1em" height="0.85em" viewBox="0 0 28 24" fill="none" style={{ display:'inline-block', verticalAlign:'middle', fontSize:'16px' }}><path d="M16 1.5l.9 3.2 3.2.9-3.2.9L16 9.7l-.9-3.2-3.2-.9 3.2-.9z" fill="#71B136" stroke="#71B136" strokeWidth="0.4" strokeLinejoin="round"/><path d="M7 7l.6 2.2 2.2.6-2.2.6L7 12.6l-.6-2.2-2.2-.6 2.2-.6z" fill="#71B136" stroke="#71B136" strokeWidth="0.3" strokeLinejoin="round" opacity="0.65"/><path d="M21 14l.5 1.6 1.6.5-1.6.5L21 18.2l-.5-1.6-1.6-.5 1.6-.5z" fill="#71B136" stroke="#71B136" strokeWidth="0.3" strokeLinejoin="round" opacity="0.45"/></svg>
             <span style={{ color:'#71B136', fontSize:'12px', fontWeight:600, letterSpacing:'0.1em' }}>{tr('Impulsado por Inteligencia Artificial', 'Powered by Artificial Intelligence')}</span>
           </div>
-          <h2 style={{ fontSize:'52px', fontWeight:900, color:'white', lineHeight:1.1, marginBottom:'16px', position:'relative', zIndex:2 }}>{tr('Todo lo que podés hacer', 'Everything you can do')}</h2>
+          <h2 className="fsm-modulos-title" style={{ fontSize:'52px', fontWeight:900, color:'white', lineHeight:1.1, marginBottom:'16px', position:'relative', zIndex:2 }}>{tr('Todo lo que podés hacer', 'Everything you can do')}</h2>
           <p style={{ fontSize:'18px', color:'rgba(255,255,255,0.6)', maxWidth:'600px', margin:'0 auto 16px', lineHeight:1.7, position:'relative', zIndex:2 }}>{tr('Gestioná tu operación de Oracle Field Service de forma masiva, sin límites y con IA.', 'Manage your Oracle Field Service operation massively, without limits and with AI.')}</p>
-          <div style={{ display:'flex', justifyContent:'center', gap:'80px', marginTop:'40px', position:'relative', zIndex:2 }}>
+          <div className="fsm-modulos-stats" style={{ display:'flex', justifyContent:'center', gap:'80px', marginTop:'40px', position:'relative', zIndex:2 }}>
             {[['4', tr('Módulos','Modules')], ['17', tr('APIs disponibles','Available APIs')], ['100%', tr('Gestión masiva','Bulk management')]].map(([num, label]) => (
               <div key={label} style={{ textAlign:'center' }}>
                 <div style={{ fontSize:'40px', fontWeight:900, color:'#71B136' }}>{num}</div>
@@ -219,14 +253,14 @@ export default function FSMToolClient() {
       </div>
 
       {/* BLOQUE 2: MÓDULOS CARDS */}
-      <div style={{ width:'100%', background:'#ffffff', padding:'80px 60px' }}>
+      <div className="fsm-modulos-cards" style={{ width:'100%', background:'#ffffff', padding:'80px 60px' }}>
         <div style={{ maxWidth:'1400px', margin:'0 auto' }}>
           <div style={{ marginBottom:'8px' }}>
             <span style={{ color:'#71B136', fontSize:'11px', fontWeight:700, letterSpacing:'0.12em', textTransform:'uppercase' }}>{tr('MÓDULOS','MODULES')}</span>
           </div>
           <h3 style={{ fontSize:'36px', fontWeight:800, color:'#172554', marginBottom:'16px' }}>{tr('Módulos de gestión masiva','Bulk management modules')}</h3>
           <p style={{ color:'#6B7280', fontSize:'16px', marginBottom:'48px' }}>{tr('Operaciones masivas sobre actividades, recursos e inventarios de OFS.','Bulk operations on OFS activities, resources and inventories.')}</p>
-          <div style={{ display:'grid', gridTemplateColumns:'repeat(2,1fr)', gap:'24px' }}>
+          <div className="fsm-modulos-grid" style={{ display:'grid', gridTemplateColumns:'repeat(2,1fr)', gap:'24px' }}>
 
             {/* Card ACTIVIDADES */}
             <div style={{ background:'#F8FAFC', borderRadius:'16px', padding:'32px', border:'1px solid #E5E7EB' }}>
@@ -265,7 +299,7 @@ export default function FSMToolClient() {
       </div>
 
       {/* BLOQUE 3: APIs */}
-      <div style={{ width:'100%', background:'#F8FAFC', padding:'80px 60px' }}>
+      <div className="fsm-apis-section" style={{ width:'100%', background:'#F8FAFC', padding:'80px 60px' }}>
         <div style={{ maxWidth:'1400px', margin:'0 auto' }}>
           <div style={{ marginBottom:'8px' }}>
             <span style={{ color:'#71B136', fontSize:'11px', fontWeight:700, letterSpacing:'0.12em', textTransform:'uppercase' }}>{tr('APIs DE OFS','OFS APIs')}</span>
@@ -281,7 +315,7 @@ export default function FSMToolClient() {
             </div>
           </div>
 
-          <div style={{ display:'grid', gridTemplateColumns:'repeat(3,1fr)', gap:'24px' }}>
+          <div className="fsm-apis-grid" style={{ display:'grid', gridTemplateColumns:'repeat(3,1fr)', gap:'24px' }}>
             {[
               { name:'Activities', count:'6', endpoints:[tr('Create activities','Create activities'), tr('Update activities','Update activities'), tr('Change activity status','Change activity status'), tr('Change activity date','Change activity date'), tr('Change activity resource','Change activity resource'), tr('Download activities','Download activities')] },
               { name:'Resources', count:'5', endpoints:[tr('Create resources','Create resources'), tr('Update resource properties','Update resource properties'), tr('Update resources work zones','Update resources work zones'), tr('Update resources work skills','Update resources work skills'), tr('Update resources work schedules','Update resources work schedules')] },
@@ -305,7 +339,7 @@ export default function FSMToolClient() {
       </div>
 
       {/* BLOQUE 4: CTA IA FINAL */}
-      <div style={{ width:'100%', background:'linear-gradient(135deg, #071428 0%, #172554 50%, #1a3a2a 100%)', padding:'80px 60px', textAlign:'center', position:'relative', overflow:'hidden' }}>
+      <div className="fsm-cta-section" style={{ width:'100%', background:'linear-gradient(135deg, #071428 0%, #172554 50%, #1a3a2a 100%)', padding:'80px 60px', textAlign:'center', position:'relative', overflow:'hidden' }}>
         <svg style={{ position:'absolute', inset:0, width:'100%', height:'100%', opacity:0.1, pointerEvents:'none' }} aria-hidden="true">
           <defs><pattern id="dots-fsm2" x="0" y="0" width="32" height="32" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r="1" fill="#71B136"/></pattern></defs>
           <rect width="100%" height="100%" fill="url(#dots-fsm2)"/>
@@ -313,8 +347,8 @@ export default function FSMToolClient() {
         <div style={{ position:'absolute', top:'50%', left:'50%', transform:'translate(-50%,-50%)', width:'500px', height:'500px', background:'radial-gradient(circle, rgba(113,177,54,0.12) 0%, transparent 70%)', borderRadius:'50%', pointerEvents:'none' }}></div>
         <div style={{ position:'relative', zIndex:2 }}>
           <svg width="48" height="40" viewBox="0 0 28 24" fill="none" style={{ display:'block', margin:'0 auto 24px' }}><path d="M16 1.5l.9 3.2 3.2.9-3.2.9L16 9.7l-.9-3.2-3.2-.9 3.2-.9z" fill="#71B136" stroke="#71B136" strokeWidth="0.4" strokeLinejoin="round"/><path d="M7 7l.6 2.2 2.2.6-2.2.6L7 12.6l-.6-2.2-2.2-.6 2.2-.6z" fill="#71B136" stroke="#71B136" strokeWidth="0.3" strokeLinejoin="round" opacity="0.65"/><path d="M21 14l.5 1.6 1.6.5-1.6.5L21 18.2l-.5-1.6-1.6-.5 1.6-.5z" fill="#71B136" stroke="#71B136" strokeWidth="0.3" strokeLinejoin="round" opacity="0.45"/></svg>
-          <div style={{ color:'white', fontSize:'44px', fontWeight:900, lineHeight:1.1 }}>{tr('Gestioná tu operación','Manage your operation')}</div>
-          <div style={{ color:'#71B136', fontSize:'44px', fontWeight:900, lineHeight:1.1, marginBottom:'16px' }}>{tr('de forma masiva con IA.','massively with AI.')}</div>
+          <div className="fsm-cta-line" style={{ color:'white', fontSize:'44px', fontWeight:900, lineHeight:1.1 }}>{tr('Gestioná tu operación','Manage your operation')}</div>
+          <div className="fsm-cta-line" style={{ color:'#71B136', fontSize:'44px', fontWeight:900, lineHeight:1.1, marginBottom:'16px' }}>{tr('de forma masiva con IA.','massively with AI.')}</div>
           <p style={{ color:'rgba(255,255,255,0.55)', fontSize:'18px', maxWidth:'500px', margin:'0 auto 40px', lineHeight:1.7 }}>{tr('Sin límites de volumen. Sin código. Con el poder de la Inteligencia Artificial.','No volume limits. No code. With the power of Artificial Intelligence.')}</p>
           <div style={{ display:'flex', justifyContent:'center', gap:'16px', flexWrap:'wrap' }}>
             <a href="#demo" style={{ background:'#71B136', color:'white', padding:'16px 40px', borderRadius:'8px', fontSize:'16px', fontWeight:600, textDecoration:'none', display:'inline-block' }}>{tr('Solicitar acceso','Request access')}</a>

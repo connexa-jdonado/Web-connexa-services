@@ -105,7 +105,7 @@ export default function HomeClient() {
           <div className="aurora-blob aurora-blob-3" />
         </div>
         <ParticlesCanvas heroRef={heroRef} heroInnerRef={heroInnerRef} heroAuroraRef={heroAuroraRef} />
-        <div className="hero-inner" ref={heroInnerRef}>
+        <div className="hero-inner hero-content-mobile" ref={heroInnerRef}>
           <div className="hero-eyebrow" style={{whiteSpace:'nowrap'}}>
             {/* <div className="hero-eyebrow-dot" /> */}
             <span>{tr('Field Service Management', 'Field Service Management')}<span style={{margin:'0 8px'}}>·</span>{tr('Experts certificados', 'Certified Experts')}</span>
@@ -139,23 +139,25 @@ export default function HomeClient() {
             </span>
           </div>
           <div className="hero-ctas">
-            <Link href="/productos" className="btn-primary" style={{ fontSize: 16, padding: '16px 32px' }}>
+            <Link href="/productos" className="btn-primary hero-cta-btn" style={{ fontSize: 16, padding: '16px 32px' }}>
               {tr('Conocé nuestras soluciones', 'Explore our solutions')}
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6" /></svg>
             </Link>
           </div>
         </div>
-        <div className="hero-trust-bar">
+        <div className="hero-trust-bar hero-partners hero-partners-block">
           <span className="trust-label-text">{tr('Partner oficial', 'Official Partner')}</span>
-          <div className="trust-sep" />
-          <div className="trust-partner">
-            <Image src="/assets/OFSC-hq.png" alt="Oracle" width={32} height={32} priority sizes="32px" />
-            <div className="trust-partner-text"><span className="trust-partner-name">Oracle</span><span className="trust-partner-caption">Field Service Cloud</span></div>
-          </div>
-          <div className="trust-sep" />
-          <div className="trust-partner">
-            <Image src="/assets/zinier-hq.webp" alt="Zinier" width={32} height={32} priority sizes="32px" style={{ background: '#fff', borderRadius: 7 }} />
-            <div className="trust-partner-text"><span className="trust-partner-name">Zinier</span><span className="trust-partner-caption">Certified Partner</span></div>
+          <div className="hero-partners-list">
+            <div className="trust-sep" />
+            <div className="trust-partner">
+              <Image src="/assets/OFSC-hq.png" alt="Oracle" width={32} height={32} priority sizes="32px" />
+              <div className="trust-partner-text"><span className="trust-partner-name">Oracle</span><span className="trust-partner-caption">Field Service Cloud</span></div>
+            </div>
+            <div className="trust-sep" />
+            <div className="trust-partner">
+              <Image src="/assets/zinier-hq.webp" alt="Zinier" width={32} height={32} priority sizes="32px" style={{ background: '#fff', borderRadius: 7 }} />
+              <div className="trust-partner-text"><span className="trust-partner-name">Zinier</span><span className="trust-partner-caption">Certified Partner</span></div>
+            </div>
           </div>
         </div>
       </section>
@@ -295,7 +297,7 @@ export default function HomeClient() {
       </section>
 
       {/* EQUIPO Y CASO DE ÉXITO */}
-      <section id="nosotros">
+      <section id="nosotros" className="metodologia-divider">
         <div className="container">
           {/* SECCIÓN LIDERAZGO Y EXPERIENCIA — temporalmente comentada
           <div className="ec-header">
@@ -371,8 +373,34 @@ export default function HomeClient() {
       </section>
 
       {/* METODOLOGÍA */}
-      <section id="metodologia">
-        <div style={{width:'100%', background:'#F3F4F6', padding:'100px 40px', position:'relative', overflow:'hidden', overflowX:'auto'}}>
+      <section id="metodologia" className="metodologia-section-end">
+        <style>{`
+          @media (max-width: 768px) {
+            /* METODOLOGÍA */
+            .metodologia-wrapper  { padding: 48px 20px !important; }
+            .metodologia-layout   { flex-direction: column !important; gap: 24px !important; }
+            .metodologia-left     { width: 100% !important; }
+            .metodologia-right    { width: 100% !important; position: relative !important; top: 0 !important; }
+            .metodologia-legend   { grid-template-columns: repeat(2, 1fr) !important; }
+            .metodologia-gap      { margin-top: 0 !important; padding-top: 0 !important; }
+            .metodologia-disclaimer { position: relative !important; margin-top: 24px !important; z-index: 1; }
+
+            /* HERO */
+            .hero-eyebrow         { white-space: normal !important; }
+            .hero-cta-btn         { width: calc(100% - 80px) !important; margin: 0 40px !important; font-size: 15px !important; padding: 14px 20px !important; }
+
+            /* SECCIONES */
+            #por-que-connexa      { padding-bottom: 24px !important; }
+            #nosotros             { display: none !important; padding: 0 !important; margin: 0 !important; height: 0 !important; overflow: hidden !important; }
+            #clients-carousel     { padding-bottom: 0 !important; }
+          }
+          @media (min-width: 769px) {
+            .hero-partners-list { display: contents; }
+            #nosotros { display: none !important; }
+            #clients-carousel { padding-bottom: 0 !important; }
+          }
+        `}</style>
+        <div className="metodologia-wrapper" style={{width:'100%', background:'#F3F4F6', padding:'100px 40px', position:'relative', overflow:'hidden', overflowX:'auto'}}>
           <svg style={{position:'absolute',inset:0,width:'100%',height:'100%',opacity:0,pointerEvents:'none',zIndex:0}}>
             <defs>
               <pattern id="dots-met" x="0" y="0" width="32" height="32" patternUnits="userSpaceOnUse">
@@ -392,10 +420,10 @@ export default function HomeClient() {
             </p>
           </div>
 
-          <div style={{display:'flex', flexDirection:'row', gap:'48px', maxWidth:'1600px', margin:'60px auto 0', alignItems:'flex-start', position:'relative', zIndex:2}}>
+          <div className="metodologia-layout metodologia-gap" style={{display:'flex', flexDirection:'row', gap:'48px', maxWidth:'1600px', margin:'60px auto 0', alignItems:'flex-start', position:'relative', zIndex:2}}>
 
             {/* Columna izquierda 30% — 3 cards */}
-            <div style={{width:'30%', display:'flex', flexDirection:'column', gap:'16px'}}>
+            <div className="metodologia-left" style={{width:'30%', display:'flex', flexDirection:'column', gap:'16px'}}>
 
               <div style={{background:'white', border:'1px solid #E5E7EB', borderRadius:'16px', padding:'28px 32px', position:'relative', overflow:'hidden'}}>
                 <span style={{position:'absolute', right:'-10px', top:'-20px', fontSize:'120px', fontWeight:900, lineHeight:1, userSelect:'none', pointerEvents:'none', color:'rgba(23,37,84,0.04)', WebkitTextStroke:'1.5px rgba(113,177,54,0.25)', letterSpacing:'-4px'}}>01</span>
@@ -464,7 +492,7 @@ export default function HomeClient() {
             </div>
 
             {/* Columna derecha 70% — scatter plot */}
-            <div style={{width:'70%', background:'rgba(255,255,255,0.97)', borderRadius:'20px', padding:'8px', boxShadow:'0 40px 100px rgba(0,0,0,0.4)', position:'sticky', top:'100px'}}>
+            <div className="metodologia-right" style={{width:'70%', background:'rgba(255,255,255,0.97)', borderRadius:'20px', padding:'8px', boxShadow:'0 40px 100px rgba(0,0,0,0.4)', position:'sticky', top:'100px'}}>
 
           {/* SCATTER PLOT MAPA DE PRIORIZACIÓN */}
           <div className="fade-up d2" style={{ background: '#fff', borderRadius: '16px', padding: '32px 32px 24px', margin: '0', boxShadow: 'none', border: 'none' }}>
@@ -630,7 +658,7 @@ export default function HomeClient() {
             </svg>
             </div>
             {/* Leyenda horizontal 4 columnas */}
-            <div style={{display:'grid', gridTemplateColumns:'repeat(4,1fr)', gap:'16px', padding:'0 8px 8px'}}>
+            <div className="metodologia-legend" style={{display:'grid', gridTemplateColumns:'repeat(4,1fr)', gap:'16px', padding:'0 8px 8px'}}>
               {[
                 { color: '#71B136', title: tr('Quick Wins', 'Quick Wins'), items: [
                   { code: 'A1', name: tr('Segmentar cuotas por zona', 'Segment quotas by zone') },
@@ -675,7 +703,7 @@ export default function HomeClient() {
             </div>{/* /columna derecha */}
           </div>{/* /flex 2 columnas */}
 
-          <div style={{ paddingTop: '32px', textAlign: 'center', position:'relative', zIndex:2 }}>
+          <div className="metodologia-disclaimer" style={{ paddingTop: '32px', textAlign: 'center', position:'relative', zIndex:2 }}>
             <p style={{ fontSize: '14px', color: 'rgb(23, 37, 84)', fontStyle: 'italic', maxWidth: '600px', margin: '0 auto', fontFamily: 'var(--font-body)', lineHeight: '1.6' }}>
               {tr('Cada assessment es único. Los resultados dependen de tu operación, tu plataforma y tus objetivos.', 'Every assessment is unique. Results depend on your operation, your platform, and your goals.')}
             </p>

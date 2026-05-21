@@ -65,7 +65,7 @@ export default function ProductosClient() {
         }
       `}</style>
       {/* ── HERO ── */}
-      <section className="prod-hero">
+      <section className="prod-hero prod-hero-section">
         <div className="container prod-hero-inner" style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
           <div style={{ textAlign: 'left', display: 'flex', flexDirection: 'column', alignItems: 'flex-start', maxWidth: '58%' }}>
           <nav className="breadcrumb">
@@ -80,7 +80,7 @@ export default function ProductosClient() {
           <h1 className="page-hero-h1" dangerouslySetInnerHTML={{ __html: tr('Herramientas que potencian<br/>tu plataforma <em>OFSC</em>', 'Tools that power<br/>your <em>OFSC</em> platform') }} />
           <p className="page-hero-sub">{tr('Apps web nativas construidas sobre Oracle Field Service Cloud para resolver los desafíos operacionales más complejos del Field Service, sin fricciones y sin código adicional.', 'Native web apps built on Oracle Field Service Cloud to solve the most complex Field Service operational challenges, without friction and without additional code.')}</p>
           </div>
-          <div style={{ flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <div className="prod-hero-svg" style={{ flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             <svg width="420" height="320" viewBox="0 0 420 320" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ overflow: 'visible' }}>
               <g style={{ animation: 'heroFloat 3.5s ease-in-out infinite', filter: 'drop-shadow(0 0 18px #71B136)' }}>
                 <rect x="20" y="20" width="175" height="115" rx="14" fill="#1e3a5f" stroke="#71B136" strokeWidth="1"/>
@@ -106,11 +106,36 @@ export default function ProductosClient() {
         </div>
       </section>
 
+      <style>{`
+        @media (max-width: 768px) {
+          .prod-hero-svg     { display: none !important; }
+          .prod-hero-section { padding-bottom: 24px !important; }
+
+          .prod-wfb-layout   { flex-direction: column !important; padding: 48px 20px !important; }
+          .prod-wfb-text     { display: contents !important; }
+          .prod-wfb-layout .showcase-name    { order: 1 !important; }
+          .prod-wfb-layout .showcase-tagline { order: 2 !important; }
+          .prod-wfb-image    { order: 3 !important; max-width: 100% !important; margin-left: 0 !important; margin-top: 16px !important; }
+          .prod-wfb-layout .showcase-desc    { order: 4 !important; margin-top: 16px !important; }
+          .prod-wfb-layout .benefits-list    { order: 5 !important; }
+          .prod-wfb-layout .showcase-ctas    { order: 6 !important; }
+
+          .prod-fsm-layout   { flex-direction: column !important; padding: 48px 20px !important; }
+          .prod-fsm-text     { display: contents !important; }
+          .prod-fsm-layout .showcase-name    { order: 1 !important; }
+          .prod-fsm-layout .showcase-tagline { order: 2 !important; }
+          .prod-fsm-image    { order: 3 !important; max-width: 100% !important; margin-left: 0 !important; margin-top: 16px !important; }
+          .prod-fsm-layout .showcase-desc    { order: 4 !important; margin-top: 16px !important; }
+          .prod-fsm-layout .benefits-list    { order: 5 !important; }
+          .prod-fsm-layout .showcase-ctas    { order: 6 !important; }
+        }
+      `}</style>
+
       {/* ── WORKFLOW BUILDER SHOWCASE (FIRST) ── */}
       <div className="showcase alt" id="prod-workflow">
         <div className="container" style={{ maxWidth: '100%', width: '100%' }}>
-          <div className="showcase-grid mirror" style={{ display: 'flex', flexDirection: 'row', alignItems: 'flex-start', gap: '0', padding: '48px 64px', marginTop: '40px' }}>
-            <div className="fade-up d2" style={{ maxWidth: '55%', marginLeft: '40px' }}>
+          <div className="showcase-grid mirror prod-wfb-layout" style={{ display: 'flex', flexDirection: 'row', alignItems: 'flex-start', gap: '0', padding: '48px 64px', marginTop: '40px' }}>
+            <div className="fade-up d2 prod-wfb-image" style={{ maxWidth: '55%', marginLeft: '40px' }}>
               <div className="browser-frame" ref={wfImgRef} style={{ opacity: 0 }}>
                 <div className="browser-toolbar">
                   <div className="browser-dots"><span></span><span></span><span></span></div>
@@ -119,7 +144,7 @@ export default function ProductosClient() {
                 <img src="/assets/WFBuilder01.png" style={{ width: '100%', display: 'block', borderRadius: '12px', borderBottomLeftRadius: '12px', borderBottomRightRadius: '12px' }} alt="Workflow Builder canvas" />
               </div>
             </div>
-            <div className="showcase-text" style={{ alignSelf: 'flex-start', paddingTop: '0', flex: 1 }}>
+            <div className="showcase-text prod-wfb-text" style={{ alignSelf: 'flex-start', paddingTop: '0', flex: 1 }}>
               <h2 className="showcase-name fade-up d1" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>Workflow Builder <span style={{color:'#172554', fontSize:'0.7em', fontWeight:700, display:'inline-flex', alignItems:'center', gap:'4px'}}>
                 <svg width="58" height="54" viewBox="0 0 28 24" fill="none"><path d="M16 1.5l.9 3.2 3.2.9-3.2.9L16 9.7l-.9-3.2-3.2-.9 3.2-.9z" fill="#71B136" stroke="#71B136" strokeWidth="0.4" strokeLinejoin="round"/><path d="M7 7l.6 2.2 2.2.6-2.2.6L7 12.6l-.6-2.2-2.2-.6 2.2-.6z" fill="#71B136" stroke="#71B136" strokeWidth="0.3" strokeLinejoin="round" opacity="0.65"/><path d="M21 14l.5 1.6 1.6.5-1.6.5L21 18.2l-.5-1.6-1.6-.5 1.6-.5z" fill="#71B136" stroke="#71B136" strokeWidth="0.3" strokeLinejoin="round" opacity="0.45"/></svg> AI</span></h2>
               <p className="showcase-tagline fade-up d2">{tr('Automatizá tus procesos OFSC sin código', 'Automate your OFSC processes without code')}</p>
@@ -171,8 +196,8 @@ export default function ProductosClient() {
       {/* ── FSMTOOL SHOWCASE (SECOND) ── */}
       <div className="showcase" id="prod-fsmtool">
         <div className="container" style={{ maxWidth: '100%', width: '100%' }}>
-          <div className="showcase-grid" style={{ display: 'flex', flexDirection: 'row', alignItems: 'flex-start', gap: '0', padding: '48px 64px', marginTop: '40px' }}>
-            <div className="showcase-text" style={{ alignSelf: 'flex-start', paddingTop: '0', flex: 1 }}>
+          <div className="showcase-grid prod-fsm-layout" style={{ display: 'flex', flexDirection: 'row', alignItems: 'flex-start', gap: '0', padding: '48px 64px', marginTop: '40px' }}>
+            <div className="showcase-text prod-fsm-text" style={{ alignSelf: 'flex-start', paddingTop: '0', flex: 1 }}>
               <h2 className="showcase-name fade-up d1" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>FSMTool <span style={{color:'#172554', fontSize:'0.7em', fontWeight:700, display:'inline-flex', alignItems:'center', gap:'4px'}}><svg width="28" height="24" viewBox="0 0 28 24" fill="none"><path d="M16 1.5l.9 3.2 3.2.9-3.2.9L16 9.7l-.9-3.2-3.2-.9 3.2-.9z" fill="#71B136" stroke="#71B136" strokeWidth="0.4" strokeLinejoin="round"/><path d="M7 7l.6 2.2 2.2.6-2.2.6L7 12.6l-.6-2.2-2.2-.6 2.2-.6z" fill="#71B136" stroke="#71B136" strokeWidth="0.3" strokeLinejoin="round" opacity="0.65"/><path d="M21 14l.5 1.6 1.6.5-1.6.5L21 18.2l-.5-1.6-1.6-.5 1.6-.5z" fill="#71B136" stroke="#71B136" strokeWidth="0.3" strokeLinejoin="round" opacity="0.45"/></svg> AI</span></h2>
               <p className="showcase-tagline fade-up d2">{tr('Operaciones masivas en OFSC, sin complejidad', 'Bulk OFSC operations, without complexity')}</p>
               <p className="showcase-desc fade-up d2">{tr('FSMTool es una suite de administración y monitoreo de operaciones construida nativamente sobre Oracle Field Service Cloud. Permite a los equipos de operaciones ejecutar acciones masivas, visualizar el estado en tiempo real y automatizar los procesos del día a día.', 'FSMTool is an operations administration and monitoring suite built natively on Oracle Field Service Cloud. It lets operations teams execute bulk actions, visualize status in real time, and automate day-to-day processes.')}</p>
@@ -220,7 +245,7 @@ export default function ProductosClient() {
                     : { transition: 'transform 0.2s ease, box-shadow 0.2s ease' }}>{tr('Solicitar acceso', 'Request access')}</Link>
               </div>
             </div>
-            <div className="fade-up d2" style={{ maxWidth: '55%', marginLeft: '40px' }}>
+            <div className="fade-up d2 prod-fsm-image" style={{ maxWidth: '55%', marginLeft: '40px' }}>
               <div className="browser-frame" ref={fsmImgRef} style={{ opacity: 0 }}>
                 <div className="browser-toolbar">
                   <div className="browser-dots"><span></span><span></span><span></span></div>

@@ -105,10 +105,29 @@ export default function ServiciosClient() {
         </div>
       </section>
 
+      <style>{`
+        @media (max-width: 768px) {
+          .sec-ofsc-layout   { flex-direction: column !important; }
+          .sec-zinier-layout { flex-direction: column !important; }
+          .srv-mockup-img    { display: none !important; }
+          .srv-consultoria-wrapper { padding: 48px 20px !important; }
+          .srv-consultoria-layout  { flex-direction: column !important; gap: 24px !important; }
+          .srv-consultoria-left    { width: 100% !important; }
+          .srv-consultoria-right   { width: 100% !important; position: relative !important; top: 0 !important; }
+          .srv-consultoria-legend  { grid-template-columns: repeat(2, 1fr) !important; }
+          .srv-integraciones-section { padding: 48px 20px !important; }
+          .srv-contacto-section      { padding: 48px 20px !important; }
+          .srv-contacto-h2           { font-size: 28px !important; }
+          .srv-soporte-section    { padding: 48px 20px !important; }
+          .srv-desarrollo-section { padding: 48px 20px !important; }
+          .srv-training-section   { padding: 48px 20px !important; }
+          .srv-cta-flotante { padding: 16px !important; min-width: 44px !important; }
+        }
+      `}</style>
       {/* ── IMPLEMENTACIÓN OFSC ── */}
       <section id="implementacion-ofsc" className="sec-ofsc">
         <div className="container">
-          <div style={{ display: 'flex', flexDirection: 'row', gap: '48px', alignItems: 'center', marginBottom: '48px' }}>
+          <div className="sec-ofsc-layout" style={{ display: 'flex', flexDirection: 'row', gap: '48px', alignItems: 'center', marginBottom: '48px' }}>
             <div style={{ flex: 1 }}>
               <div className="section-header fade-up">
                 <div className="section-eyebrow">{tr('IMPLEMENTACIÓN', 'IMPLEMENTATION')}</div>
@@ -128,7 +147,7 @@ export default function ServiciosClient() {
                 <span>{tr('Oracle Certified Partner', 'Oracle Certified Partner')}</span>
               </div>
             </div>
-            <div className="hidden md:block" style={{ flexShrink: 0, maxWidth: '560px', width: '100%', background: '#1a1a2e', borderRadius: '12px', overflow: 'hidden', boxShadow: '0 30px 80px rgba(0,0,0,0.3)' }}>
+            <div className="hidden md:block srv-mockup-img" style={{ flexShrink: 0, maxWidth: '560px', width: '100%', background: '#1a1a2e', borderRadius: '12px', overflow: 'hidden', boxShadow: '0 30px 80px rgba(0,0,0,0.3)' }}>
               <div style={{ height: '32px', background: '#e8e8ed', display: 'flex', alignItems: 'center', padding: '0 12px', gap: '6px' }}>
                 <div style={{ width: '10px', height: '10px', borderRadius: '50%', background: '#FF5F57' }}></div>
                 <div style={{ width: '10px', height: '10px', borderRadius: '50%', background: '#FFBD2E' }}></div>
@@ -168,7 +187,7 @@ export default function ServiciosClient() {
       {/* ── IMPLEMENTACIÓN ZINIER ── */}
       <section id="implementacion-zinier" className="sec-zinier">
         <div className="container">
-          <div style={{ display: 'flex', flexDirection: 'row', gap: '48px', alignItems: 'center', marginBottom: '48px' }}>
+          <div className="sec-zinier-layout" style={{ display: 'flex', flexDirection: 'row', gap: '48px', alignItems: 'center', marginBottom: '48px' }}>
             <div style={{ flex: 1 }}>
               <div className="section-header fade-up">
                 <div className="section-eyebrow">{tr('IMPLEMENTACIÓN', 'IMPLEMENTATION')}</div>
@@ -188,7 +207,7 @@ export default function ServiciosClient() {
                 <span>{tr('Zinier Certified Partner', 'Zinier Certified Partner')}</span>
               </div>
             </div>
-            <div className="hidden md:block" style={{ flexShrink: 0, maxWidth: '560px', width: '100%', background: '#1a1a2e', borderRadius: '12px', overflow: 'hidden', boxShadow: '0 30px 80px rgba(0,0,0,0.3)' }}>
+            <div className="hidden md:block srv-mockup-img" style={{ flexShrink: 0, maxWidth: '560px', width: '100%', background: '#1a1a2e', borderRadius: '12px', overflow: 'hidden', boxShadow: '0 30px 80px rgba(0,0,0,0.3)' }}>
               <div style={{ height: '32px', background: '#e8e8ed', display: 'flex', alignItems: 'center', padding: '0 12px', gap: '6px' }}>
                 <div style={{ width: '10px', height: '10px', borderRadius: '50%', background: '#FF5F57' }}></div>
                 <div style={{ width: '10px', height: '10px', borderRadius: '50%', background: '#FFBD2E' }}></div>
@@ -219,7 +238,7 @@ export default function ServiciosClient() {
       </section>
 
       {/* ── INTEGRACIONES ── */}
-      <section id="integraciones" className="sec-integraciones">
+      <section id="integraciones" className="sec-integraciones srv-integraciones-section">
         <div className="container">
           <div className="section-header center fade-up">
             <div className="section-eyebrow light">{tr('INTEGRACIONES', 'INTEGRATIONS')}</div>
@@ -281,7 +300,7 @@ export default function ServiciosClient() {
 
       {/* ── CONSULTORÍA ── */}
       <section id="consultoria" className="sec-consultoria" style={{padding:0}}>
-        <div style={{width:'100%', background:'#F3F4F6', padding:'100px 40px', position:'relative', overflow:'hidden', overflowX:'auto'}}>
+        <div className="srv-consultoria-wrapper" style={{width:'100%', background:'#F3F4F6', padding:'100px 40px', position:'relative', overflow:'hidden', overflowX:'auto'}}>
           <svg style={{position:'absolute',inset:0,width:'100%',height:'100%',opacity:0,pointerEvents:'none',zIndex:0}}>
             <defs>
               <pattern id="dots-cons" x="0" y="0" width="32" height="32" patternUnits="userSpaceOnUse">
@@ -301,10 +320,10 @@ export default function ServiciosClient() {
             </p>
           </div>
 
-          <div style={{display:'flex', gap:'48px', maxWidth:'1600px', margin:'60px auto 0', alignItems:'flex-start', position:'relative', zIndex:2}}>
+          <div className="srv-consultoria-layout" style={{display:'flex', gap:'48px', maxWidth:'1600px', margin:'60px auto 0', alignItems:'flex-start', position:'relative', zIndex:2}}>
 
             {/* Columna izquierda 30% — 3 cards */}
-            <div style={{width:'30%', display:'flex', flexDirection:'column', gap:'16px'}}>
+            <div className="srv-consultoria-left" style={{width:'30%', display:'flex', flexDirection:'column', gap:'16px'}}>
 
               <div style={{background:'white', border:'1px solid #E5E7EB', borderRadius:'16px', padding:'28px 32px', position:'relative', overflow:'hidden'}}>
                 <span style={{position:'absolute', right:'-10px', top:'-20px', fontSize:'120px', fontWeight:900, lineHeight:1, userSelect:'none', pointerEvents:'none', color:'rgba(23,37,84,0.04)', WebkitTextStroke:'1.5px rgba(113,177,54,0.25)', letterSpacing:'-4px'}}>01</span>
@@ -373,7 +392,7 @@ export default function ServiciosClient() {
             </div>
 
             {/* Columna derecha 70% — scatter plot */}
-            <div style={{width:'70%', background:'rgba(255,255,255,0.97)', borderRadius:'20px', padding:'8px', boxShadow:'0 40px 100px rgba(0,0,0,0.4)', position:'sticky', top:'100px'}}>
+            <div className="srv-consultoria-right" style={{width:'70%', background:'rgba(255,255,255,0.97)', borderRadius:'20px', padding:'8px', boxShadow:'0 40px 100px rgba(0,0,0,0.4)', position:'sticky', top:'100px'}}>
 
           {/* SCATTER PLOT MAPA DE PRIORIZACIÓN */}
           <div className="fade-up d2" style={{ background: '#fff', borderRadius: '16px', padding: '32px 32px 24px', margin: '0', boxShadow: 'none', border: 'none' }}>
@@ -539,7 +558,7 @@ export default function ServiciosClient() {
             </svg>
             </div>
             {/* Leyenda horizontal 4 columnas */}
-            <div style={{display:'grid', gridTemplateColumns:'repeat(4,1fr)', gap:'16px', padding:'0 8px 8px'}}>
+            <div className="srv-consultoria-legend" style={{display:'grid', gridTemplateColumns:'repeat(4,1fr)', gap:'16px', padding:'0 8px 8px'}}>
               {[
                 { color: '#71B136', title: tr('Quick Wins', 'Quick Wins'), items: [
                   { code: 'A1', name: tr('Segmentar cuotas por zona', 'Segment quotas by zone') },
@@ -593,7 +612,7 @@ export default function ServiciosClient() {
       </section>
 
       {/* ── SOPORTE ── */}
-      <section id="soporte" className="sec-soporte">
+      <section id="soporte" className="sec-soporte srv-soporte-section">
         <div className="container">
           <div className="section-header center fade-up">
             <div className="section-eyebrow">{tr('SOPORTE', 'SUPPORT')}</div>
@@ -631,7 +650,7 @@ export default function ServiciosClient() {
       </section>
 
       {/* ── DESARROLLO ── */}
-      <section id="desarrollo" className="sec-desarrollo">
+      <section id="desarrollo" className="sec-desarrollo srv-desarrollo-section">
         <div className="container">
           <div className="desarrollo-grid">
             <div>
@@ -664,7 +683,7 @@ export default function ServiciosClient() {
       </section>
 
       {/* ── TRAINING ── */}
-      <section id="training" className="sec-training">
+      <section id="training" className="sec-training srv-training-section">
         <div className="container">
           <div className="section-header center fade-up">
             <div className="section-eyebrow">{tr('CAPACITACIÓN', 'TRAINING')}</div>
@@ -689,11 +708,11 @@ export default function ServiciosClient() {
       </section>
 
       {/* ── FORMULARIO DE CONTACTO ── */}
-      <section id="contacto" className="sec-contacto">
+      <section id="contacto" className="sec-contacto srv-contacto-section">
         <div className="container">
           <div className="form-wrap">
             <div className="form-left">
-              <h2 dangerouslySetInnerHTML={{ __html: tr('¿Listo para transformar<br/>tu <em>Field Service</em>?', 'Ready to transform<br/>your <em>Field Service</em>?') }} />
+              <h2 className="srv-contacto-h2" dangerouslySetInnerHTML={{ __html: tr('¿Listo para transformar<br/>tu <em>Field Service</em>?', 'Ready to transform<br/>your <em>Field Service</em>?') }} />
               <p>{tr('Contactanos y diseñamos juntos la solución ideal para tu empresa.', "Contact us and we'll design together the ideal solution for your company.")}</p>
               <div className="form-trust">
                 {[tr('Sin costo. Sin compromiso.', 'No cost. No commitment.'), tr('Partner certificado Oracle y Zinier', 'Certified Oracle and Zinier Partner'), tr('+50 proyectos de Field Service', '+50 Field Service projects')].map((item, i) => (
@@ -740,7 +759,7 @@ export default function ServiciosClient() {
         </div>
       </section>
 
-      <button ref={ctaRef} className="cta-flotante" onClick={() => scrollTo('contacto')}>
+      <button ref={ctaRef} className="cta-flotante srv-cta-flotante" onClick={() => scrollTo('contacto')}>
         {tr('HABLAR CON UN EXPERTO', 'TALK TO AN EXPERT')}
       </button>
     </>

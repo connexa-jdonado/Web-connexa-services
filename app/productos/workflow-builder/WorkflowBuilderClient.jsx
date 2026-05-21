@@ -285,9 +285,13 @@ export default function WorkflowBuilderClient() {
           .wfb-hero-title   { font-size: 36px !important; }
           .wfb-features-bar { flex-wrap: wrap !important; padding: 24px 20px !important; gap: 12px !important; }
           .wfb-feature-item { flex: none !important; width: calc(50% - 6px) !important; }
-          .wfb-caso-left   { width: 100% !important; padding: 32px 20px !important; }
-          .wfb-caso-right  { width: 100% !important; padding: 20px !important; }
+          .wfb-casos-container { overflow-x: hidden !important; width: 100% !important; }
+          .wfb-caso-left   { width: 100% !important; padding: 32px 20px !important; box-sizing: border-box !important; }
+          .wfb-caso-right  { width: 100% !important; padding: 20px !important; box-sizing: border-box !important; }
           .wfb-caso-numero { font-size: 80px !important; }
+          .wfb-triggers-grid { grid-template-columns: 1fr !important; }
+          .wfb-eventos-grid  { grid-template-columns: repeat(2, 1fr) !important; }
+          .wfb-apis-grid     { grid-template-columns: 1fr !important; }
         }
       `}</style>
       {/* ── HERO FULLSCREEN ── */}
@@ -378,6 +382,7 @@ export default function WorkflowBuilderClient() {
       <section ref={casosSectionRef} id="casos-uso" style={{ position: 'relative' }}>
         <div
           ref={casosContainerRef}
+          className="wfb-casos-container"
           style={{ height: '100vh', overflowY: 'hidden', scrollSnapType: 'y mandatory', scrollBehavior: 'smooth' }}
         >
           {WB_CASOS.map((caso, idx) => {
@@ -635,7 +640,7 @@ export default function WorkflowBuilderClient() {
                 <div style={{ color:'rgba(255,255,255,0.65)', fontSize:'14px' }}>{tr('Describí en lenguaje natural lo que necesitás y la IA configura el trigger','Describe what you need in natural language and AI configures the trigger')}</div>
               </div>
             </div>
-            <div style={{ display:'grid', gridTemplateColumns:'repeat(3,1fr)', gap:'24px' }}>
+            <div className="wfb-triggers-grid" style={{ display:'grid', gridTemplateColumns:'repeat(3,1fr)', gap:'24px' }}>
               <div style={{ background:'#F8FAFC', borderRadius:'16px', padding:'32px', border:'1px solid #E5E7EB' }}>
                 <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#71B136" strokeWidth="1.5"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 010 20M12 2a15 15 0 000 20"/></svg>
                 <div style={{ fontSize:'20px', fontWeight:700, color:'#172554', marginTop:'16px', marginBottom:'8px' }}>Webhook</div>
@@ -676,7 +681,7 @@ export default function WorkflowBuilderClient() {
             <div style={{ fontSize:'11px', color:'#71B136', fontWeight:700, letterSpacing:'0.12em', textTransform:'uppercase', marginBottom:'12px' }}>{tr('EVENTOS OFS','OFS EVENTS')}</div>
             <h3 style={{ fontSize:'36px', fontWeight:800, color:'white', lineHeight:1.1, marginBottom:'16px' }}>{tr('Escuchá cualquier evento de tu operación','Listen to any event in your operation')}</h3>
             <p style={{ color:'rgba(255,255,255,0.5)', fontSize:'16px', marginBottom:'48px' }}>{tr('Suscribite a eventos en tiempo real de estas entidades','Subscribe to real-time events from these entities')}</p>
-            <div style={{ display:'grid', gridTemplateColumns:'repeat(4,1fr)', gap:'16px' }}>
+            <div className="wfb-eventos-grid" style={{ display:'grid', gridTemplateColumns:'repeat(4,1fr)', gap:'16px' }}>
               {[
                 {icon:<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#71B136" strokeWidth="1.5" strokeLinecap="round"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>,name:tr('Actividades','Activities'),desc:tr('14 eventos','14 events')},
                 {icon:<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#71B136" strokeWidth="1.5"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>,name:tr('Inventario','Inventory'),desc:tr('Eventos de stock','Stock events')},
@@ -703,7 +708,7 @@ export default function WorkflowBuilderClient() {
             <div style={{ fontSize:'11px', color:'#71B136', fontWeight:700, letterSpacing:'0.12em', textTransform:'uppercase', marginBottom:'12px' }}>{tr('APIs DE OFS','OFS APIs')}</div>
             <h3 style={{ fontSize:'36px', fontWeight:800, color:'#172554', marginBottom:'16px' }}>{tr('+40 APIs de Oracle Field Service','+40 Oracle Field Service APIs')}</h3>
             <p style={{ color:'#6B7280', fontSize:'16px', marginBottom:'48px' }}>{tr('Todas disponibles como nodos en tu workflow. Sin código.','All available as nodes in your workflow. No code.')}</p>
-            <div style={{ display:'grid', gridTemplateColumns:'repeat(3,1fr)', gap:'24px' }}>
+            <div className="wfb-apis-grid" style={{ display:'grid', gridTemplateColumns:'repeat(3,1fr)', gap:'24px' }}>
               {[
                 {cat:'Activities',count:'13',items:['Create','Get activities','Get an activity','Cancel','Stop travel','Complete','Delay','Delete','Move','Reopen','Start','Suspend','Update to enroute','Update to notdone']},
                 {cat:'Activity Inventories',count:'6',items:['Create customer inventory','Get customer inventories','Get deinstalled inventories','Get installed inventories','Get required inventories','Set required inventories']},

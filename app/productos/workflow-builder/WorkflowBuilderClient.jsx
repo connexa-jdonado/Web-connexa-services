@@ -305,6 +305,15 @@ export default function WorkflowBuilderClient() {
           .wfb-triggers-grid { grid-template-columns: 1fr !important; }
           .wfb-eventos-grid  { grid-template-columns: repeat(2, 1fr) !important; }
           .wfb-apis-grid     { grid-template-columns: 1fr !important; }
+          .wfb-modulos-hdr    { padding: 48px 20px !important; }
+          .wfb-modulos-title  { font-size: 28px !important; }
+          .wfb-modulos-stats  { gap: 32px !important; flex-wrap: wrap !important; justify-content: center !important; }
+          .wfb-triggers-section { padding: 48px 20px !important; }
+          .wfb-eventos-section  { padding: 48px 20px !important; }
+          .wfb-apis-section     { padding: 48px 20px !important; }
+          .wfb-cta-section      { padding: 48px 20px !important; }
+          .wfb-cta-title        { font-size: 28px !important; }
+          .wfb-nav-dots         { display: none !important; }
         }
       `}</style>
       {/* ── HERO FULLSCREEN ── */}
@@ -605,7 +614,7 @@ export default function WorkflowBuilderClient() {
           })}
         </div>
         {/* Navegación lateral fija */}
-        <div style={{ position: 'fixed', right: '32px', top: '50%', transform: 'translateY(-50%)', display: 'flex', flexDirection: 'column', gap: '10px', zIndex: 100 }}>
+        <div className="wfb-nav-dots" style={{ position: 'fixed', right: '32px', top: '50%', transform: 'translateY(-50%)', display: 'flex', flexDirection: 'column', gap: '10px', zIndex: 100 }}>
           {WB_CASOS.map((_, idx) => (
             <div
               key={idx}
@@ -619,7 +628,7 @@ export default function WorkflowBuilderClient() {
       {/* ── TABS / MÓDULOS ── */}
       <div>
         {/* BLOQUE 1: HEADER */}
-        <div style={{ width:'100%', background:'linear-gradient(135deg, #0d1b3e 0%, #172554 100%)', padding:'80px 60px', textAlign:'center', position:'relative', overflow:'hidden' }}>
+        <div className="wfb-modulos-hdr" style={{ width:'100%', background:'linear-gradient(135deg, #0d1b3e 0%, #172554 100%)', padding:'80px 60px', textAlign:'center', position:'relative', overflow:'hidden' }}>
           <svg style={{ position:'absolute', inset:0, width:'100%', height:'100%', opacity:0.1 }} xmlns="http://www.w3.org/2000/svg">
             <defs><pattern id="dots-mod-hdr" x="0" y="0" width="24" height="24" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1.5" fill="#71B136"/></pattern></defs>
             <rect width="100%" height="100%" fill="url(#dots-mod-hdr)"/>
@@ -629,9 +638,9 @@ export default function WorkflowBuilderClient() {
               <svg width="1em" height="0.85em" viewBox="0 0 28 24" fill="none" style={{display:'inline-block', verticalAlign:'middle'}}><path d="M16 1.5l.9 3.2 3.2.9-3.2.9L16 9.7l-.9-3.2-3.2-.9 3.2-.9z" fill="#71B136" stroke="#71B136" strokeWidth="0.4" strokeLinejoin="round"/><path d="M7 7l.6 2.2 2.2.6-2.2.6L7 12.6l-.6-2.2-2.2-.6 2.2-.6z" fill="#71B136" stroke="#71B136" strokeWidth="0.3" strokeLinejoin="round" opacity="0.65"/><path d="M21 14l.5 1.6 1.6.5-1.6.5L21 18.2l-.5-1.6-1.6-.5 1.6-.5z" fill="#71B136" stroke="#71B136" strokeWidth="0.3" strokeLinejoin="round" opacity="0.45"/></svg>
               <span style={{ color:'#71B136', fontSize:'12px', fontWeight:600, letterSpacing:'0.1em' }}>{tr('Impulsado por Inteligencia Artificial', 'Powered by Artificial Intelligence')}</span>
             </div>
-            <h2 style={{ fontSize:'52px', fontWeight:900, color:'white', lineHeight:1.1, marginBottom:'16px' }}>{tr('Todo lo que podés hacer', 'Everything you can do')}</h2>
+            <h2 className="wfb-modulos-title" style={{ fontSize:'52px', fontWeight:900, color:'white', lineHeight:1.1, marginBottom:'16px' }}>{tr('Todo lo que podés hacer', 'Everything you can do')}</h2>
             <p style={{ fontSize:'18px', color:'rgba(255,255,255,0.6)', maxWidth:'600px', margin:'0 auto 16px', lineHeight:1.7 }}>{tr('Sin conocimiento técnico. Describí lo que necesitás en lenguaje natural y la IA configura todo por vos.', 'No technical knowledge needed. Describe what you need in natural language and AI configures everything for you.')}</p>
-            <div style={{ display:'flex', justifyContent:'center', gap:'80px', marginTop:'40px' }}>
+            <div className="wfb-modulos-stats" style={{ display:'flex', justifyContent:'center', gap:'80px', marginTop:'40px' }}>
               {[{num:'+40',lbl:tr('APIs de OFS','OFS APIs')},{num:'3',lbl:tr('Tipos de trigger','Trigger types')},{num:'8',lbl:tr('Entidades OFS','OFS entities')}].map((s,i) => (
                 <div key={i} style={{ textAlign:'center' }}>
                   <div style={{ fontSize:'40px', fontWeight:900, color:'#71B136', lineHeight:1 }}>{s.num}</div>
@@ -643,7 +652,7 @@ export default function WorkflowBuilderClient() {
         </div>
 
         {/* BLOQUE 2: TRIGGERS */}
-        <div style={{ width:'100%', background:'#ffffff', padding:'80px 60px' }}>
+        <div className="wfb-triggers-section" style={{ width:'100%', background:'#ffffff', padding:'80px 60px' }}>
           <div style={{ maxWidth:'1400px', margin:'0 auto' }}>
             <div style={{ fontSize:'11px', color:'#71B136', fontWeight:700, letterSpacing:'0.12em', textTransform:'uppercase', marginBottom:'12px' }}>{tr('TIPOS DE TRIGGER','TRIGGER TYPES')}</div>
             <h3 style={{ fontSize:'36px', fontWeight:800, color:'#172554', marginBottom:'48px' }}>{tr('¿Cuándo se ejecuta tu workflow?','When does your workflow run?')}</h3>
@@ -690,7 +699,7 @@ export default function WorkflowBuilderClient() {
         </div>
 
         {/* BLOQUE 3: EVENTOS OFS */}
-        <div style={{ width:'100%', background:'#0d1b3e', padding:'80px 60px' }}>
+        <div className="wfb-eventos-section" style={{ width:'100%', background:'#0d1b3e', padding:'80px 60px' }}>
           <div style={{ maxWidth:'1400px', margin:'0 auto' }}>
             <div style={{ fontSize:'11px', color:'#71B136', fontWeight:700, letterSpacing:'0.12em', textTransform:'uppercase', marginBottom:'12px' }}>{tr('EVENTOS OFS','OFS EVENTS')}</div>
             <h3 style={{ fontSize:'36px', fontWeight:800, color:'white', lineHeight:1.1, marginBottom:'16px' }}>{tr('Escuchá cualquier evento de tu operación','Listen to any event in your operation')}</h3>
@@ -717,7 +726,7 @@ export default function WorkflowBuilderClient() {
         </div>
 
         {/* BLOQUE 4: APIs */}
-        <div style={{ width:'100%', background:'#F8FAFC', padding:'80px 60px' }}>
+        <div className="wfb-apis-section" style={{ width:'100%', background:'#F8FAFC', padding:'80px 60px' }}>
           <div style={{ maxWidth:'1400px', margin:'0 auto' }}>
             <div style={{ fontSize:'11px', color:'#71B136', fontWeight:700, letterSpacing:'0.12em', textTransform:'uppercase', marginBottom:'12px' }}>{tr('APIs DE OFS','OFS APIs')}</div>
             <h3 style={{ fontSize:'36px', fontWeight:800, color:'#172554', marginBottom:'16px' }}>{tr('+40 APIs de Oracle Field Service','+40 Oracle Field Service APIs')}</h3>
@@ -748,7 +757,7 @@ export default function WorkflowBuilderClient() {
         </div>
 
         {/* BLOQUE 5: CTA IA FINAL */}
-        <div style={{ width:'100%', background:'linear-gradient(135deg, #071428 0%, #172554 50%, #1a3a2a 100%)', padding:'80px 60px', textAlign:'center', position:'relative', overflow:'hidden' }}>
+        <div className="wfb-cta-section" style={{ width:'100%', background:'linear-gradient(135deg, #071428 0%, #172554 50%, #1a3a2a 100%)', padding:'80px 60px', textAlign:'center', position:'relative', overflow:'hidden' }}>
           <svg style={{ position:'absolute', inset:0, width:'100%', height:'100%', opacity:0.1 }} xmlns="http://www.w3.org/2000/svg">
             <defs><pattern id="dots-mod-cta" x="0" y="0" width="24" height="24" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1.5" fill="#71B136"/></pattern></defs>
             <rect width="100%" height="100%" fill="url(#dots-mod-cta)"/>
@@ -758,7 +767,7 @@ export default function WorkflowBuilderClient() {
             <div style={{ marginBottom:'24px' }}>
               <svg width="1em" height="0.85em" viewBox="0 0 28 24" fill="none" style={{display:'inline-block', verticalAlign:'middle'}}><path d="M16 1.5l.9 3.2 3.2.9-3.2.9L16 9.7l-.9-3.2-3.2-.9 3.2-.9z" fill="#71B136" stroke="#71B136" strokeWidth="0.4" strokeLinejoin="round"/><path d="M7 7l.6 2.2 2.2.6-2.2.6L7 12.6l-.6-2.2-2.2-.6 2.2-.6z" fill="#71B136" stroke="#71B136" strokeWidth="0.3" strokeLinejoin="round" opacity="0.65"/><path d="M21 14l.5 1.6 1.6.5-1.6.5L21 18.2l-.5-1.6-1.6-.5 1.6-.5z" fill="#71B136" stroke="#71B136" strokeWidth="0.3" strokeLinejoin="round" opacity="0.45"/></svg>
             </div>
-            <h2 style={{ fontSize:'44px', fontWeight:900, color:'white', lineHeight:1.2, maxWidth:'700px', margin:'0 auto 16px' }}>
+            <h2 className="wfb-cta-title" style={{ fontSize:'44px', fontWeight:900, color:'white', lineHeight:1.2, maxWidth:'700px', margin:'0 auto 16px' }}>
               {tr('Describí lo que necesitás.','Describe what you need.')}
               <br/>
               <span style={{ color:'#71B136' }}>{tr('La IA lo construye por vos.','AI builds it for you.')}</span>

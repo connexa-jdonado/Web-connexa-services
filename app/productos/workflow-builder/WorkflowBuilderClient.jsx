@@ -159,6 +159,7 @@ export default function WorkflowBuilderClient() {
     const section = casosSectionRef.current;
     const container = casosContainerRef.current;
     if (!section || !container) return;
+    if (window.innerWidth <= 768) return;
     const io = new IntersectionObserver(
       ([entry]) => {
         if (entry.intersectionRatio >= 0.9) {
@@ -284,6 +285,9 @@ export default function WorkflowBuilderClient() {
           .wfb-hero-title   { font-size: 36px !important; }
           .wfb-features-bar { flex-wrap: wrap !important; padding: 24px 20px !important; gap: 12px !important; }
           .wfb-feature-item { flex: none !important; width: calc(50% - 6px) !important; }
+          .wfb-caso-left   { width: 100% !important; padding: 32px 20px !important; }
+          .wfb-caso-right  { width: 100% !important; padding: 20px !important; }
+          .wfb-caso-numero { font-size: 80px !important; }
         }
       `}</style>
       {/* ── HERO FULLSCREEN ── */}
@@ -391,8 +395,8 @@ export default function WorkflowBuilderClient() {
                 style={{ height: '100vh', width: '100%', scrollSnapAlign: 'start', scrollSnapStop: 'always', display: 'flex', position: 'relative', overflow: 'hidden', background: bg }}
               >
                 {/* Columna izquierda 40% */}
-                <div style={{ width: '40%', padding: '80px 60px', display: 'flex', flexDirection: 'column', justifyContent: 'center', position: 'relative', zIndex: 2 }}>
-                  <div style={{ position: 'absolute', top: '50%', left: '-20px', transform: 'translateY(-50%)', fontSize: '280px', fontWeight: 900, lineHeight: 1, color: numDeco, userSelect: 'none', zIndex: 1, pointerEvents: 'none' }}>
+                <div className="wfb-caso-left" style={{ width: '40%', padding: '80px 60px', display: 'flex', flexDirection: 'column', justifyContent: 'center', position: 'relative', zIndex: 2 }}>
+                  <div className="wfb-caso-numero" style={{ position: 'absolute', top: '50%', left: '-20px', transform: 'translateY(-50%)', fontSize: '280px', fontWeight: 900, lineHeight: 1, color: numDeco, userSelect: 'none', zIndex: 1, pointerEvents: 'none' }}>
                     {caso.num}
                   </div>
                   <div style={{ color: '#71B136', fontSize: '11px', fontWeight: 600, letterSpacing: '0.14em', marginBottom: '20px', zIndex: 2, position: 'relative' }}>
@@ -422,7 +426,7 @@ export default function WorkflowBuilderClient() {
                   </div>
                 </div>
                 {/* Columna derecha 60% */}
-                <div style={{ width: '60%', padding: '60px', display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative' }}>
+                <div className="wfb-caso-right" style={{ width: '60%', padding: '60px', display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative' }}>
                   <div style={{ width: '100%', maxWidth: '900px', borderRadius: '16px', overflow: 'hidden', boxShadow: '0 40px 100px rgba(0,0,0,0.25)', position: 'relative' }}>
                     <div style={{ height: '40px', background: '#e8e8ed', display: 'flex', alignItems: 'center', padding: '0 16px', gap: '7px' }}>
                       <div style={{ width: '11px', height: '11px', borderRadius: '50%', background: '#FF5F57' }} />

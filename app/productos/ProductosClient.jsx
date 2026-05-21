@@ -108,14 +108,26 @@ export default function ProductosClient() {
 
       <style>{`
         @media (max-width: 768px) {
-          .prod-hero-svg    { display: none !important; }
+          .prod-hero-svg     { display: none !important; }
           .prod-hero-section { padding-bottom: 24px !important; }
-          .prod-wfb-layout  { flex-direction: column !important; padding: 48px 20px !important; }
-          .prod-wfb-text    { flex: none !important; width: 100% !important; order: 1 !important; }
-          .prod-wfb-image   { max-width: 100% !important; margin-left: 0 !important; margin-top: 24px !important; order: 2 !important; }
-          .prod-fsm-layout  { flex-direction: column !important; padding: 48px 20px !important; }
-          .prod-fsm-text    { flex: none !important; width: 100% !important; order: 1 !important; }
-          .prod-fsm-image   { max-width: 100% !important; margin-left: 0 !important; margin-top: 24px !important; order: 2 !important; }
+
+          .prod-wfb-layout   { flex-direction: column !important; padding: 48px 20px !important; }
+          .prod-wfb-text     { display: contents !important; }
+          .prod-wfb-layout .showcase-name    { order: 1 !important; }
+          .prod-wfb-layout .showcase-tagline { order: 2 !important; }
+          .prod-wfb-image    { order: 3 !important; max-width: 100% !important; margin-left: 0 !important; margin-top: 16px !important; }
+          .prod-wfb-layout .showcase-desc    { order: 4 !important; margin-top: 16px !important; }
+          .prod-wfb-layout .benefits-list    { order: 5 !important; }
+          .prod-wfb-layout .showcase-ctas    { order: 6 !important; }
+
+          .prod-fsm-layout   { flex-direction: column !important; padding: 48px 20px !important; }
+          .prod-fsm-text     { display: contents !important; }
+          .prod-fsm-layout .showcase-name    { order: 1 !important; }
+          .prod-fsm-layout .showcase-tagline { order: 2 !important; }
+          .prod-fsm-image    { order: 3 !important; max-width: 100% !important; margin-left: 0 !important; margin-top: 16px !important; }
+          .prod-fsm-layout .showcase-desc    { order: 4 !important; margin-top: 16px !important; }
+          .prod-fsm-layout .benefits-list    { order: 5 !important; }
+          .prod-fsm-layout .showcase-ctas    { order: 6 !important; }
         }
       `}</style>
 

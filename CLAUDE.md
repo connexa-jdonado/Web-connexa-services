@@ -193,3 +193,42 @@ funciona en los 5 breakpoints. Sin excepción.
 - Media queries via <style> tag para mobile/tablet
 - Nunca usar px fijos en widths de contenedores principales
 - Usar %, vw, o maxWidth con width 100%
+
+## REGLAS DE TRABAJO Y DISEÑO (NO NEGOCIABLES)
+
+### Antes de tocar nada
+- Si el cambio toca una sección o componente que aún no conocés, leelo completo primero. No asumas estructura.
+- Si una tarea requiere modificar estilos globales, Navbar, Footer u otro componente compartido, DETENETE y avisá antes de hacerlo. No lo hagas por tu cuenta.
+- No refactorices, renombres ni "mejores" código que no se pidió tocar.
+
+### Tokens y estilos
+- Usá siempre var(--primary), var(--accent), var(--accent-dark), var(--secondary), var(--text-body), var(--font-heading) y var(--font-body). Prohibido hardcodear colores o fuentes nuevos.
+- Para sombras, radios y espaciados, reutilizá los valores ya presentes en globals.css. No inventes valores nuevos.
+- No modifiques los colores existentes. Si fuera imprescindible, recordá que están duplicados en @theme {} y en :root {} y deben cambiarse en ambos lugares para no desincronizarse.
+- Mantené Tailwind solo como está (colores en @theme). El proyecto es CSS custom en globals.css: no introduzcas clases utilitarias de Tailwind en los JSX.
+
+### Animaciones
+- Sin librerías nuevas: nada de Framer Motion, GSAP, AOS ni similares.
+- Toda animación sigue el patrón existente del proyecto: IntersectionObserver + clase .visible + @keyframes en globals.css. Para reveals usá .fade-up y los delays .d1–.d4.
+- Animá solo transform y opacity (nunca propiedades que disparen reflow/layout).
+- Duraciones cortas (150–280 ms), easing ease-out. Sin rebotes exagerados.
+- Respetá SIEMPRE prefers-reduced-motion: si está activo, desactivá o reducí las animaciones.
+
+### Nombres y convenciones
+- Clases con prefijo de sección (hero-*, pqc-*, ec-*, etc.), IDs en kebab-case (#hero, #metodologia), modificadores con sufijo (.alt, .featured, .visible, .active).
+- Páginas: page.jsx (Server Component con metadata) + [Nombre]Client.jsx (Client Component con la lógica UI) en la misma carpeta.
+- Componentes compartidos en components/PascalCase.jsx. Contexto en context/NombreContext.jsx.
+
+### Features nuevas
+- Reutilizá los componentes y patrones existentes antes de crear nuevos. Si creás un componente nuevo, seguí exactamente las convenciones de arriba.
+- Mantené la separación Server/Client del App Router. La lógica de UI interactiva va en el *Client.jsx.
+- No agregues dependencias nuevas sin justificarlo y consultarme primero.
+
+### Accesibilidad y calidad
+- Accesibilidad mínima AA: foco visible, contraste suficiente, navegación por teclado intacta, HTML semántico.
+- Responsive obligatorio: verificá en los breakpoints del proyecto (768px y 960px/1024px con max-width).
+
+### Proceso
+- Cambios pequeños e incrementales, uno a la vez.
+- Tras cada cambio: confirmá que las demás secciones quedan idénticas y que no cambió ningún comportamiento existente. Probá responsive.
+- Si algo no está claro o hay ambigüedad, preguntá antes de asumir.

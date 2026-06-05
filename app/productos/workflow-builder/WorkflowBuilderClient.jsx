@@ -756,6 +756,213 @@ export default function WorkflowBuilderClient() {
           </div>
         </div>
 
+        {/* ── BLOQUE 4.5: CAPA DE IA/LLM ── */}
+        <style>{`
+          .wfb-llm-pipeline { display: flex; align-items: center; justify-content: center; gap: 0; flex-wrap: nowrap; margin-bottom: 56px; }
+          .wfb-llm-node { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 24px 20px; text-align: center; flex-shrink: 0; min-width: 140px; }
+          .wfb-llm-node--ai { border-color: rgba(113,177,54,0.45); background: rgba(113,177,54,0.08); box-shadow: 0 0 32px rgba(113,177,54,0.15), 0 4px 24px rgba(0,0,0,0.3); }
+          .wfb-llm-node-icon { width: 52px; height: 52px; border-radius: 12px; background: rgba(255,255,255,0.06); display: flex; align-items: center; justify-content: center; margin: 0 auto 12px; }
+          .wfb-llm-node-icon--ai { background: rgba(113,177,54,0.12); border: 1px solid rgba(113,177,54,0.3); }
+          .wfb-llm-node--sm { padding: 16px 14px; min-width: 160px; }
+          .wfb-llm-node-icon--sm { width: 40px; height: 40px; border-radius: 10px; margin-bottom: 8px; }
+          .wfb-llm-outputs { display: flex; flex-direction: column; gap: 12px; flex-shrink: 0; }
+          .wfb-llm-connector { flex-shrink: 0; display: flex; align-items: center; padding: 0 4px; }
+          .wfb-llm-example { max-width: 720px; margin: 0 auto; }
+          .wfb-llm-caps { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 16px; }
+          .wfb-llm-cap-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 20px; display: flex; gap: 14px; align-items: flex-start; }
+          .wfb-llm-cap-icon { width: 40px; height: 40px; border-radius: 10px; background: rgba(113,177,54,0.1); border: 1px solid rgba(113,177,54,0.2); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+          @media (prefers-reduced-motion: reduce) { .wfb-llm-dashline { animation: none !important; } }
+          @media (max-width: 768px) {
+            .wfb-llm-section { padding: 48px 20px !important; }
+            .wfb-llm-pipeline { flex-direction: column !important; align-items: stretch !important; gap: 8px !important; margin-bottom: 32px !important; }
+            .wfb-llm-connector { display: none !important; }
+            .wfb-llm-node { min-width: 0 !important; width: 100% !important; }
+            .wfb-llm-node--sm { min-width: 0 !important; width: 100% !important; }
+            .wfb-llm-outputs { width: 100% !important; }
+            .wfb-llm-caps { grid-template-columns: 1fr !important; }
+            .wfb-llm-example { max-width: 100% !important; }
+          }
+        `}</style>
+        <div
+          id="ia-layer"
+          className="wfb-llm-section"
+          style={{ width: '100%', background: 'linear-gradient(180deg, var(--primary) 0%, #0a1628 100%)', padding: '80px 60px', position: 'relative', overflow: 'hidden' }}
+        >
+          <svg style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', opacity: 0.07, pointerEvents: 'none' }} aria-hidden="true">
+            <defs>
+              <pattern id="dots-llm" x="0" y="0" width="32" height="32" patternUnits="userSpaceOnUse">
+                <circle cx="1" cy="1" r="1" fill="#71B136" />
+              </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#dots-llm)" />
+          </svg>
+          <div style={{ position: 'absolute', width: '700px', height: '700px', borderRadius: '50%', background: 'radial-gradient(circle, rgba(113,177,54,0.06) 0%, transparent 70%)', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', pointerEvents: 'none' }} aria-hidden="true" />
+
+          <div style={{ maxWidth: '1400px', margin: '0 auto', position: 'relative', zIndex: 2 }}>
+
+            {/* Intro */}
+            <div className="fade-up" style={{ textAlign: 'center', marginBottom: '64px' }}>
+              <div style={{ fontFamily: 'var(--font-body)', fontSize: '12px', fontWeight: 600, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--accent)', marginBottom: '14px' }}>
+                {tr('CAPA DE INTELIGENCIA', 'INTELLIGENCE LAYER')}
+              </div>
+              <h2 style={{ fontFamily: 'var(--font-heading)', fontSize: '44px', fontWeight: 800, color: '#fff', lineHeight: 1.1, margin: '0 0 16px 0' }}>
+                {tr('Tu operación, entendida por IA', 'Your operation, understood by AI')}
+              </h2>
+              <p style={{ fontFamily: 'var(--font-body)', fontSize: '18px', color: 'rgba(255,255,255,0.6)', maxWidth: '580px', margin: '0 auto', lineHeight: 1.7 }}>
+                {tr(
+                  'Un agente conectado a todos los datos de campo — disponible para consultas en lenguaje natural y capaz de anticipar problemas antes de que ocurran.',
+                  'An agent connected to all field data — available for natural language queries and capable of anticipating issues before they occur.'
+                )}
+              </p>
+            </div>
+
+            {/* Pipeline visual */}
+            <div className="wfb-llm-pipeline fade-up d1">
+              <div className="wfb-llm-node">
+                <div className="wfb-llm-node-icon">
+                  <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                  </svg>
+                </div>
+                <div style={{ fontFamily: 'var(--font-heading)', fontSize: '14px', fontWeight: 700, color: '#fff', marginBottom: '4px' }}>{tr('Eventos OFS', 'OFS Events')}</div>
+                <div style={{ fontFamily: 'var(--font-body)', fontSize: '12px', color: 'rgba(255,255,255,0.45)' }}>{tr('Tiempo real', 'Real time')}</div>
+              </div>
+              <div className="wfb-llm-connector" aria-hidden="true">
+                <svg width="52" height="14" viewBox="0 0 52 14" fill="none">
+                  <line x1="0" y1="7" x2="44" y2="7" stroke="rgba(113,177,54,0.5)" strokeWidth="1.5" strokeDasharray="5 4" className="wfb-llm-dashline" style={{ animation: 'dashFlow 2s linear infinite' }} />
+                  <polygon points="44,3 52,7 44,11" fill="rgba(113,177,54,0.45)" />
+                </svg>
+              </div>
+              <div className="wfb-llm-node">
+                <div className="wfb-llm-node-icon">
+                  <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                    <ellipse cx="12" cy="5" rx="9" ry="3"/>
+                    <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/>
+                    <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/>
+                  </svg>
+                </div>
+                <div style={{ fontFamily: 'var(--font-heading)', fontSize: '14px', fontWeight: 700, color: '#fff', marginBottom: '4px' }}>{tr('Base de datos', 'Database')}</div>
+                <div style={{ fontFamily: 'var(--font-body)', fontSize: '11px', color: 'rgba(255,255,255,0.4)', lineHeight: 1.5 }}>
+                  {tr('Actividades · Inventarios', 'Activities · Inventories')}<br />
+                  {tr('Recursos · Rutas', 'Resources · Routes')}
+                </div>
+              </div>
+              <div className="wfb-llm-connector" aria-hidden="true">
+                <svg width="52" height="14" viewBox="0 0 52 14" fill="none">
+                  <line x1="0" y1="7" x2="44" y2="7" stroke="rgba(113,177,54,0.5)" strokeWidth="1.5" strokeDasharray="5 4" className="wfb-llm-dashline" style={{ animation: 'dashFlow 2s linear 0.4s infinite' }} />
+                  <polygon points="44,3 52,7 44,11" fill="rgba(113,177,54,0.45)" />
+                </svg>
+              </div>
+              <div className="wfb-llm-node wfb-llm-node--ai">
+                <div className="wfb-llm-node-icon wfb-llm-node-icon--ai">
+                  <svg width="26" height="22" viewBox="0 0 28 24" fill="none" aria-hidden="true">
+                    <path d="M16 1.5l.9 3.2 3.2.9-3.2.9L16 9.7l-.9-3.2-3.2-.9 3.2-.9z" fill="var(--accent)" stroke="var(--accent)" strokeWidth="0.4" strokeLinejoin="round"/>
+                    <path d="M7 7l.6 2.2 2.2.6-2.2.6L7 12.6l-.6-2.2-2.2-.6 2.2-.6z" fill="var(--accent)" stroke="var(--accent)" strokeWidth="0.3" strokeLinejoin="round" opacity="0.7"/>
+                    <path d="M21 14l.5 1.6 1.6.5-1.6.5L21 18.2l-.5-1.6-1.6-.5 1.6-.5z" fill="var(--accent)" stroke="var(--accent)" strokeWidth="0.3" strokeLinejoin="round" opacity="0.5"/>
+                  </svg>
+                </div>
+                <div style={{ fontFamily: 'var(--font-heading)', fontSize: '14px', fontWeight: 700, color: '#fff', marginBottom: '4px' }}>{tr('Agente de IA', 'AI Agent')}</div>
+                <div style={{ fontFamily: 'var(--font-body)', fontSize: '11px', color: 'var(--accent)', fontWeight: 600, letterSpacing: '0.08em' }}>LLM</div>
+              </div>
+              <div className="wfb-llm-connector" aria-hidden="true">
+                <svg width="52" height="14" viewBox="0 0 52 14" fill="none">
+                  <line x1="0" y1="7" x2="44" y2="7" stroke="rgba(113,177,54,0.5)" strokeWidth="1.5" strokeDasharray="5 4" className="wfb-llm-dashline" style={{ animation: 'dashFlow 2s linear 0.8s infinite' }} />
+                  <polygon points="44,3 52,7 44,11" fill="rgba(113,177,54,0.45)" />
+                </svg>
+              </div>
+              <div className="wfb-llm-outputs">
+                <div className="wfb-llm-node wfb-llm-node--sm">
+                  <div className="wfb-llm-node-icon wfb-llm-node-icon--sm">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                    </svg>
+                  </div>
+                  <div style={{ fontFamily: 'var(--font-heading)', fontSize: '13px', fontWeight: 700, color: '#fff' }}>{tr('Consulta conversacional', 'Conversational query')}</div>
+                </div>
+                <div className="wfb-llm-node wfb-llm-node--sm">
+                  <div className="wfb-llm-node-icon wfb-llm-node-icon--sm">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                      <circle cx="12" cy="12" r="10"/><path d="M12 8v4m0 4h.01"/>
+                    </svg>
+                  </div>
+                  <div style={{ fontFamily: 'var(--font-heading)', fontSize: '13px', fontWeight: 700, color: '#fff' }}>{tr('Recomendaciones proactivas', 'Proactive recommendations')}</div>
+                </div>
+              </div>
+            </div>
+
+            {/* Example card + capability cards */}
+            <div className="wfb-llm-example fade-up d2">
+              <div style={{ background: '#0f172a', border: '1px solid rgba(113,177,54,0.5)', borderRadius: '12px', padding: '24px', marginBottom: '16px' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '16px' }}>
+                  <svg width="14" height="12" viewBox="0 0 28 24" fill="none" aria-hidden="true">
+                    <path d="M16 1.5l.9 3.2 3.2.9-3.2.9L16 9.7l-.9-3.2-3.2-.9 3.2-.9z" fill="var(--accent)" stroke="var(--accent)" strokeWidth="0.4" strokeLinejoin="round"/>
+                    <path d="M7 7l.6 2.2 2.2.6-2.2.6L7 12.6l-.6-2.2-2.2-.6 2.2-.6z" fill="var(--accent)" stroke="var(--accent)" strokeWidth="0.3" strokeLinejoin="round" opacity="0.65"/>
+                    <path d="M21 14l.5 1.6 1.6.5-1.6.5L21 18.2l-.5-1.6-1.6-.5 1.6-.5z" fill="var(--accent)" stroke="var(--accent)" strokeWidth="0.3" strokeLinejoin="round" opacity="0.45"/>
+                  </svg>
+                  <span style={{ fontFamily: 'var(--font-body)', fontSize: '12px', fontWeight: 600, letterSpacing: '0.06em', color: 'var(--accent)' }}>{tr('Asistente IA', 'AI Assistant')}</span>
+                  <span style={{ marginLeft: 'auto', fontFamily: 'var(--font-body)', fontSize: '11px', color: 'rgba(255,255,255,0.3)' }}>{tr('Recomendación proactiva', 'Proactive recommendation')}</span>
+                </div>
+                <p style={{ fontFamily: 'var(--font-body)', fontSize: '15px', lineHeight: 1.75, color: '#fff', margin: '0 0 20px 0' }}>
+                  {lang === 'es'
+                    ? <>La instalación asignada al <span style={{ color: 'var(--accent)', fontWeight: 600 }}>Técnico García</span> se completaría más rápido con el <span style={{ color: 'var(--accent)', fontWeight: 600 }}>Técnico Martínez</span> — mayor performance histórico en este tipo de actividad y disponibilidad inmediata.</>
+                    : <>The installation assigned to <span style={{ color: 'var(--accent)', fontWeight: 600 }}>Technician García</span> would be completed faster with <span style={{ color: 'var(--accent)', fontWeight: 600 }}>Technician Martínez</span> — higher historical performance for this activity type and immediate availability.</>
+                  }
+                </p>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '12px', background: 'rgba(255,255,255,0.04)', borderRadius: '8px', padding: '12px 16px', flexWrap: 'wrap' }}>
+                  <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px' }}>
+                    <div style={{ width: '36px', height: '36px', borderRadius: '50%', background: 'rgba(255,255,255,0.08)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.5)" strokeWidth="1.75" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                    </div>
+                    <span style={{ fontFamily: 'var(--font-body)', fontSize: '11px', color: 'rgba(255,255,255,0.45)' }}>García</span>
+                  </div>
+                  <svg width="36" height="14" viewBox="0 0 36 14" fill="none" aria-hidden="true" style={{ flexShrink: 0 }}>
+                    <line x1="0" y1="7" x2="28" y2="7" stroke="rgba(113,177,54,0.6)" strokeWidth="1.5" strokeDasharray="4 3" className="wfb-llm-dashline" style={{ animation: 'dashFlow 1.5s linear infinite' }} />
+                    <polygon points="28,3 36,7 28,11" fill="rgba(113,177,54,0.6)" />
+                  </svg>
+                  <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px' }}>
+                    <div style={{ width: '36px', height: '36px', borderRadius: '50%', background: 'rgba(113,177,54,0.15)', border: '1.5px solid rgba(113,177,54,0.5)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" strokeWidth="1.75" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                    </div>
+                    <span style={{ fontFamily: 'var(--font-body)', fontSize: '11px', color: 'var(--accent)', fontWeight: 600 }}>Martínez</span>
+                  </div>
+                  <div style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', background: 'rgba(113,177,54,0.1)', border: '1px solid rgba(113,177,54,0.25)', borderRadius: '20px', padding: '5px 14px' }}>
+                    <span style={{ fontFamily: 'var(--font-body)', fontSize: '12px', color: 'var(--accent)', fontWeight: 600 }}>{tr('Reasignación sugerida', 'Suggested reassignment')}</span>
+                  </div>
+                </div>
+              </div>
+              <div className="wfb-llm-caps">
+                <div className="wfb-llm-cap-card">
+                  <div className="wfb-llm-cap-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                    </svg>
+                  </div>
+                  <div>
+                    <div style={{ fontFamily: 'var(--font-heading)', fontSize: '16px', fontWeight: 700, color: '#fff', marginBottom: '6px' }}>{tr('Preguntá en lenguaje natural', 'Ask in natural language')}</div>
+                    <div style={{ fontFamily: 'var(--font-body)', fontSize: '14px', color: 'rgba(255,255,255,0.55)', lineHeight: 1.65 }}>
+                      {tr('El agente consulta actividades, inventarios, recursos y rutas en tiempo real y responde al instante.', 'The agent queries activities, inventories, resources and routes in real time and responds instantly.')}
+                    </div>
+                  </div>
+                </div>
+                <div className="wfb-llm-cap-card">
+                  <div className="wfb-llm-cap-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                      <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>
+                    </svg>
+                  </div>
+                  <div>
+                    <div style={{ fontFamily: 'var(--font-heading)', fontSize: '16px', fontWeight: 700, color: '#fff', marginBottom: '6px' }}>{tr('Monitoreo que se adelanta', 'Monitoring that stays ahead')}</div>
+                    <div style={{ fontFamily: 'var(--font-body)', fontSize: '14px', color: 'rgba(255,255,255,0.55)', lineHeight: 1.65 }}>
+                      {tr('Los agentes vigilan la operación de forma continua y sugieren reasignaciones, alertas y optimizaciones antes de que sean un problema.', 'Agents monitor the operation continuously and suggest reassignments, alerts and optimizations before they become a problem.')}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
         {/* BLOQUE 5: CTA IA FINAL */}
         <div className="wfb-cta-section" style={{ width:'100%', background:'linear-gradient(135deg, #071428 0%, #172554 50%, #1a3a2a 100%)', padding:'80px 60px', textAlign:'center', position:'relative', overflow:'hidden' }}>
           <svg style={{ position:'absolute', inset:0, width:'100%', height:'100%', opacity:0.1 }} xmlns="http://www.w3.org/2000/svg">

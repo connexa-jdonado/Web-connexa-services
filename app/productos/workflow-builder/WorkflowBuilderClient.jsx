@@ -103,9 +103,10 @@ export default function WorkflowBuilderClient() {
   const [activeCaso, setActiveCaso] = useState(0);
   const [activeTab, setActiveTab] = useState('constructor');
   const [formSent, setFormSent] = useState(false);
-  const casosContainerRef = useRef(null);
   const casosSectionRef = useRef(null);
   const caseRefs = useRef([]);
+  const activeCasoRef = useRef(0);
+  const [dotsVisible, setDotsVisible] = useState(false);
   const [caso1Chars, setCaso1Chars] = useState(0);
   const [caso1ShowImg, setCaso1ShowImg] = useState(false);
   const [caso2Chars, setCaso2Chars] = useState(0);
@@ -140,14 +141,12 @@ export default function WorkflowBuilderClient() {
   }, []);
 
   useEffect(() => {
-    const container = casosContainerRef.current;
-    if (!container) return;
     const observers = [];
     caseRefs.current.forEach((el, idx) => {
       if (!el) return;
       const obs = new IntersectionObserver(
         ([entry]) => { if (entry.intersectionRatio >= 0.5) setActiveCaso(idx); },
-        { root: container, threshold: 0.5 }
+        { threshold: 0.5 }
       );
       obs.observe(el);
       observers.push(obs);
@@ -155,65 +154,37 @@ export default function WorkflowBuilderClient() {
     return () => observers.forEach((obs) => obs.disconnect());
   }, []);
 
+  useEffect(() => { activeCasoRef.current = activeCaso; }, [activeCaso]);
+
   useEffect(() => {
     const section = casosSectionRef.current;
-    const container = casosContainerRef.current;
-    if (!section || !container) return;
-    if (window.innerWidth <= 768) return;
-
-    let isTrapped = false;
-    let cooldown  = false;
-
-    const activate = () => {
-      isTrapped = true;
-      container.style.overflowY = 'scroll';
-      document.body.style.overflow = 'hidden';
-    };
-
-    const deactivate = () => {
-      isTrapped = false;
-      cooldown  = true;
-      document.body.style.overflow = '';
-      container.style.overflowY = 'hidden';
-      setTimeout(() => { cooldown = false; }, 1000);
-    };
-
+    if (!section) return;
     const io = new IntersectionObserver(
-      ([entry]) => {
-        if (window.innerWidth <= 768) {
-          document.body.style.overflow = '';
-          return;
-        }
-        if (cooldown) return;
-        if (entry.intersectionRatio >= 0.9) {
-          if (!isTrapped) activate();
-        } else {
-          if (isTrapped) deactivate();
-        }
-      },
-      { threshold: 0.9 }
+      ([entry]) => setDotsVisible(entry.isIntersecting),
+      { threshold: 0.1 }
     );
     io.observe(section);
+    return () => io.disconnect();
+  }, []);
 
-    const onWheel = (e) => {
-      if (window.innerWidth <= 768) {
-        document.body.style.overflow = '';
-        return;
-      }
-      if (!isTrapped) return;
-      e.preventDefault();
-      const atTop    = container.scrollTop <= 0;
-      const atBottom = container.scrollTop >= container.scrollHeight - container.clientHeight - 1;
-      if ((atTop && e.deltaY < 0) || (atBottom && e.deltaY > 0)) {
-        deactivate();
-      }
+  useEffect(() => {
+    const section = casosSectionRef.current;
+    if (!section) return;
+    let touchStartY = 0;
+    const onTouchStart = (e) => { touchStartY = e.touches[0].clientY; };
+    const onTouchEnd = (e) => {
+      const delta = touchStartY - e.changedTouches[0].clientY;
+      if (Math.abs(delta) < 50) return;
+      const next = delta > 0
+        ? Math.min(activeCasoRef.current + 1, WB_CASOS.length - 1)
+        : Math.max(activeCasoRef.current - 1, 0);
+      scrollToCase(next);
     };
-
-    container.addEventListener('wheel', onWheel, { passive: false });
+    section.addEventListener('touchstart', onTouchStart, { passive: true });
+    section.addEventListener('touchend', onTouchEnd, { passive: true });
     return () => {
-      io.disconnect();
-      container.removeEventListener('wheel', onWheel);
-      document.body.style.overflow = '';
+      section.removeEventListener('touchstart', onTouchStart);
+      section.removeEventListener('touchend', onTouchEnd);
     };
   }, []);
 
@@ -295,17 +266,19 @@ export default function WorkflowBuilderClient() {
   }, [caso5Chars, caso5ShowImg]);
 
   const scrollToCase = (idx) => {
-    if (window.innerWidth <= 768) return;
-    const container = casosContainerRef.current;
-    if (!container) return;
-    container.scrollTo({ top: idx * window.innerHeight, behavior: 'smooth' });
+    const reduced = typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    caseRefs.current[idx]?.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'start' });
   };
 
   const scrollTo = (id) => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
 
   return (
     <>
-      <style>{`@keyframes blink { 50% { opacity: 0; } }`}</style>
+      <style>{`
+        @keyframes blink { 50% { opacity: 0; } }
+        .wfb-dot-btn { background: none; cursor: pointer; padding: 0; border: none; }
+        .wfb-dot-btn:focus-visible { outline: 2px solid #71B136; outline-offset: 3px; border-radius: 50%; }
+      `}</style>
       <style>{`
         @media (max-width: 768px) {
           .wfb-hero-layout  { flex-direction: column !important; padding: 48px 20px !important; gap: 24px !important; }
@@ -316,8 +289,7 @@ export default function WorkflowBuilderClient() {
           .wfb-features-bar     { flex-wrap: wrap !important; gap: 16px !important; justify-content: flex-start !important; }
           .wfb-feature-item     { flex: none !important; width: calc(50% - 8px) !important; padding: 0 8px !important; }
           .wfb-casos-container { overflow-x: hidden !important; width: 100% !important; }
-          .wfb-casos-section   { overflow-y: auto !important; scroll-snap-type: none !important; height: auto !important; }
-          .wfb-caso-wrapper { flex-direction: column !important; width: 100% !important; overflow: hidden !important; }
+          .wfb-caso-wrapper { flex-direction: column !important; width: 100% !important; overflow: hidden !important; min-height: auto !important; height: auto !important; }
           .wfb-caso-left    { width: 100% !important; padding: 32px 20px !important; box-sizing: border-box !important; }
           .wfb-caso-right   { width: 100% !important; padding: 16px 20px 60px 20px !important; box-sizing: border-box !important; order: 2 !important; overflow: visible !important; min-height: 400px !important; }
           .wfb-caso-right img { width: 100% !important; height: auto !important; max-height: none !important; display: block !important; }
@@ -423,9 +395,8 @@ export default function WorkflowBuilderClient() {
       {/* ── CASOS DE USO — SCROLL SNAP ── */}
       <section ref={casosSectionRef} id="casos-uso" style={{ position: 'relative' }}>
         <div
-          ref={casosContainerRef}
           className="wfb-casos-container wfb-casos-section"
-          style={{ height: '100vh', overflowY: 'hidden', scrollSnapType: 'y mandatory', scrollBehavior: 'smooth' }}
+          style={{ width: '100%' }}
         >
           {WB_CASOS.map((caso, idx) => {
             const isDark = idx % 2 === 0;
@@ -440,7 +411,7 @@ export default function WorkflowBuilderClient() {
                 key={idx}
                 ref={(el) => { caseRefs.current[idx] = el; }}
                 className="wfb-caso-wrapper"
-                style={{ height: '100vh', width: '100%', scrollSnapAlign: 'start', scrollSnapStop: 'always', display: 'flex', position: 'relative', overflow: 'hidden', background: bg }}
+                style={{ minHeight: '75vh', width: '100%', display: 'flex', position: 'relative', overflow: 'hidden', background: bg }}
               >
                 {/* Columna izquierda 40% */}
                 <div className="wfb-caso-left" style={{ width: '40%', padding: '80px 60px', display: 'flex', flexDirection: 'column', justifyContent: 'center', position: 'relative', zIndex: 2 }}>
@@ -465,10 +436,13 @@ export default function WorkflowBuilderClient() {
                   </p>
                   <div style={{ display: 'flex', gap: '8px', marginTop: '48px', zIndex: 2, position: 'relative' }}>
                     {WB_CASOS.map((_, dotIdx) => (
-                      <div
+                      <button
                         key={dotIdx}
+                        className="wfb-dot-btn"
                         onClick={() => scrollToCase(dotIdx)}
-                        style={{ width: dotIdx === activeCaso ? '32px' : '8px', height: '4px', borderRadius: '2px', background: dotIdx === activeCaso ? '#71B136' : 'rgba(113,177,54,0.3)', transition: 'all 0.3s ease', cursor: 'pointer' }}
+                        aria-label={`${tr('Caso de uso', 'Use case')} ${dotIdx + 1}${dotIdx === activeCaso ? ` (${tr('activo', 'active')})` : ''}`}
+                        aria-current={dotIdx === activeCaso ? 'true' : undefined}
+                        style={{ width: dotIdx === activeCaso ? '32px' : '8px', height: '4px', borderRadius: '2px', background: dotIdx === activeCaso ? '#71B136' : 'rgba(113,177,54,0.3)', transition: 'all 0.3s ease', flexShrink: 0 }}
                       />
                     ))}
                   </div>
@@ -634,12 +608,18 @@ export default function WorkflowBuilderClient() {
           })}
         </div>
         {/* Navegación lateral fija */}
-        <div className="wfb-nav-dots" style={{ position: 'fixed', right: '32px', top: '50%', transform: 'translateY(-50%)', display: 'flex', flexDirection: 'column', gap: '10px', zIndex: 100 }}>
+        <div
+          className="wfb-nav-dots"
+          style={{ position: 'fixed', right: '32px', top: '50%', transform: 'translateY(-50%)', display: 'flex', flexDirection: 'column', gap: '10px', zIndex: 100, opacity: dotsVisible ? 1 : 0, pointerEvents: dotsVisible ? 'auto' : 'none', transition: 'opacity 0.25s ease' }}
+        >
           {WB_CASOS.map((_, idx) => (
-            <div
+            <button
               key={idx}
+              className="wfb-dot-btn"
               onClick={() => scrollToCase(idx)}
-              style={{ width: idx === activeCaso ? '12px' : '8px', height: idx === activeCaso ? '12px' : '8px', borderRadius: '50%', background: idx === activeCaso ? '#71B136' : 'rgba(113,177,54,0.3)', cursor: 'pointer', transition: 'all 0.3s ease' }}
+              aria-label={`${tr('Caso de uso', 'Use case')} ${idx + 1}${idx === activeCaso ? ` (${tr('activo', 'active')})` : ''}`}
+              aria-current={idx === activeCaso ? 'true' : undefined}
+              style={{ width: idx === activeCaso ? '12px' : '8px', height: idx === activeCaso ? '12px' : '8px', borderRadius: '50%', background: idx === activeCaso ? '#71B136' : 'rgba(113,177,54,0.3)', transition: 'all 0.3s ease', display: 'block' }}
             />
           ))}
         </div>

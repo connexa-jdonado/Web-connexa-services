@@ -295,3 +295,8 @@ Ningún cambio se considera terminado hasta que funciona en los 5 breakpoints.
 - Cambios pequeños e incrementales, uno a la vez.
 - Tras cada cambio: confirmá que las demás secciones quedan idénticas y que no cambió ningún comportamiento existente. Probá responsive.
 - Si algo no está claro o hay ambigüedad, preguntá antes de asumir.
+
+<!-- SPECKIT START -->
+For additional context about technologies to be used, project structure,
+shell commands, and other important information, read the current plan
+<!-- SPECKIT END -->

@@ -13,10 +13,6 @@
 # testing
 /coverage
 
-# next.js
-/.next/
-/out/
-
 # production
 /build
 
@@ -33,9 +29,9 @@ yarn-error.log*
 # env files (can opt-in for committing if needed)
 .env*
 
-# vercel
-.vercel
+# claude code — config personal por usuario (el resto de .claude/, como las
+# skills de Spec Kit, SÍ se versiona)
+.claude/settings.local.json
 
 # typescript
 *.tsbuildinfo
-next-env.d.ts

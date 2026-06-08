@@ -1,20 +1,32 @@
-# REGLAS DEL PROYECTO — CONNEXA SERVICES (Next.js)
+# REGLAS DEL PROYECTO — CONNEXA SERVICES (React + Express)
 
 ## STACK TÉCNICO (verificado)
-- Next.js 16.2.6 — App Router
-- React 19.2.4 / react-dom 19.2.4
-- TypeScript 5.9.3 — SOLO en archivos de config (next.config.ts,
-  next-env.d.ts). El código de la app es JavaScript (.jsx), NO TypeScript.
-- Tailwind CSS v4 (vía @tailwindcss/postcss) + CSS custom en styles/globals.css
-- ESLint 9 — flat config en eslint.config.mjs
-- Gestor de paquetes: npm (lockfile: package-lock.json)
-- Tipo de proyecto: sitio de marketing estático. SIN backend, SIN base de
-  datos, SIN auth. El único "estado" es el idioma (React Context).
+Monorepo con dos proyectos independientes que se deployan en servidores
+distintos: `frontend/` (Servidor A) y `backend/` (Servidor B).
+
+### Frontend (`frontend/`)
+- React 19.2.4 / react-dom 19.2.4 — SOLO React, sin meta-framework.
+- Vite 7 como bundler/dev server.
+- react-router-dom 6 para el ruteo (SPA).
+- vite-react-ssg 0.9 para prerender estático: genera un HTML por ruta en
+  build (SEO). El componente `Head` (de vite-react-ssg, envuelve
+  react-helmet-async) inyecta title/description/keywords por página.
+- Tailwind CSS v4 vía `@tailwindcss/vite` — se mantiene SOLO porque
+  `styles/globals.css` hace `@import "tailwindcss"` y define tokens en
+  `@theme`. El diseño real usa variables `:root`. NO se usan clases
+  utilitarias de Tailwind en el JSX.
+- El código es JavaScript (.jsx), NO TypeScript.
+- Gestor de paquetes: npm.
+
+### Backend (`backend/`)
+- Node.js + Express 4 (ESM, `"type": "module"`).
+- Middlewares: helmet, cors (restringido a `FRONTEND_URL`), express-rate-limit.
+- nodemailer para el envío del formulario de contacto.
+- Sin base de datos ni auth por ahora. Estructura preparada para crecer.
 
 ### RIESGO CONOCIDO
-- La versión de Node NO está fijada en el repo (no hay .nvmrc ni campo
-  "engines" en package.json). El entorno usa la versión de Node que tenga
-  instalada. No asumir una versión concreta de Node.
+- La versión de Node NO está fijada (no hay .nvmrc ni "engines"). No asumir
+  una versión concreta de Node.
 
 ## DESIGN SYSTEM BLOQUEADO
 - Color primario: #172554
@@ -22,161 +34,140 @@
 - Color acento: #71B136
 - Tipografía headings: Plus Jakarta Sans
 - Tipografía body: Inter
-- Variables en styles/globals.css — NO modificar
+- Variables en `frontend/src/styles/globals.css` — NO modificar.
+- Las fuentes se cargan vía `<link>` de Google Fonts en `frontend/index.html`;
+  los fallbacks de `globals.css` ya apuntan a 'Plus Jakarta Sans' / Inter.
 
 ## ESTRUCTURA DEL PROYECTO
-NO existe carpeta /src. El código vive en la raíz del repo.
+```
+frontend/
+  index.html            <link> Google Fonts + div#root
+  vite.config.js         alias @ -> src, plugins react + tailwindcss
+  .env(.example)         VITE_API_URL (URL del backend)
+  public/assets/         imágenes y logos (clientes en public/assets/clients/)
+  src/
+    main.jsx             entry (ViteReactSSG con las rutas)
+    routes.jsx           definición de rutas (array que consume vite-react-ssg)
+    App.jsx              layout: LanguageProvider + ScrollToHash + Navbar + <Outlet/> + Footer
+    styles/globals.css   CSS completo del proyecto (NO modificar tokens)
+    context/LanguageContext.jsx   sistema bilingüe ES/EN
+    lib/next-compat.jsx  capa de compat (ver abajo)
+    components/          Navbar, Footer, LanguageSwitcher, ParticlesCanvas, AssessmentMethodology
+    pages/               Home, Servicios, Productos, FSMTool, WorkflowBuilder, NotFound
+backend/
+  src/
+    server.js            arranque
+    app.js               configuración de Express
+    config/env.js        lectura de variables de entorno
+    routes/              rutas (contacto.js)
+    controllers/         lógica de cada endpoint
+    middleware/          cors, rateLimit, validateContacto, errorHandler
+    services/mailer.js   envío de email (nodemailer)
+  .env(.example)         PORT, FRONTEND_URL, CONTACT_TO, SMTP_*
+```
 
-- app/ — App Router (rutas + layout)
-  - layout.jsx — layout raíz (Navbar, Footer, Providers). Server Component.
-  - page.jsx — Home (Server Component wrapper, exporta metadata)
-  - HomeClient.jsx — Home (Client Component)
-  - not-found.jsx — página 404
-  - servicios/ — page.jsx + ServiciosClient.jsx
-  - productos/ — page.jsx + ProductosClient.jsx
-    - fsmtool/ — page.jsx + FSMToolClient.jsx
-    - workflow-builder/ — page.jsx + WorkflowBuilderClient.jsx
-- components/ — Navbar, Footer, LanguageSwitcher, Providers,
-  ParticlesCanvas, AssessmentMethodology (todos .jsx, PascalCase)
-- context/LanguageContext.jsx — sistema bilingüe ES/EN
-- styles/globals.css — CSS completo del proyecto
-- public/assets/ — imágenes y logos (clientes en public/assets/clients/)
+## CAPA DE COMPATIBILIDAD (`frontend/src/lib/next-compat.jsx`)
+La migración desde Next.js reimplementó sus APIs sobre react-router puro para
+preservar el JSX existente sin reescribirlo. Exporta:
+- `Link` — envuelve react-router Link (acepta `href`, lo mapea a `to`).
+- `Image` — renderiza `<img>` (descarta props propias de Next).
+- `useRouter` / `usePathname` — sobre useNavigate / useLocation.
+- `dynamic` — React.lazy (+ comportamiento client-only cuando `ssr: false`).
+Es 100% React, sin dependencia de Next. Para código nuevo, preferí usar
+directamente react-router-dom (`Link to=...`, `useNavigate`) y `<img>`.
 
 ## REGLAS DE MODIFICACIÓN
-1. NUNCA reescribir archivos completos
-2. Solo usar str_replace para ediciones puntuales
-3. Nunca tocar Navbar.jsx ni Footer.jsx sin indicación explícita
-4. Nunca cambiar colores ni tipografías del design system
-5. Antes de modificar: leer el archivo completo
-6. Después de modificar: verificar que el contenido clave existe
+1. NUNCA reescribir archivos completos (salvo migración explícita ya acordada).
+2. Preferir ediciones puntuales (str_replace / Edit).
+3. Nunca tocar Navbar.jsx ni Footer.jsx sin indicación explícita.
+4. Nunca cambiar colores ni tipografías del design system.
+5. Antes de modificar: leer el archivo completo.
+6. Después de modificar: verificar que el contenido clave existe.
 
 ## SISTEMA BILINGÜE — OBLIGATORIO
-- Todo texto visible debe usar el LanguageContext
-- Usar el hook useLang() (importado desde @/context/LanguageContext) para
-  acceder a las traducciones
-- PROHIBIDO hardcodear texto visible. Todo string visible pasa por useLang()
-  con su traducción ES/EN
-- El idioma persiste en localStorage
+- Todo texto visible debe usar el LanguageContext.
+- Usar el hook `useLang()` (importado desde `@/context/LanguageContext`).
+- PROHIBIDO hardcodear texto visible. Todo string visible pasa por `useLang()`
+  con su traducción ES/EN.
+- El idioma persiste en localStorage.
 
 ## COMPONENTES EXISTENTES — REUTILIZAR SIEMPRE
-- Navbar.jsx — navbar con scroll, hamburguesa, ES/EN
-- Footer.jsx — footer 4 columnas
-- LanguageSwitcher.jsx — selector ES/EN
-- Providers.jsx — wrapper client para LanguageProvider
+- Navbar.jsx — navbar con scroll, hamburguesa, ES/EN.
+- Footer.jsx — footer 4 columnas.
+- LanguageSwitcher.jsx — selector ES/EN.
+- LanguageProvider (en context/LanguageContext.jsx) envuelve la app en App.jsx.
 
 ## REGLA CRÍTICA — SECCIONES PROTEGIDAS
-En FSMTool y WorkflowBuilder verificar siempre que
-existe la sección de casos de uso con video antes
-y después de cualquier cambio.
+En FSMTool y WorkflowBuilder verificar siempre que existe la sección de casos
+de uso con video antes y después de cualquier cambio.
 
 ## MOBILE FIRST
-- Todo componente debe ser responsive
-- Breakpoints: mobile 768px, tablet 1024px
+- Todo componente debe ser responsive.
+- Breakpoints: mobile 768px, tablet 1024px.
 
 ## NAVEGACIÓN
-- Usar next/link para navegación interna
-- Nunca usar <a href> para rutas internas
-- Rutas: / · /servicios · /productos ·
-  /productos/fsmtool · /productos/workflow-builder
+- Usar `Link` (react-router-dom, o el de `@/lib/next-compat`) para rutas internas.
+- Nunca usar `<a href>` para rutas internas (provoca recarga completa).
+- Los enlaces con hash (`/#partnerships`, `/servicios#contacto`) hacen scroll
+  suave gracias al helper `ScrollToHash` en App.jsx.
+- Rutas: / · /servicios · /productos · /productos/fsmtool ·
+  /productos/workflow-builder. El catch-all `*` renderiza NotFound.
+- Las rutas se declaran en `frontend/src/routes.jsx`.
 
 ## IMÁGENES
-- Usar next/image para todas las imágenes
-- Todas las imágenes en public/assets/
-- Logos clientes en public/assets/clients/
+- Usar `<img>` (o el `Image` de la capa de compat) para todas las imágenes.
+- Todas las imágenes en `frontend/public/assets/`.
+- Logos clientes en `frontend/public/assets/clients/`.
 
 ## SEO
-- Cada página tiene export const metadata con:
-  title, description y keywords relevantes
-- Keywords principales: Oracle Field Service, OFSC,
-  Field Service Management, Zinier, implementación OFSC
+- Cada página inyecta su metadata con `<Head>` de vite-react-ssg:
+  title, description y keywords relevantes.
+- El prerender genera un HTML por ruta con esos meta tags ya resueltos.
+- NO poner un `<title>` estático en index.html (duplicaría el de `<Head>`).
+- Keywords principales: Oracle Field Service, OFSC, Field Service Management,
+  Zinier, implementación OFSC.
 
 ## CONVENCIONES DE CÓDIGO (verificadas)
-- El código es JavaScript (.jsx), NO TypeScript. NO hay reglas de tipado:
-  no tipar props, no preocuparse por "any", no convertir .jsx a .tsx.
-- Patrón de ruta: cada ruta = page.jsx (Server Component que exporta
-  `metadata` para SEO) + [Nombre]Client.jsx con la directiva 'use client'
-  y la lógica de UI interactiva, en la misma carpeta.
-- layout.jsx y los page.jsx NO llevan 'use client'. Solo los *Client.jsx
-  y el contexto/providers son Client Components.
-- Componentes en PascalCase. Los Client Components de página llevan el
-  sufijo Client (HomeClient, ProductosClient, FSMToolClient, …).
-- Imports SIEMPRE con el alias @/* (configurado en tsconfig paths).
+- El código es JavaScript (.jsx), NO TypeScript. No tipar props, no convertir a .tsx.
+- Cada página vive en `frontend/src/pages/[Nombre].jsx` y se registra en routes.jsx.
+- Componentes en PascalCase, en `frontend/src/components/`.
+- Imports del frontend SIEMPRE con el alias `@/*` (configurado en vite.config.js).
   Nunca usar rutas relativas profundas tipo ../../..
-- i18n: todo texto visible pasa por el hook useLang() (ver SISTEMA BILINGÜE).
+- i18n: todo texto visible pasa por `useLang()` (ver SISTEMA BILINGÜE).
+- El frontend no usa la directiva 'use client' (era de Next; ya no aplica).
 
 ## VERIFICACIÓN ANTES DE PR
-- Ejecutar `npm run lint` y que pase sin errores.
-- Ejecutar `npm run build` y que compile sin errores.
-- NO existe script de typecheck ni de tests en este proyecto: no los
-  menciones ni los asumas. Scripts disponibles: dev, build, start, lint.
+- Frontend: `cd frontend && npm run build` y que compile + prerendere sin errores.
+- Backend: `cd backend && npm start` y verificar `/api/health` y `/api/contacto`.
+- NO hay script de lint ni de tests configurado actualmente: no los asumas.
+  Scripts frontend: dev, build, preview. Scripts backend: start, dev.
 
 ## PÁGINAS FALTANTES — CREAR CUANDO SE SOLICITE
-- app/not-found.jsx — página 404
-- app/nosotros/page.jsx — página Nosotros
-- app/casos-de-exito/page.jsx — página Casos de éxito
+- frontend/src/pages/Nosotros.jsx — página Nosotros (+ ruta en routes.jsx).
+- frontend/src/pages/CasosDeExito.jsx — página Casos de éxito (+ ruta).
 
 ## GIT — OBLIGATORIO ANTES DE CADA CAMBIO
-- Antes de cualquier modificación hacer commit de backup
-- Nunca trabajar con cambios sin commitear
+- Antes de cualquier modificación hacer commit de backup.
+- Nunca trabajar con cambios sin commitear.
 - Formato de commits: "tipo: descripción breve"
-  Tipos: feat, fix, style, refactor, backup
-- Después de cada cambio verificar que el build 
-  compila sin errores con npm run build
-
-## WORKTREES — TRABAJO EN PARALELO
-- Cada worktree trabaja en su propia rama
-- Nunca mergear a main sin revisar visualmente
-- Cada rama tiene una sola responsabilidad
-- Ramas activas:
-  main — producción estable
-  feature/home — mejoras Home
-  feature/productos — mejoras páginas de producto
-  feature/servicios — mejoras página servicios
-  feature/seo — optimizaciones SEO y metadata
-
-## REGLAS ESPECÍFICAS — WORKTREE CONTENT
-
-PROHIBIDO en este worktree:
-- Nunca tocar archivos de performance o animaciones
-- Nunca modificar el canvas de partículas
-- Nunca cambiar colores ni tipografías del design system
-- Nunca reescribir archivos completos
-
-PERMITIDO en este worktree:
-- Modificar textos y traducciones ES/EN
-- Cambiar orden de secciones
-- Agregar imágenes y videos
-- Ajustes visuales de layout y espaciado
-- Crear páginas nuevas (nosotros, casos de éxito)
-
-ANTES de cada cambio:
-1. Leer el archivo completo
-2. Confirmar qué líneas exactas se van a tocar
-3. Verificar que la sección de casos de uso con video
-   existe en FSMTool y WorkflowBuilder después del cambio
-4. Confirmar que el build compila sin errores
-
-WORKFLOW:
-- Un cambio a la vez
-- Commit después de cada cambio exitoso
-- Nunca acumular muchos cambios sin commitear
+  Tipos: feat, fix, style, refactor, backup.
+- Después de cada cambio verificar que el build del frontend compila.
 
 ## MOBILE — REGLA CRÍTICA
 
 Prioridad: desktop intacto, mobile funcional.
 
 ### PRINCIPIO BASE
-Nunca modificar estilos desktop para arreglar mobile.
-Todo ajuste mobile va EXCLUSIVAMENTE en media queries
-o condiciones responsive, nunca tocando el estilo base.
+Nunca modificar estilos desktop para arreglar mobile. Todo ajuste mobile va
+EXCLUSIVAMENTE en media queries o condiciones responsive, nunca tocando el
+estilo base.
 
 ### OBLIGATORIO EN CADA COMPONENTE NUEVO O MODIFICADO
-1. Verificar que el componente se ve en 375px y 768px
-2. Agregar estilos mobile SIEMPRE como adición, nunca reemplazando
-3. Usar este patrón para responsive inline:
+1. Verificar que el componente se ve en 375px y 768px.
+2. Agregar estilos mobile SIEMPRE como adición, nunca reemplazando.
+3. Patrón para responsive inline:
    - Desktop: estilo base en style={{}}
-   - Mobile: usar <style> tag con @media (max-width: 768px)
-     o estado con useWindowSize hook si es necesario
+   - Mobile: `<style>` tag con @media (max-width: 768px).
 
 ### BREAKPOINTS DEL PROYECTO
 - Mobile: max-width 768px
@@ -208,11 +199,10 @@ Verificar y reparar en este orden de prioridad:
 - Nunca reescribir archivos completos
 - Nunca mergear a main sin revisar en mobile real o DevTools
 
-
 ## RESPONSIVE — OBLIGATORIO EN TODO EL PROYECTO
 
-Todo componente, sección o página debe funcionar correctamente
-en estos anchos mínimos sin excepción:
+Todo componente, sección o página debe funcionar correctamente en estos anchos
+mínimos sin excepción:
 - 375px — iPhone SE / móviles pequeños
 - 390px — iPhone 14
 - 768px — tablets
@@ -220,8 +210,7 @@ en estos anchos mínimos sin excepción:
 - 1280px+ — desktop
 
 ### REGLA DE ORO
-Ningún cambio se considera terminado hasta que
-funciona en los 5 breakpoints. Sin excepción.
+Ningún cambio se considera terminado hasta que funciona en los 5 breakpoints.
 
 ### PATRONES OBLIGATORIOS
 - Flex rows en desktop → flex column en mobile
@@ -232,7 +221,7 @@ funciona en los 5 breakpoints. Sin excepción.
 
 ### CÓMO IMPLEMENTAR
 - Estilos base (style={{}}) = desktop
-- Media queries via <style> tag para mobile/tablet
+- Media queries via `<style>` tag para mobile/tablet
 - Nunca usar px fijos en widths de contenedores principales
 - Usar %, vw, o maxWidth con width 100%
 
@@ -240,35 +229,36 @@ funciona en los 5 breakpoints. Sin excepción.
 
 ### Antes de tocar nada
 - Si el cambio toca una sección o componente que aún no conocés, leelo completo primero. No asumas estructura.
-- Si una tarea requiere modificar estilos globales, Navbar, Footer u otro componente compartido, DETENETE y avisá antes de hacerlo. No lo hagas por tu cuenta.
+- Si una tarea requiere modificar estilos globales, Navbar, Footer u otro componente compartido, DETENETE y avisá antes de hacerlo.
 - No refactorices, renombres ni "mejores" código que no se pidió tocar.
 
 ### Tokens y estilos
 - Usá siempre var(--primary), var(--accent), var(--accent-dark), var(--secondary), var(--text-body), var(--font-heading) y var(--font-body). Prohibido hardcodear colores o fuentes nuevos.
 - Para sombras, radios y espaciados, reutilizá los valores ya presentes en globals.css. No inventes valores nuevos.
-- No modifiques los colores existentes. Si fuera imprescindible, recordá que están duplicados en @theme {} y en :root {} y deben cambiarse en ambos lugares para no desincronizarse.
+- No modifiques los colores existentes. Si fuera imprescindible, recordá que están duplicados en @theme {} y en :root {} y deben cambiarse en ambos lugares.
 - Mantené Tailwind solo como está (colores en @theme). El proyecto es CSS custom en globals.css: no introduzcas clases utilitarias de Tailwind en los JSX.
 
 ### Animaciones
 - Sin librerías nuevas: nada de Framer Motion, GSAP, AOS ni similares.
-- Toda animación sigue el patrón existente del proyecto: IntersectionObserver + clase .visible + @keyframes en globals.css. Para reveals usá .fade-up y los delays .d1–.d4.
+- Toda animación sigue el patrón del proyecto: IntersectionObserver + clase .visible + @keyframes en globals.css. Para reveals usá .fade-up y los delays .d1–.d4.
 - Animá solo transform y opacity (nunca propiedades que disparen reflow/layout).
 - Duraciones cortas (150–280 ms), easing ease-out. Sin rebotes exagerados.
-- Respetá SIEMPRE prefers-reduced-motion: si está activo, desactivá o reducí las animaciones.
+- Respetá SIEMPRE prefers-reduced-motion.
 
 ### Nombres y convenciones
 - Clases con prefijo de sección (hero-*, pqc-*, ec-*, etc.), IDs en kebab-case (#hero, #metodologia), modificadores con sufijo (.alt, .featured, .visible, .active).
-- Páginas: page.jsx (Server Component con metadata) + [Nombre]Client.jsx (Client Component con la lógica UI) en la misma carpeta.
-- Componentes compartidos en components/PascalCase.jsx. Contexto en context/NombreContext.jsx.
+- Páginas en frontend/src/pages/[Nombre].jsx, registradas en routes.jsx.
+- Componentes compartidos en frontend/src/components/PascalCase.jsx. Contexto en frontend/src/context/NombreContext.jsx.
 
 ### Features nuevas
-- Reutilizá los componentes y patrones existentes antes de crear nuevos. Si creás un componente nuevo, seguí exactamente las convenciones de arriba.
-- Mantené la separación Server/Client del App Router. La lógica de UI interactiva va en el *Client.jsx.
+- Reutilizá los componentes y patrones existentes antes de crear nuevos.
+- Lógica de UI interactiva en el componente de página (en pages/).
 - No agregues dependencias nuevas sin justificarlo y consultarme primero.
+- Si una feature necesita backend, agregá ruta/controlador/middleware en backend/ siguiendo la estructura existente y exponé la URL al frontend vía VITE_API_URL.
 
 ### Accesibilidad y calidad
 - Accesibilidad mínima AA: foco visible, contraste suficiente, navegación por teclado intacta, HTML semántico.
-- Responsive obligatorio: verificá en los breakpoints del proyecto (768px y 960px/1024px con max-width).
+- Responsive obligatorio: verificá en los breakpoints del proyecto.
 
 ### Proceso
 - Cambios pequeños e incrementales, uno a la vez.

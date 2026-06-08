@@ -1,5 +1,21 @@
 # REGLAS DEL PROYECTO — CONNEXA SERVICES (Next.js)
 
+## STACK TÉCNICO (verificado)
+- Next.js 16.2.6 — App Router
+- React 19.2.4 / react-dom 19.2.4
+- TypeScript 5.9.3 — SOLO en archivos de config (next.config.ts,
+  next-env.d.ts). El código de la app es JavaScript (.jsx), NO TypeScript.
+- Tailwind CSS v4 (vía @tailwindcss/postcss) + CSS custom en styles/globals.css
+- ESLint 9 — flat config en eslint.config.mjs
+- Gestor de paquetes: npm (lockfile: package-lock.json)
+- Tipo de proyecto: sitio de marketing estático. SIN backend, SIN base de
+  datos, SIN auth. El único "estado" es el idioma (React Context).
+
+### RIESGO CONOCIDO
+- La versión de Node NO está fijada en el repo (no hay .nvmrc ni campo
+  "engines" en package.json). El entorno usa la versión de Node que tenga
+  instalada. No asumir una versión concreta de Node.
+
 ## DESIGN SYSTEM BLOQUEADO
 - Color primario: #172554
 - Color secundario: #F3F4F6
@@ -9,18 +25,22 @@
 - Variables en styles/globals.css — NO modificar
 
 ## ESTRUCTURA DEL PROYECTO
-- app/ — páginas Next.js App Router
-- app/layout.jsx — layout raíz con Navbar y Footer
-- app/page.jsx — Home (Server Component wrapper)
-- app/HomeClient.jsx — Home (Client Component)
-- app/servicios/ — página Servicios
-- app/productos/ — página Productos
-- app/productos/fsmtool/ — página FSMTool
-- app/productos/workflow-builder/ — página WFBuilder
-- components/ — Navbar, Footer, LanguageSwitcher, Providers
+NO existe carpeta /src. El código vive en la raíz del repo.
+
+- app/ — App Router (rutas + layout)
+  - layout.jsx — layout raíz (Navbar, Footer, Providers). Server Component.
+  - page.jsx — Home (Server Component wrapper, exporta metadata)
+  - HomeClient.jsx — Home (Client Component)
+  - not-found.jsx — página 404
+  - servicios/ — page.jsx + ServiciosClient.jsx
+  - productos/ — page.jsx + ProductosClient.jsx
+    - fsmtool/ — page.jsx + FSMToolClient.jsx
+    - workflow-builder/ — page.jsx + WorkflowBuilderClient.jsx
+- components/ — Navbar, Footer, LanguageSwitcher, Providers,
+  ParticlesCanvas, AssessmentMethodology (todos .jsx, PascalCase)
 - context/LanguageContext.jsx — sistema bilingüe ES/EN
 - styles/globals.css — CSS completo del proyecto
-- public/assets/ — imágenes y logos
+- public/assets/ — imágenes y logos (clientes en public/assets/clients/)
 
 ## REGLAS DE MODIFICACIÓN
 1. NUNCA reescribir archivos completos
@@ -32,8 +52,10 @@
 
 ## SISTEMA BILINGÜE — OBLIGATORIO
 - Todo texto visible debe usar el LanguageContext
-- Usar el hook useLanguage() para acceder a traducciones
-- Nunca agregar texto hardcodeado sin traducción ES/EN
+- Usar el hook useLang() (importado desde @/context/LanguageContext) para
+  acceder a las traducciones
+- PROHIBIDO hardcodear texto visible. Todo string visible pasa por useLang()
+  con su traducción ES/EN
 - El idioma persiste en localStorage
 
 ## COMPONENTES EXISTENTES — REUTILIZAR SIEMPRE
@@ -67,6 +89,26 @@ y después de cualquier cambio.
   title, description y keywords relevantes
 - Keywords principales: Oracle Field Service, OFSC,
   Field Service Management, Zinier, implementación OFSC
+
+## CONVENCIONES DE CÓDIGO (verificadas)
+- El código es JavaScript (.jsx), NO TypeScript. NO hay reglas de tipado:
+  no tipar props, no preocuparse por "any", no convertir .jsx a .tsx.
+- Patrón de ruta: cada ruta = page.jsx (Server Component que exporta
+  `metadata` para SEO) + [Nombre]Client.jsx con la directiva 'use client'
+  y la lógica de UI interactiva, en la misma carpeta.
+- layout.jsx y los page.jsx NO llevan 'use client'. Solo los *Client.jsx
+  y el contexto/providers son Client Components.
+- Componentes en PascalCase. Los Client Components de página llevan el
+  sufijo Client (HomeClient, ProductosClient, FSMToolClient, …).
+- Imports SIEMPRE con el alias @/* (configurado en tsconfig paths).
+  Nunca usar rutas relativas profundas tipo ../../..
+- i18n: todo texto visible pasa por el hook useLang() (ver SISTEMA BILINGÜE).
+
+## VERIFICACIÓN ANTES DE PR
+- Ejecutar `npm run lint` y que pase sin errores.
+- Ejecutar `npm run build` y que compile sin errores.
+- NO existe script de typecheck ni de tests en este proyecto: no los
+  menciones ni los asumas. Scripts disponibles: dev, build, start, lint.
 
 ## PÁGINAS FALTANTES — CREAR CUANDO SE SOLICITE
 - app/not-found.jsx — página 404

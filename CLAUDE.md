@@ -1,8 +1,11 @@
 # REGLAS DEL PROYECTO — CONNEXA SERVICES (React + Express)
 
 ## STACK TÉCNICO (verificado)
-Monorepo con dos proyectos independientes que se deployan en servidores
-distintos: `frontend/` (Servidor A) y `backend/` (Servidor B).
+Repo de DOS PAQUETES INDEPENDIENTES (NO es un monorepo orquestado: no hay
+package.json en la raíz, ni npm workspaces ni turborepo). `frontend/`
+(Servidor A) y `backend/` (Servidor B) tienen cada uno su propio
+package.json y su propio node_modules; se instalan, corren y deployan por
+separado.
 
 ### Frontend (`frontend/`)
 - React 19.2.4 / react-dom 19.2.4 — SOLO React, sin meta-framework.
@@ -23,10 +26,29 @@ distintos: `frontend/` (Servidor A) y `backend/` (Servidor B).
 - Middlewares: helmet, cors (restringido a `FRONTEND_URL`), express-rate-limit.
 - nodemailer para el envío del formulario de contacto.
 - Sin base de datos ni auth por ahora. Estructura preparada para crecer.
+- Solo expone DOS endpoints: `GET /api/health` y `POST /api/contacto`
+  (este último con rate-limit + validación + nodemailer). Nada más.
 
 ### RIESGO CONOCIDO
 - La versión de Node NO está fijada (no hay .nvmrc ni "engines"). No asumir
   una versión concreta de Node.
+
+## COMANDOS POR PAQUETE
+Cada paquete se instala y se corre por separado (no hay scripts en la raíz):
+- Frontend (`cd frontend`): `npm install`, `npm run dev` (Vite),
+  `npm run build` (vite-react-ssg, prerender estático), `npm run preview`.
+- Backend (`cd backend`): `npm install`, `npm start` (node src/server.js),
+  `npm run dev` (node --watch src/server.js).
+- NO hay scripts de lint, test ni typecheck en ningún paquete.
+
+## CONEXIÓN FRONTEND ↔ BACKEND
+- El frontend es AUTÓNOMO: todo el sitio es estático/prerenderizado y funciona
+  sin el backend.
+- ÚNICA dependencia del backend: el formulario de contacto en
+  `frontend/src/pages/Servicios.jsx`, que hace `fetch` a
+  `VITE_API_URL` + `/api/contacto`. Si el backend está caído, solo falla ese
+  envío; el resto del sitio sigue funcionando.
+- `VITE_API_URL` se define en `frontend/.env` (fallback `http://localhost:4000`).
 
 ## DESIGN SYSTEM BLOQUEADO
 - Color primario: #172554
@@ -76,6 +98,13 @@ preservar el JSX existente sin reescribirlo. Exporta:
 Es 100% React, sin dependencia de Next. Para código nuevo, preferí usar
 directamente react-router-dom (`Link to=...`, `useNavigate`) y `<img>`.
 
+## NOTAS — DEUDA TÉCNICA CONOCIDA
+- `frontend/src/lib/next-compat.jsx` es un RESIDUO de la migración desde
+  Next.js: reimplementa Link/Image/useRouter/usePathname/dynamic sobre
+  react-router. Sigue en uso por el JSX migrado. NO arreglarlo ahora. A futuro,
+  ir reemplazando sus usos por react-router-dom (`Link to=...`, `useNavigate`)
+  y `<img>` directos hasta poder eliminarlo. No introducir nuevos usos.
+
 ## REGLAS DE MODIFICACIÓN
 1. NUNCA reescribir archivos completos (salvo migración explícita ya acordada).
 2. Preferir ediciones puntuales (str_replace / Edit).
@@ -96,6 +125,8 @@ directamente react-router-dom (`Link to=...`, `useNavigate`) y `<img>`.
 - Footer.jsx — footer 4 columnas.
 - LanguageSwitcher.jsx — selector ES/EN.
 - LanguageProvider (en context/LanguageContext.jsx) envuelve la app en App.jsx.
+- ParticlesCanvas.jsx — canvas de partículas. NUNCA usar Web Worker ni
+  OffscreenCanvas para las partículas (regla heredada: rompe el render).
 
 ## REGLA CRÍTICA — SECCIONES PROTEGIDAS
 En FSMTool y WorkflowBuilder verificar siempre que existe la sección de casos

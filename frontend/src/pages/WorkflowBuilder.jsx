@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { Fragment, useEffect, useRef, useState } from 'react';
 import { Head } from 'vite-react-ssg';
 import { useLang } from '@/context/LanguageContext';
 
@@ -93,6 +93,47 @@ const WB_TABS = [
   { key: 'panel', label: 'Panel principal' },
 ];
 
+const HOW_STEPS = [
+  {
+    titleEs: 'Ocurre un evento', titleEn: 'An event occurs',
+    descEs: 'Una actividad se completa, un inventario cambia, un formulario se guarda.',
+    descEn: 'An activity completes, inventory changes, a form is saved.',
+    icon: <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />,
+  },
+  {
+    titleEs: 'El trigger lo captura', titleEn: 'The trigger catches it',
+    descEs: 'Workflow Builder lo recibe en tiempo real. Sin polling.',
+    descEn: 'Workflow Builder receives it in real time. No polling.',
+    icon: <><circle cx="12" cy="12" r="10" /><circle cx="12" cy="12" r="3" fill="var(--accent)" stroke="none" /></>,
+  },
+  {
+    titleEs: 'El workflow se ejecuta', titleEn: 'The workflow runs',
+    descEs: 'Condiciones y acciones — con un nodo de IA que analiza y decide.',
+    descEn: 'Conditions and actions — with an AI node that analyzes and decides.',
+    icon: <><line x1="6" y1="3" x2="6" y2="15" /><circle cx="18" cy="6" r="3" /><circle cx="6" cy="18" r="3" /><path d="M18 9a9 9 0 0 1-9 9" /></>,
+  },
+  {
+    titleEs: 'Se integra con todo', titleEn: 'It integrates with everything',
+    descEs: 'Slack, Teams, email, webhooks, APIs y bases de datos.',
+    descEn: 'Slack, Teams, email, webhooks, APIs and databases.',
+    icon: <><circle cx="18" cy="5" r="3" /><circle cx="6" cy="12" r="3" /><circle cx="18" cy="19" r="3" /><line x1="8.59" y1="13.51" x2="15.42" y2="17.49" /><line x1="15.41" y1="6.51" x2="8.59" y2="10.49" /></>,
+  },
+  {
+    titleEs: 'OFS queda actualizado', titleEn: 'OFS stays updated',
+    descEs: 'El resultado vuelve a Oracle Field Service. Ciclo cerrado.',
+    descEn: 'The result goes back to Oracle Field Service. Loop closed.',
+    icon: <><polyline points="23 4 23 10 17 10" /><polyline points="1 20 1 14 7 14" /><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15" /></>,
+  },
+];
+
+const HOW_LOG = [
+  { glyph: '⚡', es: '14:32:05 · OFS — Actividad #4512 «Instalación fibra» completada', en: '14:32:05 · OFS — Activity #4512 “Fiber install” completed' },
+  { glyph: '◉', es: 'Trigger «Actividad completada» disparado — filtros verificados', en: 'Trigger “Activity completed” fired — filters verified' },
+  { glyph: '✦', es: 'Nodo IA: cliente VIP detectado → notificación prioritaria', en: 'AI node: VIP customer detected → priority notification' },
+  { glyph: '→', es: 'Slack #operaciones notificado · CRM actualizado vía API', en: 'Slack #operations notified · CRM updated via API' },
+  { glyph: '✓', es: 'OFS actualizado — ciclo completado en 1.2 s', en: 'OFS updated — cycle completed in 1.2 s' },
+];
+
 export default function WorkflowBuilderClient() {
   const { lang } = useLang();
   const ctaRef = useRef(null);
@@ -116,6 +157,9 @@ export default function WorkflowBuilderClient() {
   const [caso4ShowImg, setCaso4ShowImg] = useState(false);
   const [caso5Chars, setCaso5Chars] = useState(0);
   const [caso5ShowImg, setCaso5ShowImg] = useState(false);
+  const [howStep, setHowStep] = useState(0);
+  const [howReduced, setHowReduced] = useState(false);
+  const howRef = useRef(null);
 
   const tr = (es, en) => (lang === 'es' ? es : en);
 
@@ -262,6 +306,31 @@ export default function WorkflowBuilderClient() {
     return () => clearTimeout(t);
   }, [caso5Chars, caso5ShowImg]);
 
+  useEffect(() => {
+    const el = howRef.current;
+    if (!el) return;
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduced) {
+      setHowReduced(true);
+      setHowStep(HOW_LOG.length - 1);
+      return;
+    }
+    let interval = null;
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          if (!interval) interval = setInterval(() => setHowStep((s) => (s + 1) % HOW_LOG.length), 2400);
+        } else if (interval) {
+          clearInterval(interval);
+          interval = null;
+        }
+      },
+      { threshold: 0.25 }
+    );
+    io.observe(el);
+    return () => { io.disconnect(); if (interval) clearInterval(interval); };
+  }, []);
+
   const scrollToCase = (idx) => {
     const reduced = typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     caseRefs.current[idx]?.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'start' });
@@ -393,6 +462,251 @@ export default function WorkflowBuilderClient() {
           ))}
         </div>
       </div>
+
+      {/* ── QUÉ ES / CÓMO FUNCIONA / PARA QUIÉN ── */}
+      <style>{`
+        .wfb-what-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+        .wfb-what-card { background: #F8FAFC; border: 1px solid #E5E7EB; border-radius: 16px; padding: 32px; }
+        .wfb-what-icon { width: 48px; height: 48px; border-radius: 12px; background: rgba(113,177,54,0.1); border: 1px solid rgba(113,177,54,0.22); display: flex; align-items: center; justify-content: center; margin-bottom: 18px; }
+        .wfb-how-pipeline { display: flex; align-items: stretch; justify-content: center; gap: 10px; }
+        .wfb-how-node { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-radius: 14px; padding: 22px 18px; min-width: 190px; max-width: 210px; flex: 0 1 auto; text-align: center; transition: border-color 0.25s ease-out, background 0.25s ease-out, box-shadow 0.25s ease-out, transform 0.25s ease-out; }
+        .wfb-how-node--active { border-color: rgba(113,177,54,0.55); background: rgba(113,177,54,0.07); box-shadow: 0 0 36px rgba(113,177,54,0.16); transform: translateY(-4px); }
+        .wfb-how-node--exec { min-width: 230px; max-width: 250px; }
+        .wfb-how-node-icon { width: 48px; height: 48px; border-radius: 12px; background: rgba(255,255,255,0.06); display: flex; align-items: center; justify-content: center; margin: 0 auto 12px; transition: background 0.25s ease-out; }
+        .wfb-how-node--active .wfb-how-node-icon { background: rgba(113,177,54,0.14); }
+        .wfb-how-step-num { font-family: var(--font-body); font-size: 11px; font-weight: 800; letter-spacing: 0.14em; color: rgba(255,255,255,0.35); margin-bottom: 10px; transition: color 0.25s ease-out; }
+        .wfb-how-node--active .wfb-how-step-num { color: var(--accent); }
+        .wfb-how-chips { display: flex; gap: 6px; justify-content: center; flex-wrap: wrap; margin-top: 12px; }
+        .wfb-how-chip { font-family: var(--font-body); font-size: 11px; font-weight: 600; padding: 4px 10px; border-radius: 999px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); color: rgba(255,255,255,0.7); }
+        .wfb-how-chip--ai { background: rgba(113,177,54,0.12); border-color: rgba(113,177,54,0.4); color: var(--accent); }
+        .wfb-how-connector { flex-shrink: 0; display: flex; align-items: center; padding: 0 2px; }
+        .wfb-how-loop { position: relative; max-width: 1160px; margin: 4px auto 0; }
+        .wfb-how-loopchip-m { display: none; }
+        .wfb-who-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+        .wfb-who-card { background: #ffffff; border: 1px solid #E5E7EB; border-radius: 16px; padding: 32px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
+        @media (prefers-reduced-motion: reduce) { .wfb-how-dash { animation: none !important; } }
+        @media (max-width: 1100px) {
+          .wfb-how-node { min-width: 150px; padding: 18px 12px; }
+          .wfb-how-node--exec { min-width: 170px; }
+        }
+        @media (max-width: 768px) {
+          .wfb-what-section, .wfb-how-section, .wfb-who-section { padding: 56px 20px !important; }
+          .wfb-what-title, .wfb-how-title, .wfb-who-title { font-size: 28px !important; }
+          .wfb-what-grid, .wfb-who-grid { grid-template-columns: 1fr !important; }
+          .wfb-how-pipeline { flex-direction: column !important; align-items: stretch !important; gap: 10px !important; }
+          .wfb-how-connector { display: none !important; }
+          .wfb-how-node { min-width: 0 !important; max-width: none !important; width: 100% !important; }
+          .wfb-how-node--exec { min-width: 0 !important; }
+          .wfb-how-loop { display: none !important; }
+          .wfb-how-loopchip-m { display: inline-flex !important; }
+        }
+      `}</style>
+
+      {/* ¿Qué es? */}
+      <section id="que-es" className="wfb-what-section" style={{ width: '100%', background: '#ffffff', padding: '96px 60px' }}>
+        <div style={{ maxWidth: '1400px', margin: '0 auto' }}>
+          <div className="fade-up" style={{ textAlign: 'center', maxWidth: '780px', margin: '0 auto 56px' }}>
+            <div style={{ fontFamily: 'var(--font-body)', fontSize: '12px', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--accent)', marginBottom: '14px' }}>
+              {tr('¿Qué es Workflow Builder?', 'What is Workflow Builder?')}
+            </div>
+            <h2 className="wfb-what-title" style={{ fontFamily: 'var(--font-heading)', fontSize: '42px', fontWeight: 800, color: 'var(--primary)', lineHeight: 1.15, margin: '0 0 18px 0' }}>
+              {tr('El motor de automatización para Oracle Field Service', 'The automation engine for Oracle Field Service')}
+            </h2>
+            <p style={{ fontFamily: 'var(--font-body)', fontSize: '17px', color: 'var(--text-body)', lineHeight: 1.75, margin: 0 }}>
+              {tr(
+                'Una plataforma no-code que convierte los eventos de tu operación en procesos automáticos: escuchá lo que pasa en campo, aplicá tu lógica de negocio y ejecutá acciones en OFS y en todos tus sistemas — sin escribir una línea de código.',
+                'A no-code platform that turns your operation’s events into automatic processes: listen to what happens in the field, apply your business logic and execute actions in OFS and across all your systems — without writing a single line of code.'
+              )}
+            </p>
+          </div>
+          <div className="wfb-what-grid fade-up d1">
+            {[
+              {
+                icon: <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2" /><path d="M3 9h18M9 21V9" /></svg>,
+                t: tr('100% visual', '100% visual'),
+                d: tr('Arrastrá, conectá y publicá. El canvas es tu editor: cada flujo se entiende de un vistazo.', 'Drag, connect and publish. The canvas is your editor: every flow is clear at a glance.'),
+              },
+              {
+                icon: <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" /></svg>,
+                t: tr('Nativo de OFS', 'OFS native'),
+                d: tr('Triggers, eventos en tiempo real y +40 APIs de Oracle Field Service integrados de fábrica.', 'Real-time triggers, events and +40 Oracle Field Service APIs built in.'),
+              },
+              {
+                icon: <svg width="22" height="19" viewBox="0 0 28 24" fill="none" aria-hidden="true"><path d="M16 1.5l.9 3.2 3.2.9-3.2.9L16 9.7l-.9-3.2-3.2-.9 3.2-.9z" fill="var(--accent)" stroke="var(--accent)" strokeWidth="0.4" strokeLinejoin="round" /><path d="M7 7l.6 2.2 2.2.6-2.2.6L7 12.6l-.6-2.2-2.2-.6 2.2-.6z" fill="var(--accent)" stroke="var(--accent)" strokeWidth="0.3" strokeLinejoin="round" opacity="0.65" /><path d="M21 14l.5 1.6 1.6.5-1.6.5L21 18.2l-.5-1.6-1.6-.5 1.6-.5z" fill="var(--accent)" stroke="var(--accent)" strokeWidth="0.3" strokeLinejoin="round" opacity="0.45" /></svg>,
+                t: tr('IA integrada', 'AI inside'),
+                d: tr('Describí el flujo en lenguaje natural o sumá nodos de IA que analizan y deciden por vos.', 'Describe your flow in natural language or add AI nodes that analyze and decide for you.'),
+              },
+            ].map((p, i) => (
+              <div key={i} className="wfb-what-card">
+                <div className="wfb-what-icon">{p.icon}</div>
+                <div style={{ fontFamily: 'var(--font-heading)', fontSize: '18px', fontWeight: 800, color: 'var(--primary)', marginBottom: '8px' }}>{p.t}</div>
+                <div style={{ fontFamily: 'var(--font-body)', fontSize: '14.5px', color: '#6B7280', lineHeight: 1.7 }}>{p.d}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ¿Cómo funciona? */}
+      <section id="como-funciona" ref={howRef} className="wfb-how-section" style={{ width: '100%', background: 'linear-gradient(180deg, #0d1b3e 0%, var(--primary) 55%, #0a1628 100%)', padding: '96px 60px', position: 'relative', overflow: 'hidden' }}>
+        <svg style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', opacity: 0.07, pointerEvents: 'none' }} aria-hidden="true">
+          <defs>
+            <pattern id="dots-how" x="0" y="0" width="32" height="32" patternUnits="userSpaceOnUse">
+              <circle cx="1" cy="1" r="1" fill="#71B136" />
+            </pattern>
+          </defs>
+          <rect width="100%" height="100%" fill="url(#dots-how)" />
+        </svg>
+        <div style={{ maxWidth: '1400px', margin: '0 auto', position: 'relative', zIndex: 2 }}>
+          <div className="fade-up" style={{ textAlign: 'center', maxWidth: '720px', margin: '0 auto 56px' }}>
+            <div style={{ fontFamily: 'var(--font-body)', fontSize: '12px', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--accent)', marginBottom: '14px' }}>
+              {tr('¿Cómo funciona?', 'How does it work?')}
+            </div>
+            <h2 className="wfb-how-title" style={{ fontFamily: 'var(--font-heading)', fontSize: '42px', fontWeight: 800, color: '#fff', lineHeight: 1.15, margin: '0 0 18px 0' }}>
+              {tr('Del evento en campo a la acción, en segundos', 'From field event to action, in seconds')}
+            </h2>
+            <p style={{ fontFamily: 'var(--font-body)', fontSize: '17px', color: 'rgba(255,255,255,0.6)', lineHeight: 1.75, margin: 0 }}>
+              {tr(
+                'Un ciclo cerrado: OFS dispara, Workflow Builder orquesta, tus sistemas se enteran y OFS queda actualizado. Sin intervención manual.',
+                'A closed loop: OFS fires, Workflow Builder orchestrates, your systems are notified and OFS stays updated. No manual intervention.'
+              )}
+            </p>
+          </div>
+
+          {/* Pipeline */}
+          <div className="wfb-how-pipeline fade-up d1">
+            {HOW_STEPS.map((st, i) => {
+              const active = !howReduced && i === howStep;
+              return (
+                <Fragment key={i}>
+                  {i > 0 && (
+                    <div className="wfb-how-connector" aria-hidden="true">
+                      <svg width="40" height="14" viewBox="0 0 40 14" fill="none">
+                        <line x1="0" y1="7" x2="32" y2="7" stroke="rgba(113,177,54,0.5)" strokeWidth="1.5" strokeDasharray="5 4" className="wfb-how-dash" style={{ animation: `dashFlow 2s linear ${i * 0.3}s infinite` }} />
+                        <polygon points="32,3 40,7 32,11" fill="rgba(113,177,54,0.45)" />
+                      </svg>
+                    </div>
+                  )}
+                  <div className={`wfb-how-node${active ? ' wfb-how-node--active' : ''}${i === 2 ? ' wfb-how-node--exec' : ''}`}>
+                    <div className="wfb-how-step-num">{`0${i + 1}`}</div>
+                    <div className="wfb-how-node-icon">
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">{st.icon}</svg>
+                    </div>
+                    <div style={{ fontFamily: 'var(--font-heading)', fontSize: '15px', fontWeight: 700, color: '#fff', marginBottom: '6px' }}>{tr(st.titleEs, st.titleEn)}</div>
+                    <div style={{ fontFamily: 'var(--font-body)', fontSize: '12.5px', color: 'rgba(255,255,255,0.5)', lineHeight: 1.55 }}>{tr(st.descEs, st.descEn)}</div>
+                    {i === 2 && (
+                      <div className="wfb-how-chips">
+                        <span className="wfb-how-chip">{tr('Condición', 'Condition')}</span>
+                        <span className="wfb-how-chip wfb-how-chip--ai">{tr('✦ Nodo IA', '✦ AI node')}</span>
+                        <span className="wfb-how-chip">{tr('Acción', 'Action')}</span>
+                      </div>
+                    )}
+                  </div>
+                </Fragment>
+              );
+            })}
+          </div>
+
+          {/* Arco de retorno — cierre del ciclo */}
+          <div className="wfb-how-loop" aria-hidden="true">
+            <svg width="100%" viewBox="0 0 1160 72" fill="none" style={{ display: 'block' }}>
+              <path d="M 1110 6 C 1110 58, 50 58, 50 6" stroke="rgba(113,177,54,0.45)" strokeWidth="1.5" strokeDasharray="7 5" className="wfb-how-dash" style={{ animation: 'dashFlow 1.6s linear infinite' }} />
+              <polygon points="42,16 50,2 58,16" fill="rgba(113,177,54,0.5)" />
+            </svg>
+            <div style={{ position: 'absolute', left: '50%', top: '34px', transform: 'translateX(-50%)', display: 'inline-flex', alignItems: 'center', gap: '8px', background: '#0d1b3e', border: '1px solid rgba(113,177,54,0.35)', borderRadius: '999px', padding: '7px 18px', whiteSpace: 'nowrap' }}>
+              <span style={{ color: 'var(--accent)', fontSize: '13px' }}>↻</span>
+              <span style={{ fontFamily: 'var(--font-body)', fontSize: '12px', fontWeight: 600, color: 'rgba(255,255,255,0.75)', letterSpacing: '0.04em' }}>
+                {tr('El resultado vuelve a OFS — el ciclo se cierra solo', 'The result returns to OFS — the loop closes itself')}
+              </span>
+            </div>
+          </div>
+          <div style={{ textAlign: 'center', marginTop: '12px' }}>
+            <span className="wfb-how-loopchip-m" style={{ alignItems: 'center', gap: '8px', background: '#0d1b3e', border: '1px solid rgba(113,177,54,0.35)', borderRadius: '999px', padding: '7px 16px' }}>
+              <span style={{ color: 'var(--accent)', fontSize: '13px' }}>↻</span>
+              <span style={{ fontFamily: 'var(--font-body)', fontSize: '12px', fontWeight: 600, color: 'rgba(255,255,255,0.75)' }}>
+                {tr('El resultado vuelve a OFS — ciclo cerrado', 'The result returns to OFS — loop closed')}
+              </span>
+            </span>
+          </div>
+
+          {/* Log de ejecución en vivo */}
+          <div className="fade-up d2" style={{ maxWidth: '860px', margin: '48px auto 0', borderRadius: '14px', overflow: 'hidden', boxShadow: '0 30px 80px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,255,255,0.07)' }}>
+            <div style={{ height: '38px', background: '#1e293b', display: 'flex', alignItems: 'center', padding: '0 16px', gap: '7px' }}>
+              <div style={{ width: '11px', height: '11px', borderRadius: '50%', background: '#FF5F57' }} />
+              <div style={{ width: '11px', height: '11px', borderRadius: '50%', background: '#FFBD2E' }} />
+              <div style={{ width: '11px', height: '11px', borderRadius: '50%', background: '#28CA41' }} />
+              <span style={{ marginLeft: '10px', fontFamily: 'var(--font-body)', fontSize: '12px', fontWeight: 600, color: 'rgba(255,255,255,0.6)' }}>{tr('Ejecución en vivo', 'Live run')}</span>
+              <span style={{ marginLeft: 'auto', fontFamily: 'var(--font-body)', fontSize: '11px', color: 'rgba(255,255,255,0.3)' }}>wf: prioridad-vip</span>
+            </div>
+            <div style={{ background: '#0f172a', padding: '20px 24px' }}>
+              {HOW_LOG.map((l, i) => {
+                const shown = howReduced || i <= howStep;
+                const current = !howReduced && i === howStep;
+                return (
+                  <div key={i} style={{ display: 'flex', gap: '12px', padding: '7px 0', opacity: shown ? (current ? 1 : 0.55) : 0.14, transition: 'opacity 0.3s ease-out' }}>
+                    <span style={{ fontFamily: 'var(--font-body)', fontSize: '13px', color: 'var(--accent)', width: '16px', flexShrink: 0, textAlign: 'center' }}>{l.glyph}</span>
+                    <span style={{ fontFamily: 'var(--font-body)', fontSize: '13.5px', lineHeight: 1.5, color: current ? 'var(--accent)' : 'rgba(255,255,255,0.78)', transition: 'color 0.3s ease-out' }}>{tr(l.es, l.en)}</span>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ¿Para quién es? */}
+      <section id="para-quien" className="wfb-who-section" style={{ width: '100%', background: '#F8FAFC', padding: '96px 60px' }}>
+        <div style={{ maxWidth: '1400px', margin: '0 auto' }}>
+          <div className="fade-up" style={{ textAlign: 'center', maxWidth: '720px', margin: '0 auto 56px' }}>
+            <div style={{ fontFamily: 'var(--font-body)', fontSize: '12px', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--accent)', marginBottom: '14px' }}>
+              {tr('¿Para quién es?', 'Who is it for?')}
+            </div>
+            <h2 className="wfb-who-title" style={{ fontFamily: 'var(--font-heading)', fontSize: '42px', fontWeight: 800, color: 'var(--primary)', lineHeight: 1.15, margin: '0 0 18px 0' }}>
+              {tr('Pensado para los equipos que viven en OFS', 'Built for the teams that live in OFS')}
+            </h2>
+            <p style={{ fontFamily: 'var(--font-body)', fontSize: '17px', color: 'var(--text-body)', lineHeight: 1.75, margin: 0 }}>
+              {tr(
+                'Si tu operación corre sobre Oracle Field Service, Workflow Builder le ahorra horas a cada rol del equipo.',
+                'If your operation runs on Oracle Field Service, Workflow Builder saves hours for every role on the team.'
+              )}
+            </p>
+          </div>
+          <div className="wfb-who-grid fade-up d1">
+            {[
+              {
+                icon: <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M23 21v-2a4 4 0 0 0-3-3.87" /><path d="M16 3.13a4 4 0 0 1 0 7.75" /></svg>,
+                t: tr('Operaciones y supervisores', 'Operations & supervisors'),
+                d: tr('Notificaciones, escalados y reasignaciones automáticas, sin depender de IT. Enterate de lo que importa, cuando importa.', 'Automatic notifications, escalations and reassignments without depending on IT. Know what matters, when it matters.'),
+              },
+              {
+                icon: <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><polyline points="22 12 16 12 14 15 10 15 8 12 2 12" /><path d="M5.45 5.11L2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z" /></svg>,
+                t: tr('Despacho y back-office', 'Dispatch & back-office'),
+                d: tr('La rutina se ejecuta sola: menos tareas repetitivas y más foco en las excepciones que mueven la operación.', 'Routine runs itself: fewer repetitive tasks and more focus on the exceptions that move the operation.'),
+              },
+              {
+                icon: <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><polyline points="16 18 22 12 16 6" /><polyline points="8 6 2 12 8 18" /></svg>,
+                t: tr('IT e integraciones', 'IT & integrations'),
+                d: tr('Conectá OFS con el resto del stack vía webhooks y APIs, con autenticación segura y sin desarrollos a medida.', 'Connect OFS to the rest of your stack via webhooks and APIs, with secure authentication and no custom development.'),
+              },
+            ].map((p, i) => (
+              <div key={i} className="wfb-who-card">
+                <div className="wfb-what-icon">{p.icon}</div>
+                <div style={{ fontFamily: 'var(--font-heading)', fontSize: '19px', fontWeight: 800, color: 'var(--primary)', marginBottom: '8px' }}>{p.t}</div>
+                <div style={{ fontFamily: 'var(--font-body)', fontSize: '14.5px', color: '#6B7280', lineHeight: 1.7 }}>{p.d}</div>
+              </div>
+            ))}
+          </div>
+          <div className="fade-up d2" style={{ textAlign: 'center', marginTop: '48px' }}>
+            <p style={{ fontFamily: 'var(--font-body)', fontSize: '16px', color: 'var(--text-body)', margin: '0 0 4px 0' }}>
+              {tr('¿Usás Oracle Field Service?', 'Using Oracle Field Service?')}{' '}
+              <strong style={{ color: 'var(--primary)' }}>{tr('Entonces Workflow Builder es para tu equipo.', 'Then Workflow Builder is for your team.')}</strong>
+            </p>
+            <a href="#demo" style={{ fontFamily: 'var(--font-body)', fontSize: '15px', fontWeight: 600, color: 'var(--accent)', textDecoration: 'none' }}>
+              {tr('Agendá una demo →', 'Schedule a demo →')}
+            </a>
+          </div>
+        </div>
+      </section>
 
       {/* ── CASOS DE USO — SCROLL SNAP ── */}
       <section ref={casosSectionRef} id="casos-uso" style={{ position: 'relative' }}>

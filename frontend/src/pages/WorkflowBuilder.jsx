@@ -49,42 +49,13 @@ const CASO1_SEGS = [
 ];
 
 const CASO2_TEXT = 'Cuántas actividades tiene asignadas el recurso García para mañana en zona norte';
-const CASO2_SEGS = [
-  { t: 'Cuántas actividades tiene ', g: false },
-  { t: 'asignadas el recurso García ', g: true },
-  { t: 'para mañana ', g: false },
-  { t: 'en zona norte', g: true },
-];
 
-const CASO3_TEXT = 'Crea un flujo para capturar todos los mensajes de OFS Collaboration automáticamente y guardalos en la base de datos';
-const CASO3_SEGS = [
-  { t: 'Crea un flujo para ', g: false },
-  { t: 'capturar todos los mensajes ', g: true },
-  { t: 'de ', g: false },
-  { t: 'OFS Collaboration ', g: true },
-  { t: 'automáticamente y ', g: false },
-  { t: 'guardalos en la base de datos', g: true },
-];
-
-const CASO4_TEXT = 'Crea un flujo que detectá cuando un técnico no tiene el inventario requerido y enviá notificacion por Slack';
-const CASO4_SEGS = [
-  { t: 'Crea un flujo que ', g: false },
-  { t: 'detectá ', g: true },
-  { t: 'cuando un técnico ', g: false },
-  { t: 'no tiene el inventario requerido ', g: true },
-  { t: 'y ', g: false },
-  { t: 'enviá notificacion por Slack', g: true },
-];
-
-const CASO5_TEXT = 'Crea un flujo que cada vez que se guarda un formulario en OFS, envíe la información automáticamente al sistema legado vía API';
-const CASO5_SEGS = [
-  { t: 'Crea un flujo que cada vez que ', g: false },
-  { t: 'se guarda un formulario en OFS', g: true },
-  { t: ', ', g: false },
-  { t: 'envíe la información automáticamente ', g: true },
-  { t: 'al ', g: false },
-  { t: 'sistema legado vía API', g: true },
-];
+// Duraciones (ms) de cada paso de las escenas animadas de los casos de uso
+const S1_DUR = [450, 450, 450, 450, 550, 450, 450, 450, 700];
+const S2_DUR = [700, 900, 1000, 800];
+const S3_DUR = [650, 500, 650, 500, 650, 500, 700];
+const S4_DUR = [500, 500, 750, 850, 700];
+const S5_DUR = [550, 550, 550, 500, 800, 600];
 
 const WB_TABS = [
   { key: 'constructor', label: 'Constructor visual' },
@@ -134,6 +105,289 @@ const HOW_LOG = [
   { glyph: '✓', es: 'OFS actualizado — ciclo completado en 1.2 s', en: 'OFS updated — cycle completed in 1.2 s' },
 ];
 
+// Reveal helper: opacity/transform según el paso de la escena
+const rv = (on, dy = 8) => ({ opacity: on ? 1 : 0, transform: on ? 'none' : `translateY(${dy}px)`, transition: 'opacity 0.25s ease-out, transform 0.25s ease-out' });
+
+// Avanza step según durations; al terminar espera holdMs y reinicia (loop)
+function useSceneLoop(run, durations, holdMs) {
+  const [step, setStep] = useState(0);
+  useEffect(() => {
+    if (!run) { setStep(0); return; }
+    const t = step < durations.length
+      ? setTimeout(() => setStep((s) => s + 1), durations[step])
+      : setTimeout(() => setStep(0), holdMs);
+    return () => clearTimeout(t);
+  }, [run, step, durations, holdMs]);
+  return step;
+}
+
+function WbsHeader({ left, right }) {
+  return (
+    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '10px', marginBottom: '14px' }}>
+      <span style={{ fontFamily: 'var(--font-body)', fontSize: '11px', fontWeight: 600, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.45)' }}>{left}</span>
+      {right}
+    </div>
+  );
+}
+
+function WbsAiChip({ text }) {
+  return (
+    <span style={{ display: 'inline-flex', alignItems: 'center', gap: '5px', background: 'rgba(113,177,54,0.12)', border: '1px solid rgba(113,177,54,0.35)', borderRadius: '999px', padding: '3px 10px', fontFamily: 'var(--font-body)', fontSize: '10.5px', fontWeight: 600, color: 'var(--accent)', whiteSpace: 'nowrap' }}>✦ {text}</span>
+  );
+}
+
+// Caso 01 — el prompt se escribe, el flujo se construye nodo a nodo y se ejecuta
+function SceneFlujo({ active, reduced, tr }) {
+  const [chars, setChars] = useState(0);
+  const typed = reduced || chars >= CASO1_TEXT.length;
+  useEffect(() => {
+    if (reduced) return;
+    if (!active) { setChars(0); return; }
+    if (chars < CASO1_TEXT.length) {
+      const t = setTimeout(() => setChars((c) => c + 1), 26);
+      return () => clearTimeout(t);
+    }
+  }, [active, chars, reduced]);
+  const raw = useSceneLoop(active && !reduced && typed, S1_DUR, 2600);
+  const step = reduced ? S1_DUR.length : raw;
+  const nodes = [
+    { t: 'Trigger', d: tr('Actividad sin programar', 'Unscheduled activity') },
+    { t: tr('Condición', 'Condition'), d: tr('Recurso = Buenos Aires', 'Resource = Buenos Aires') },
+    { t: tr('Acción', 'Action'), d: tr('Programar → mañana', 'Schedule → tomorrow') },
+    { t: 'Slack', d: tr('Notificar #despacho', 'Notify #dispatch') },
+  ];
+  return (
+    <div style={{ background: '#0f172a', padding: '20px' }}>
+      <WbsHeader left={tr('Asistente IA — Constructor', 'AI Assistant — Builder')} right={<WbsAiChip text={tr('construyendo flujo', 'building flow')} />} />
+      <div style={{ border: '1px solid rgba(113,177,54,0.4)', borderRadius: '10px', padding: '14px 16px', marginBottom: '16px' }}>
+        <p style={{ margin: 0, fontFamily: 'var(--font-body)', fontSize: '13.5px', lineHeight: 1.6, minHeight: '42px' }}>
+          {(() => {
+            let rem = reduced ? CASO1_TEXT.length : chars;
+            return CASO1_SEGS.map((seg, si) => {
+              if (rem <= 0) return null;
+              const show = seg.t.slice(0, rem);
+              rem -= seg.t.length;
+              return <span key={si} style={{ color: seg.g ? 'var(--accent)' : '#fff' }}>{show}</span>;
+            });
+          })()}
+          {!reduced && <span style={{ display: 'inline-block', width: '2px', height: '1em', background: 'var(--accent)', marginLeft: '2px', verticalAlign: 'text-bottom', animation: 'blink 1s step-end infinite' }} />}
+        </p>
+      </div>
+      <div className="wbs-flow">
+        {nodes.map((n, i) => (
+          <Fragment key={i}>
+            {i > 0 && (
+              <svg className="wbs-flow-conn" width="26" height="10" viewBox="0 0 26 10" fill="none" aria-hidden="true" style={{ opacity: step >= i + 1 ? 1 : 0.15, transition: 'opacity 0.25s ease-out', flexShrink: 0, alignSelf: 'center' }}>
+                <line x1="0" y1="5" x2="19" y2="5" stroke="rgba(113,177,54,0.6)" strokeWidth="1.5" strokeDasharray="4 3" />
+                <polygon points="19,1.5 26,5 19,8.5" fill="rgba(113,177,54,0.55)" />
+              </svg>
+            )}
+            <div className="wbs-flow-node" style={{ ...rv(step >= i + 1), borderColor: step >= i + 5 ? 'rgba(113,177,54,0.65)' : 'rgba(255,255,255,0.12)' }}>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '6px' }}>
+                <span style={{ fontFamily: 'var(--font-heading)', fontSize: '11.5px', fontWeight: 700, color: '#fff' }}>{n.t}</span>
+                <span style={{ width: '14px', height: '14px', borderRadius: '50%', background: step >= i + 5 ? 'var(--accent)' : 'rgba(255,255,255,0.08)', color: '#0f172a', fontSize: '9px', fontWeight: 900, display: 'inline-flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, transition: 'background 0.25s ease-out' }}>✓</span>
+              </div>
+              <div style={{ fontFamily: 'var(--font-body)', fontSize: '10.5px', color: 'rgba(255,255,255,0.5)', marginTop: '4px' }}>{n.d}</div>
+            </div>
+          </Fragment>
+        ))}
+      </div>
+      <div style={{ ...rv(step >= 9), marginTop: '16px', display: 'flex', alignItems: 'center', gap: '10px', background: 'rgba(113,177,54,0.1)', border: '1px solid rgba(113,177,54,0.35)', borderRadius: '10px', padding: '12px 14px' }}>
+        <span style={{ color: 'var(--accent)', fontSize: '15px' }}>✓</span>
+        <span style={{ fontFamily: 'var(--font-body)', fontSize: '13px', color: '#fff' }}>{tr('12 actividades programadas para mañana — #despacho notificado', '12 activities scheduled for tomorrow — #dispatch notified')}</span>
+      </div>
+    </div>
+  );
+}
+
+// Caso 02 — conversación con el agente de IA y respuesta con datos de OFS
+function SceneAgente({ active, reduced, tr }) {
+  const raw = useSceneLoop(active && !reduced, S2_DUR, 3000);
+  const step = reduced ? S2_DUR.length : raw;
+  const rows = [
+    ['08:30', tr('Instalación — Zona Norte', 'Install — North Zone')],
+    ['11:00', tr('Reparación — Zona Norte', 'Repair — North Zone')],
+    ['15:30', tr('Mantenimiento — Zona Norte', 'Maintenance — North Zone')],
+  ];
+  return (
+    <div style={{ background: '#0f172a', padding: '20px' }}>
+      <WbsHeader left="#operaciones · Slack" right={<WbsAiChip text={tr('Agente Connexa', 'Connexa Agent')} />} />
+      <div style={{ ...rv(step >= 1), display: 'flex', justifyContent: 'flex-end', marginBottom: '12px' }}>
+        <div style={{ maxWidth: '85%', background: 'rgba(255,255,255,0.08)', borderRadius: '12px 12px 2px 12px', padding: '10px 14px', fontFamily: 'var(--font-body)', fontSize: '13px', color: '#fff', lineHeight: 1.5 }}>
+          {tr('¿', '')}{tr(CASO2_TEXT, 'How many activities does resource García have tomorrow in the north zone')}?
+        </div>
+      </div>
+      {!reduced && step === 2 && (
+        <div style={{ display: 'flex', gap: '4px', padding: '8px 2px', alignItems: 'center' }} aria-hidden="true">
+          {[0, 1, 2].map((d) => (
+            <span key={d} style={{ width: '6px', height: '6px', borderRadius: '50%', background: 'rgba(113,177,54,0.7)', animation: `blink 1.2s step-end ${d * 0.35}s infinite` }} />
+          ))}
+        </div>
+      )}
+      <div style={{ ...rv(step >= 3), display: 'flex', gap: '10px', alignItems: 'flex-start' }}>
+        <span style={{ width: '26px', height: '26px', borderRadius: '8px', background: 'rgba(113,177,54,0.15)', border: '1px solid rgba(113,177,54,0.4)', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', color: 'var(--accent)', fontSize: '12px', flexShrink: 0 }}>✦</span>
+        <div style={{ flex: 1, background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(113,177,54,0.3)', borderRadius: '2px 12px 12px 12px', padding: '12px 14px' }}>
+          <p style={{ margin: '0 0 10px 0', fontFamily: 'var(--font-body)', fontSize: '13px', color: '#fff', lineHeight: 1.5 }}>
+            {tr('García tiene 3 actividades mañana en zona norte:', 'García has 3 activities tomorrow in the north zone:')}
+          </p>
+          {rows.map((r, i) => (
+            <div key={i} style={{ display: 'flex', gap: '12px', padding: '6px 0', borderTop: '1px solid rgba(255,255,255,0.07)', fontFamily: 'var(--font-body)', fontSize: '12.5px' }}>
+              <span style={{ color: 'var(--accent)', fontWeight: 700, flexShrink: 0 }}>{r[0]}</span>
+              <span style={{ color: 'rgba(255,255,255,0.75)' }}>{r[1]}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+      <div style={{ ...rv(step >= 4), marginTop: '14px', textAlign: 'right' }}>
+        <span style={{ fontFamily: 'var(--font-body)', fontSize: '11px', color: 'rgba(255,255,255,0.4)' }}>{tr('Datos en vivo de OFS · respondido en 0.9 s', 'Live OFS data · answered in 0.9 s')}</span>
+      </div>
+    </div>
+  );
+}
+
+// Caso 03 — los chats de Collaboration se respaldan en la base de datos
+function SceneBackup({ active, reduced, tr }) {
+  const raw = useSceneLoop(active && !reduced, S3_DUR, 2800);
+  const step = reduced ? S3_DUR.length : raw;
+  const msgs = [
+    ['García', tr('Llegué al sitio, cliente ausente', 'On site, customer absent'), '14:02'],
+    ['Supervisor', tr('Esperá 10 min y reintentá', 'Wait 10 min and retry'), '14:04'],
+    ['García', tr('Cliente llegó, iniciando instalación', 'Customer arrived, starting install'), '14:11'],
+  ];
+  return (
+    <div style={{ background: '#0f172a', padding: '20px' }}>
+      <WbsHeader left="OFS Collaboration" right={<WbsAiChip text={tr('backup automático', 'auto backup')} />} />
+      <div className="wbs-split">
+        <div style={{ flex: 1, minWidth: 0 }}>
+          {msgs.map((m, i) => (
+            <div key={i} style={{ ...rv(step >= i * 2 + 1), marginBottom: '8px', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '10px', padding: '9px 12px' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', gap: '8px', marginBottom: '3px' }}>
+                <span style={{ fontFamily: 'var(--font-body)', fontSize: '11px', fontWeight: 700, color: 'var(--accent)' }}>{m[0]}</span>
+                <span style={{ fontFamily: 'var(--font-body)', fontSize: '10px', color: 'rgba(255,255,255,0.35)' }}>{m[2]}</span>
+              </div>
+              <div style={{ fontFamily: 'var(--font-body)', fontSize: '12px', color: 'rgba(255,255,255,0.8)', lineHeight: 1.45 }}>{m[1]}</div>
+            </div>
+          ))}
+        </div>
+        <svg className="wbs-split-conn" width="30" height="14" viewBox="0 0 30 14" fill="none" aria-hidden="true" style={{ flexShrink: 0, alignSelf: 'center' }}>
+          <line x1="0" y1="7" x2="22" y2="7" stroke="rgba(113,177,54,0.55)" strokeWidth="1.5" strokeDasharray="4 3" className="wfb-how-dash" style={{ animation: 'dashFlow 1.5s linear infinite' }} />
+          <polygon points="22,3 30,7 22,11" fill="rgba(113,177,54,0.5)" />
+        </svg>
+        <div style={{ flex: 1, minWidth: 0, background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '10px', padding: '12px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '7px', marginBottom: '10px' }}>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" strokeWidth="1.75" aria-hidden="true"><ellipse cx="12" cy="5" rx="9" ry="3" /><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3" /><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5" /></svg>
+            <span style={{ fontFamily: 'var(--font-body)', fontSize: '11px', fontWeight: 700, color: 'rgba(255,255,255,0.7)' }}>backup_collaboration</span>
+          </div>
+          {msgs.map((m, i) => (
+            <div key={i} style={{ ...rv(step >= i * 2 + 2, 4), display: 'flex', gap: '8px', padding: '5px 0', borderTop: '1px solid rgba(255,255,255,0.06)', fontFamily: 'var(--font-body)', fontSize: '10.5px', whiteSpace: 'nowrap', overflow: 'hidden' }}>
+              <span style={{ color: 'var(--accent)', fontWeight: 700, flexShrink: 0 }}>#{1042 + i}</span>
+              <span style={{ color: 'rgba(255,255,255,0.4)', flexShrink: 0 }}>{m[2]}</span>
+              <span style={{ color: 'rgba(255,255,255,0.65)', overflow: 'hidden', textOverflow: 'ellipsis' }}>{m[1]}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+      <div style={{ ...rv(step >= 7), marginTop: '14px', display: 'flex', alignItems: 'center', gap: '10px', background: 'rgba(113,177,54,0.1)', border: '1px solid rgba(113,177,54,0.35)', borderRadius: '10px', padding: '10px 14px' }}>
+        <span style={{ color: 'var(--accent)', fontSize: '14px' }}>✓</span>
+        <span style={{ fontFamily: 'var(--font-body)', fontSize: '12.5px', color: '#fff' }}>{tr('3/3 mensajes respaldados — trazabilidad completa para auditoría', '3/3 messages backed up — full traceability for audit')}</span>
+      </div>
+    </div>
+  );
+}
+
+// Caso 04 — checklist de inventario con faltante que dispara la alerta
+function SceneInventario({ active, reduced, tr }) {
+  const raw = useSceneLoop(active && !reduced, S4_DUR, 2800);
+  const step = reduced ? S4_DUR.length : raw;
+  const items = [
+    [tr('ONT Router AX-200', 'ONT Router AX-200'), true],
+    [tr('Cable drop 50 m', 'Drop cable 50 m'), true],
+    [tr('Modem XR-500', 'Modem XR-500'), false],
+  ];
+  return (
+    <div style={{ background: '#0f172a', padding: '20px' }}>
+      <WbsHeader left={tr('Inventario — Van 24 · Téc. García', 'Inventory — Van 24 · Tech García')} right={<WbsAiChip text={tr('detección automática', 'auto detection')} />} />
+      <div style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '10px', padding: '6px 14px', marginBottom: '14px' }}>
+        {items.map((it, i) => {
+          const missing = !it[1];
+          const on = step >= i + 1;
+          return (
+            <div key={i} style={{ ...rv(on, 4), display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '10px', padding: '9px 0', borderTop: i > 0 ? '1px solid rgba(255,255,255,0.06)' : 'none' }}>
+              <span style={{ fontFamily: 'var(--font-body)', fontSize: '12.5px', color: missing ? '#FF8A80' : 'rgba(255,255,255,0.8)' }}>{it[0]}</span>
+              {missing ? (
+                <span style={{ fontFamily: 'var(--font-body)', fontSize: '10.5px', fontWeight: 700, letterSpacing: '0.06em', color: '#FF8A80', background: 'rgba(255,95,87,0.12)', border: '1px solid rgba(255,95,87,0.35)', borderRadius: '999px', padding: '2px 9px', whiteSpace: 'nowrap' }}>{tr('FALTANTE', 'MISSING')}</span>
+              ) : (
+                <span style={{ color: 'var(--accent)', fontSize: '13px' }}>✓</span>
+              )}
+            </div>
+          );
+        })}
+      </div>
+      <div style={{ ...rv(step >= 4), background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.12)', borderLeft: '3px solid var(--accent)', borderRadius: '10px', padding: '12px 14px', marginBottom: '10px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '7px', marginBottom: '5px' }}>
+          <span style={{ fontFamily: 'var(--font-body)', fontSize: '11px', fontWeight: 700, color: '#fff' }}>Slack · #supervisores</span>
+          <span style={{ fontFamily: 'var(--font-body)', fontSize: '10px', color: 'rgba(255,255,255,0.35)' }}>{tr('ahora', 'now')}</span>
+        </div>
+        <div style={{ fontFamily: 'var(--font-body)', fontSize: '12.5px', color: 'rgba(255,255,255,0.8)', lineHeight: 1.5 }}>
+          ⚠ {tr('García sin Modem XR-500 para la actividad #4512 de las 09:30', 'García is missing Modem XR-500 for activity #4512 at 09:30')}
+        </div>
+      </div>
+      <div style={{ ...rv(step >= 5), display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '10px', flexWrap: 'wrap' }}>
+        <span style={{ fontFamily: 'var(--font-body)', fontSize: '11px', color: 'rgba(255,255,255,0.45)' }}>{tr('+ copia por Email al supervisor de zona', '+ Email copy to the zone supervisor')}</span>
+        <span style={{ fontFamily: 'var(--font-body)', fontSize: '11px', fontWeight: 600, color: 'var(--accent)' }}>{tr('Notificado en 0.8 s', 'Notified in 0.8 s')}</span>
+      </div>
+    </div>
+  );
+}
+
+// Caso 05 — el formulario se completa, se guarda y viaja al sistema externo
+function SceneFormulario({ active, reduced, tr }) {
+  const raw = useSceneLoop(active && !reduced, S5_DUR, 2800);
+  const step = reduced ? S5_DUR.length : raw;
+  const fields = [
+    [tr('Cliente', 'Customer'), 'María López'],
+    [tr('Dirección', 'Address'), 'Av. Córdoba 1180'],
+    [tr('Firma digital', 'Digital signature'), '✓'],
+  ];
+  return (
+    <div style={{ background: '#0f172a', padding: '20px' }}>
+      <WbsHeader left={tr('Formulario OFS — Acta de instalación', 'OFS Form — Install report')} right={<WbsAiChip text={tr('sync automático', 'auto sync')} />} />
+      <div className="wbs-s5">
+        <div style={{ flex: '1 1 55%', minWidth: 0, background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '10px', padding: '12px 14px' }}>
+          {fields.map((f, i) => (
+            <div key={i} style={{ marginBottom: i < 2 ? '10px' : 0 }}>
+              <div style={{ fontFamily: 'var(--font-body)', fontSize: '10px', fontWeight: 600, letterSpacing: '0.06em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.35)', marginBottom: '3px' }}>{f[0]}</div>
+              <div style={{ background: 'rgba(255,255,255,0.05)', border: `1px solid ${step >= i + 1 ? 'rgba(113,177,54,0.45)' : 'rgba(255,255,255,0.1)'}`, borderRadius: '7px', padding: '7px 10px', fontFamily: 'var(--font-body)', fontSize: '12.5px', color: step >= i + 1 ? '#fff' : 'rgba(255,255,255,0.2)', minHeight: '17px', transition: 'border-color 0.25s ease-out, color 0.25s ease-out' }}>
+                {step >= i + 1 ? f[1] : '—'}
+              </div>
+            </div>
+          ))}
+          <div style={{ marginTop: '12px', textAlign: 'right' }}>
+            <span style={{ display: 'inline-block', background: step >= 4 ? 'var(--accent)' : 'rgba(113,177,54,0.25)', color: step >= 4 ? '#fff' : 'rgba(255,255,255,0.5)', borderRadius: '7px', padding: '7px 16px', fontFamily: 'var(--font-body)', fontSize: '12px', fontWeight: 700, transform: step === 4 ? 'scale(0.96)' : 'none', transition: 'background 0.2s ease-out, transform 0.15s ease-out' }}>
+              {step >= 4 ? tr('Guardado ✓', 'Saved ✓') : tr('Guardar', 'Save')}
+            </span>
+          </div>
+        </div>
+        <div className="wbs-s5-mid" style={{ flexShrink: 0, alignSelf: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '6px' }}>
+          <span style={{ ...rv(step >= 5, 0), fontFamily: 'var(--font-body)', fontSize: '10px', color: 'var(--accent)', background: 'rgba(113,177,54,0.1)', border: '1px solid rgba(113,177,54,0.35)', borderRadius: '6px', padding: '3px 8px', whiteSpace: 'nowrap' }}>{'{ form: #8841 }'}</span>
+          <svg width="34" height="14" viewBox="0 0 34 14" fill="none" aria-hidden="true">
+            <line x1="0" y1="7" x2="26" y2="7" stroke="rgba(113,177,54,0.55)" strokeWidth="1.5" strokeDasharray="4 3" className="wfb-how-dash" style={{ animation: step >= 5 ? 'dashFlow 1.2s linear infinite' : 'none', opacity: step >= 5 ? 1 : 0.25, transition: 'opacity 0.25s ease-out' }} />
+            <polygon points="26,3 34,7 26,11" fill="rgba(113,177,54,0.5)" />
+          </svg>
+        </div>
+        <div style={{ flex: '1 1 32%', minWidth: 0, alignSelf: 'center', background: 'rgba(255,255,255,0.03)', border: `1px solid ${step >= 6 ? 'rgba(113,177,54,0.5)' : 'rgba(255,255,255,0.1)'}`, borderRadius: '10px', padding: '14px', textAlign: 'center', transition: 'border-color 0.25s ease-out' }}>
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" strokeWidth="1.75" aria-hidden="true" style={{ marginBottom: '6px' }}><rect x="2" y="2" width="20" height="8" rx="2" /><rect x="2" y="14" width="20" height="8" rx="2" /><line x1="6" y1="6" x2="6.01" y2="6" /><line x1="6" y1="18" x2="6.01" y2="18" /></svg>
+          <div style={{ fontFamily: 'var(--font-heading)', fontSize: '12px', fontWeight: 700, color: '#fff', marginBottom: '4px' }}>{tr('Sistema legado / ERP', 'Legacy system / ERP')}</div>
+          <span style={{ ...rv(step >= 6, 4), display: 'inline-block', fontFamily: 'var(--font-body)', fontSize: '10.5px', fontWeight: 700, color: 'var(--accent)', background: 'rgba(113,177,54,0.12)', border: '1px solid rgba(113,177,54,0.4)', borderRadius: '999px', padding: '2px 10px' }}>200 OK</span>
+        </div>
+      </div>
+      <div style={{ ...rv(step >= 6), marginTop: '14px', textAlign: 'center' }}>
+        <span style={{ fontFamily: 'var(--font-body)', fontSize: '11.5px', color: 'rgba(255,255,255,0.45)' }}>{tr('Cada formulario guardado en OFS se sincroniza vía API — sin intervención manual', 'Every form saved in OFS syncs via API — no manual intervention')}</span>
+      </div>
+    </div>
+  );
+}
+
 export default function WorkflowBuilderClient() {
   const { lang } = useLang();
   const ctaRef = useRef(null);
@@ -145,18 +399,7 @@ export default function WorkflowBuilderClient() {
   const caseRefs = useRef([]);
   const activeCasoRef = useRef(0);
   const [dotsVisible, setDotsVisible] = useState(false);
-  const [caso1Chars, setCaso1Chars] = useState(0);
-  const [caso1ShowImg, setCaso1ShowImg] = useState(false);
-  const [caso2Chars, setCaso2Chars] = useState(0);
-  const [caso2ShowAsis, setCaso2ShowAsis] = useState(false);
-  const [caso2ShowImg, setCaso2ShowImg] = useState(false);
-  const [caso2Scale, setCaso2Scale] = useState(1);
-  const [caso3Chars, setCaso3Chars] = useState(0);
-  const [caso3ShowImg, setCaso3ShowImg] = useState(false);
-  const [caso4Chars, setCaso4Chars] = useState(0);
-  const [caso4ShowImg, setCaso4ShowImg] = useState(false);
-  const [caso5Chars, setCaso5Chars] = useState(0);
-  const [caso5ShowImg, setCaso5ShowImg] = useState(false);
+  const [reducedAnim, setReducedAnim] = useState(false);
   const [howStep, setHowStep] = useState(0);
   const [howReduced, setHowReduced] = useState(false);
   const howRef = useRef(null);
@@ -230,81 +473,8 @@ export default function WorkflowBuilderClient() {
   }, []);
 
   useEffect(() => {
-    const full = CASO1_TEXT.length;
-    let t;
-    if (!caso1ShowImg) {
-      if (caso1Chars < full) {
-        t = setTimeout(() => setCaso1Chars(c => c + 1), 45);
-      } else {
-        t = setTimeout(() => setCaso1ShowImg(true), 600);
-      }
-    } else {
-      t = setTimeout(() => { setCaso1Chars(0); setCaso1ShowImg(false); }, 3000);
-    }
-    return () => clearTimeout(t);
-  }, [caso1Chars, caso1ShowImg]);
-
-  useEffect(() => {
-    const full = CASO2_TEXT.length;
-    let t;
-    if (caso2Chars < full) {
-      t = setTimeout(() => setCaso2Chars(c => c + 1), 45);
-    } else if (!caso2ShowAsis && !caso2ShowImg) {
-      t = setTimeout(() => setCaso2ShowAsis(true), 600);
-    } else if (caso2ShowAsis && !caso2ShowImg) {
-      t = setTimeout(() => { setCaso2ShowAsis(false); setCaso2ShowImg(true); }, 2000);
-    } else if (!caso2ShowAsis && caso2ShowImg && caso2Scale === 1) {
-      t = setTimeout(() => setCaso2Scale(1.15), 1000);
-    } else if (!caso2ShowAsis && caso2ShowImg && caso2Scale !== 1) {
-      t = setTimeout(() => { setCaso2Chars(0); setCaso2ShowAsis(false); setCaso2ShowImg(false); setCaso2Scale(1); }, 5000);
-    }
-    return () => clearTimeout(t);
-  }, [caso2Chars, caso2ShowAsis, caso2ShowImg, caso2Scale]);
-
-  useEffect(() => {
-    const full = CASO3_TEXT.length;
-    let t;
-    if (!caso3ShowImg) {
-      if (caso3Chars < full) {
-        t = setTimeout(() => setCaso3Chars(c => c + 1), 45);
-      } else {
-        t = setTimeout(() => setCaso3ShowImg(true), 600);
-      }
-    } else {
-      t = setTimeout(() => { setCaso3Chars(0); setCaso3ShowImg(false); }, 3000);
-    }
-    return () => clearTimeout(t);
-  }, [caso3Chars, caso3ShowImg]);
-
-  useEffect(() => {
-    const full = CASO4_TEXT.length;
-    let t;
-    if (!caso4ShowImg) {
-      if (caso4Chars < full) {
-        t = setTimeout(() => setCaso4Chars(c => c + 1), 45);
-      } else {
-        t = setTimeout(() => setCaso4ShowImg(true), 600);
-      }
-    } else {
-      t = setTimeout(() => { setCaso4Chars(0); setCaso4ShowImg(false); }, 3000);
-    }
-    return () => clearTimeout(t);
-  }, [caso4Chars, caso4ShowImg]);
-
-  useEffect(() => {
-    const full = CASO5_TEXT.length;
-    let t;
-    if (!caso5ShowImg) {
-      if (caso5Chars < full) {
-        t = setTimeout(() => setCaso5Chars(c => c + 1), 45);
-      } else {
-        t = setTimeout(() => setCaso5ShowImg(true), 600);
-      }
-    } else {
-      t = setTimeout(() => { setCaso5Chars(0); setCaso5ShowImg(false); }, 3000);
-    }
-    return () => clearTimeout(t);
-  }, [caso5Chars, caso5ShowImg]);
+    setReducedAnim(window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+  }, []);
 
   useEffect(() => {
     const el = howRef.current;
@@ -349,6 +519,19 @@ export default function WorkflowBuilderClient() {
         @keyframes blink { 50% { opacity: 0; } }
         .wfb-dot-btn { background: none; cursor: pointer; padding: 0; border: none; }
         .wfb-dot-btn:focus-visible { outline: 2px solid #71B136; outline-offset: 3px; border-radius: 50%; }
+        .wbs-flow { display: flex; align-items: stretch; gap: 6px; }
+        .wbs-flow-node { flex: 1; min-width: 0; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.12); border-radius: 10px; padding: 10px 12px; }
+        .wbs-split { display: flex; gap: 12px; align-items: stretch; }
+        .wbs-s5 { display: flex; gap: 12px; align-items: stretch; }
+        @media (max-width: 768px) {
+          .wbs-flow { flex-wrap: wrap; gap: 8px; }
+          .wbs-flow-conn { display: none; }
+          .wbs-flow-node { flex: 1 1 calc(50% - 4px); min-width: calc(50% - 4px); }
+          .wbs-split { flex-direction: column; }
+          .wbs-split-conn { transform: rotate(90deg); margin: 2px auto; }
+          .wbs-s5 { flex-direction: column; }
+          .wbs-s5-mid { transform: rotate(90deg); margin: 2px auto; }
+        }
       `}</style>
       <style>{`
         @media (max-width: 768px) {
@@ -772,150 +955,15 @@ export default function WorkflowBuilderClient() {
                       <div style={{ width: '11px', height: '11px', borderRadius: '50%', background: '#28CA41' }} />
                     </div>
                     {idx === 0 ? (
-                      <div style={{ background: '#0f172a', padding: '20px' }}>
-                        <div style={{ border: '1px solid #71B136', borderRadius: '12px', padding: '20px' }}>
-                          <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '16px' }}>
-                            <svg width="14" height="12" viewBox="0 0 28 24" fill="none">
-                              <path d="M16 1.5l.9 3.2 3.2.9-3.2.9L16 9.7l-.9-3.2-3.2-.9 3.2-.9z" fill="#71B136" stroke="#71B136" strokeWidth="0.4" strokeLinejoin="round"/>
-                              <path d="M7 7l.6 2.2 2.2.6-2.2.6L7 12.6l-.6-2.2-2.2-.6 2.2-.6z" fill="#71B136" stroke="#71B136" strokeWidth="0.3" strokeLinejoin="round" opacity="0.65"/>
-                              <path d="M21 14l.5 1.6 1.6.5-1.6.5L21 18.2l-.5-1.6-1.6-.5 1.6-.5z" fill="#71B136" stroke="#71B136" strokeWidth="0.3" strokeLinejoin="round" opacity="0.45"/>
-                            </svg>
-                            <span style={{ color: '#71B136', fontSize: '12px', fontWeight: 600, letterSpacing: '0.06em' }}>Asistente IA</span>
-                          </div>
-                          <p style={{ margin: 0, fontSize: '15px', lineHeight: 1.7, minHeight: '80px' }}>
-                            {(() => {
-                              let rem = caso1Chars;
-                              return CASO1_SEGS.map((seg, si) => {
-                                if (rem <= 0) return null;
-                                const show = seg.t.slice(0, rem);
-                                rem -= seg.t.length;
-                                return <span key={si} style={{ color: seg.g ? '#71B136' : 'white' }}>{show}</span>;
-                              });
-                            })()}
-                            <span style={{ display: 'inline-block', width: '2px', height: '1em', background: '#71B136', marginLeft: '2px', verticalAlign: 'text-bottom', animation: 'blink 1s step-end infinite' }} />
-                          </p>
-                        </div>
-                        <div style={{ marginTop: '16px', opacity: caso1ShowImg ? 1 : 0, transition: 'opacity 0.8s ease' }}>
-                          <img src="/assets/caso1.png" style={{ width: '100%', height: 'auto', display: 'block', borderRadius: '10px' }} alt={tr(caso.titleEs, caso.titleEn)} />
-                        </div>
-                      </div>
+                      <SceneFlujo active={activeCaso === 0 && dotsVisible} reduced={reducedAnim} tr={tr} />
                     ) : idx === 1 ? (
-                      <div style={{ background: '#0f172a', padding: '20px' }}>
-                        <div style={{ border: '1px solid #71B136', borderRadius: '12px', padding: '20px' }}>
-                          <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '16px' }}>
-                            <svg width="14" height="12" viewBox="0 0 28 24" fill="none">
-                              <path d="M16 1.5l.9 3.2 3.2.9-3.2.9L16 9.7l-.9-3.2-3.2-.9 3.2-.9z" fill="#71B136" stroke="#71B136" strokeWidth="0.4" strokeLinejoin="round"/>
-                              <path d="M7 7l.6 2.2 2.2.6-2.2.6L7 12.6l-.6-2.2-2.2-.6 2.2-.6z" fill="#71B136" stroke="#71B136" strokeWidth="0.3" strokeLinejoin="round" opacity="0.65"/>
-                              <path d="M21 14l.5 1.6 1.6.5-1.6.5L21 18.2l-.5-1.6-1.6-.5 1.6-.5z" fill="#71B136" stroke="#71B136" strokeWidth="0.3" strokeLinejoin="round" opacity="0.45"/>
-                            </svg>
-                            <span style={{ color: '#71B136', fontSize: '12px', fontWeight: 600, letterSpacing: '0.06em' }}>Asistente IA</span>
-                          </div>
-                          <p style={{ margin: 0, fontSize: '15px', lineHeight: 1.7, minHeight: '80px' }}>
-                            {(() => {
-                              let rem = caso2Chars;
-                              return CASO2_SEGS.map((seg, si) => {
-                                if (rem <= 0) return null;
-                                const show = seg.t.slice(0, rem);
-                                rem -= seg.t.length;
-                                return <span key={si} style={{ color: seg.g ? '#71B136' : 'white' }}>{show}</span>;
-                              });
-                            })()}
-                            <span style={{ display: 'inline-block', width: '2px', height: '1em', background: '#71B136', marginLeft: '2px', verticalAlign: 'text-bottom', animation: 'blink 1s step-end infinite' }} />
-                          </p>
-                        </div>
-                        <div style={{ marginTop: '16px', position: 'relative' }}>
-                          <div style={{ overflow: 'hidden', opacity: caso2ShowImg ? 1 : 0, transition: 'opacity 0.8s ease' }}>
-                            <img src="/assets/caso2.png" style={{ width: '100%', height: 'auto', display: 'block', borderRadius: '10px', transform: `scale(${caso2Scale})`, transformOrigin: 'center center', transition: 'transform 3s ease-in-out' }} alt={tr(caso.titleEs, caso.titleEn)} />
-                          </div>
-                          <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, opacity: caso2ShowAsis ? 1 : 0, transition: 'opacity 0.8s ease', borderRadius: '10px', overflow: 'hidden' }}>
-                            <img src="/assets/asis2.png" style={{ width: '100%', height: '100%', display: 'block', objectFit: 'cover', borderRadius: '10px' }} alt={tr(caso.titleEs, caso.titleEn)} />
-                          </div>
-                        </div>
-                      </div>
+                      <SceneAgente active={activeCaso === 1 && dotsVisible} reduced={reducedAnim} tr={tr} />
                     ) : idx === 2 ? (
-                      <div style={{ background: '#0f172a', padding: '20px' }}>
-                        <div style={{ border: '1px solid #71B136', borderRadius: '12px', padding: '20px' }}>
-                          <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '16px' }}>
-                            <svg width="14" height="12" viewBox="0 0 28 24" fill="none">
-                              <path d="M16 1.5l.9 3.2 3.2.9-3.2.9L16 9.7l-.9-3.2-3.2-.9 3.2-.9z" fill="#71B136" stroke="#71B136" strokeWidth="0.4" strokeLinejoin="round"/>
-                              <path d="M7 7l.6 2.2 2.2.6-2.2.6L7 12.6l-.6-2.2-2.2-.6 2.2-.6z" fill="#71B136" stroke="#71B136" strokeWidth="0.3" strokeLinejoin="round" opacity="0.65"/>
-                              <path d="M21 14l.5 1.6 1.6.5-1.6.5L21 18.2l-.5-1.6-1.6-.5 1.6-.5z" fill="#71B136" stroke="#71B136" strokeWidth="0.3" strokeLinejoin="round" opacity="0.45"/>
-                            </svg>
-                            <span style={{ color: '#71B136', fontSize: '12px', fontWeight: 600, letterSpacing: '0.06em' }}>Asistente IA</span>
-                          </div>
-                          <p style={{ margin: 0, fontSize: '15px', lineHeight: 1.7, minHeight: '80px' }}>
-                            {(() => {
-                              let rem = caso3Chars;
-                              return CASO3_SEGS.map((seg, si) => {
-                                if (rem <= 0) return null;
-                                const show = seg.t.slice(0, rem);
-                                rem -= seg.t.length;
-                                return <span key={si} style={{ color: seg.g ? '#71B136' : 'white' }}>{show}</span>;
-                              });
-                            })()}
-                            <span style={{ display: 'inline-block', width: '2px', height: '1em', background: '#71B136', marginLeft: '2px', verticalAlign: 'text-bottom', animation: 'blink 1s step-end infinite' }} />
-                          </p>
-                        </div>
-                        <div style={{ marginTop: '16px', opacity: caso3ShowImg ? 1 : 0, transition: 'opacity 0.8s ease' }}>
-                          <img src="/assets/caso3.png" style={{ width: '100%', height: 'auto', display: 'block', borderRadius: '10px' }} alt={tr(caso.titleEs, caso.titleEn)} />
-                        </div>
-                      </div>
+                      <SceneBackup active={activeCaso === 2 && dotsVisible} reduced={reducedAnim} tr={tr} />
                     ) : idx === 3 ? (
-                      <div style={{ background: '#0f172a', padding: '20px' }}>
-                        <div style={{ border: '1px solid #71B136', borderRadius: '12px', padding: '20px' }}>
-                          <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '16px' }}>
-                            <svg width="14" height="12" viewBox="0 0 28 24" fill="none">
-                              <path d="M16 1.5l.9 3.2 3.2.9-3.2.9L16 9.7l-.9-3.2-3.2-.9 3.2-.9z" fill="#71B136" stroke="#71B136" strokeWidth="0.4" strokeLinejoin="round"/>
-                              <path d="M7 7l.6 2.2 2.2.6-2.2.6L7 12.6l-.6-2.2-2.2-.6 2.2-.6z" fill="#71B136" stroke="#71B136" strokeWidth="0.3" strokeLinejoin="round" opacity="0.65"/>
-                              <path d="M21 14l.5 1.6 1.6.5-1.6.5L21 18.2l-.5-1.6-1.6-.5 1.6-.5z" fill="#71B136" stroke="#71B136" strokeWidth="0.3" strokeLinejoin="round" opacity="0.45"/>
-                            </svg>
-                            <span style={{ color: '#71B136', fontSize: '12px', fontWeight: 600, letterSpacing: '0.06em' }}>Asistente IA</span>
-                          </div>
-                          <p style={{ margin: 0, fontSize: '15px', lineHeight: 1.7, minHeight: '80px' }}>
-                            {(() => {
-                              let rem = caso4Chars;
-                              return CASO4_SEGS.map((seg, si) => {
-                                if (rem <= 0) return null;
-                                const show = seg.t.slice(0, rem);
-                                rem -= seg.t.length;
-                                return <span key={si} style={{ color: seg.g ? '#71B136' : 'white' }}>{show}</span>;
-                              });
-                            })()}
-                            <span style={{ display: 'inline-block', width: '2px', height: '1em', background: '#71B136', marginLeft: '2px', verticalAlign: 'text-bottom', animation: 'blink 1s step-end infinite' }} />
-                          </p>
-                        </div>
-                        <div style={{ marginTop: '16px', opacity: caso4ShowImg ? 1 : 0, transition: 'opacity 0.8s ease' }}>
-                          <img src="/assets/caso4.png" style={{ width: '100%', height: 'auto', display: 'block', borderRadius: '10px' }} alt={tr(caso.titleEs, caso.titleEn)} />
-                        </div>
-                      </div>
+                      <SceneInventario active={activeCaso === 3 && dotsVisible} reduced={reducedAnim} tr={tr} />
                     ) : (
-                      <div style={{ background: '#0f172a', padding: '20px' }}>
-                        <div style={{ border: '1px solid #71B136', borderRadius: '12px', padding: '20px' }}>
-                          <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '16px' }}>
-                            <svg width="14" height="12" viewBox="0 0 28 24" fill="none">
-                              <path d="M16 1.5l.9 3.2 3.2.9-3.2.9L16 9.7l-.9-3.2-3.2-.9 3.2-.9z" fill="#71B136" stroke="#71B136" strokeWidth="0.4" strokeLinejoin="round"/>
-                              <path d="M7 7l.6 2.2 2.2.6-2.2.6L7 12.6l-.6-2.2-2.2-.6 2.2-.6z" fill="#71B136" stroke="#71B136" strokeWidth="0.3" strokeLinejoin="round" opacity="0.65"/>
-                              <path d="M21 14l.5 1.6 1.6.5-1.6.5L21 18.2l-.5-1.6-1.6-.5 1.6-.5z" fill="#71B136" stroke="#71B136" strokeWidth="0.3" strokeLinejoin="round" opacity="0.45"/>
-                            </svg>
-                            <span style={{ color: '#71B136', fontSize: '12px', fontWeight: 600, letterSpacing: '0.06em' }}>Asistente IA</span>
-                          </div>
-                          <p style={{ margin: 0, fontSize: '15px', lineHeight: 1.7, minHeight: '80px' }}>
-                            {(() => {
-                              let rem = caso5Chars;
-                              return CASO5_SEGS.map((seg, si) => {
-                                if (rem <= 0) return null;
-                                const show = seg.t.slice(0, rem);
-                                rem -= seg.t.length;
-                                return <span key={si} style={{ color: seg.g ? '#71B136' : 'white' }}>{show}</span>;
-                              });
-                            })()}
-                            <span style={{ display: 'inline-block', width: '2px', height: '1em', background: '#71B136', marginLeft: '2px', verticalAlign: 'text-bottom', animation: 'blink 1s step-end infinite' }} />
-                          </p>
-                        </div>
-                        <div style={{ marginTop: '16px', opacity: caso5ShowImg ? 1 : 0, transition: 'opacity 0.8s ease' }}>
-                          <img src="/assets/caso5.png" style={{ width: '100%', height: 'auto', display: 'block', borderRadius: '10px' }} alt={tr(caso.titleEs, caso.titleEn)} />
-                        </div>
-                      </div>
+                      <SceneFormulario active={activeCaso === 4 && dotsVisible} reduced={reducedAnim} tr={tr} />
                     )}
                   </div>
                 </div>

@@ -641,6 +641,214 @@ function HeroCanvas({ active, reduced, tr }) {
   );
 }
 
+// Demo E2E — historia interactiva: técnico → WF Builder → OFS, con capítulos clickeables
+const E2E_DUR = [900, 1700, 700, 900, 1000, 800, 1000, 900];
+const E2E_MSG_ES = 'Listo! Instalación terminada y probada ✅';
+const E2E_MSG_EN = 'Done! Install finished and tested ✅';
+
+function useStorySteps(run, durations, holdMs) {
+  const [step, setStep] = useState(0);
+  useEffect(() => {
+    if (!run) { setStep(0); return; }
+    const t = step < durations.length
+      ? setTimeout(() => setStep((s) => s + 1), durations[step])
+      : setTimeout(() => setStep(0), holdMs);
+    return () => clearTimeout(t);
+  }, [run, step, durations, holdMs]);
+  return [step, setStep];
+}
+
+function E2EStory({ active, reduced, tr }) {
+  const [rawStep, setRawStep] = useStorySteps(active && !reduced, E2E_DUR, 3500);
+  const step = reduced ? E2E_DUR.length : rawStep;
+  const msg = tr(E2E_MSG_ES, E2E_MSG_EN);
+  const [chars, setChars] = useState(0);
+  useEffect(() => {
+    if (reduced) return;
+    if (step < 2) { setChars(0); return; }
+    if (step === 2 && chars < msg.length) {
+      const t = setTimeout(() => setChars((c) => c + 1), 32);
+      return () => clearTimeout(t);
+    }
+  }, [step, chars, reduced, msg.length]);
+  const shown = reduced ? msg : msg.slice(0, step > 2 ? msg.length : chars);
+  const z1Hot = (step >= 1 && step <= 3) || step >= 8;
+  const z2Hot = step >= 3 && step <= 6;
+  const z3Hot = step >= 6;
+  const zone = (hot) => ({ opacity: step === 0 ? 0.5 : hot ? 1 : 0.5, transform: hot ? 'scale(1.02)' : 'scale(0.98)', transition: 'opacity 0.35s ease-out, transform 0.35s ease-out' });
+  const chapters = [
+    { n: '1', lbl: tr('Técnico', 'Technician'), jump: 1, on: z1Hot },
+    { n: '2', lbl: 'WF Builder', jump: 4, on: z2Hot },
+    { n: '3', lbl: 'OFS', jump: 7, on: z3Hot },
+  ];
+  const miniNode = (on, glyph, title, sub) => (
+    <div style={{ display: 'flex', alignItems: 'center', gap: '9px', background: '#1e293b', border: `1px solid ${on ? 'rgba(113,177,54,0.65)' : 'rgba(255,255,255,0.12)'}`, borderRadius: '10px', padding: '9px 11px', boxShadow: on ? '0 0 20px rgba(113,177,54,0.18)' : 'none', transition: 'border-color 0.25s ease-out, box-shadow 0.25s ease-out' }}>
+      <span style={{ width: '22px', height: '22px', borderRadius: '6px', background: 'rgba(113,177,54,0.12)', border: '1px solid rgba(113,177,54,0.3)', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', color: 'var(--accent)', fontSize: '11px', flexShrink: 0 }}>{glyph}</span>
+      <div style={{ minWidth: 0 }}>
+        <div style={{ fontFamily: 'var(--font-heading)', fontSize: '11.5px', fontWeight: 700, color: '#fff', whiteSpace: 'nowrap' }}>{title}</div>
+        <div style={{ fontFamily: 'var(--font-body)', fontSize: '10px', color: 'rgba(255,255,255,0.5)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{sub}</div>
+      </div>
+      <span style={{ marginLeft: 'auto', width: '13px', height: '13px', borderRadius: '50%', flexShrink: 0, background: on ? 'var(--accent)' : 'rgba(255,255,255,0.08)', color: '#0f172a', fontSize: '8px', fontWeight: 900, display: 'inline-flex', alignItems: 'center', justifyContent: 'center', transition: 'background 0.25s ease-out' }}>✓</span>
+    </div>
+  );
+  return (
+    <div>
+      {/* Escenario */}
+      <div className="wfb-e2e-stage fade-up d1">
+        {/* Zona 1 — técnico + teléfono */}
+        <div className="wfb-e2e-zone" style={zone(z1Hot)}>
+          <div style={{ display: 'flex', alignItems: 'flex-end', gap: '10px', justifyContent: 'center' }}>
+            <svg className="wfb-e2e-tech" viewBox="0 0 120 170" width="84" aria-hidden="true" style={{ flexShrink: 0 }}>
+              <path d="M30 38 a30 26 0 0 1 60 0 z" fill="var(--accent)" />
+              <rect x="24" y="36" width="72" height="7" rx="3.5" fill="var(--accent)" />
+              <circle cx="60" cy="58" r="17" fill="#E9C39B" />
+              <circle cx="54" cy="56" r="1.8" fill="#172554" />
+              <circle cx="66" cy="56" r="1.8" fill="#172554" />
+              <path d="M54 64 q6 5 12 0" stroke="#172554" strokeWidth="1.6" fill="none" strokeLinecap="round" />
+              <path d="M38 84 q22 -10 44 0 l-3 48 h-38 z" fill="rgba(113,177,54,0.85)" />
+              <rect x="42" y="100" width="36" height="5" rx="2.5" fill="rgba(255,255,255,0.75)" />
+              <rect x="42" y="113" width="36" height="5" rx="2.5" fill="rgba(255,255,255,0.75)" />
+              <path d="M42 90 q-14 8 -10 26" stroke="#E9C39B" strokeWidth="8" fill="none" strokeLinecap="round" />
+              <path d="M78 90 q16 4 14 22" stroke="#E9C39B" strokeWidth="8" fill="none" strokeLinecap="round" />
+              <rect x="85" y="105" width="14" height="22" rx="3" fill="#0b1220" stroke="rgba(113,177,54,0.6)" strokeWidth="1.5" />
+              <rect x="46" y="132" width="11" height="28" rx="5" fill="#172554" />
+              <rect x="63" y="132" width="11" height="28" rx="5" fill="#172554" />
+              <rect x="44" y="157" width="15" height="8" rx="3" fill="#0d1426" />
+              <rect x="61" y="157" width="15" height="8" rx="3" fill="#0d1426" />
+            </svg>
+            <div style={{ width: '212px', borderRadius: '20px', background: '#0b1220', border: '1px solid rgba(255,255,255,0.14)', overflow: 'hidden', boxShadow: '0 18px 50px rgba(0,0,0,0.45)' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '10px 12px', background: 'rgba(255,255,255,0.04)', borderBottom: '1px solid rgba(255,255,255,0.07)' }}>
+                <span style={{ width: '24px', height: '24px', borderRadius: '50%', background: 'rgba(113,177,54,0.2)', border: '1px solid rgba(113,177,54,0.45)', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', color: 'var(--accent)', fontSize: '11px', fontWeight: 800, flexShrink: 0 }}>C</span>
+                <div style={{ minWidth: 0 }}>
+                  <div style={{ fontFamily: 'var(--font-heading)', fontSize: '11px', fontWeight: 700, color: '#fff' }}>Connexa Field Bot</div>
+                  <div style={{ fontFamily: 'var(--font-body)', fontSize: '9.5px', color: 'var(--accent)' }}>{tr('en línea', 'online')}</div>
+                </div>
+              </div>
+              <div style={{ padding: '12px 10px', minHeight: '190px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                <div style={{ ...rv(step >= 1, 5), alignSelf: 'flex-start', maxWidth: '88%', background: 'rgba(255,255,255,0.07)', borderRadius: '10px 10px 10px 2px', padding: '7px 10px', fontFamily: 'var(--font-body)', fontSize: '11px', color: 'rgba(255,255,255,0.85)', lineHeight: 1.45 }}>
+                  {tr('Hola García 👋 ¿novedades de la actividad #4512?', 'Hi García 👋 any updates on activity #4512?')}
+                </div>
+                <div style={{ ...rv(step >= 2, 5), alignSelf: 'flex-end', maxWidth: '88%', background: 'rgba(113,177,54,0.16)', border: '1px solid rgba(113,177,54,0.3)', borderRadius: '10px 10px 2px 10px', padding: '7px 10px', fontFamily: 'var(--font-body)', fontSize: '11px', color: '#fff', lineHeight: 1.45 }}>
+                  {shown}
+                  {!reduced && step === 2 && <span style={{ display: 'inline-block', width: '2px', height: '0.9em', background: 'var(--accent)', marginLeft: '2px', verticalAlign: 'text-bottom', animation: 'blink 1s step-end infinite' }} />}
+                  <span style={{ display: 'block', textAlign: 'right', fontSize: '9px', color: step >= 3 ? 'var(--accent)' : 'rgba(255,255,255,0.35)', transition: 'color 0.25s ease-out' }}>✓✓</span>
+                </div>
+                <div style={{ ...rv(step >= 8, 5), alignSelf: 'flex-start', maxWidth: '88%', background: 'rgba(255,255,255,0.07)', borderRadius: '10px 10px 10px 2px', padding: '7px 10px', fontFamily: 'var(--font-body)', fontSize: '11px', color: 'rgba(255,255,255,0.85)', lineHeight: 1.45 }}>
+                  ✓ {tr('OFS actualizado — actividad #4512 completada. ¡Buen trabajo!', 'OFS updated — activity #4512 completed. Nice work!')}
+                </div>
+              </div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '8px 12px', borderTop: '1px solid rgba(255,255,255,0.07)' }}>
+                <span style={{ flex: 1, height: '24px', borderRadius: '12px', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)' }} />
+                <span style={{ color: 'var(--accent)', fontSize: '12px' }}>➤</span>
+              </div>
+            </div>
+          </div>
+          <div style={{ textAlign: 'center', marginTop: '12px', fontFamily: 'var(--font-body)', fontSize: '11px', fontWeight: 600, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.45)' }}>{tr('Técnico en campo', 'Field technician')}</div>
+        </div>
+
+        {/* Conector 1 */}
+        <div className="wfb-e2e-conn" aria-hidden="true">
+          <span style={{ opacity: step >= 3 && step < 5 ? 1 : 0, transition: 'opacity 0.3s ease-out', position: 'absolute', top: '-14px', left: 0 }}>
+            <span className={step >= 3 ? 'wfb-e2e-fly' : ''} style={{ display: 'inline-flex', fontFamily: 'var(--font-body)', fontSize: '9.5px', fontWeight: 600, color: 'var(--accent)', background: '#0d1426', border: '1px solid rgba(113,177,54,0.45)', borderRadius: '999px', padding: '2px 8px', whiteSpace: 'nowrap' }}>💬 {tr('mensaje', 'message')}</span>
+          </span>
+          <svg width="96" height="14" viewBox="0 0 96 14" fill="none">
+            <line x1="0" y1="7" x2="88" y2="7" stroke={step >= 3 ? 'rgba(113,177,54,0.8)' : 'rgba(113,177,54,0.35)'} strokeWidth="1.5" strokeDasharray="5 4" className="wfb-how-dash" style={{ animation: 'dashFlow 1.4s linear infinite', transition: 'stroke 0.25s ease-out' }} />
+            <polygon points="88,3 96,7 88,11" fill="rgba(113,177,54,0.5)" />
+          </svg>
+        </div>
+
+        {/* Zona 2 — WF Builder */}
+        <div className="wfb-e2e-zone" style={{ ...zone(z2Hot), minWidth: 0 }}>
+          <div style={{ background: '#0d1426', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '14px', padding: '14px', boxShadow: '0 18px 50px rgba(0,0,0,0.45)' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '7px', marginBottom: '12px' }}>
+              <svg width="15" height="13" viewBox="0 0 28 24" fill="none" aria-hidden="true"><path d="M16 1.5l.9 3.2 3.2.9-3.2.9L16 9.7l-.9-3.2-3.2-.9 3.2-.9z" fill="var(--accent)" stroke="var(--accent)" strokeWidth="0.4" strokeLinejoin="round" /></svg>
+              <span style={{ fontFamily: 'var(--font-heading)', fontSize: '12.5px', fontWeight: 700, color: '#fff' }}>Workflow Builder</span>
+              <span style={{ marginLeft: 'auto', width: '7px', height: '7px', borderRadius: '50%', background: z2Hot ? 'var(--accent)' : 'rgba(255,255,255,0.15)', transition: 'background 0.25s ease-out' }} />
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+              {miniNode(step >= 4, '⚡', 'Trigger', tr('Mensaje del técnico', 'Technician message'))}
+              {miniNode(step >= 5, '✦', tr('Nodo IA', 'AI Node'), tr('Entiende: instalación terminada', 'Understands: install finished'))}
+              {miniNode(step >= 6, '▶', tr('Acción', 'Action'), tr('Completar actividad en OFS', 'Complete activity in OFS'))}
+            </div>
+          </div>
+          <div style={{ textAlign: 'center', marginTop: '12px', fontFamily: 'var(--font-body)', fontSize: '11px', fontWeight: 600, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.45)' }}>{tr('Workflow Builder', 'Workflow Builder')}</div>
+        </div>
+
+        {/* Conector 2 */}
+        <div className="wfb-e2e-conn" aria-hidden="true">
+          <span style={{ opacity: step >= 6 && step < 8 ? 1 : 0, transition: 'opacity 0.3s ease-out', position: 'absolute', top: '-14px', left: 0 }}>
+            <span className={step >= 6 ? 'wfb-e2e-fly' : ''} style={{ display: 'inline-flex', fontFamily: 'var(--font-body)', fontSize: '9.5px', fontWeight: 600, color: 'var(--accent)', background: '#0d1426', border: '1px solid rgba(113,177,54,0.45)', borderRadius: '999px', padding: '2px 8px', whiteSpace: 'nowrap' }}>{'{ API }'}</span>
+          </span>
+          <svg width="96" height="14" viewBox="0 0 96 14" fill="none">
+            <line x1="0" y1="7" x2="88" y2="7" stroke={step >= 6 ? 'rgba(113,177,54,0.8)' : 'rgba(113,177,54,0.35)'} strokeWidth="1.5" strokeDasharray="5 4" className="wfb-how-dash" style={{ animation: 'dashFlow 1.4s linear 0.3s infinite', transition: 'stroke 0.25s ease-out' }} />
+            <polygon points="88,3 96,7 88,11" fill="rgba(113,177,54,0.5)" />
+          </svg>
+        </div>
+
+        {/* Zona 3 — OFS */}
+        <div className="wfb-e2e-zone" style={{ ...zone(z3Hot), minWidth: 0 }}>
+          <div style={{ background: '#0d1426', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '14px', padding: '14px', boxShadow: '0 18px 50px rgba(0,0,0,0.45)' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '7px', marginBottom: '12px' }}>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" strokeWidth="1.75" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="M2 12h20M12 2a15 15 0 010 20M12 2a15 15 0 000 20" /></svg>
+              <span style={{ fontFamily: 'var(--font-heading)', fontSize: '12.5px', fontWeight: 700, color: '#fff' }}>Oracle Field Service</span>
+            </div>
+            <div style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '10px', padding: '12px' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '10px' }}>
+                <span style={{ fontFamily: 'var(--font-heading)', fontSize: '12px', fontWeight: 800, color: '#fff' }}>#4512</span>
+                <span style={{ fontFamily: 'var(--font-body)', fontSize: '11px', color: 'rgba(255,255,255,0.55)' }}>{tr('Instalación fibra', 'Fiber install')}</span>
+                <span style={{ marginLeft: 'auto', fontFamily: 'var(--font-body)', fontSize: '9.5px', fontWeight: 700, letterSpacing: '0.04em', borderRadius: '999px', padding: '3px 9px', whiteSpace: 'nowrap', background: step >= 7 ? 'rgba(113,177,54,0.15)' : 'rgba(255,255,255,0.07)', border: `1px solid ${step >= 7 ? 'rgba(113,177,54,0.5)' : 'rgba(255,255,255,0.15)'}`, color: step >= 7 ? 'var(--accent)' : 'rgba(255,255,255,0.6)', transition: 'background 0.3s ease-out, border-color 0.3s ease-out, color 0.3s ease-out' }}>
+                  {step >= 7 ? tr('✓ COMPLETADA', '✓ COMPLETED') : tr('EN CURSO', 'IN PROGRESS')}
+                </span>
+              </div>
+              {[[tr('Cliente', 'Customer'), 'María López'], [tr('Recurso', 'Resource'), 'García'], [tr('Zona', 'Zone'), tr('Norte', 'North')]].map((f, i) => (
+                <div key={i} style={{ display: 'flex', justifyContent: 'space-between', gap: '10px', padding: '5px 0', borderTop: '1px solid rgba(255,255,255,0.06)', fontFamily: 'var(--font-body)', fontSize: '11px' }}>
+                  <span style={{ color: 'rgba(255,255,255,0.4)' }}>{f[0]}</span>
+                  <span style={{ color: 'rgba(255,255,255,0.75)' }}>{f[1]}</span>
+                </div>
+              ))}
+              <div style={{ ...rv(step >= 7, 4), marginTop: '8px', fontFamily: 'var(--font-body)', fontSize: '10px', color: 'var(--accent)' }}>
+                ✦ {tr('Cerrada por Workflow Builder · hace 1 s', 'Closed by Workflow Builder · 1 s ago')}
+              </div>
+            </div>
+          </div>
+          <div style={{ textAlign: 'center', marginTop: '12px', fontFamily: 'var(--font-body)', fontSize: '11px', fontWeight: 600, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.45)' }}>OFS</div>
+        </div>
+      </div>
+
+      {/* Toast final */}
+      <div style={{ textAlign: 'center', marginTop: '28px' }}>
+        <span style={{ ...rv(step >= 8, 6), display: 'inline-flex', alignItems: 'center', gap: '8px', background: 'rgba(113,177,54,0.1)', border: '1px solid rgba(113,177,54,0.4)', borderRadius: '999px', padding: '8px 18px' }}>
+          <span style={{ color: 'var(--accent)', fontSize: '13px' }}>✓</span>
+          <span style={{ fontFamily: 'var(--font-body)', fontSize: '12.5px', fontWeight: 600, color: '#fff' }}>{tr('De campo a OFS sin despacho manual — 2.1 s', 'From field to OFS with no manual dispatch — 2.1 s')}</span>
+        </span>
+      </div>
+
+      {/* Barra de capítulos interactiva */}
+      <div className="fade-up d2" style={{ maxWidth: '640px', margin: '36px auto 0' }}>
+        <div style={{ height: '4px', borderRadius: '2px', background: 'rgba(255,255,255,0.08)', overflow: 'hidden', marginBottom: '14px' }}>
+          <div style={{ height: '100%', width: '100%', borderRadius: '2px', background: 'var(--accent)', transform: `scaleX(${step / E2E_DUR.length})`, transformOrigin: 'left', transition: 'transform 0.4s ease-out' }} />
+        </div>
+        <div style={{ display: 'flex', gap: '10px', justifyContent: 'center' }}>
+          {chapters.map((c, i) => (
+            <button
+              key={i}
+              type="button"
+              className="wfb-e2e-chap"
+              aria-pressed={c.on}
+              aria-disabled={reduced || undefined}
+              onClick={() => { if (!reduced) setRawStep(c.jump); }}
+              style={{ background: c.on ? 'rgba(113,177,54,0.12)' : 'rgba(255,255,255,0.04)', borderColor: c.on ? 'rgba(113,177,54,0.5)' : 'rgba(255,255,255,0.12)' }}
+            >
+              <span style={{ color: 'var(--accent)', fontWeight: 800 }}>{c.n}</span>
+              <span style={{ color: c.on ? '#fff' : 'rgba(255,255,255,0.6)' }}>{c.lbl}</span>
+            </button>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function WorkflowBuilderClient() {
   const { lang } = useLang();
   const ctaRef = useRef(null);
@@ -660,6 +868,8 @@ export default function WorkflowBuilderClient() {
   const [llmVisible, setLlmVisible] = useState(false);
   const heroRef = useRef(null);
   const [heroVisible, setHeroVisible] = useState(false);
+  const e2eRef = useRef(null);
+  const [e2eVisible, setE2eVisible] = useState(false);
 
   const tr = (es, en) => (lang === 'es' ? es : en);
 
@@ -745,6 +955,14 @@ export default function WorkflowBuilderClient() {
     const el = heroRef.current;
     if (!el) return;
     const io = new IntersectionObserver(([entry]) => setHeroVisible(entry.isIntersecting), { threshold: 0.15 });
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
+  useEffect(() => {
+    const el = e2eRef.current;
+    if (!el) return;
+    const io = new IntersectionObserver(([entry]) => setE2eVisible(entry.isIntersecting), { threshold: 0.15 });
     io.observe(el);
     return () => io.disconnect();
   }, []);
@@ -1259,6 +1477,62 @@ export default function WorkflowBuilderClient() {
               style={{ width: idx === activeCaso ? '12px' : '8px', height: idx === activeCaso ? '12px' : '8px', borderRadius: '50%', background: idx === activeCaso ? '#71B136' : 'rgba(113,177,54,0.3)', transition: 'all 0.3s ease', display: 'block' }}
             />
           ))}
+        </div>
+      </section>
+
+      {/* ── DEMO E2E — DEL TÉCNICO A OFS ── */}
+      <style>{`
+        .wfb-e2e-stage { display: flex; align-items: center; justify-content: center; gap: 14px; max-width: 1240px; margin: 0 auto; }
+        .wfb-e2e-zone { flex: 0 1 auto; min-width: 0; }
+        .wfb-e2e-conn { position: relative; flex-shrink: 0; display: flex; align-items: center; }
+        .wfb-e2e-tech { animation: e2eFloat 3.2s ease-in-out infinite; transform-origin: center bottom; }
+        .wfb-e2e-fly { animation: e2eTravel 0.7s ease-out forwards; }
+        .wfb-e2e-chap { display: inline-flex; align-items: center; gap: 8px; border: 1px solid rgba(255,255,255,0.12); border-radius: 999px; padding: 10px 18px; min-height: 44px; font-family: var(--font-body); font-size: 12.5px; font-weight: 600; cursor: pointer; transition: background 0.25s ease-out, border-color 0.25s ease-out; }
+        .wfb-e2e-chap:focus-visible { outline: 2px solid #71B136; outline-offset: 3px; }
+        @keyframes e2eFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
+        @keyframes e2eTravel { from { transform: translateX(-6px); opacity: 0; } to { transform: translateX(46px); opacity: 1; } }
+        @media (prefers-reduced-motion: reduce) {
+          .wfb-e2e-tech { animation: none; }
+          .wfb-e2e-fly { animation: none; opacity: 0; }
+        }
+        @media (max-width: 1100px) {
+          .wfb-e2e-stage { flex-wrap: wrap; }
+          .wfb-e2e-conn { display: none; }
+          .wfb-e2e-zone { flex: 1 1 300px; }
+        }
+        @media (max-width: 768px) {
+          .wfb-e2e-section { padding: 56px 20px !important; }
+          .wfb-e2e-title { font-size: 28px !important; }
+          .wfb-e2e-stage { flex-direction: column; align-items: stretch; }
+          .wfb-e2e-zone { flex: 1 1 auto; }
+        }
+      `}</style>
+      <section id="demo-e2e" ref={e2eRef} className="wfb-e2e-section" style={{ width: '100%', background: 'linear-gradient(160deg, #0a1628 0%, #0d1b3e 55%, #122036 100%)', padding: '96px 60px', position: 'relative', overflow: 'hidden' }}>
+        <svg style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', opacity: 0.06, pointerEvents: 'none' }} aria-hidden="true">
+          <defs>
+            <pattern id="dots-e2e" x="0" y="0" width="32" height="32" patternUnits="userSpaceOnUse">
+              <circle cx="1" cy="1" r="1" fill="#71B136" />
+            </pattern>
+          </defs>
+          <rect width="100%" height="100%" fill="url(#dots-e2e)" />
+        </svg>
+        <div style={{ position: 'absolute', width: '760px', height: '760px', borderRadius: '50%', background: 'radial-gradient(circle, rgba(113,177,54,0.07) 0%, transparent 70%)', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', pointerEvents: 'none' }} aria-hidden="true" />
+        <div style={{ maxWidth: '1400px', margin: '0 auto', position: 'relative', zIndex: 2 }}>
+          <div className="fade-up" style={{ textAlign: 'center', maxWidth: '720px', margin: '0 auto 56px' }}>
+            <div style={{ fontFamily: 'var(--font-body)', fontSize: '12px', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--accent)', marginBottom: '14px' }}>
+              {tr('Demo interactiva', 'Interactive demo')}
+            </div>
+            <h2 className="wfb-e2e-title" style={{ fontFamily: 'var(--font-heading)', fontSize: '42px', fontWeight: 800, color: '#fff', lineHeight: 1.15, margin: '0 0 18px 0' }}>
+              {tr('Del técnico en campo a OFS — sin tocar nada', 'From the field tech to OFS — hands-free')}
+            </h2>
+            <p style={{ fontFamily: 'var(--font-body)', fontSize: '17px', color: 'rgba(255,255,255,0.6)', lineHeight: 1.75, margin: 0 }}>
+              {tr(
+                'Un técnico escribe un mensaje. Workflow Builder lo entiende, ejecuta la acción y deja OFS actualizado. Mirá la historia completa — o saltá a un capítulo.',
+                'A technician sends a message. Workflow Builder understands it, runs the action and updates OFS. Watch the full story — or jump to a chapter.'
+              )}
+            </p>
+          </div>
+          <E2EStory active={e2eVisible} reduced={reducedAnim} tr={tr} />
         </div>
       </section>
 

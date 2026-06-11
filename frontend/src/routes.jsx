@@ -4,6 +4,7 @@ import Servicios from './pages/Servicios.jsx';
 import Productos from './pages/Productos.jsx';
 import FSMTool from './pages/FSMTool.jsx';
 import WorkflowBuilder from './pages/WorkflowBuilder.jsx';
+import WorkflowBuilderExperiencia from './pages/WorkflowBuilderExperiencia.jsx';
 import NotFound from './pages/NotFound.jsx';
 
 export const routes = [
@@ -16,6 +17,7 @@ export const routes = [
       { path: 'productos', Component: Productos },
       { path: 'productos/fsmtool', Component: FSMTool },
       { path: 'productos/workflow-builder', Component: WorkflowBuilder },
+      { path: 'productos/workflow-builder/experiencia', Component: WorkflowBuilderExperiencia },
       { path: '*', Component: NotFound },
     ],
   },

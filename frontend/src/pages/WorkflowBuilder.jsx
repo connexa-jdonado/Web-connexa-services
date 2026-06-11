@@ -547,6 +547,100 @@ function LlmDemo({ active, reduced, tr }) {
   );
 }
 
+// Hero — canvas de workflow animado: el flujo se construye, ejecuta y repite
+const HERO_DUR = [600, 600, 600, 700, 900, 800, 900];
+
+function HeroCanvas({ active, reduced, tr }) {
+  const raw = useSceneLoop(active && !reduced, HERO_DUR, 3000);
+  const step = reduced ? HERO_DUR.length : raw;
+  const [runs, setRuns] = useState(1024);
+  useEffect(() => { if (step === 7 && !reduced) setRuns((r) => r + 1); }, [step, reduced]);
+  const fmt = (n) => `${Math.floor(n / 1000)}${tr('.', ',')}${String(n % 1000).padStart(3, '0')}`;
+  const connStroke = (on) => (on ? 'rgba(113,177,54,0.85)' : 'rgba(113,177,54,0.35)');
+  const node = (key, pos, on, hot, icon, title, sub, check) => (
+    <div key={key} style={{ position: 'absolute', left: pos[0], top: pos[1], width: '22%', ...rv(on, 10), background: '#1e293b', border: `1px solid ${hot ? 'rgba(113,177,54,0.65)' : 'rgba(255,255,255,0.12)'}`, borderRadius: '10px', padding: '10px 12px', boxShadow: hot ? '0 0 26px rgba(113,177,54,0.22)' : '0 8px 24px rgba(0,0,0,0.35)', transition: 'opacity 0.25s ease-out, transform 0.25s ease-out, border-color 0.25s ease-out, box-shadow 0.25s ease-out', zIndex: 2 }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+        <span style={{ width: '24px', height: '24px', borderRadius: '7px', background: 'rgba(113,177,54,0.12)', border: '1px solid rgba(113,177,54,0.3)', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>{icon}</span>
+        <div style={{ minWidth: 0 }}>
+          <div style={{ fontFamily: 'var(--font-heading)', fontSize: '12px', fontWeight: 700, color: '#fff', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{title}</div>
+          <div style={{ fontFamily: 'var(--font-body)', fontSize: '10.5px', color: 'rgba(255,255,255,0.5)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{sub}</div>
+        </div>
+        <span style={{ marginLeft: 'auto', width: '15px', height: '15px', borderRadius: '50%', flexShrink: 0, background: check ? 'var(--accent)' : 'rgba(255,255,255,0.08)', color: '#0f172a', fontSize: '9.5px', fontWeight: 900, display: 'inline-flex', alignItems: 'center', justifyContent: 'center', transition: 'background 0.25s ease-out' }}>✓</span>
+      </div>
+    </div>
+  );
+  const ic = {
+    zap: <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" /></svg>,
+    ai: <svg width="14" height="12" viewBox="0 0 28 24" fill="none" aria-hidden="true"><path d="M16 1.5l.9 3.2 3.2.9-3.2.9L16 9.7l-.9-3.2-3.2-.9 3.2-.9z" fill="var(--accent)" stroke="var(--accent)" strokeWidth="0.4" strokeLinejoin="round" /><path d="M7 7l.6 2.2 2.2.6-2.2.6L7 12.6l-.6-2.2-2.2-.6 2.2-.6z" fill="var(--accent)" stroke="var(--accent)" strokeWidth="0.3" strokeLinejoin="round" opacity="0.7" /></svg>,
+    chat: <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" /></svg>,
+    sync: <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><polyline points="23 4 23 10 17 10" /><polyline points="1 20 1 14 7 14" /><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15" /></svg>,
+  };
+  return (
+    <div style={{ position: 'relative', height: '460px', background: '#0d1426', overflow: 'hidden' }}>
+      <svg style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', opacity: 0.5, pointerEvents: 'none' }} aria-hidden="true">
+        <defs>
+          <pattern id="dots-hero-canvas" x="0" y="0" width="22" height="22" patternUnits="userSpaceOnUse">
+            <circle cx="1" cy="1" r="0.8" fill="rgba(113,177,54,0.25)" />
+          </pattern>
+        </defs>
+        <rect width="100%" height="100%" fill="url(#dots-hero-canvas)" />
+      </svg>
+
+      {/* Conectores bezier */}
+      <svg viewBox="0 0 700 460" preserveAspectRatio="none" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', zIndex: 1 }} aria-hidden="true">
+        <path d="M 175 198 C 210 198, 217 191, 252 191" fill="none" stroke={connStroke(step >= 4)} strokeWidth="1.6" strokeDasharray="6 4" className="wfb-how-dash" style={{ animation: 'dashFlow 1.4s linear infinite', opacity: step >= 2 ? 1 : 0, transition: 'opacity 0.3s ease-out, stroke 0.25s ease-out' }} />
+        <path d="M 406 185 C 436 185, 425 78, 455 78" fill="none" stroke={connStroke(step >= 6)} strokeWidth="1.6" strokeDasharray="6 4" className="wfb-how-dash" style={{ animation: 'dashFlow 1.4s linear 0.2s infinite', opacity: step >= 3 ? 1 : 0, transition: 'opacity 0.3s ease-out, stroke 0.25s ease-out' }} />
+        <path d="M 406 197 C 436 197, 425 308, 455 308" fill="none" stroke={connStroke(step >= 6)} strokeWidth="1.6" strokeDasharray="6 4" className="wfb-how-dash" style={{ animation: 'dashFlow 1.4s linear 0.4s infinite', opacity: step >= 3 ? 1 : 0, transition: 'opacity 0.3s ease-out, stroke 0.25s ease-out' }} />
+        {[[175, 198, 2], [252, 191, 2], [406, 191, 3], [455, 78, 3], [455, 308, 3]].map(([cx, cy, s], i) => (
+          <circle key={i} cx={cx} cy={cy} r="3.5" fill="#0d1426" stroke="var(--accent)" strokeWidth="1.5" style={{ opacity: step >= s ? 1 : 0, transition: 'opacity 0.3s ease-out' }} />
+        ))}
+      </svg>
+
+      {/* Etiquetas de rama */}
+      <span style={{ position: 'absolute', left: '61%', top: '24%', ...rv(step >= 3, 4), fontFamily: 'var(--font-body)', fontSize: '9.5px', fontWeight: 600, color: 'var(--accent)', background: 'rgba(113,177,54,0.1)', border: '1px solid rgba(113,177,54,0.3)', borderRadius: '999px', padding: '2px 8px', zIndex: 2 }}>{tr('prioridad alta', 'high priority')}</span>
+      <span style={{ position: 'absolute', left: '61%', top: '57%', ...rv(step >= 3, 4), fontFamily: 'var(--font-body)', fontSize: '9.5px', fontWeight: 600, color: 'rgba(255,255,255,0.55)', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.12)', borderRadius: '999px', padding: '2px 8px', zIndex: 2 }}>{tr('estándar', 'standard')}</span>
+
+      {/* Nodos */}
+      {node('t', ['3%', '38%'], step >= 1, step >= 4, ic.zap, 'Trigger · OFS', tr('Actividad completada', 'Activity completed'), step >= 4)}
+      {node('a', ['36%', '36.5%'], step >= 2, step >= 5, ic.ai, tr('Nodo IA', 'AI Node'), tr('Analiza y decide', 'Analyzes & decides'), step >= 6)}
+      {node('s', ['65%', '12%'], step >= 3, step >= 6, ic.chat, 'Slack', tr('Notificar #vip', 'Notify #vip'), step >= 6)}
+      {node('o', ['65%', '62%'], step >= 3, step >= 6, ic.sync, 'OFS API', tr('Actualizar actividad', 'Update activity'), step >= 6)}
+
+      {/* Overlay superior */}
+      <div style={{ position: 'absolute', top: '12px', left: '14px', right: '14px', display: 'flex', alignItems: 'center', gap: '8px', zIndex: 3 }}>
+        <span style={{ fontFamily: 'var(--font-body)', fontSize: '9.5px', fontWeight: 600, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.4)' }}>{tr('Constructor visual', 'Visual builder')}</span>
+        <span style={{ marginLeft: 'auto', display: 'inline-flex', alignItems: 'center', gap: '6px', fontFamily: 'var(--font-body)', fontSize: '10.5px', color: 'rgba(255,255,255,0.6)', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '999px', padding: '3px 10px' }}>
+          <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: 'var(--accent)', flexShrink: 0 }} />{tr('activo', 'active')}
+        </span>
+        <span style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', fontFamily: 'var(--font-body)', fontSize: '10.5px', fontWeight: 600, color: 'var(--accent)', background: 'rgba(113,177,54,0.1)', border: '1px solid rgba(113,177,54,0.3)', borderRadius: '999px', padding: '3px 10px' }}>
+          ▶ {fmt(runs)} {tr('ejecuciones hoy', 'runs today')}
+        </span>
+      </div>
+
+      {/* Controles de zoom + minimapa */}
+      <div style={{ position: 'absolute', left: '14px', bottom: '14px', display: 'flex', flexDirection: 'column', gap: '4px', zIndex: 3 }} aria-hidden="true">
+        {['+', '−', '⤢'].map((g, i) => (
+          <span key={i} style={{ width: '24px', height: '24px', borderRadius: '6px', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', color: 'rgba(255,255,255,0.5)', fontSize: '12px', display: 'inline-flex', alignItems: 'center', justifyContent: 'center' }}>{g}</span>
+        ))}
+      </div>
+      <div style={{ position: 'absolute', right: '14px', bottom: '14px', width: '64px', height: '42px', borderRadius: '6px', background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.12)', zIndex: 3, padding: '6px' }} aria-hidden="true">
+        <div style={{ position: 'relative', width: '100%', height: '100%' }}>
+          <span style={{ position: 'absolute', left: '4%', top: '40%', width: '14px', height: '6px', borderRadius: '2px', background: 'rgba(113,177,54,0.45)' }} />
+          <span style={{ position: 'absolute', left: '40%', top: '38%', width: '14px', height: '6px', borderRadius: '2px', background: 'rgba(113,177,54,0.45)' }} />
+          <span style={{ position: 'absolute', left: '74%', top: '10%', width: '14px', height: '6px', borderRadius: '2px', background: 'rgba(113,177,54,0.3)' }} />
+          <span style={{ position: 'absolute', left: '74%', top: '64%', width: '14px', height: '6px', borderRadius: '2px', background: 'rgba(113,177,54,0.3)' }} />
+        </div>
+      </div>
+
+      {/* Toast de ejecución */}
+      <div style={{ position: 'absolute', bottom: '16px', left: '50%', opacity: step >= 7 ? 1 : 0, transform: step >= 7 ? 'translateX(-50%)' : 'translateX(-50%) translateY(6px)', transition: 'opacity 0.25s ease-out, transform 0.25s ease-out', display: 'inline-flex', alignItems: 'center', gap: '8px', background: 'rgba(113,177,54,0.12)', border: '1px solid rgba(113,177,54,0.4)', borderRadius: '999px', padding: '7px 16px', zIndex: 3, whiteSpace: 'nowrap' }}>
+        <span style={{ color: 'var(--accent)', fontSize: '12px' }}>✓</span>
+        <span style={{ fontFamily: 'var(--font-body)', fontSize: '11.5px', fontWeight: 600, color: '#fff' }}>{tr('Ejecución', 'Run')} #{fmt(runs)} · 1.2 s</span>
+      </div>
+    </div>
+  );
+}
+
 export default function WorkflowBuilderClient() {
   const { lang } = useLang();
   const ctaRef = useRef(null);
@@ -564,6 +658,8 @@ export default function WorkflowBuilderClient() {
   const howRef = useRef(null);
   const llmRef = useRef(null);
   const [llmVisible, setLlmVisible] = useState(false);
+  const heroRef = useRef(null);
+  const [heroVisible, setHeroVisible] = useState(false);
 
   const tr = (es, en) => (lang === 'es' ? es : en);
 
@@ -641,6 +737,14 @@ export default function WorkflowBuilderClient() {
     const el = llmRef.current;
     if (!el) return;
     const io = new IntersectionObserver(([entry]) => setLlmVisible(entry.isIntersecting), { threshold: 0.15 });
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
+  useEffect(() => {
+    const el = heroRef.current;
+    if (!el) return;
+    const io = new IntersectionObserver(([entry]) => setHeroVisible(entry.isIntersecting), { threshold: 0.15 });
     io.observe(el);
     return () => io.disconnect();
   }, []);
@@ -732,7 +836,7 @@ export default function WorkflowBuilderClient() {
         }
       `}</style>
       {/* ── HERO FULLSCREEN ── */}
-      <div style={{ width: '100%', minHeight: '100vh', background: 'linear-gradient(135deg, #0d1b3e 0%, #172554 60%, #1a3a2a 100%)', display: 'flex', alignItems: 'center', position: 'relative', overflow: 'hidden', padding: '0' }}>
+      <div ref={heroRef} style={{ width: '100%', minHeight: '100vh', background: 'linear-gradient(135deg, #0d1b3e 0%, #172554 60%, #1a3a2a 100%)', display: 'flex', alignItems: 'center', position: 'relative', overflow: 'hidden', padding: '0' }}>
         <svg style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', opacity: 0.15 }}>
           <defs>
             <pattern id="dots" x="0" y="0" width="32" height="32" patternUnits="userSpaceOnUse">
@@ -781,16 +885,16 @@ export default function WorkflowBuilderClient() {
           <div className="wfb-hero-right" style={{ flex: '0 0 58%' }}>
             <div style={{ width: '100%', position: 'relative', transform: 'perspective(1200px) rotateY(-4deg) rotateX(2deg)', transformStyle: 'preserve-3d' }}>
               <div style={{ position: 'absolute', inset: '-20px', background: 'radial-gradient(ellipse, rgba(113,177,54,0.15) 0%, transparent 70%)', borderRadius: '20px', zIndex: 0 }} />
-              <div style={{ borderRadius: '14px', overflow: 'hidden', boxShadow: '0 50px 120px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.08)', position: 'relative', zIndex: 1, background: '#F3F4F6' }}>
-                <div style={{ height: '40px', background: '#E5E7EB', display: 'flex', alignItems: 'center', padding: '0 16px', gap: '7px' }}>
+              <div style={{ borderRadius: '14px', overflow: 'hidden', boxShadow: '0 50px 120px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.08)', position: 'relative', zIndex: 1, background: '#0d1426' }}>
+                <div style={{ height: '40px', background: '#1e293b', display: 'flex', alignItems: 'center', padding: '0 16px', gap: '7px' }}>
                   <div style={{ width: '11px', height: '11px', borderRadius: '50%', background: '#FF5F57' }} />
                   <div style={{ width: '11px', height: '11px', borderRadius: '50%', background: '#FFBD2E' }} />
                   <div style={{ width: '11px', height: '11px', borderRadius: '50%', background: '#28CA41' }} />
                   <div style={{ flex: 1, background: 'rgba(255,255,255,0.06)', borderRadius: '6px', height: '22px', margin: '0 12px', display: 'flex', alignItems: 'center', padding: '0 10px' }}>
-                    <span style={{ color: 'rgba(255,255,255,0.3)', fontSize: '11px' }}>newwfbuilder.fsmtool.com/workflows</span>
+                    <span style={{ color: 'rgba(255,255,255,0.35)', fontSize: '11px' }}>newwfbuilder.fsmtool.com/workflows</span>
                   </div>
                 </div>
-                <img src="/assets/wb-canvas.png" style={{ width: '100%', display: 'block', objectFit: 'cover' }} alt="Workflow Builder" />
+                <HeroCanvas active={heroVisible} reduced={reducedAnim} tr={tr} />
               </div>
             </div>
           </div>

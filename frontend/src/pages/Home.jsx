@@ -210,7 +210,6 @@ export default function HomeClient() {
               <p className="partner-desc">{tr('Partner oficial de Oracle para la implementación y soporte de Oracle Field Service Cloud. Lideramos proyectos de transformación digital para empresas de utilities, telecomunicaciones e industria de servicios.', 'Gold Partner certified by Oracle for Field Service Cloud implementations. Direct access to technical support and the latest platform updates.')}</p>
               <div className="partner-stats">
                 <div className="partner-stat-item"><div className="partner-stat-val">30+</div><div className="partner-stat-lbl">{tr('Impl. OFS', 'OFS Impl.')}</div></div>
-                <div className="partner-stat-item"><div className="partner-stat-val">99%</div><div className="partner-stat-lbl">{tr('Satisfacción', 'Satisfaction')}</div></div>
                 <div className="partner-stat-item"><div className="partner-stat-val">8+</div><div className="partner-stat-lbl">{tr('Años de partnership', 'Years of partnership')}</div></div>
               </div>
             </div>
@@ -220,11 +219,9 @@ export default function HomeClient() {
                 <div className="partner-verified"><div className="partner-verified-icon" /><span className="partner-verified-text">{tr('Partner Certificado', 'Certified Partner')}</span></div>
               </div>
               <div className="partner-name-large">Zinier FSM Platform</div>
-              <span style={{ fontSize: '12px', color: '#71B136', background: 'rgba(113,177,54,0.1)', borderRadius: '20px', padding: '4px 10px', display: 'inline-block', marginTop: '8px' }}>{tr('+8 implementaciones', '+8 implementations')}</span>
               <p className="partner-desc">{tr('Partner certificado de Zinier, la plataforma de inteligencia artificial para Field Service Management de próxima generación. Implementamos flujos de trabajo inteligentes y automatizados.', 'Authorized reseller and official implementation partner of Zinier. Full access to roadmap and dedicated technical support.')}</p>
               <div className="partner-stats">
                 <div className="partner-stat-item"><div className="partner-stat-val">8+</div><div className="partner-stat-lbl">{tr('Impl. Zinier', 'Zinier Impl.')}</div></div>
-                <div className="partner-stat-item"><div className="partner-stat-val">88%</div><div className="partner-stat-lbl">{tr('Efic. promedio', 'Avg. efficiency')}</div></div>
                 <div className="partner-stat-item"><div className="partner-stat-val">4+</div><div className="partner-stat-lbl">{tr('Años de partnership', 'Years of partnership')}</div></div>
               </div>
             </div>
@@ -654,7 +651,7 @@ export default function HomeClient() {
                 <text x="200" y="139" textAnchor="middle" fill="#fff" fontWeight="700" fontSize="11" fontFamily="var(--font-body)">D8</text>
                 <g className="tt" filter="url(#tt-shadow)">
                   <rect x="116" y="96" width="168" height="28" rx="6" fill="#172554" />
-                  <text x="200" y="115" textAnchor="middle" fill="#fff" fontSize="11" fontFamily="var(--font-body)">{tr('Réplica BI en tiempo real', 'Real-time BI replication')}</text>
+                  <text x="200" y="115" textAnchor="middle" fill="#fff" fontSize="11" fontFamily="var(--font-body)">{tr('Otros', 'Other')}</text>
                 </g>
               </g>
             </svg>
@@ -679,7 +676,7 @@ export default function HomeClient() {
                   { code: 'B2', name: tr('Reclasificar atributos como skills', 'Reclassify attributes as skills') },
                 ]},
                 { color: '#EF4444', title: tr('Descarte', 'Discard'), items: [
-                  { code: 'D8', name: tr('Réplica de datos BI en tiempo real', 'Real-time BI data replication') },
+                  { code: 'D8', name: tr('Otros', 'Other') },
                 ]},
               ].map((group, gi) => (
                 <div key={gi}>
@@ -737,15 +734,7 @@ export default function HomeClient() {
                 <button className="product-cta">{tr('Conocer más', 'Learn more')} <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6" /></svg></button>
               </div>
               <div className="product-visual">
-                <svg viewBox="0 0 80 80"><circle cx="20" cy="20" r="8" /><circle cx="60" cy="20" r="8" /><circle cx="20" cy="60" r="8" /><circle cx="60" cy="60" r="8" /><line x1="28" y1="20" x2="52" y2="20" /><line x1="20" y1="28" x2="20" y2="52" /><line x1="28" y1="60" x2="52" y2="60" /><line x1="60" y1="28" x2="60" y2="52" /><circle cx="40" cy="40" r="6" /></svg>
-                <div style={{display:'flex', flexDirection:'column', alignItems:'center', gap:'8px', marginTop:'16px'}}>
-                  <svg width="32" height="27" viewBox="0 0 28 24" fill="none">
-                    <path d="M16 1.5l.9 3.2 3.2.9-3.2.9L16 9.7l-.9-3.2-3.2-.9 3.2-.9z" fill="#71B136" stroke="#71B136" strokeWidth="0.4" strokeLinejoin="round"/>
-                    <path d="M7 7l.6 2.2 2.2.6-2.2.6L7 12.6l-.6-2.2-2.2-.6 2.2-.6z" fill="#71B136" stroke="#71B136" strokeWidth="0.3" strokeLinejoin="round" opacity="0.65"/>
-                    <path d="M21 14l.5 1.6 1.6.5-1.6.5L21 18.2l-.5-1.6-1.6-.5 1.6-.5z" fill="#71B136" stroke="#71B136" strokeWidth="0.3" strokeLinejoin="round" opacity="0.45"/>
-                  </svg>
-                  <span style={{color:'#71B136', fontSize:'30px', fontWeight:700, letterSpacing:'0.1em'}}>IA</span>
-                </div>
+                <Image src="/assets/WFBuilder01.png" alt="Workflow Builder" width={480} height={360} sizes="480px" style={{ width: '100%', height: '100%', objectFit: 'contain', borderRadius: '20px' }} />
               </div>
             </div>
             <div className="product-card fade-up d2" onClick={() => router.push('/productos/fsmtool')} role="button" tabIndex={0} onKeyDown={(e) => e.key === 'Enter' && router.push('/productos/fsmtool')}>
@@ -761,15 +750,7 @@ export default function HomeClient() {
                 <button className="product-cta">{tr('Conocer más', 'Learn more')} <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6" /></svg></button>
               </div>
               <div className="product-visual">
-                <svg viewBox="0 0 80 80"><rect x="8" y="20" width="64" height="44" rx="6" /><rect x="14" y="28" width="22" height="14" rx="3" /><rect x="14" y="46" width="22" height="8" rx="2" /><rect x="42" y="28" width="22" height="8" rx="2" /><rect x="42" y="40" width="22" height="14" rx="3" /><circle cx="14" cy="14" r="3" /><circle cx="40" cy="14" r="3" /><circle cx="66" cy="14" r="3" /></svg>
-                <div style={{display:'flex', flexDirection:'column', alignItems:'center', gap:'8px', marginTop:'16px'}}>
-                  <svg width="32" height="27" viewBox="0 0 28 24" fill="none">
-                    <path d="M16 1.5l.9 3.2 3.2.9-3.2.9L16 9.7l-.9-3.2-3.2-.9 3.2-.9z" fill="#71B136" stroke="#71B136" strokeWidth="0.4" strokeLinejoin="round"/>
-                    <path d="M7 7l.6 2.2 2.2.6-2.2.6L7 12.6l-.6-2.2-2.2-.6 2.2-.6z" fill="#71B136" stroke="#71B136" strokeWidth="0.3" strokeLinejoin="round" opacity="0.65"/>
-                    <path d="M21 14l.5 1.6 1.6.5-1.6.5L21 18.2l-.5-1.6-1.6-.5 1.6-.5z" fill="#71B136" stroke="#71B136" strokeWidth="0.3" strokeLinejoin="round" opacity="0.45"/>
-                  </svg>
-                  <span style={{color:'#71B136', fontSize:'30px', fontWeight:700, letterSpacing:'0.1em'}}>IA</span>
-                </div>
+                <Image src="/assets/fsmtool-home.png" alt="FSMTool" width={480} height={360} sizes="480px" style={{ width: '100%', height: '100%', objectFit: 'contain', borderRadius: '20px' }} />
               </div>
             </div>
           </div>

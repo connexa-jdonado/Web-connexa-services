@@ -467,7 +467,6 @@ function LlmPipeline({ active, reduced, tr }) {
 function LlmDemo({ active, reduced, tr }) {
   const raw = useSceneLoop(active && !reduced, INT_DEMO_DUR, 3400);
   const step = reduced ? INT_DEMO_DUR.length : raw;
-  const bars1 = [['08:00', 6, false], ['08:15', 14, true], ['08:30', 9, false], ['08:45', 4, false]];
   const bars2 = [['Martínez', 94, true], ['García', 88, false], ['López', 81, false], ['Ruiz', 76, false]];
   const dots = (
     <div style={{ display: 'flex', gap: '4px', padding: '6px 2px 14px', alignItems: 'center' }} aria-hidden="true">
@@ -496,24 +495,39 @@ function LlmDemo({ active, reduced, tr }) {
         <span style={{ marginLeft: 'auto', fontFamily: 'var(--font-body)', fontSize: '11px', color: 'rgba(255,255,255,0.3)' }}>{tr('conectado a OFS · en vivo', 'connected to OFS · live')}</span>
       </div>
       <div style={{ background: '#0f172a', padding: '22px 24px' }}>
-        {userBubble(step >= 1, tr('¿Cuántos técnicos iniciaron ruta a las 8:15?', 'How many technicians started their route at 8:15?'))}
+        {userBubble(step >= 1, tr('¿Cuántos técnicos iniciaron ruta?', 'How many technicians started their route?'))}
         {!reduced && step === 2 && dots}
         <div style={{ ...rv(step >= 3), display: 'flex', gap: '10px', alignItems: 'flex-start', marginBottom: '18px' }}>
           <span style={{ width: '26px', height: '26px', borderRadius: '8px', background: 'rgba(113,177,54,0.15)', border: '1px solid rgba(113,177,54,0.4)', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', color: 'var(--accent)', fontSize: '12px', flexShrink: 0 }}>✦</span>
           <div style={{ flex: 1, minWidth: 0, background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(113,177,54,0.3)', borderRadius: '2px 12px 12px 12px', padding: '12px 14px' }}>
             <p style={{ margin: '0 0 12px 0', fontFamily: 'var(--font-body)', fontSize: '13.5px', color: '#fff', lineHeight: 1.55 }}>
-              {tr('14 técnicos iniciaron ruta a las 8:15 — la distribución de la mañana:', '14 technicians started their route at 8:15 — the morning distribution:')}
+              {tr('425 técnicos ya iniciaron ruta — 1.243 todavía no la iniciaron:', "425 technicians have already started their route — 1,243 haven't started yet:")}
             </p>
             <div style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '10px', padding: '14px' }}>
-              <div style={{ fontFamily: 'var(--font-body)', fontSize: '11px', fontWeight: 600, letterSpacing: '0.06em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.5)', marginBottom: '12px' }}>{tr('Inicios de ruta — hoy', 'Route starts — today')}</div>
-              <div style={{ display: 'flex', alignItems: 'stretch', gap: '14px', height: '112px' }}>
-                {bars1.map(([lbl, v, hot], i) => (
-                  <div key={i} style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'flex-end', gap: '5px' }}>
-                    <span style={{ fontFamily: 'var(--font-heading)', fontSize: '12px', fontWeight: 800, color: hot ? 'var(--accent)' : 'rgba(255,255,255,0.55)', opacity: step >= 4 ? 1 : 0, transition: `opacity 0.3s ease-out ${0.45 + i * 0.09}s` }}>{v}</span>
-                    <div style={{ width: '100%', maxWidth: '44px', height: `${Math.round((v / 14) * 62)}px`, borderRadius: '5px 5px 2px 2px', background: hot ? 'var(--accent)' : 'rgba(113,177,54,0.3)', transform: step >= 4 ? 'scaleY(1)' : 'scaleY(0)', transformOrigin: 'bottom', transition: `transform 0.5s ease-out ${i * 0.09}s` }} />
-                    <span style={{ fontFamily: 'var(--font-body)', fontSize: '10.5px', color: hot ? 'var(--accent)' : 'rgba(255,255,255,0.4)', fontWeight: hot ? 700 : 400 }}>{lbl}</span>
+              <div style={{ fontFamily: 'var(--font-body)', fontSize: '11px', fontWeight: 600, letterSpacing: '0.06em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.5)', marginBottom: '12px' }}>{tr('Estado de inicio de ruta — hoy', 'Route start status — today')}</div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
+                <div style={{ position: 'relative', width: '112px', height: '112px', flexShrink: 0 }}>
+                  <svg viewBox="0 0 36 36" width="112" height="112" aria-hidden="true">
+                    <circle cx="18" cy="18" r="15.9155" fill="none" stroke="rgba(255,255,255,0.08)" strokeWidth="4" />
+                    <circle cx="18" cy="18" r="15.9155" fill="none" stroke="var(--accent)" strokeWidth="4" strokeLinecap="round" strokeDasharray="25.5 74.5" strokeDashoffset={step >= 4 ? 0 : 25.5} style={{ transition: 'stroke-dashoffset 0.7s ease-out', transform: 'rotate(-90deg)', transformOrigin: '50% 50%' }} />
+                  </svg>
+                  <div style={{ position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+                    <span style={{ fontFamily: 'var(--font-heading)', fontSize: '20px', fontWeight: 800, color: '#fff', opacity: step >= 4 ? 1 : 0, transition: 'opacity 0.3s ease-out 0.5s' }}>25%</span>
+                    <span style={{ fontFamily: 'var(--font-body)', fontSize: '9px', color: 'rgba(255,255,255,0.45)' }}>{tr('iniciaron', 'started')}</span>
                   </div>
-                ))}
+                </div>
+                <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                    <span style={{ width: '10px', height: '10px', borderRadius: '3px', background: 'var(--accent)', flexShrink: 0 }} />
+                    <span style={{ fontFamily: 'var(--font-body)', fontSize: '12px', color: 'rgba(255,255,255,0.8)', flex: 1 }}>{tr('Iniciaron ruta', 'Started route')}</span>
+                    <span style={{ fontFamily: 'var(--font-heading)', fontSize: '13px', fontWeight: 800, color: 'var(--accent)' }}>425</span>
+                  </div>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                    <span style={{ width: '10px', height: '10px', borderRadius: '3px', background: 'rgba(255,255,255,0.15)', flexShrink: 0 }} />
+                    <span style={{ fontFamily: 'var(--font-body)', fontSize: '12px', color: 'rgba(255,255,255,0.8)', flex: 1 }}>{tr('No iniciaron', 'Not started')}</span>
+                    <span style={{ fontFamily: 'var(--font-heading)', fontSize: '13px', fontWeight: 800, color: 'rgba(255,255,255,0.6)' }}>{tr('1.243', '1,243')}</span>
+                  </div>
+                </div>
               </div>
               {chartCaption}
             </div>
@@ -643,8 +657,8 @@ function HeroCanvas({ active, reduced, tr }) {
 
 // Demo E2E — historia interactiva: técnico → WF Builder → OFS, con capítulos clickeables
 const E2E_DUR = [900, 1700, 700, 900, 1000, 800, 1000, 900];
-const E2E_MSG_ES = 'Listo! Instalación terminada y probada ✅';
-const E2E_MSG_EN = 'Done! Install finished and tested ✅';
+const E2E_MSG_ES = 'Iniciar viaje';
+const E2E_MSG_EN = 'Start trip';
 
 function useStorySteps(run, durations, holdMs) {
   const [step, setStep] = useState(0);
@@ -665,13 +679,13 @@ function E2EStory({ active, reduced, tr }) {
   const [chars, setChars] = useState(0);
   useEffect(() => {
     if (reduced) return;
-    if (step < 2) { setChars(0); return; }
-    if (step === 2 && chars < msg.length) {
+    if (step < 3) { setChars(0); return; }
+    if (step === 3 && chars < msg.length) {
       const t = setTimeout(() => setChars((c) => c + 1), 32);
       return () => clearTimeout(t);
     }
   }, [step, chars, reduced, msg.length]);
-  const shown = reduced ? msg : msg.slice(0, step > 2 ? msg.length : chars);
+  const shown = reduced ? msg : msg.slice(0, step > 3 ? msg.length : chars);
   const z1Hot = (step >= 1 && step <= 3) || step >= 8;
   const z2Hot = step >= 3 && step <= 6;
   const z3Hot = step >= 6;
@@ -724,17 +738,25 @@ function E2EStory({ active, reduced, tr }) {
                   <div style={{ fontFamily: 'var(--font-body)', fontSize: '9.5px', color: 'var(--accent)' }}>{tr('en línea', 'online')}</div>
                 </div>
               </div>
-              <div style={{ padding: '12px 10px', minHeight: '190px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                <div style={{ ...rv(step >= 1, 5), alignSelf: 'flex-start', maxWidth: '88%', background: 'rgba(255,255,255,0.07)', borderRadius: '10px 10px 10px 2px', padding: '7px 10px', fontFamily: 'var(--font-body)', fontSize: '11px', color: 'rgba(255,255,255,0.85)', lineHeight: 1.45 }}>
-                  {tr('Hola García 👋 ¿novedades de la actividad #4512?', 'Hi García 👋 any updates on activity #4512?')}
+              <div style={{ padding: '12px 10px', minHeight: '220px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                <div style={{ ...rv(step >= 1, 5), alignSelf: 'flex-end', maxWidth: '88%', background: 'rgba(113,177,54,0.16)', border: '1px solid rgba(113,177,54,0.3)', borderRadius: '10px 10px 2px 10px', padding: '7px 10px', fontFamily: 'var(--font-body)', fontSize: '11px', color: '#fff', lineHeight: 1.45 }}>
+                  {tr('¿Cuál es mi próxima actividad?', "What's my next activity?")}
                 </div>
-                <div style={{ ...rv(step >= 2, 5), alignSelf: 'flex-end', maxWidth: '88%', background: 'rgba(113,177,54,0.16)', border: '1px solid rgba(113,177,54,0.3)', borderRadius: '10px 10px 2px 10px', padding: '7px 10px', fontFamily: 'var(--font-body)', fontSize: '11px', color: '#fff', lineHeight: 1.45 }}>
+                <div style={{ ...rv(step >= 2, 5), alignSelf: 'flex-start', maxWidth: '88%', background: 'rgba(255,255,255,0.07)', borderRadius: '10px 10px 10px 2px', padding: '8px 10px', fontFamily: 'var(--font-body)', fontSize: '11px', color: 'rgba(255,255,255,0.85)', lineHeight: 1.55 }}>
+                  <div>{tr('Tu próxima actividad es:', 'Your next activity is:')}</div>
+                  <div style={{ marginTop: '4px' }}>
+                    <div><span style={{ color: 'rgba(255,255,255,0.5)' }}>{tr('Actividad: ', 'Activity: ')}</span><span style={{ color: '#fff', fontWeight: 600 }}>#1234</span></div>
+                    <div><span style={{ color: 'rgba(255,255,255,0.5)' }}>{tr('Dirección: ', 'Address: ')}</span><span style={{ color: '#fff' }}>Av. Córdoba 1456</span></div>
+                    <div><span style={{ color: 'rgba(255,255,255,0.5)' }}>{tr('Horario de llegada: ', 'Arrival time: ')}</span><span style={{ color: '#fff' }}>12:35</span></div>
+                  </div>
+                </div>
+                <div style={{ ...rv(step >= 3, 5), alignSelf: 'flex-end', maxWidth: '88%', background: 'rgba(113,177,54,0.16)', border: '1px solid rgba(113,177,54,0.3)', borderRadius: '10px 10px 2px 10px', padding: '7px 10px', fontFamily: 'var(--font-body)', fontSize: '11px', color: '#fff', lineHeight: 1.45 }}>
                   {shown}
-                  {!reduced && step === 2 && <span style={{ display: 'inline-block', width: '2px', height: '0.9em', background: 'var(--accent)', marginLeft: '2px', verticalAlign: 'text-bottom', animation: 'blink 1s step-end infinite' }} />}
-                  <span style={{ display: 'block', textAlign: 'right', fontSize: '9px', color: step >= 3 ? 'var(--accent)' : 'rgba(255,255,255,0.35)', transition: 'color 0.25s ease-out' }}>✓✓</span>
+                  {!reduced && step === 3 && <span style={{ display: 'inline-block', width: '2px', height: '0.9em', background: 'var(--accent)', marginLeft: '2px', verticalAlign: 'text-bottom', animation: 'blink 1s step-end infinite' }} />}
+                  <span style={{ display: 'block', textAlign: 'right', fontSize: '9px', color: step >= 4 ? 'var(--accent)' : 'rgba(255,255,255,0.35)', transition: 'color 0.25s ease-out' }}>✓✓</span>
                 </div>
                 <div style={{ ...rv(step >= 8, 5), alignSelf: 'flex-start', maxWidth: '88%', background: 'rgba(255,255,255,0.07)', borderRadius: '10px 10px 10px 2px', padding: '7px 10px', fontFamily: 'var(--font-body)', fontSize: '11px', color: 'rgba(255,255,255,0.85)', lineHeight: 1.45 }}>
-                  ✓ {tr('OFS actualizado — actividad #4512 completada. ¡Buen trabajo!', 'OFS updated — activity #4512 completed. Nice work!')}
+                  ✓ {tr('Viaje iniciado', 'Trip started')}
                 </div>
               </div>
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '8px 12px', borderTop: '1px solid rgba(255,255,255,0.07)' }}>
@@ -767,8 +789,8 @@ function E2EStory({ active, reduced, tr }) {
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
               {miniNode(step >= 4, '⚡', 'Trigger', tr('Mensaje del técnico', 'Technician message'))}
-              {miniNode(step >= 5, '✦', tr('Nodo IA', 'AI Node'), tr('Entiende: instalación terminada', 'Understands: install finished'))}
-              {miniNode(step >= 6, '▶', tr('Acción', 'Action'), tr('Completar actividad en OFS', 'Complete activity in OFS'))}
+              {miniNode(step >= 5, '✦', tr('Nodo IA', 'AI Node'), tr('Entiende: iniciar viaje a #1234', 'Understands: start trip to #1234'))}
+              {miniNode(step >= 6, '▶', tr('Acción', 'Action'), tr('Marcar actividad #1234 en camino', 'Mark activity #1234 en route'))}
             </div>
           </div>
           <div style={{ textAlign: 'center', marginTop: '12px', fontFamily: 'var(--font-body)', fontSize: '11px', fontWeight: 600, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.45)' }}>{tr('Workflow Builder', 'Workflow Builder')}</div>
@@ -794,20 +816,20 @@ function E2EStory({ active, reduced, tr }) {
             </div>
             <div style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '10px', padding: '12px' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '10px' }}>
-                <span style={{ fontFamily: 'var(--font-heading)', fontSize: '12px', fontWeight: 800, color: '#fff' }}>#4512</span>
-                <span style={{ fontFamily: 'var(--font-body)', fontSize: '11px', color: 'rgba(255,255,255,0.55)' }}>{tr('Instalación fibra', 'Fiber install')}</span>
+                <span style={{ fontFamily: 'var(--font-heading)', fontSize: '12px', fontWeight: 800, color: '#fff' }}>#1234</span>
+                <span style={{ fontFamily: 'var(--font-body)', fontSize: '11px', color: 'rgba(255,255,255,0.55)' }}>{tr('Visita técnica', 'Service visit')}</span>
                 <span style={{ marginLeft: 'auto', fontFamily: 'var(--font-body)', fontSize: '9.5px', fontWeight: 700, letterSpacing: '0.04em', borderRadius: '999px', padding: '3px 9px', whiteSpace: 'nowrap', background: step >= 7 ? 'rgba(113,177,54,0.15)' : 'rgba(255,255,255,0.07)', border: `1px solid ${step >= 7 ? 'rgba(113,177,54,0.5)' : 'rgba(255,255,255,0.15)'}`, color: step >= 7 ? 'var(--accent)' : 'rgba(255,255,255,0.6)', transition: 'background 0.3s ease-out, border-color 0.3s ease-out, color 0.3s ease-out' }}>
-                  {step >= 7 ? tr('✓ COMPLETADA', '✓ COMPLETED') : tr('EN CURSO', 'IN PROGRESS')}
+                  {step >= 7 ? tr('✓ EN CAMINO', '✓ EN ROUTE') : tr('PENDIENTE', 'PENDING')}
                 </span>
               </div>
-              {[[tr('Cliente', 'Customer'), 'María López'], [tr('Recurso', 'Resource'), 'García'], [tr('Zona', 'Zone'), tr('Norte', 'North')]].map((f, i) => (
+              {[[tr('Cliente', 'Customer'), 'María López'], [tr('Recurso', 'Resource'), 'García'], [tr('Dirección', 'Address'), 'Av. Córdoba 1456']].map((f, i) => (
                 <div key={i} style={{ display: 'flex', justifyContent: 'space-between', gap: '10px', padding: '5px 0', borderTop: '1px solid rgba(255,255,255,0.06)', fontFamily: 'var(--font-body)', fontSize: '11px' }}>
                   <span style={{ color: 'rgba(255,255,255,0.4)' }}>{f[0]}</span>
                   <span style={{ color: 'rgba(255,255,255,0.75)' }}>{f[1]}</span>
                 </div>
               ))}
               <div style={{ ...rv(step >= 7, 4), marginTop: '8px', fontFamily: 'var(--font-body)', fontSize: '10px', color: 'var(--accent)' }}>
-                ✦ {tr('Cerrada por Workflow Builder · hace 1 s', 'Closed by Workflow Builder · 1 s ago')}
+                ✦ {tr('Viaje iniciado por Workflow Builder · hace 1 s', 'Trip started by Workflow Builder · 1 s ago')}
               </div>
             </div>
           </div>
@@ -1076,7 +1098,7 @@ export default function WorkflowBuilderClient() {
             <div className="wfb-hero-title" style={{ fontSize: '64px', fontWeight: 900, lineHeight: 1.05, color: 'white', marginBottom: '8px' }}>Workflow Builder</div>
             <div style={{ fontSize: '64px', fontWeight: 900, color: '#71B136', marginBottom: '16px' }}><span style={{display:'inline-flex', alignItems:'center', gap:'12px', verticalAlign:'middle'}}><svg width="1em" height="0.85em" viewBox="0 0 28 24" fill="none" style={{display:'inline-block', verticalAlign:'middle'}}><path d="M16 1.5l.9 3.2 3.2.9-3.2.9L16 9.7l-.9-3.2-3.2-.9 3.2-.9z" fill="#71B136" stroke="#71B136" strokeWidth="0.4" strokeLinejoin="round"/><path d="M7 7l.6 2.2 2.2.6-2.2.6L7 12.6l-.6-2.2-2.2-.6 2.2-.6z" fill="#71B136" stroke="#71B136" strokeWidth="0.3" strokeLinejoin="round" opacity="0.65"/><path d="M21 14l.5 1.6 1.6.5-1.6.5L21 18.2l-.5-1.6-1.6-.5 1.6-.5z" fill="#71B136" stroke="#71B136" strokeWidth="0.3" strokeLinejoin="round" opacity="0.45"/></svg>AI</span></div>
             <div style={{ fontSize: '22px', color: 'rgba(255,255,255,0.7)', fontWeight: 400, marginBottom: '24px', lineHeight: 1.5 }}>
-              {tr('Automatizá tus procesos OFSC sin código', 'Automate your OFSC processes without code')}
+              {tr('Automatizá tus procesos Oracle Field Service sin código', 'Automate your Oracle Field Service processes without code')}
             </div>
             <p style={{ fontSize: '16px', color: 'rgba(255,255,255,0.55)', lineHeight: 1.8, margin: '0 0 40px 0', maxWidth: '460px' }}>
               {tr('Construí y ejecutá workflows programados sobre entidades de Oracle Field Service de forma visual y sencilla. Triggers, condiciones, acciones y notificaciones — todo sin código.', 'Build and execute scheduled workflows on Oracle Field Service entities visually and simply. Triggers, conditions, actions and notifications — all without code.')}
@@ -1520,7 +1542,7 @@ export default function WorkflowBuilderClient() {
         <div style={{ maxWidth: '1400px', margin: '0 auto', position: 'relative', zIndex: 2 }}>
           <div className="fade-up" style={{ textAlign: 'center', maxWidth: '720px', margin: '0 auto 56px' }}>
             <div style={{ fontFamily: 'var(--font-body)', fontSize: '12px', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--accent)', marginBottom: '14px' }}>
-              {tr('Demo interactiva', 'Interactive demo')}
+              {tr('Chat inteligente para el técnico', 'Smart chat for the technician')}
             </div>
             <h2 className="wfb-e2e-title" style={{ fontFamily: 'var(--font-heading)', fontSize: '42px', fontWeight: 800, color: '#fff', lineHeight: 1.15, margin: '0 0 18px 0' }}>
               {tr('Del técnico en campo a OFS — sin tocar nada', 'From the field tech to OFS — hands-free')}

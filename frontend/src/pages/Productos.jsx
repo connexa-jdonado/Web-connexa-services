@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { Head } from 'vite-react-ssg';
-import { Link } from '@/lib/next-compat';
+import { Image, Link } from '@/lib/next-compat';
 import { useLang } from '@/context/LanguageContext';
 
 export default function ProductosClient() {
@@ -80,7 +80,10 @@ export default function ProductosClient() {
             <div className="page-hero-eyebrow-dot"></div>
             <span>{tr('Soluciones propias · Desarrolladas por Connexa', 'Proprietary Solutions · Built by Connexa')}</span>
           </div>
-          <h1 className="page-hero-h1" dangerouslySetInnerHTML={{ __html: tr('Herramientas que potencian<br/>tu plataforma <em>OFSC</em>', 'Tools that power<br/>your <em>OFSC</em> platform') }} />
+          <div style={{ display: 'flex', alignItems: 'center', gap: '14px', flexWrap: 'wrap' }}>
+            <h1 className="page-hero-h1" style={{ margin: 0 }} dangerouslySetInnerHTML={{ __html: tr('Herramientas que potencian<br/>tu plataforma <em>Oracle Field Service</em>', 'Tools that power<br/>your <em>Oracle Field Service</em> platform') }} />
+            <Image src="/assets/OFSC-hq.png" alt="Oracle Field Service" width={44} height={44} sizes="44px" style={{ borderRadius: '10px', flexShrink: 0 }} />
+          </div>
           <p className="page-hero-sub">{tr('Apps web nativas construidas sobre Oracle Field Service Cloud para resolver los desafíos operacionales más complejos del Field Service, sin fricciones y sin código adicional.', 'Native web apps built on Oracle Field Service Cloud to solve the most complex Field Service operational challenges, without friction and without additional code.')}</p>
           </div>
           <div className="prod-hero-svg" style={{ flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>

@@ -7,7 +7,10 @@ import Footer from '@/components/Footer';
 function ScrollToHash() {
   const { hash, pathname } = useLocation();
   useEffect(() => {
-    if (!hash) return;
+    if (!hash) {
+      window.scrollTo(0, 0);
+      return;
+    }
     const scroll = () => document.querySelector(hash)?.scrollIntoView({ behavior: 'smooth' });
     // Pequeño delay para asegurar que el contenido de la ruta ya está montado.
     const id = setTimeout(scroll, 60);

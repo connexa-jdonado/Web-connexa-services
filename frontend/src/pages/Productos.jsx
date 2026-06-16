@@ -1,10 +1,12 @@
 import { useEffect, useRef, useState } from 'react';
 import { Head } from 'vite-react-ssg';
+import { useNavigate } from 'react-router-dom';
 import { Image, Link } from '@/lib/next-compat';
 import { useLang } from '@/context/LanguageContext';
 
 export default function ProductosClient() {
   const { lang } = useLang();
+  const navigate = useNavigate();
   const ctaRef = useRef(null);
   const wfImgRef = useRef(null);
   const fsmImgRef = useRef(null);
@@ -187,7 +189,7 @@ export default function ProductosClient() {
                   {tr('Ver más', 'Learn more')}
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
                 </Link>
-                <Link href="/productos/workflow-builder" className="btn-secondary"
+                <Link href="/servicios#contacto" className="btn-secondary"
                   onMouseEnter={() => setWfSecondaryHover(true)}
                   onMouseLeave={() => setWfSecondaryHover(false)}
                   style={wfSecondaryHover
@@ -243,7 +245,7 @@ export default function ProductosClient() {
                   {tr('Ver más', 'Learn more')}
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
                 </Link>
-                <Link href="/productos/fsmtool" className="btn-secondary"
+                <Link href="/servicios#contacto" className="btn-secondary"
                   onMouseEnter={() => setFsmSecondaryHover(true)}
                   onMouseLeave={() => setFsmSecondaryHover(false)}
                   style={fsmSecondaryHover
@@ -271,13 +273,13 @@ export default function ProductosClient() {
           <h2 className="cta-headline" dangerouslySetInnerHTML={{ __html: tr('¿Querés ver los productos<br/><em>en acción</em>?', 'Want to see the products<br/><em>in action</em>?') }} />
           <p className="cta-sub">{tr('Agendá una demo personalizada con nuestro equipo.', 'Schedule a personalized demo with our team.')}</p>
           <div className="cta-btns">
-            <a href="/servicios#contacto" className="btn-primary cta-btn-lg">{tr('Agendar demo', 'Schedule demo')}</a>
+            <Link to="/servicios#contacto" className="btn-primary cta-btn-lg">{tr('Agendar demo', 'Schedule demo')}</Link>
             <a href="#prod-workflow" className="btn-ghost cta-btn-lg" onClick={(e) => { e.preventDefault(); scrollTo('prod-workflow'); }}>{tr('Ver productos', 'View products')}</a>
           </div>
         </div>
       </section>
 
-      <button ref={ctaRef} className="cta-flotante" onClick={() => scrollTo('contacto')}>
+      <button ref={ctaRef} className="cta-flotante" onClick={() => navigate('/servicios#contacto')}>
         {tr('AGENDAR DEMO', 'SCHEDULE DEMO')}
       </button>
     </>

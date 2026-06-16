@@ -60,7 +60,12 @@ export default function Navbar() {
               <Link to="/#partnerships">{nav.partnerships}</Link>
             </li>
             <li>
-              <Link to="/#nosotros">{nav.about}</Link>
+              <Link
+                to="/nosotros"
+                className={isActive('/nosotros') ? 'active' : ''}
+              >
+                {nav.about}
+              </Link>
             </li>
           </ul>
 
@@ -98,7 +103,12 @@ export default function Navbar() {
           {nav.products}
         </Link>
         <Link to="/#partnerships">{nav.partnerships}</Link>
-        <Link to="/#nosotros">{nav.about}</Link>
+        <Link
+          to="/nosotros"
+          className={isActive('/nosotros') ? 'active' : ''}
+        >
+          {nav.about}
+        </Link>
         <Link className="btn-primary" to="/servicios#contacto">
           {nav.cta}
         </Link>

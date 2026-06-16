@@ -57,7 +57,7 @@ export default function Footer() {
             </ul>
             <div className="footer-col-title" style={{ marginTop: 28 }}>{f.company}</div>
             <ul className="footer-links">
-              <li><Link to="/#nosotros">{f.companyLinks.about}</Link></li>
+              <li><Link to="/nosotros">{f.companyLinks.about}</Link></li>
             </ul>
           </div>
 

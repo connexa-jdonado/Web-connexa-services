@@ -295,82 +295,6 @@ export default function HomeClient() {
         </div>
       </section>
 
-      {/* EQUIPO Y CASO DE ÉXITO */}
-      <section id="nosotros" className="metodologia-divider">
-        <div className="container">
-          {/* SECCIÓN LIDERAZGO Y EXPERIENCIA — temporalmente comentada
-          <div className="ec-header">
-            <div className="ec-eyebrow fade-up">{tr('LIDERAZGO Y EXPERIENCIA', 'LEADERSHIP & EXPERIENCE')}</div>
-            <h2 className="ec-title fade-up d1">{tr('El equipo detrás de cada implementación', 'The team behind every implementation')}</h2>
-            <p className="ec-subtitle fade-up d2">{tr('Más de [X] años de experiencia combinada en Field Service Management a nivel internacional.', 'Over [X] years of combined experience in Field Service Management at an international level.')}</p>
-            <div className="ec-header-highlight fade-up d3">
-              <p>{tr('Nuestros CEOs no solo lideran la empresa — están en los detalles de cada proyecto.', "Our CEOs don't just lead the company — they are involved in every project detail.")}</p>
-            </div>
-          </div>
-          <div className="ec-ceos-grid">
-            {[{ role: 'Co-founder & CEO' }, { role: 'Co-founder & CTO' }].map((c, i) => (
-              <div key={i} className={`ec-ceo-card fade-up d${i + 1}`}>
-                <div className="ec-ceo-photo-placeholder">
-                  <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="5" /><path d="M20 21a8 8 0 1 0-16 0" /></svg>
-                  <span className="ec-ceo-photo-label">{tr(`[ Foto CEO ${i + 1} ]`, `[ CEO ${i + 1} Photo ]`)}</span>
-                </div>
-                <div className="ec-ceo-name">{tr('[ Nombre del CEO ]', '[ CEO Name ]')}</div>
-                <div className="ec-ceo-role">{c.role}</div>
-                <p className="ec-ceo-desc">{tr('[ Breve descripción profesional. ]', '[ Brief professional description. ]')}</p>
-                <div className="ec-ceo-tags">
-                  <span className="ec-ceo-tag">Oracle Certified</span>
-                  <span className="ec-ceo-tag">Zinier Partner</span>
-                  <span className="ec-ceo-tag ec-tag-placeholder">{tr('[ Industria ]', '[ Industry ]')}</span>
-                  <span className="ec-ceo-tag ec-tag-placeholder">{tr('[ País ]', '[ Country ]')}</span>
-                </div>
-              </div>
-            ))}
-          </div>
-          <div className="ec-sep" />
-          */}
-          {/* SECCIÓN CASO DE ÉXITO INTERNACIONAL — temporalmente comentada
-          <div id="casos" />
-          <div className="ec-case-eyebrow fade-up">{tr('CASO DE ÉXITO INTERNACIONAL', 'INTERNATIONAL SUCCESS CASE')}</div>
-          <div className="ec-case-layout">
-            <div className="ec-case-left fade-up d1">
-              <div className="ec-case-location-badge">
-                <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z" /><circle cx="12" cy="10" r="3" /></svg>
-                <span>{tr('[ País o región ]', '[ Country or region ]')}</span>
-              </div>
-              <div className="ec-case-industry">{tr('[ INDUSTRIA ]', '[ INDUSTRY ]')}</div>
-              <h3 className="ec-case-title">{tr('[ Título del proyecto ]', '[ Project title ]')}</h3>
-              <div className="ec-case-lead-badge">
-                <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /></svg>
-                <span>{tr('Proyecto liderado directamente por los co-fundadores de Connexa Services', 'Project directly led by Connexa Services co-founders')}</span>
-              </div>
-              <p className="ec-case-desc">{tr('[ Descripción del desafío inicial del cliente. ]', "[ Description of the client's initial challenge. ]")}</p>
-              <div className="ec-case-impl-label">{tr('SOLUCIÓN IMPLEMENTADA', 'IMPLEMENTED SOLUTION')}</div>
-              <p className="ec-case-desc">{tr('[ Descripción de la solución implementada. ]', '[ Description of the implemented solution. ]')}</p>
-              <p className="ec-case-closing">{tr('Este proyecto, como todos los de Connexa, fue liderado directamente por nuestros co-fundadores.', "This project, like all Connexa projects, was directly led by our co-founders.")}</p>
-              <div className="ec-metrics">
-                {[1, 2, 3].map((n) => (
-                  <div key={n} className="ec-metric">
-                    <div className="ec-metric-number">{tr('[ N ]', '[ N ]')}</div>
-                    <div className="ec-metric-desc">{tr(`[ Resultado ${n} ]`, `[ Result ${n} ]`)}</div>
-                  </div>
-                ))}
-              </div>
-            </div>
-            <div className="ec-case-right fade-up d2">
-              <div className="ec-img-placeholder">
-                <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" /><circle cx="8.5" cy="8.5" r="1.5" /><polyline points="21 15 16 10 5 21" /></svg>
-                <span className="ec-img-label">{tr('[ Imagen del proyecto ]', '[ Project image ]')}</span>
-              </div>
-              <div className="ec-img-placeholder">
-                <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M23 21v-2a4 4 0 0 0-3-3.87" /><path d="M16 3.13a4 4 0 0 1 0 7.75" /></svg>
-                <span className="ec-img-label">{tr('[ Foto del equipo ]', '[ Team photo ]')}</span>
-              </div>
-            </div>
-          </div>
-          */}
-        </div>
-      </section>
-
       {/* METODOLOGÍA */}
       <section id="metodologia" className="metodologia-section-end">
         <style>{`
@@ -390,12 +314,10 @@ export default function HomeClient() {
 
             /* SECCIONES */
             #por-que-connexa      { padding-bottom: 24px !important; }
-            #nosotros             { display: none !important; padding: 0 !important; margin: 0 !important; height: 0 !important; overflow: hidden !important; }
             #clients-carousel     { padding-bottom: 0 !important; }
           }
           @media (min-width: 769px) {
             .hero-partners-list { display: contents; }
-            #nosotros { display: none !important; }
             #clients-carousel { padding-bottom: 0 !important; }
           }
         `}</style>

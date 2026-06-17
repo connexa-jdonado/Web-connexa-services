@@ -4,6 +4,7 @@ dotenv.config();
 
 export const config = {
   port: Number(process.env.PORT) || 4000,
+  sslDir: process.env.SSL_DIR || '',
   frontendUrl: process.env.FRONTEND_URL || 'http://localhost:5174',
   contactTo: process.env.CONTACT_TO || 'contacto@connexaservices.com',
   mail: {

@@ -1,0 +1,20 @@
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+
+  # 1. Archivos reales (JS, CSS, imágenes, fuentes…) — servir directo
+  RewriteCond %{REQUEST_FILENAME} -f
+  RewriteRule ^ - [L]
+
+  # 2. Quitar barra final para normalizar las rutas (/productos/ → /productos)
+  RewriteCond %{REQUEST_URI} ^(.+)/$
+  RewriteRule ^ %1 [R=301,L]
+
+  # 3. Rutas pre-renderizadas por vite-react-ssg — si existe {ruta}.html, servirlo
+  #    Ej: /productos → productos.html, /productos/fsmtool → productos/fsmtool.html
+  RewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI}.html -f
+  RewriteRule ^(.+)$ /$1.html [L]
+
+  # 4. Fallback SPA — index.html raíz (maneja 404 y rutas sin prerender)
+  RewriteRule ^ /index.html [L]
+</IfModule>

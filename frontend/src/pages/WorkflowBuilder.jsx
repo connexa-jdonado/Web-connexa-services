@@ -1086,7 +1086,7 @@ export default function WorkflowBuilderClient() {
           <rect width="100%" height="100%" fill="url(#dots)"/>
         </svg>
         <div style={{ position: 'absolute', width: '600px', height: '600px', borderRadius: '50%', background: 'radial-gradient(circle, rgba(113,177,54,0.12) 0%, transparent 70%)', top: '-100px', right: '20%', pointerEvents: 'none' }} />
-        <div className="wfb-hero-layout" style={{ display: 'flex', width: '100%', maxWidth: '1400px', margin: '0 auto', padding: '80px 60px', alignItems: 'center', gap: '80px', position: 'relative', zIndex: 2 }}>
+        <div className="wfb-hero-layout" style={{ display: 'flex', width: '100%', maxWidth: '1400px', margin: '0 auto', padding: '104px 60px', alignItems: 'center', gap: '80px', position: 'relative', zIndex: 2 }}>
           {/* Columna izquierda 48% */}
           <div className="wfb-hero-left" style={{ flex: '0 0 48%' }}>
             <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', background: 'rgba(113,177,54,0.12)', border: '1px solid rgba(113,177,54,0.3)', borderRadius: '999px', padding: '8px 18px', marginBottom: '32px' }}>

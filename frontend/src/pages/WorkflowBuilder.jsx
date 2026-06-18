@@ -1074,6 +1074,11 @@ export default function WorkflowBuilderClient() {
           .wfb-cta-title        { font-size: 28px !important; }
           .wfb-nav-dots         { display: none !important; }
         }
+        @media (min-width: 769px) and (max-height: 760px) {
+          .wfb-hero-layout { padding-top: 84px !important; padding-bottom: 24px !important; }
+          .wfb-hero-title  { font-size: 40px !important; margin-bottom: 4px !important; }
+          .wfb-hero-title + div { font-size: 40px !important; margin-bottom: 8px !important; }
+        }
       `}</style>
       {/* ── HERO FULLSCREEN ── */}
       <div ref={heroRef} style={{ width: '100%', minHeight: '100vh', background: 'linear-gradient(135deg, #0d1b3e 0%, #172554 60%, #1a3a2a 100%)', display: 'flex', alignItems: 'center', position: 'relative', overflow: 'hidden', padding: '0' }}>
@@ -1088,7 +1093,7 @@ export default function WorkflowBuilderClient() {
         <div style={{ position: 'absolute', width: '600px', height: '600px', borderRadius: '50%', background: 'radial-gradient(circle, rgba(113,177,54,0.12) 0%, transparent 70%)', top: '-100px', right: '20%', pointerEvents: 'none' }} />
         <div className="wfb-hero-layout" style={{ display: 'flex', width: '100%', maxWidth: '1400px', margin: '0 auto', padding: '104px 60px', alignItems: 'center', gap: '80px', position: 'relative', zIndex: 2 }}>
           {/* Columna izquierda 48% */}
-          <div className="wfb-hero-left" style={{ flex: '0 0 48%' }}>
+          <div className="wfb-hero-left" style={{ flex: '1 1 45%' }}>
             <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', background: 'rgba(113,177,54,0.12)', border: '1px solid rgba(113,177,54,0.3)', borderRadius: '999px', padding: '8px 18px', marginBottom: '32px' }}>
               <svg width="1em" height="0.85em" viewBox="0 0 28 24" fill="none" style={{display:'inline-block', verticalAlign:'middle'}}><path d="M16 1.5l.9 3.2 3.2.9-3.2.9L16 9.7l-.9-3.2-3.2-.9 3.2-.9z" fill="#71B136" stroke="#71B136" strokeWidth="0.4" strokeLinejoin="round"/><path d="M7 7l.6 2.2 2.2.6-2.2.6L7 12.6l-.6-2.2-2.2-.6 2.2-.6z" fill="#71B136" stroke="#71B136" strokeWidth="0.3" strokeLinejoin="round" opacity="0.65"/><path d="M21 14l.5 1.6 1.6.5-1.6.5L21 18.2l-.5-1.6-1.6-.5 1.6-.5z" fill="#71B136" stroke="#71B136" strokeWidth="0.3" strokeLinejoin="round" opacity="0.45"/></svg>
               <span style={{ color: '#71B136', fontSize: '12px', fontWeight: 600, letterSpacing: '0.08em' }}>
@@ -1122,7 +1127,7 @@ export default function WorkflowBuilderClient() {
             </div>
           </div>
           {/* Columna derecha 52% */}
-          <div className="wfb-hero-right" style={{ flex: '0 0 58%' }}>
+          <div className="wfb-hero-right" style={{ flex: '1 1 55%' }}>
             <div style={{ width: '100%', position: 'relative', transform: 'perspective(1200px) rotateY(-4deg) rotateX(2deg)', transformStyle: 'preserve-3d' }}>
               <div style={{ position: 'absolute', inset: '-20px', background: 'radial-gradient(ellipse, rgba(113,177,54,0.15) 0%, transparent 70%)', borderRadius: '20px', zIndex: 0 }} />
               <div style={{ borderRadius: '14px', overflow: 'hidden', boxShadow: '0 50px 120px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.08)', position: 'relative', zIndex: 1, background: '#0d1426' }}>

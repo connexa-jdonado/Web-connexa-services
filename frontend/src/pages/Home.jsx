@@ -98,6 +98,16 @@ export default function HomeClient() {
         <title>Connexa Services | Field Service Management Experts</title>
         <meta name="description" content="Expertos en Field Service Management. Implementamos, optimizamos y soportamos Oracle Field Service Cloud y Zinier para empresas líderes en América Latina y el mundo." />
         <meta name="keywords" content="Oracle Field Service, OFSC, Field Service Management, Zinier, implementación OFSC, consultoría FSM" />
+        <meta property="og:title" content="Connexa Services | Field Service Management Experts" />
+        <meta property="og:description" content="Expertos en Field Service Management. Implementamos, optimizamos y soportamos Oracle Field Service Cloud y Zinier para empresas líderes en América Latina y el mundo." />
+        <meta property="og:image" content="https://connexaservices.com/assets/connexaAzul.png" />
+        <meta property="og:image:width" content="802" />
+        <meta property="og:image:height" content="302" />
+        <meta property="og:image:alt" content="Connexa Services" />
+        <meta property="og:url" content="https://connexaservices.com/" />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:image" content="https://connexaservices.com/assets/connexaAzul.png" />
       </Head>
       {/* HERO */}
       <section id="hero" ref={heroRef}>
